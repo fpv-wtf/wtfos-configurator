@@ -1,3 +1,5 @@
+import { escapeArg } from "@yume-chan/adb";
+
 import Proxy from "./Proxy";
 const proxy = new Proxy("https://cors.bubblesort.me/?");
 
@@ -10,15 +12,33 @@ export default class AdbWrapper {
     return this.adb.device;
   }
 
+  /**
+   * Returns an object which should contain stdout, stderr and exitCode.
+   * Unfortunately this only works on Android 7 and above, this means that
+   * we will only have stdout to our disposal, but we can work around the
+   * exit code problem by appending ";echo $?" to all our commands and then
+   * parsing the last line manually, removing it and filling the exit code
+   * ourselves.
+   */
   async executeCommand(command) {
-    return await this.adb.subprocess.spawnAndWait(command);
+    const commandArray = Array.isArray(command) ? command : [command];
+    const fullCommand = [...commandArray, ";echo $?"];
+    const output = await this.adb.subprocess.spawnAndWait(fullCommand);
+    let lines = output.stdout.split("\n");
+    lines = lines.filter((line) => line);
+    const exitCode = lines.pop();
+
+    output.exitCode = parseInt(exitCode);
+    output.stdout = lines.join("\n");
+
+    return output;
   }
 
   async installPackage(name) {
     return await this.executeCommand([
       "/opt/bin/opkg",
       "install",
-      name,
+      escapeArg(name),
     ]);
   }
 
@@ -26,7 +46,7 @@ export default class AdbWrapper {
     return await this.executeCommand([
       "/opt/bin/opkg",
       "remove",
-      name,
+      escapeArg(name),
     ]);
   }
 
@@ -148,7 +168,7 @@ export default class AdbWrapper {
       "/opt/bin/dinitctl",
       "-u",
       "enable",
-      name,
+      escapeArg(name),
     ]);
 
     return output.exitcode;
@@ -160,7 +180,7 @@ export default class AdbWrapper {
       "/opt/bin/dinitctl",
       "-u",
       "disable",
-      name,
+      escapeArg(name),
     ]);
 
     return output.exitcode;
@@ -199,5 +219,15 @@ export default class AdbWrapper {
 
     await this.adb.reverse.remove(remote).catch(() => { });
     return await this.adb.reverse.add(remote, local, handler);
+  }
+
+  async fileExists(path) {
+    const output = await this.executeCommand([
+      "test",
+      "-f",
+      path,
+    ]);
+
+    return output.exitCode === 0;
   }
 }

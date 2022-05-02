@@ -21,6 +21,8 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 
+import SetupHint from "../setup/SetupHint";
+
 import {
   disableService,
   enableService,
@@ -31,11 +33,14 @@ import {
   selectServices,
 } from "./startupSlice";
 
+import { selectHasDinitBinary } from "../device/deviceSlice";
+
 export default function Startup({ adb }) {
   const dispatch = useDispatch();
 
   const error = useSelector(selectError);
   const fetched = useSelector(selectFetched);
+  const hasDinitBinary = useSelector(selectHasDinitBinary);
   const services = useSelector(selectServices);
   const processing = useSelector(selectProcessing);
 
@@ -100,25 +105,29 @@ export default function Startup({ adb }) {
 
   return (
     <Stack spacing={2}>
-      {error &&
+      {!hasDinitBinary &&
+        <SetupHint />}
+
+      {error && hasDinitBinary &&
         <Alert severity="error">
           {error}
         </Alert>}
 
-      <Paper>
-        <Box p={2}>
+      {hasDinitBinary &&
+        <Paper>
+          <Box p={2}>
 
-          <Typography>
-            Enabled services are started during the bootup process of the device.
-          </Typography>
+            <Typography>
+              Enabled services are started during the bootup process of the device.
+            </Typography>
 
-          <Table>
-            <TableBody>
-              {renderedServices}
-            </TableBody>
-          </Table>
-        </Box>
-      </Paper>
+            <Table>
+              <TableBody>
+                {renderedServices}
+              </TableBody>
+            </Table>
+          </Box>
+        </Paper>}
     </Stack>
   );
 }

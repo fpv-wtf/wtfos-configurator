@@ -1,11 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {
+  createAsyncThunk,
+  createSlice,
+} from "@reduxjs/toolkit";
 
 const initialState = {
   connected: false,
   error: false,
   status: "idle",
   hasHttpProxy: false,
+  binaries: {
+    hasDinitBinary: false,
+    hasOpkgBinary: false,
+  },
 };
+
+export const checkBinaries = createAsyncThunk(
+  "device/checkBinaries",
+  async (adb) => {
+    const hasDinitBinary = await adb.fileExists("/opt/bin/dinit");
+    const hasOpkgBinary = await adb.fileExists("/opt/bin/opkg");
+
+    return {
+      hasDinitBinary,
+      hasOpkgBinary,
+    };
+  }
+);
 
 export const deviceSlice = createSlice({
   name: "device",
@@ -28,6 +48,12 @@ export const deviceSlice = createSlice({
       state.status = "idle";
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(checkBinaries.fulfilled, (state, action) => {
+        state.binaries = action.payload;
+      });
+  },
 });
 
 export const {
@@ -40,6 +66,8 @@ export const {
 export const selectConnected = (state) => state.device.connected;
 export const selectError = (state) => state.device.error;
 export const selectHasHttpProxy = (state) => state.device.hasHttpProxy;
+export const selectHasDinitBinary = (state) => state.device.binaries.hasDinitBinary;
+export const selectHasOpkgBinary = (state) => state.device.binaries.hasOpkgBinary;
 export const selectStatus = (state) => state.device.status;
 
 export default deviceSlice.reducer;

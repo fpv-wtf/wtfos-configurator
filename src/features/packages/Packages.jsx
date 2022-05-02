@@ -40,6 +40,10 @@ import {
   selectProcessing,
 } from "./packagesSlice";
 
+import { selectHasOpkgBinary } from "../device/deviceSlice";
+
+import SetupHint from "../setup/SetupHint";
+
 export default function Packages({ adb }) {
   const tableEl = useRef();
 
@@ -48,6 +52,7 @@ export default function Packages({ adb }) {
   const fetched = useSelector(selectFetched);
   const filter = useSelector(selectFilter);
   const filtered = useSelector(selectFiltered);
+  const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const processing = useSelector(selectProcessing);
 
   const [installed, setInstalled] = useState(filter.installed);
@@ -123,7 +128,6 @@ export default function Packages({ adb }) {
   }, [adb, dispatch]);
 
   const rows = renderRows.map((item) => {
-
     return (
       <TableRow key={item.name}>
         <TableCell sx={{ width: 250 }}>
@@ -172,7 +176,10 @@ export default function Packages({ adb }) {
   const packageString = `Found ${filtered.length} packages`;
   return (
     <>
-      {!fetched &&
+      {!hasOpkgBinary &&
+        <SetupHint />}
+
+      {!fetched && hasOpkgBinary &&
         <Stack
           alignItems="center"
           justifyContent="center"
@@ -191,7 +198,7 @@ export default function Packages({ adb }) {
           </Typography>
         </Stack>}
 
-      {fetched &&
+      {fetched && hasOpkgBinary &&
         <Stack
           spacing={2}
         >

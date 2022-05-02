@@ -10,6 +10,7 @@ import ActionArea from "./ActionArea";
 
 export default function Tile({
   children,
+  disabled,
   description,
   href,
   linkTo,
@@ -20,6 +21,7 @@ export default function Tile({
       sx={{ height: "100%" }}
     >
       <ActionArea
+        disabled={disabled}
         href={href}
         linkTo={linkTo}
       >
@@ -57,6 +59,7 @@ export default function Tile({
 }
 
 Tile.defaultProps = {
+  disabled: false,
   href: null,
   linkTo: null,
 };
@@ -64,6 +67,7 @@ Tile.defaultProps = {
 Tile.propTypes = {
   children: PropTypes.element.isRequired,
   description: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
   href: PropTypes.string,
   linkTo: PropTypes.string,
   title: PropTypes.string.isRequired,

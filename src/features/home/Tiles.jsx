@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 import Grid from "@mui/material/Grid";
 
@@ -9,7 +10,15 @@ import TerminalIcon from "@mui/icons-material/Terminal";
 
 import Tile from "./Tile";
 
+import {
+  selectHasDinitBinary,
+  selectHasOpkgBinary,
+} from "../device/deviceSlice";
+
 export default function Tiles() {
+  const hasDinitBinary = useSelector(selectHasDinitBinary);
+  const hasOpkgBinary = useSelector(selectHasOpkgBinary);
+
   return(
     <Grid
       alignItems="stretch"
@@ -22,6 +31,7 @@ export default function Tiles() {
       >
         <Tile
           description="Expand functionality of your devive by installing additional packages developed by the community."
+          disabled={!hasOpkgBinary}
           linkTo="packages"
           title="Package Manager"
         >
@@ -37,6 +47,8 @@ export default function Tiles() {
       >
         <Tile
           description="Manage applications that should be run on startup to permanently enable functionality once the device is powered up."
+          disabled={!hasDinitBinary}
+          linkTo="startup"
           title="Startup"
         >
           <StartIcon

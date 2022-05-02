@@ -17,7 +17,7 @@ import {
 } from "react-router-dom";
 
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
+import Stack from "@mui/material/Stack";
 
 import "./App.css";
 
@@ -29,9 +29,11 @@ import Header from "./features/header/Header";
 import Cli from "./features/cli/Cli";
 import Home from "./features/home/Main";
 import Packages from "./features/packages/Packages";
+import Setup from "./features/setup/Setup";
 import Startup from "./features/startup/Startup";
 
 import {
+  checkBinaries,
   connected,
   connecting,
   connectionFailed,
@@ -41,6 +43,7 @@ import {
 
 function App() {
   const dispatch = useDispatch();
+
   const isConnected = useSelector(selectConnected);
   const error = useSelector(selectError);
 
@@ -55,11 +58,11 @@ function App() {
       const adbLocal = await Adb.authenticate(streams, credentialStore, undefined);
       const adbWrapper = new AdbWrapper(adbLocal);
 
-      const result = await adbWrapper.establishReverseSocket(1);
-      console.log("Reverse socket result", result);
+      await adbWrapper.establishReverseSocket(1);
 
       setAdb(adbWrapper);
       dispatch(connected());
+      dispatch(checkBinaries(adbWrapper));
     } catch(e) {
       console.log(e);
       dispatch(connectionFailed());
@@ -75,20 +78,15 @@ function App() {
         deviceName={(isConnected && adb) ? adb.getDevice() : null}
       />
 
-      <Grid
+      <Stack
         container
         spacing={3}
       >
-        <Grid
-          item
-          xs={12}
-        >
-          <Device
-            error={error}
-            handleDeviceConnect={handleDeviceConnect}
-          />
-        </Grid>
-      </Grid>
+        <Device
+          error={error}
+          handleDeviceConnect={handleDeviceConnect}
+        />
+      </Stack>
 
       {isConnected &&
         <Routes>
@@ -102,6 +100,11 @@ function App() {
               <Route
                 element={<Cli adb={adb} />}
                 path="cli"
+              />
+
+              <Route
+                element={<Setup adb={adb} />}
+                path="setup"
               />
 
               <Route
