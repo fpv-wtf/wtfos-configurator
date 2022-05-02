@@ -1,0 +1,48 @@
+{
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": 2020
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/all",
+    "react-app",
+  ],
+  "rules": {
+    "react/jsx-indent": ["warn", 2],
+    "react/jsx-indent-props": ["warn", 2],
+    "react/jsx-no-literals": "off",
+    "react/jsx-max-depth": ["warn", { "max": 6 }],
+    "react/no-danger": "warn",
+    "quotes": 1,
+    "indent": ["warn", 2, { "SwitchCase": 1 }],
+    "no-unused-vars": "warn",
+    "space-infix-ops": "error",
+    "arrow-parens": "error",
+    "eqeqeq": "error",
+    "object-curly-spacing": ["error", "always"],
+    "object-curly-newline": ["error", {
+      "ObjectExpression": { "multiline": true, "minProperties": 2 },
+      "ObjectPattern": { "multiline": true, "minProperties": 2 },
+      "ImportDeclaration": { "multiline": true, "minProperties": 2 },
+      "ExportDeclaration": { "multiline": true, "minProperties": 1 }
+    }],
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "never"
+    }],
+    "object-property-newline": "error",
+    "default-case": "warn",
+    "no-template-curly-in-string": "off",
+    "no-unreachable": "warn",
+    "semi": "error"
+  }
+}

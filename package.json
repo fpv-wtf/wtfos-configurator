@@ -3,21 +3,35 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.6.2",
+    "@mui/material": "^5.6.3",
     "@reduxjs/toolkit": "^1.8.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^14.1.1",
+    "@yume-chan/adb": "^0.0.15",
+    "@yume-chan/adb-backend-webusb": "^0.0.15",
+    "@yume-chan/adb-credential-web": "^0.0.15",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-redux": "^8.0.1",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-virtualized": "^9.22.3",
+    "web-vitals": "^2.1.4",
+    "with-staged": "^1.0.2",
+    "xterm-addon-fit": "^0.5.0",
+    "xterm-for-react": "^1.0.4"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint ./src --ext .jsx,.js",
+    "lint-commit": "with-staged '**/*.{js,jsx}' -- yarn eslint"
   },
   "eslintConfig": {
     "extends": [
@@ -36,5 +50,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {
+    "eslint-plugin-react": "^7.29.4"
+  },
+  "pre-commit": [
+    "lint-commit"
+  ]
 }

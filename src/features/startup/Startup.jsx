@@ -1,0 +1,126 @@
+import PropTypes from "prop-types";
+import React, {
+  useCallback,
+  useEffect,
+}  from "react";
+import {
+  useDispatch,
+  useSelector,
+} from "react-redux";
+
+import Alert from "@mui/material/Alert";
+import Chip from "@mui/material/Chip";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch from "@mui/material/Switch";
+import Stack from "@mui/material/Stack";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+
+import {
+  disableService,
+  enableService,
+  fetchServices,
+  selectError,
+  selectFetched,
+  selectProcessing,
+  selectServices,
+} from "./startupSlice";
+
+export default function Startup({ adb }) {
+  const dispatch = useDispatch();
+
+  const error = useSelector(selectError);
+  const fetched = useSelector(selectFetched);
+  const services = useSelector(selectServices);
+  const processing = useSelector(selectProcessing);
+
+  useEffect(() => {
+    if(!fetched) {
+      dispatch(fetchServices(adb));
+    }
+  }, [adb, dispatch, fetched]);
+
+  const handleChange = useCallback((event) => {
+    const checked = event.target.checked;
+    const name = event.target.dataset["name"];
+    if(checked) {
+      dispatch(enableService({
+        adb,
+        name,
+      }));
+    } else {
+      dispatch(disableService({
+        adb,
+        name,
+      }));
+    }
+  }, [adb, dispatch]);
+
+  const renderedServices = services.map((item) => {
+    return(
+      <TableRow
+        key={item.name}
+      >
+        <TableCell>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={item.enabled}
+                inputProps={{ "data-name": item.name }}
+                onChange={handleChange}
+              />
+            }
+            data-name={item.name}
+            disabled={processing}
+            label={item.name}
+          />
+        </TableCell>
+
+        <TableCell align="right">
+          {item.enabled && item.pid &&
+            <Chip
+              color="success"
+              label={`running (PID: ${item.pid})`}
+            />}
+
+          {item.enabled && !item.pid &&
+            <Chip
+              color="error"
+              label="stopped"
+            />}
+        </TableCell>
+      </TableRow>
+    );
+  });
+
+  return (
+    <Stack spacing={2}>
+      {error &&
+        <Alert severity="error">
+          {error}
+        </Alert>}
+
+      <Paper>
+        <Box p={2}>
+
+          <Typography>
+            Enabled services are started during the bootup process of the device.
+          </Typography>
+
+          <Table>
+            <TableBody>
+              {renderedServices}
+            </TableBody>
+          </Table>
+        </Box>
+      </Paper>
+    </Stack>
+  );
+}
+
+Startup.propTypes = { adb: PropTypes.shape().isRequired };
