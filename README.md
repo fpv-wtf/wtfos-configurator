@@ -1,6 +1,10 @@
-# FPV.WTF Web Configurator
+# WTFOS Configurator
 
-> Configure your rooted goggles and air-units via a web interface
+> Root and configure your DJI HD FPV goggles and air-units via web interface.
+
+## Deployment
+
+The app is automatically built and deployed to gh-pages. If forking this repository you will have to change the `homepage` property in `package.json` to point to the actual URL you want to use.
 
 ## Available Scripts
 
