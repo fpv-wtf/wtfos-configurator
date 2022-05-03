@@ -11,7 +11,6 @@ export default function ActionArea({
   href,
   linkTo,
 }) {
-  console.log(href, linkTo);
   if(linkTo) {
     return(
       <CardActionArea
