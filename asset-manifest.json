@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/dji-hd-fpv-configurator/static/css/main.17756b17.css",
-    "main.js": "/dji-hd-fpv-configurator/static/js/main.82f110fa.js",
+    "main.js": "/dji-hd-fpv-configurator/static/js/main.df996217.js",
     "static/js/787.df804e12.chunk.js": "/dji-hd-fpv-configurator/static/js/787.df804e12.chunk.js",
     "index.html": "/dji-hd-fpv-configurator/index.html",
     "main.17756b17.css.map": "/dji-hd-fpv-configurator/static/css/main.17756b17.css.map",
-    "main.82f110fa.js.map": "/dji-hd-fpv-configurator/static/js/main.82f110fa.js.map",
+    "main.df996217.js.map": "/dji-hd-fpv-configurator/static/js/main.df996217.js.map",
     "787.df804e12.chunk.js.map": "/dji-hd-fpv-configurator/static/js/787.df804e12.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.17756b17.css",
-    "static/js/main.82f110fa.js"
+    "static/js/main.df996217.js"
   ]
 }
