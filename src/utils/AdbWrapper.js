@@ -50,13 +50,20 @@ export default class AdbWrapper {
     ]);
   }
 
+  async updataPackages() {
+    const output = await this.adb.subprocess.spawnAndWait([
+      "/opt/bin/opkg",
+      "update",
+    ]);
+
+    return output;
+  }
+
   async getPackages() {
     let output = await this.executeCommand([
       "/opt/bin/opkg",
       "list-installed",
     ]);
-
-    console.log(output);
 
     if(output.exitCode !== 0) {
       throw new Error("Failed fetching installed packages.");
@@ -69,6 +76,7 @@ export default class AdbWrapper {
       return fields[0];
     });
 
+    await this.updataPackages();
     output = await this.adb.subprocess.spawnAndWait([
       "/opt/bin/opkg",
       "list",
@@ -205,7 +213,7 @@ export default class AdbWrapper {
           try {
             const request = proxy.getRequestObject(chunk);
             const response = await proxy.proxyRequest(request);
-            const buffer = await proxy.buildHttpResponse(response);
+            const buffer = await proxy.getResponseBuffer(response);
 
             writer.write(buffer);
           } catch(e) {
