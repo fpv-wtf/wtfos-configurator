@@ -12,12 +12,13 @@ const initialState = {
     hasDinitBinary: false,
     hasOpkgBinary: false,
   },
+  log: [],
 };
 
 export const checkBinaries = createAsyncThunk(
   "device/checkBinaries",
   async (adb) => {
-    const hasDinitBinary = await adb.fileExists("/opt/bin/dinit");
+    const hasDinitBinary = await adb.fileExists("/opt/sbin/dinit");
     const hasOpkgBinary = await adb.fileExists("/opt/bin/opkg");
 
     return {
@@ -47,6 +48,15 @@ export const deviceSlice = createSlice({
       state.error = true;
       state.status = "idle";
     },
+    clearLog: (state) => {
+      state.log = [];
+    },
+    appendToLog: (state, action) => {
+      state.log = [...state.log, action.payload];
+    },
+    installing: (state) => {
+      state.status = "installing";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -57,10 +67,13 @@ export const deviceSlice = createSlice({
 });
 
 export const {
+  appendToLog,
+  clearLog,
   connected,
   connecting,
   connectionFailed,
   disconnected,
+  installing,
 } = deviceSlice.actions;
 
 export const selectConnected = (state) => state.device.connected;
@@ -68,6 +81,7 @@ export const selectError = (state) => state.device.error;
 export const selectHasHttpProxy = (state) => state.device.hasHttpProxy;
 export const selectHasDinitBinary = (state) => state.device.binaries.hasDinitBinary;
 export const selectHasOpkgBinary = (state) => state.device.binaries.hasOpkgBinary;
+export const selectLog = (state) => state.device.log;
 export const selectStatus = (state) => state.device.status;
 
 export default deviceSlice.reducer;

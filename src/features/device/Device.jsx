@@ -7,13 +7,13 @@ import Stack from "@mui/material/Stack";
 
 import ConnectButton from "./ConnectButton";
 
-import { selectStatus } from "./deviceSlice";
+import { selectConnected } from "./deviceSlice";
 
 export default function Device({
   error,
   handleDeviceConnect,
 }) {
-  const status = useSelector(selectStatus);
+  const connected = useSelector(selectConnected);
 
   return (
     <Stack
@@ -21,7 +21,7 @@ export default function Device({
       spacing={2}
       sx={{ width: "100%" }}
     >
-      {status !== "connected" &&
+      {!connected &&
         <>
           { !error &&
             <Alert severity="warning">

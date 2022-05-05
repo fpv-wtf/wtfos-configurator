@@ -5,10 +5,11 @@ import Grid from "@mui/material/Grid";
 
 import DownloadIcon from "@mui/icons-material/Download";
 import HelpIcon from "@mui/icons-material/Help";
+import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import StartIcon from "@mui/icons-material/Start";
 import TerminalIcon from "@mui/icons-material/Terminal";
 
-import Tile from "./Tile";
+import Tile from "../tile/Tile";
 
 import {
   selectHasDinitBinary,
@@ -35,9 +36,7 @@ export default function Tiles() {
           linkTo="packages"
           title="Package Manager"
         >
-          <DownloadIcon
-            fontSize="large"
-          />
+          <DownloadIcon fontSize="large" />
         </Tile>
       </Grid>
 
@@ -51,9 +50,7 @@ export default function Tiles() {
           linkTo="startup"
           title="Startup"
         >
-          <StartIcon
-            fontSize="large"
-          />
+          <StartIcon fontSize="large" />
         </Tile>
       </Grid>
 
@@ -77,13 +74,24 @@ export default function Tiles() {
         xs={3}
       >
         <Tile
+          description="Install, maintain or Remove WTFOS - the operating system for all community contributet functionality."
+          linkTo="wtfos"
+          title="WTFOS"
+        >
+          <RocketLaunchIcon fontSize="large" />
+        </Tile>
+      </Grid>
+
+      <Grid
+        item
+        xs={3}
+      >
+        <Tile
           description="If you have any feedback, questions or want to contribute additional functionality, join our community on Discord."
           href="https://google.com"
           title="Support"
         >
-          <HelpIcon
-            fontSize="large"
-          />
+          <HelpIcon fontSize="large" />
         </Tile>
       </Grid>
     </Grid>

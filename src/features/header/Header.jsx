@@ -103,6 +103,14 @@ export default function Header({ deviceName }) {
               >
                 CLI
               </MenuItem>
+
+              <MenuItem
+                component={Link}
+                onClick={handleClose}
+                to="/wtfos"
+              >
+                WTFOS
+              </MenuItem>
             </Menu>}
 
           <Typography

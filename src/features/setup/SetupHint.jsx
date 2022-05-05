@@ -7,11 +7,11 @@ import Alert from "@mui/material/Alert";
 export default function SetupHint() {
   return(
     <Alert severity="warning">
-      It seems that you have not completed the&nbsp;
+      You should &nbsp;
       <Link href="/setup">
-        basic setup
+        install WTFOS now
       </Link>
-      , this is needed in order to fully benefit from the configurator.
+      . This is required for adding new packages and service management.
     </Alert>
   );
 }

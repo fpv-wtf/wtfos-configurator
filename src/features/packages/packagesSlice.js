@@ -110,7 +110,6 @@ export const packagesSlice = createSlice({
         ...state.filter,
         search: event.payload,
       };
-      console.log(state.filter, state.packages);
 
       state.filtered = filterPackages(state.packages, state.filter);
     },

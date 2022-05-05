@@ -29,16 +29,21 @@ import Header from "./features/header/Header";
 
 import Cli from "./features/cli/Cli";
 import Home from "./features/home/Main";
+import Install from "./features/setup/Install";
 import Packages from "./features/packages/Packages";
 import Setup from "./features/setup/Setup";
+import Remove from "./features/setup/Remove";
 import Startup from "./features/startup/Startup";
 
 import {
+  appendToLog,
   checkBinaries,
+  clearLog,
   connected,
   connecting,
   connectionFailed,
   disconnected,
+  installing,
   selectConnected,
   selectError,
 } from "./features/device/deviceSlice";
@@ -50,6 +55,30 @@ function App() {
   const error = useSelector(selectError);
 
   const [adb, setAdb] = useState(null);
+
+  const handleWTFOSInstall = useCallback(async (device) => {
+    dispatch(clearLog());
+    dispatch(installing());
+
+    await adb.installWTFOS((message) => {
+      dispatch(appendToLog(message));
+    });
+
+    dispatch(connected());
+    dispatch(checkBinaries(adb));
+  }, [adb, dispatch]);
+
+  const handleWTFOSRemove = useCallback(async (device) => {
+    dispatch(clearLog());
+    dispatch(installing());
+
+    await adb.removeWTFOS((message) => {
+      dispatch(appendToLog(message));
+    });
+
+    dispatch(connected());
+    dispatch(checkBinaries(adb));
+  }, [adb, dispatch]);
 
   const connectToDevice = useCallback(async (device) => {
     try {
@@ -115,10 +144,7 @@ function App() {
         deviceName={(isConnected && adb) ? adb.getDevice() : null}
       />
 
-      <Stack
-        container
-        spacing={3}
-      >
+      <Stack spacing={3}>
         <Device
           error={error}
           handleDeviceConnect={handleDeviceConnect}
@@ -140,8 +166,18 @@ function App() {
               />
 
               <Route
-                element={<Setup adb={adb} />}
-                path="setup"
+                element={<Setup />}
+                path="wtfos"
+              />
+
+              <Route
+                element={<Remove onClick={handleWTFOSRemove} />}
+                path="wtfos/remove"
+              />
+
+              <Route
+                element={<Install onClick={handleWTFOSInstall} />}
+                path="wtfos/install"
               />
 
               <Route
