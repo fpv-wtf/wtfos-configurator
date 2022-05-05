@@ -3,7 +3,6 @@ import React, {
   useEffect,
   useState,
 }  from "react";
-
 import {
   useDispatch,
   useSelector,
@@ -29,11 +28,13 @@ import Header from "./features/header/Header";
 
 import Cli from "./features/cli/Cli";
 import Home from "./features/home/Main";
-import Install from "./features/setup/Install";
 import Packages from "./features/packages/Packages";
-import Setup from "./features/setup/Setup";
-import Remove from "./features/setup/Remove";
 import Startup from "./features/startup/Startup";
+
+import Setup from "./features/setup/Setup";
+import Install from "./features/setup/Install";
+import Remove from "./features/setup/Remove";
+import Update from "./features/setup/Update";
 
 import {
   appendToLog,
@@ -178,6 +179,11 @@ function App() {
               <Route
                 element={<Install onClick={handleWTFOSInstall} />}
                 path="wtfos/install"
+              />
+
+              <Route
+                element={<Update adb={adb} />}
+                path="wtfos/update"
               />
 
               <Route

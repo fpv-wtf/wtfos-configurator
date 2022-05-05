@@ -7,6 +7,7 @@ const initialState = {
   repos: [],
   packages: [],
   filtered: [],
+  upgradable: [],
   filter: {
     installed: false,
     search: null,
@@ -71,6 +72,15 @@ export const fetchPackages = createAsyncThunk(
   }
 );
 
+export const fetchUpgradable = createAsyncThunk(
+  "packages/fetchUpgradable",
+  async (adb) => {
+    const upgradable = await adb.getUpgradablePackages();
+
+    return upgradable;
+  }
+);
+
 function filterPackages(packages, filter) {
   let filtered = packages.filter((item) => (
     filter.repo === "all" ||
@@ -126,6 +136,9 @@ export const packagesSlice = createSlice({
 
       state.filtered = filterPackages(state.packages, state.filter);
     },
+    processing: (state, event) => {
+      state.processing = true;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -164,12 +177,20 @@ export const packagesSlice = createSlice({
         });
         state.filtered = filterPackages(state.packages, state.filter);
         state.processing = false;
+      })
+      .addCase(fetchUpgradable.pending, (state, action) => {
+        state.processing = true;
+      })
+      .addCase(fetchUpgradable.fulfilled, (state, action) => {
+        state.upgradable = action.payload;
+        state.processing = false;
       });
   },
 });
 
 export const {
   installedFilter,
+  processing,
   repo,
   search,
 } = packagesSlice.actions;
@@ -179,5 +200,6 @@ export const selectFetched = (state) => state.packages.fetched;
 export const selectFilter = (state) => state.packages.filter;
 export const selectFiltered = (state) => state.packages.filtered;
 export const selectProcessing = (state) => state.packages.processing;
+export const selectUpgradable = (state) => state.packages.upgradable;
 
 export default packagesSlice.reducer;

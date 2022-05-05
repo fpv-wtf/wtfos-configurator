@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 
 import DownloadIcon from "@mui/icons-material/Download";
 import DeleteIcon from "@mui/icons-material/Delete";
+import UpdateIcon from "@mui/icons-material/Update";
 
 import Tile from "../tile/Tile";
 
@@ -34,6 +35,20 @@ export default function Tiles() {
           title="Install"
         >
           <DownloadIcon fontSize="large" />
+        </Tile>
+      </Grid>
+
+      <Grid
+        item
+        xs={3}
+      >
+        <Tile
+          description="Update WTFOS and installed packages to stay up to date."
+          disabled={!hasDinitBinary}
+          linkTo="/wtfos/update"
+          title="Update"
+        >
+          <UpdateIcon fontSize="large" />
         </Tile>
       </Grid>
 

@@ -113,6 +113,38 @@ export default class AdbWrapper {
     return output;
   }
 
+  async getUpgradablePackages() {
+    let upgradable = [];
+    try {
+      await this.updataPackages();
+      const output = await this.executeCommand([
+        this.wtfos.bin.opkg,
+        "list-upgradable",
+      ]);
+      upgradable = output.stdout.split("\n").filter((element) => element);
+      upgradable = upgradable.map((item) => {
+        const fields = item.split(" - ");
+
+        return {
+          name: fields[0],
+          current: fields[1],
+          latest: fields[2],
+        };
+      });
+    } catch(e) {
+      console.log(e);
+    }
+
+    return upgradable;
+  }
+
+  async upgradePackages() {
+    await this.executeCommand([
+      this.wtfos.bin.opkg,
+      "upgrade",
+    ]);
+  }
+
   async getPackages() {
     let output = await this.executeCommand([
       this.wtfos.bin.opkg,
