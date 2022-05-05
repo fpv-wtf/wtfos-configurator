@@ -26,6 +26,7 @@ export default class AdbWrapper {
       },
       proxy: "http://127.0.0.1:8089",
       linkFunctions: ["wget", "vi", "ping"],
+      opkgLists: "/opt/var/opkg-lists",
     };
   }
 
@@ -80,8 +81,31 @@ export default class AdbWrapper {
     ]);
   }
 
+  async getRepos() {
+    const output = await this.executeCommand(`ls ${this.wtfos.opkgLists}`);
+    const repos = output.stdout.split("\n");
+
+    return repos;
+  }
+
+  async getPackagesByRepo() {
+    const repos = await this.getRepos();
+    const packages = {};
+    for(let repo of repos) {
+      const output = await this.executeCommand([
+        "gunzip -c",
+        `${this.wtfos.opkgLists}/${repo}`,
+        "| grep 'Package:' | cut -d ' ' -f2",
+      ]);
+      const lines = output.stdout.split("\n");
+      packages[repo] = lines;
+    }
+
+    return packages;
+  }
+
   async updataPackages() {
-    const output = await this.adb.subprocess.spawnAndWait([
+    const output = await this.executeCommand([
       this.wtfos.bin.opkg,
       "update",
     ]);
@@ -116,12 +140,24 @@ export default class AdbWrapper {
       throw new Error("Failed fetching packages.");
     }
 
+    const repos = await this.getPackagesByRepo();
+    const repoKeys = Object.keys(repos);
+
     lines = output.stdout.split("\n").filter((element) => element);
     const packages = lines.map((item) => {
       const fields = item.split(" - ");
+      const name = fields[0];
+      const repo = repoKeys.find((key) => {
+        if(repos[key].includes(name)) {
+          return key;
+        }
+
+        return false;
+      });
 
       return {
-        name: fields[0],
+        name: name,
+        repo: repo,
         version: fields[1],
         description: fields[2] || "",
         installed: installed.includes(fields[0]),

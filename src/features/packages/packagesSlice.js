@@ -4,18 +4,13 @@ import {
 } from "@reduxjs/toolkit";
 
 const initialState = {
+  repos: [],
   packages: [],
-  filtered: [
-    {
-      name: "Test 1",
-      version: "0.1.0",
-      description: "Description",
-      installed: false,
-    },
-  ],
+  filtered: [],
   filter: {
-    installed: true,
+    installed: false,
     search: null,
+    repo: "fpv-wtf",
   },
   fetched: false,
   processing: false,
@@ -61,18 +56,28 @@ export const fetchPackages = createAsyncThunk(
   "packages/fetchPackages",
   async (adb) => {
     let packages = [];
+    let repos = [];
     try {
       packages = await adb.getPackages();
+      repos =  await adb.getRepos();
     } catch(e) {
       console.log(e);
     }
 
-    return packages;
+    return {
+      packages,
+      repos,
+    };
   }
 );
 
 function filterPackages(packages, filter) {
-  let filtered = packages.filter((item) => {
+  let filtered = packages.filter((item) => (
+    filter.repo === "all" ||
+    filter.repo === item.repo
+  ));
+
+  filtered = filtered.filter((item) => {
     if(filter.installed) {
       return item.installed;
     }
@@ -113,12 +118,21 @@ export const packagesSlice = createSlice({
 
       state.filtered = filterPackages(state.packages, state.filter);
     },
+    repo: (state, event) => {
+      state.filter = {
+        ...state.filter,
+        repo: event.payload,
+      };
+
+      state.filtered = filterPackages(state.packages, state.filter);
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPackages.fulfilled, (state, action) => {
-        state.packages = action.payload;
-        state.filtered = state.packages.filter((item) => item.installed);
+        state.packages = action.payload.packages;
+        state.repos = action.payload.repos;
+        state.filtered = filterPackages(state.packages, state.filter);
         state.fetched = true;
       })
       .addCase(removePackage.pending, (state, action) => {
@@ -156,9 +170,11 @@ export const packagesSlice = createSlice({
 
 export const {
   installedFilter,
+  repo,
   search,
 } = packagesSlice.actions;
 
+export const selectRepos = (state) => state.packages.repos;
 export const selectFetched = (state) => state.packages.fetched;
 export const selectFilter = (state) => state.packages.filter;
 export const selectFiltered = (state) => state.packages.filtered;

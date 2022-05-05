@@ -33,11 +33,13 @@ import {
   installedFilter,
   installPackage,
   removePackage,
+  repo,
   search,
   selectFetched,
   selectFilter,
   selectFiltered,
   selectProcessing,
+  selectRepos,
 } from "./packagesSlice";
 
 import { selectHasOpkgBinary } from "../device/deviceSlice";
@@ -54,6 +56,7 @@ export default function Packages({ adb }) {
   const filtered = useSelector(selectFiltered);
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const processing = useSelector(selectProcessing);
+  const repos = useSelector(selectRepos);
 
   const [installed, setInstalled] = useState(filter.installed);
 
@@ -76,6 +79,11 @@ export default function Packages({ adb }) {
     } else {
       dispatch(search(""));
     }
+  }, [dispatch]);
+
+  const handleRepoChange = useCallback((event) => {
+    const value = event.target.value;
+    dispatch(repo(value));
   }, [dispatch]);
 
   useEffect(() => {
@@ -173,6 +181,17 @@ export default function Packages({ adb }) {
     );
   });
 
+  const renderedRepos = repos.map((repo) => {
+    return(
+      <MenuItem
+        key={repo}
+        value={repo}
+      >
+        {repo}
+      </MenuItem>
+    );
+  });
+
   const packageString = `Found ${filtered.length} packages`;
   return (
     <>
@@ -207,6 +226,25 @@ export default function Packages({ adb }) {
             noValidate
             sx={{ "& > :not(style)": { m: 1 } }}
           >
+            <FormControl sx={{ width: 120 }}>
+              <InputLabel id="package-state-select-label">
+                Repo
+              </InputLabel>
+
+              <Select
+                id="package-state-select"
+                label="Packages"
+                onChange={handleRepoChange}
+                value={filter.repo}
+              >
+                <MenuItem value="all">
+                  All
+                </MenuItem>
+
+                {renderedRepos}
+              </Select>
+            </FormControl>
+
             <FormControl sx={{ width: 120 }}>
               <InputLabel id="package-state-select-label">
                 Packages
