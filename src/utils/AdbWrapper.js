@@ -25,7 +25,7 @@ export default class AdbWrapper {
         opkg: "/opt/etc/opkg.conf",
       },
       proxy: "http://127.0.0.1:8089",
-      linkFunctions: ["wget", "vi", "ping"],
+      linkFunctions: ["wget"],
       opkgLists: "/opt/var/opkg-lists",
     };
   }
