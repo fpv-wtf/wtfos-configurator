@@ -306,8 +306,7 @@ export default class AdbWrapper {
       socket.readable.pipeTo(new WritableStream({
         write: async (chunk) => {
           try {
-            const request = proxy.getRequestObject(chunk);
-            const response = await proxy.proxyRequest(request);
+            const response = await proxy.proxyRequest(chunk);
             const buffer = await proxy.getResponseBuffer(response);
 
             writer.write(buffer);
