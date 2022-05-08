@@ -3,7 +3,6 @@ import React, {
   useCallback,
   useState,
 } from "react";
-import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
@@ -17,14 +16,11 @@ import Typography from "@mui/material/Typography";
 
 import { Link } from "react-router-dom";
 
-import { selectConnected } from "../device/deviceSlice";
-
 export default function Header({ deviceName }) {
   const location = useLocation();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const connected = useSelector(selectConnected);
 
   const handleClose = useCallback(() => {
     setAnchorEl(null);
