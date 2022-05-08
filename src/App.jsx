@@ -2,7 +2,7 @@ import React, {
   useCallback,
   useEffect,
   useState,
-}  from "react";
+} from "react";
 import {
   useDispatch,
   useSelector,

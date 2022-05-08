@@ -60,58 +60,65 @@ export default function Header({ deviceName }) {
             <MenuIcon />
           </IconButton>
 
-          {connected &&
-            <Menu
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              id="menu-appbar"
-              keepMounted
-              onClose={handleClose}
-              open={open}
+          <Menu
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            id="menu-appbar"
+            keepMounted
+            onClose={handleClose}
+            open={open}
+          >
+            <MenuItem
+              component={Link}
+              onClick={handleClose}
+              to="/"
             >
-              <MenuItem
-                component={Link}
-                onClick={handleClose}
-                to="/"
-              >
-                Home
-              </MenuItem>
+              Home
+            </MenuItem>
 
-              <MenuItem
-                component={Link}
-                onClick={handleClose}
-                to="/packages"
-              >
-                Package Manager
-              </MenuItem>
+            <MenuItem
+              component={Link}
+              onClick={handleClose}
+              to="/packages"
+            >
+              Package Manager
+            </MenuItem>
 
-              <MenuItem
-                component={Link}
-                onClick={handleClose}
-                to="/startup"
-              >
-                Startup
-              </MenuItem>
+            <MenuItem
+              component={Link}
+              onClick={handleClose}
+              to="/startup"
+            >
+              Startup
+            </MenuItem>
 
-              <MenuItem
-                component={Link}
-                onClick={handleClose}
-                to="/cli"
-              >
-                CLI
-              </MenuItem>
+            <MenuItem
+              component={Link}
+              onClick={handleClose}
+              to="/cli"
+            >
+              CLI
+            </MenuItem>
 
-              <MenuItem
-                component={Link}
-                onClick={handleClose}
-                to="/wtfos"
-              >
-                WTFOS
-              </MenuItem>
-            </Menu>}
+            <MenuItem
+              component={Link}
+              onClick={handleClose}
+              to="/wtfos"
+            >
+              WTFOS
+            </MenuItem>
+
+            <MenuItem
+              component={Link}
+              onClick={handleClose}
+              to="/root"
+            >
+              Root
+            </MenuItem>
+          </Menu>
 
           <Typography
             component="div"

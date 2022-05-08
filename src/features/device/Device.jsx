@@ -17,8 +17,8 @@ export default function Device({
 
   return (
     <Stack
-      paddingTop={2}
-      spacing={2}
+      paddingTop={3}
+      spacing={3}
       sx={{ width: "100%" }}
     >
       {!connected &&
