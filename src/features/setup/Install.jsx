@@ -18,7 +18,6 @@ import {
   clearLog,
   selectHasOpkgBinary,
   selectLog,
-  selectStatus,
 } from "../device/deviceSlice";
 
 import {
