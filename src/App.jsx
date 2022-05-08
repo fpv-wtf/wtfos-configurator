@@ -37,14 +37,11 @@ import Remove from "./features/setup/Remove";
 import Update from "./features/setup/Update";
 
 import {
-  appendToLog,
   checkBinaries,
-  clearLog,
   connected,
   connecting,
   connectionFailed,
   disconnected,
-  installing,
   selectConnected,
   selectError,
 } from "./features/device/deviceSlice";
@@ -56,30 +53,6 @@ function App() {
   const error = useSelector(selectError);
 
   const [adb, setAdb] = useState(null);
-
-  const handleWTFOSInstall = useCallback(async (device) => {
-    dispatch(clearLog());
-    dispatch(installing());
-
-    await adb.installWTFOS((message) => {
-      dispatch(appendToLog(message));
-    });
-
-    dispatch(connected());
-    dispatch(checkBinaries(adb));
-  }, [adb, dispatch]);
-
-  const handleWTFOSRemove = useCallback(async (device) => {
-    dispatch(clearLog());
-    dispatch(installing());
-
-    await adb.removeWTFOS((message) => {
-      dispatch(appendToLog(message));
-    });
-
-    dispatch(connected());
-    dispatch(checkBinaries(adb));
-  }, [adb, dispatch]);
 
   const connectToDevice = useCallback(async (device) => {
     try {
@@ -172,12 +145,12 @@ function App() {
               />
 
               <Route
-                element={<Remove onClick={handleWTFOSRemove} />}
+                element={<Remove adb={adb} />}
                 path="wtfos/remove"
               />
 
               <Route
-                element={<Install onClick={handleWTFOSInstall} />}
+                element={<Install adb={adb} />}
                 path="wtfos/install"
               />
 

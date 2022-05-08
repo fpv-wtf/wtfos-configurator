@@ -14,6 +14,7 @@ const initialState = {
     repo: "fpv-wtf",
   },
   fetched: false,
+  fetchedUpgradable: false,
   processing: false,
 };
 
@@ -81,6 +82,13 @@ export const fetchUpgradable = createAsyncThunk(
   }
 );
 
+export const upgrade = createAsyncThunk(
+  "packages/upgrade",
+  async (adb) => {
+    await adb.upgradePackages();
+  }
+);
+
 function filterPackages(packages, filter) {
   let filtered = packages.filter((item) => (
     filter.repo === "all" ||
@@ -137,16 +145,20 @@ export const packagesSlice = createSlice({
       state.filtered = filterPackages(state.packages, state.filter);
     },
     processing: (state, event) => {
-      state.processing = true;
+      state.processing = event.payload;
     },
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchPackages.pending, (state, action) => {
+        state.processing = true;
+      })
       .addCase(fetchPackages.fulfilled, (state, action) => {
         state.packages = action.payload.packages;
         state.repos = action.payload.repos;
         state.filtered = filterPackages(state.packages, state.filter);
         state.fetched = true;
+        state.processing = false;
       })
       .addCase(removePackage.pending, (state, action) => {
         state.processing = true;
@@ -180,9 +192,17 @@ export const packagesSlice = createSlice({
       })
       .addCase(fetchUpgradable.pending, (state, action) => {
         state.processing = true;
+        state.fetchedUpgradable = true;
       })
       .addCase(fetchUpgradable.fulfilled, (state, action) => {
         state.upgradable = action.payload;
+        state.processing = false;
+      })
+      .addCase(upgrade.pending, (state, action) => {
+        state.processing = true;
+        state.fetchedUpgradable = false;
+      })
+      .addCase(upgrade.fulfilled, (state, action) => {
         state.processing = false;
       });
   },
@@ -197,6 +217,7 @@ export const {
 
 export const selectRepos = (state) => state.packages.repos;
 export const selectFetched = (state) => state.packages.fetched;
+export const selectFetchedUpgradable = (state) => state.packages.fetchedUpgradable;
 export const selectFilter = (state) => state.packages.filter;
 export const selectFiltered = (state) => state.packages.filtered;
 export const selectProcessing = (state) => state.packages.processing;
