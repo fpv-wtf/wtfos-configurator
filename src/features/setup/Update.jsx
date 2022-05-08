@@ -19,6 +19,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
+import Spinner from "../loading/Spinner";
+
 import {
   selectHasOpkgBinary,
   selectStatus,
@@ -85,6 +87,9 @@ export default function Update({ adb }) {
       >
         Update WTFOS
       </Button>
+
+      {isProcessing &&
+        <Spinner text="Checking packages..." />}
 
       {upgradable.length > 0 &&
         <TableContainer
