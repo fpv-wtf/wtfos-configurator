@@ -43,6 +43,7 @@
     "default-case": "warn",
     "no-template-curly-in-string": "off",
     "no-unreachable": "warn",
-    "semi": "error"
+    "semi": "error",
+    "no-lone-blocks": "off"
   }
 }
