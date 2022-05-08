@@ -25,13 +25,12 @@ import {
 } from "../device/deviceSlice";
 
 import {
-  selectProcessing,
-  selectUpgradable,
-} from "../packages/packagesSlice";
-
-import {
   fetchUpgradable,
   processing,
+  selectFetchedUpgradable,
+  selectProcessing,
+  selectUpgradable,
+  upgrade,
 } from "../packages/packagesSlice";
 
 export default function Update({ adb }) {
@@ -40,18 +39,17 @@ export default function Update({ adb }) {
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const status = useSelector(selectStatus);
   const upgradable = useSelector(selectUpgradable);
+  const fetchedUpgradable = useSelector(selectFetchedUpgradable);
   const isProcessing = useSelector(selectProcessing);
 
   useEffect(() => {
-    dispatch(fetchUpgradable(adb));
-  }, [adb, dispatch]);
+    if(!isProcessing && !fetchedUpgradable) {
+      dispatch(fetchUpgradable(adb));
+    }
+  }, [adb, dispatch, fetchedUpgradable, isProcessing]);
 
-  const handleWTFOSUpdate = useCallback(async () => {
-    dispatch(processing());
-
-    await adb.upgradePackages();
-
-    dispatch(fetchUpgradable(adb));
+  const handleWTFOSUpdate = useCallback(() => {
+    dispatch(upgrade(adb));
   }, [adb, dispatch]);
 
   const renderedUpgradable = upgradable.map((item) => {
