@@ -36,6 +36,8 @@ import Install from "./features/setup/Install";
 import Remove from "./features/setup/Remove";
 import Update from "./features/setup/Update";
 
+import About from "./features/about/About";
+
 import {
   appendToLog,
   checkBinaries,
@@ -152,13 +154,19 @@ function App() {
         />
       </Stack>
 
-      {isConnected &&
-        <Routes>
+      <Routes>
+        <Route
+          element={<About />}
+          path="about"
+        />
+
+        {isConnected &&
+        <>
           <Route
             element={<Home />}
             path="/"
           />
-
+          
           {adb &&
             <>
               <Route
@@ -195,8 +203,12 @@ function App() {
                 element={<Startup adb={adb} />}
                 path="startup"
               />
+
+
             </>}
-        </Routes>}
+        </>}
+        
+      </Routes>
     </Container>
   );
 }

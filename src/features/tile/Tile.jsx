@@ -48,6 +48,8 @@ export default function Tile({
 
           <Typography
             color="text.secondary"
+            display="block"
+            sx={{ wordWrap:"break-word" }}
             variant="body2"
           >
             {description}
