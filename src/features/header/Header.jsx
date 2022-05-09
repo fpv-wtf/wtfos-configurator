@@ -35,12 +35,15 @@ export default function Header({ deviceName }) {
     case "/cli": title = "CLI"; break;
     case "/packages": title = "Packages"; break;
     case "/startup": title = "Startup"; break;
+    case "/about": title = "About fpv.wtf"; break;
     default: title = "Home";
   }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar
+        position="static"
+      >
         <Toolbar>
           <IconButton
             aria-controls={open ? "menu-appbar" : null}
@@ -113,6 +116,14 @@ export default function Header({ deviceName }) {
               to="/root"
             >
               Root
+            </MenuItem>
+
+            <MenuItem
+              component={Link}
+              onClick={handleClose}
+              to="/about"
+            >
+              About fpv.wtf
             </MenuItem>
           </Menu>
 
