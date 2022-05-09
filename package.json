@@ -33,7 +33,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext .jsx,.js",
     "lint-commit": "with-staged '**/*.{js,jsx}' -- yarn eslint",
-    "obfuscate": "javascript-obfuscator src/utils/exploit --output src/utils/obfuscated-exploit --split-strings=true --string-array-encoding base64,rc4"
+    "obfuscate": "javascript-obfuscator src/utils/exploit --output src/utils/obfuscated-exploit --split-strings=true --string-array-encoding base64,rc4 --disable-console-output=true"
   },
   "eslintConfig": {
     "extends": [
