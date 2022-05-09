@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "WTFOS Configurator",
+  "name": "Configurator for DJI HD FPV hardware running WTFOS",
   "icons": [
     {
       "src": "favicon.ico",
