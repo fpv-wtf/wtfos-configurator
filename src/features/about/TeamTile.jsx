@@ -21,10 +21,13 @@ export default function TeamTile({
   description,
 }) {
   return (
-    <Card sx={{
-      height: "100%",
-      position:"relative" ,
-    }}
+    <Card
+      sx={{
+        height: "100%",
+        position:"relative",
+        display: "flex",
+        flexDirection: "column",
+      }}
     >
       { honorary && (
         <CornerRibbon
@@ -36,7 +39,7 @@ export default function TeamTile({
         </CornerRibbon>
       )}
 
-      <CardContent>
+      <CardContent sx={{ flexGrow: 1 }}>
         <Grid
           container
           justifyContent="center"
@@ -81,7 +84,9 @@ export default function TeamTile({
         </Grid>
       </CardContent>
 
-      <CardActions>
+      <CardActions
+        sx={{ justifyContent: "center" }}
+      >
         <IconButton
           aria-label="github"
           href={"https://github.com/" + nick}

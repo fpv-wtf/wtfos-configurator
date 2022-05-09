@@ -10,7 +10,6 @@ import Team from "./Team";
 import Support from "./Support";
 
 export default function About() {
-
   return(
     <Container
       fixed
