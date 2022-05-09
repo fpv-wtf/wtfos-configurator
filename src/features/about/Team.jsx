@@ -14,7 +14,9 @@ export default function Team() {
       <Grid
         item
         key={member.nick}
-        xs={3}
+        md={3}
+        sm={4}
+        xs={12}
       >
         <TeamTile
           description={member.description}

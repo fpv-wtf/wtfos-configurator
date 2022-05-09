@@ -18,7 +18,8 @@ export default function Support() {
     >
       <Grid
         item
-        xs={4}
+        md={4}
+        xs={12}
       >
         <Tile
           description="buymeacoffee.com/fpv.wtf"
@@ -30,7 +31,8 @@ export default function Support() {
 
       <Grid
         item
-        xs={4}
+        md={4}
+        xs={12}
       >
         <Tile
           description="0xbAB1fec80922328F27De6E2F1CDBC2F322397637"
@@ -46,7 +48,8 @@ export default function Support() {
 
       <Grid
         item
-        xs={4}
+        md={4}
+        xs={12}
       >
         <Tile
           description="3L7dE5EHtyd2b1tXBwdnWC2MADkV2VTbrq"

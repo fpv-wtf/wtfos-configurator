@@ -70,7 +70,9 @@ export default function TeamTile({
               gutterBottom
               variant="caption"
             >
+              &nbsp;
               {name}
+              &nbsp;
             </Typography>
 
             <Typography
@@ -112,7 +114,7 @@ export default function TeamTile({
 TeamTile.defaultProps = {
   description: null,
   honorary: false,
-  name: null,
+  name: " ",
   nick: null,
   twitter: null,
 };
