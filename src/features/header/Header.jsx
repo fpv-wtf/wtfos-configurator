@@ -40,7 +40,10 @@ export default function Header({ deviceName }) {
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+      marginBottom={2}
+      sx={{ flexGrow: 1 }}
+    >
       <AppBar
         position="static"
       >

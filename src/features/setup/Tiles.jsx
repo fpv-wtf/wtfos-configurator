@@ -26,7 +26,9 @@ export default function Tiles() {
     >
       <Grid
         item
-        xs={3}
+        md={3}
+        sm={6}
+        xs={12}
       >
         <Tile
           description="Install WTFOS to your device to install community contrsibuted software."
@@ -40,7 +42,9 @@ export default function Tiles() {
 
       <Grid
         item
-        xs={3}
+        md={3}
+        sm={6}
+        xs={12}
       >
         <Tile
           description="Update WTFOS and installed packages to stay up to date."
@@ -54,7 +58,9 @@ export default function Tiles() {
 
       <Grid
         item
-        xs={3}
+        md={3}
+        sm={6}
+        xs={12}
       >
         <Tile
           description="Remove WTFOS from your device. This will revert all changes apart from the root unlock itself."
