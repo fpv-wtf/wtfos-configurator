@@ -13,7 +13,6 @@ export default function Device({
   return (
     <Stack
       marginBottom={2}
-      paddingTop={2}
       spacing={2}
       sx={{ width: "100%" }}
     >

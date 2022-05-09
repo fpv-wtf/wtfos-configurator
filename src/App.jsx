@@ -103,7 +103,6 @@ function App() {
     try {
       const device = await AdbWebUsbBackend.requestDevice();
       await connectToDevice(device);
-      console.log(device);
     } catch(e) {
       console.log(e);
       dispatch(connectionFailed());

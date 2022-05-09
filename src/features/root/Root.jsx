@@ -17,7 +17,9 @@ import Typography from "@mui/material/Typography";
 
 import Header from "../header/Header";
 
+import { PortLostError } from "../../utils/Errors";
 import Exploit from "../../utils/obfuscated-exploit/Exploit";
+//import Exploit from "../../utils/exploit/Exploit";
 
 import {
   appendToLog,
@@ -35,14 +37,17 @@ export default function Root() {
   const dispatch = useDispatch();
 
   const unlockStep = useRef(1);
+  const disconnected = useRef(false);
+  const rebooting = useRef(false);
 
   const attempted = useSelector(selectAttempted);
   const log = useSelector(selectLog);
   const rooting = useSelector(selectRooting);
 
-  const renderedLog = log.map((line) => {
+  const renderedLog = log.map((line, index) => {
+    const key = `${index}-${line}`;
     return (
-      <ListItem key={line}>
+      <ListItem key={key}>
         <Typography
           sx={{ fontFamily: "Monospace" }}
         >
@@ -56,6 +61,7 @@ export default function Root() {
     dispatch(root());
 
     const log = (message) => {
+      console.log(message);
       dispatch(appendToLog(message));
     };
 
@@ -77,8 +83,11 @@ export default function Root() {
                 log(` - Found Device: ${device}`);
                 log("Step 1 - Success! Rebooting...");
 
+                rebooting.current = true;
                 unlockStep.current = 2;
                 done = true;
+
+                await exploit.restart();
               } break;
 
               case 2: {
@@ -96,7 +105,8 @@ export default function Root() {
                   runUnlock();
                 } else {
                   log("Step 2 - Success! Rebooting...");
-                  exploit.restart();
+                  rebooting.current = true;
+                  await exploit.restart();
                 }
               } break;
 
@@ -120,11 +130,12 @@ export default function Root() {
                 await exploit.unlockStep4();
                 log("Step 4 - Success! Rebooting...");
 
+                rebooting.current = true;
                 unlockStep.current = 5;
                 done = true;
 
                 try {
-                  exploit.restart();
+                  await exploit.restart();
                 } catch (e) {
                   console.log("Device might already be restarting");
                   console.log(e);
@@ -137,15 +148,18 @@ export default function Root() {
                 }
                 await exploit.unlockStep5();
 
+                log("Step 5 - Success! Rebooting...");
+
+                rebooting.current = true;
                 unlockStep.current = 6;
                 done = true;
 
-                log("Step 5 - Success! Rebooting...");
                 exploit.restart();
               } break;
 
               case 6: {
                 log("All done - your device has been successfully rooted!");
+                unlockStep.current = 0;
                 done = true;
 
                 try {
@@ -163,13 +177,19 @@ export default function Root() {
               }
             }
           } catch(e) {
-            currentTry += 1;
+            if(e instanceof PortLostError) {
+              disconnected.current = true;
+              break;
+            } else {
+              console.log(e);
+              currentTry += 1;
 
-            console.log(e);
+              await exploit.sleep(1000);
+            }
           }
         }
 
-        if(!done) {
+        if(!done && !disconnected.current) {
           log(`Failed after ${maxTry} retries.`);
           try {
             exploit.closePort();
@@ -177,10 +197,20 @@ export default function Root() {
             console.log(e);
           }
         }
+
+        if(!done && disconnected.current) {
+          log("Device went away...");
+        }
       }
     };
 
     const reConnect = async () => {
+      disconnected.current = false;
+      if(!rebooting.current && unlockStep.current > 0) {
+        log("Device came back...");
+      }
+      rebooting.current = false;
+
       const ports = await navigator.serial.getPorts();
       if(ports.length > 0 ) {
         // Assume that the first available port is the device we are looking for.
@@ -188,12 +218,16 @@ export default function Root() {
         exploit.setPort(port);
         await exploit.makeConnection();
 
+        // Run the next unlock step (or the failed one if device went away)
         runUnlock();
       }
     };
 
     navigator.serial.addEventListener("connect", reConnect);
-    navigator.serial.addEventListener("disconnected", () => {
+    navigator.serial.addEventListener("disconnect", () => {
+      console.log("Disconnect");
+      disconnected.current = true;
+
       if(!rooting && attempted) {
         dispatch(reset);
       }
@@ -214,10 +248,7 @@ export default function Root() {
     >
       <Header />
 
-      <Stack
-        paddingTop={3}
-        spacing={3}
-      >
+      <Stack spacing={2}>
         <Button
           disabled={rooting}
           onClick={handleClick}
