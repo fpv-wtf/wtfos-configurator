@@ -103,6 +103,7 @@ function App() {
     try {
       const device = await AdbWebUsbBackend.requestDevice();
       await connectToDevice(device);
+      console.log(device);
     } catch(e) {
       console.log(e);
       dispatch(connectionFailed());
@@ -118,58 +119,58 @@ function App() {
         deviceName={(isConnected && adb) ? adb.getDevice() : null}
       />
 
-      <Stack spacing={3}>
-        <Device
-          error={error}
-          handleDeviceConnect={handleDeviceConnect}
-        />
-      </Stack>
-
-      {isConnected &&
-        <Routes>
-          <Route
-            element={<Home />}
-            path="/"
+      {!isConnected  &&
+        <Stack>
+          <Device
+            error={error}
+            handleDeviceConnect={handleDeviceConnect}
           />
+        </Stack>}
 
-          {adb &&
-            <>
-              <Route
-                element={<Cli adb={adb} />}
-                path="cli"
-              />
+      <Routes>
+        <Route
+          element={<Home />}
+          path="/"
+        />
 
-              <Route
-                element={<Setup />}
-                path="wtfos"
-              />
+        {isConnected && adb &&
+          <>
+            <Route
+              element={<Cli adb={adb} />}
+              path="cli"
+            />
 
-              <Route
-                element={<Remove adb={adb} />}
-                path="wtfos/remove"
-              />
+            <Route
+              element={<Setup />}
+              path="wtfos"
+            />
 
-              <Route
-                element={<Install adb={adb} />}
-                path="wtfos/install"
-              />
+            <Route
+              element={<Remove adb={adb} />}
+              path="wtfos/remove"
+            />
 
-              <Route
-                element={<Update adb={adb} />}
-                path="wtfos/update"
-              />
+            <Route
+              element={<Install adb={adb} />}
+              path="wtfos/install"
+            />
 
-              <Route
-                element={<Packages adb={adb} />}
-                path="packages"
-              />
+            <Route
+              element={<Update adb={adb} />}
+              path="wtfos/update"
+            />
 
-              <Route
-                element={<Startup adb={adb} />}
-                path="startup"
-              />
-            </>}
-        </Routes>}
+            <Route
+              element={<Packages adb={adb} />}
+              path="packages"
+            />
+
+            <Route
+              element={<Startup adb={adb} />}
+              path="startup"
+            />
+          </>}
+      </Routes>
     </Container>
   );
 }

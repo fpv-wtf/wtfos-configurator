@@ -8,25 +8,30 @@ import Stack from "@mui/material/Stack";
 import SetupHint from "../setup/SetupHint";
 import Tiles from "./Tiles";
 
-import { selectHasOpkgBinary } from "../device/deviceSlice";
+import {
+  selectConnected,
+  selectHasOpkgBinary,
+} from "../device/deviceSlice";
 
 export default function Main() {
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
+  const isConnected = useSelector(selectConnected);
 
   return(
     <Stack
       marginBottom={2}
       spacing={2}
     >
-      <Alert severity="success">
-        Successfully connected to your device.
-      </Alert>
+      {isConnected &&
+        <Alert severity="success">
+          Successfully connected to your device.
+        </Alert>}
 
       <Stack>
         <Tiles />
       </Stack>
 
-      {!hasOpkgBinary &&
+      {!hasOpkgBinary && isConnected &&
         <SetupHint />}
     </Stack>
   );

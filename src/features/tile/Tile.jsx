@@ -48,6 +48,8 @@ export default function Tile({
 
           <Typography
             color="text.secondary"
+            display="block"
+            sx={{ wordWrap:"break-word" }}
             variant="body2"
           >
             {description}
@@ -62,6 +64,7 @@ Tile.defaultProps = {
   disabled: false,
   href: null,
   linkTo: null,
+  title: null,
 };
 
 Tile.propTypes = {
@@ -70,5 +73,5 @@ Tile.propTypes = {
   disabled: PropTypes.bool,
   href: PropTypes.string,
   linkTo: PropTypes.string,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
 };
