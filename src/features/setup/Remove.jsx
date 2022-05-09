@@ -1,8 +1,5 @@
 import PropTypes from "prop-types";
-import React, {
-  useEffect,
-  useCallback,
-} from "react";
+import React, { useCallback } from "react";
 import {
   useDispatch,
   useSelector,
