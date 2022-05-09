@@ -1,7 +1,6 @@
 import React from "react";
 
 import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
 import Team from "./Team";
@@ -13,26 +12,35 @@ export default function About() {
     <Stack
       marginBottom={2}
       marginTop={2}
-      spacing={2}
     >
 
-      <Typography 
+      <Typography
         component="div"
-        variant="h5"  
+        variant="h5"
       >
         Support the effort
       </Typography>
 
-      <Support />
+      <Stack
+        marginBottom={2}
+        marginTop={2}
+      >
+        <Support />
+      </Stack>
 
-      <Typography 
+      <Typography
         component="div"
-        variant="h5"  
+        variant="h5"
       >
         Team
       </Typography>
 
-      <Team />
+      <Stack
+        marginBottom={2}
+        marginTop={2}
+      >
+        <Team />
+      </Stack>
     </Stack>
   );
 }

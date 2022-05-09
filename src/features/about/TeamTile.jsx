@@ -1,18 +1,15 @@
+import PropTypes from "prop-types";
 import * as React from "react";
+
+import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import Grid from "@mui/material/Grid";
-
-import PropTypes from "prop-types";
-
-
-import Avatar from "@mui/material/Avatar";
-
 import GitHubIcon from "@mui/icons-material/GitHub";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import Typography from "@mui/material/Typography";
 
 import CornerRibbon from "./CornerRibbon";
 
@@ -24,10 +21,10 @@ export default function TeamTile({
   description,
 }) {
   return (
-    <Card sx={{ 
-            height: "100%",
-            position:"relative" ,
-            }}
+    <Card sx={{
+      height: "100%",
+      position:"relative" ,
+    }}
     >
       { honorary && (
         <CornerRibbon
@@ -46,13 +43,12 @@ export default function TeamTile({
           textAlign="center"
         >
           <Grid item>
-            <Avatar 
+            <Avatar
               alt={nick}
-              component="component"
               src={"https://github.com/" + nick + ".png"}
-              sx={{ 
+              sx={{
                 display: "inline-block",
-                width: 56, 
+                width: 56,
                 height: 56,
               }}
             />
@@ -65,7 +61,7 @@ export default function TeamTile({
               {nick}
             </Typography>
 
-            <Typography 
+            <Typography
               color="text.secondary"
               display="block"
               gutterBottom
@@ -73,8 +69,8 @@ export default function TeamTile({
             >
               {name}
             </Typography>
-                
-            <Typography 
+
+            <Typography
               color=""
               paddingTop={1}
               variant="body2"
@@ -86,16 +82,16 @@ export default function TeamTile({
       </CardContent>
 
       <CardActions>
-        <IconButton 
-          aria-label="github" 
+        <IconButton
+          aria-label="github"
           href={"https://github.com/" + nick}
           target="_new"
         >
           <GitHubIcon />
         </IconButton>
-        
+
         {twitter && (
-          <IconButton 
+          <IconButton
             aria-label="twitter"
             href={"https://twitter.com/" + twitter}
             target="_new"
@@ -107,6 +103,7 @@ export default function TeamTile({
     </Card>
   );
 }
+
 TeamTile.defaultProps = {
   description: null,
   honorary: false,
@@ -114,7 +111,7 @@ TeamTile.defaultProps = {
   nick: null,
   twitter: null,
 };
-  
+
 TeamTile.propTypes = {
   description: PropTypes.string,
   honorary: PropTypes.bool,
