@@ -8,7 +8,6 @@ import {
   createTheme,
 } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import { lightBlue } from "@mui/material/colors";
 
 import { store } from "./app/store";
 import Router from "./Router";
@@ -16,12 +15,21 @@ import reportWebVitals from "./reportWebVitals";
 
 import "./index.css";
 
+
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
-    primary: lightBlue,
+    primary: { main: "#1676c7" },
+    secondary: { main: "#5b5bb9" },
+    background: {
+      default: "#12121c",
+      paper: "#242539",
+    },
+    success: { main: "#419ef9" },
+    error: { main: "#e23860" },
   },
 });
+
 const container = document.getElementById("root");
 const root = createRoot(container);
 
@@ -34,7 +42,6 @@ root.render(
             display: "flex",
             width: "100%",
             minHeight: "100%",
-            bgcolor: "background.default",
             color: "text.primary",
           }}
         >
