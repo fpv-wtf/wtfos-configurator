@@ -36,8 +36,6 @@ import Install from "./features/setup/Install";
 import Remove from "./features/setup/Remove";
 import Update from "./features/setup/Update";
 
-import About from "./features/about/About";
-
 import {
   checkBinaries,
   connected,
@@ -128,59 +126,53 @@ function App() {
       </Stack>
 
       <Routes>
-        <Route
-          element={<About />}
-          path="about"
-        />
-
         {isConnected &&
-        <>
-          <Route
-            element={<Home />}
-            path="/"
-          />
-          
-          {adb &&
-            <>
-              <Route
-                element={<Cli adb={adb} />}
-                path="cli"
-              />
+          <>
+            <Route
+              element={<Home />}
+              path="/"
+            />
 
-              <Route
-                element={<Setup />}
-                path="wtfos"
-              />
+            {adb &&
+              <>
+                <Route
+                  element={<Cli adb={adb} />}
+                  path="cli"
+                />
 
-              <Route
-                element={<Remove adb={adb} />}
-                path="wtfos/remove"
-              />
+                <Route
+                  element={<Setup />}
+                  path="wtfos"
+                />
 
-              <Route
-                element={<Install adb={adb} />}
-                path="wtfos/install"
-              />
+                <Route
+                  element={<Remove adb={adb} />}
+                  path="wtfos/remove"
+                />
 
-              <Route
-                element={<Update adb={adb} />}
-                path="wtfos/update"
-              />
+                <Route
+                  element={<Install adb={adb} />}
+                  path="wtfos/install"
+                />
 
-              <Route
-                element={<Packages adb={adb} />}
-                path="packages"
-              />
+                <Route
+                  element={<Update adb={adb} />}
+                  path="wtfos/update"
+                />
 
-              <Route
-                element={<Startup adb={adb} />}
-                path="startup"
-              />
+                <Route
+                  element={<Packages adb={adb} />}
+                  path="packages"
+                />
+
+                <Route
+                  element={<Startup adb={adb} />}
+                  path="startup"
+                />
 
 
-            </>}
-        </>}
-        
+              </>}
+          </>}
       </Routes>
     </Container>
   );
