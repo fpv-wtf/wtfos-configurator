@@ -15,6 +15,7 @@
     "@yume-chan/adb": "^0.0.15",
     "@yume-chan/adb-backend-webusb": "^0.0.15",
     "@yume-chan/adb-credential-web": "^0.0.15",
+    "buffer": "^6.0.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-redux": "^8.0.1",
@@ -31,7 +32,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext .jsx,.js",
-    "lint-commit": "with-staged '**/*.{js,jsx}' -- yarn eslint"
+    "lint-commit": "with-staged '**/*.{js,jsx}' -- yarn eslint",
+    "obfuscate": "javascript-obfuscator src/utils/exploit --output src/utils/obfuscated-exploit --split-strings=true --string-array-encoding base64,rc4"
   },
   "eslintConfig": {
     "extends": [
@@ -52,7 +54,8 @@
     ]
   },
   "devDependencies": {
-    "eslint-plugin-react": "^7.29.4"
+    "eslint-plugin-react": "^7.29.4",
+    "javascript-obfuscator": "^4.0.0"
   },
   "pre-commit": [
     "lint-commit"

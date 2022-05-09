@@ -1,6 +1,9 @@
 import PropTypes from "prop-types";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useCallback }  from "react";
+import {
+  useDispatch,
+  useSelector,
+} from "react-redux";
 
 import Button from "@mui/material/Button";
 import List from "@mui/material/List";
@@ -9,17 +12,37 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-
 import {
+  appendToLog,
+  checkBinaries,
+  clearLog,
   selectHasOpkgBinary,
   selectLog,
-  selectStatus,
 } from "../device/deviceSlice";
 
-export default function Install({ onClick }) {
+import {
+  processing,
+  selectProcessing,
+} from "../packages/packagesSlice";
+
+export default function Install({ adb }) {
+  const dispatch = useDispatch();
+
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const log = useSelector(selectLog);
-  const status = useSelector(selectStatus);
+  const isProcessing = useSelector(selectProcessing);
+
+  const onClick = useCallback(async (device) => {
+    dispatch(clearLog());
+    dispatch(processing(true));
+
+    await adb.installWTFOS((message) => {
+      dispatch(appendToLog(message));
+    });
+
+    dispatch(processing(false));
+    dispatch(checkBinaries(adb));
+  }, [adb, dispatch]);
 
   const renderedLog = log.map((line) => {
     return (
@@ -37,7 +60,7 @@ export default function Install({ onClick }) {
     <Stack spacing={2}>
 
       <Button
-        disabled={status === "installing" || hasOpkgBinary}
+        disabled={hasOpkgBinary || isProcessing}
         onClick={onClick}
         variant="contained"
       >
@@ -55,4 +78,4 @@ export default function Install({ onClick }) {
   );
 }
 
-Install.propTypes = { onClick: PropTypes.func.isRequired };
+Install.propTypes = { adb: PropTypes.shape().isRequired };

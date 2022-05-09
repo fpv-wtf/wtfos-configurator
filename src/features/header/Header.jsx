@@ -3,7 +3,6 @@ import React, {
   useCallback,
   useState,
 } from "react";
-import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
@@ -17,14 +16,11 @@ import Typography from "@mui/material/Typography";
 
 import { Link } from "react-router-dom";
 
-import { selectConnected } from "../device/deviceSlice";
-
 export default function Header({ deviceName }) {
   const location = useLocation();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const connected = useSelector(selectConnected);
 
   const handleClose = useCallback(() => {
     setAnchorEl(null);
@@ -63,66 +59,74 @@ export default function Header({ deviceName }) {
             <MenuIcon />
           </IconButton>
 
-          {connected &&
-            <Menu
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              id="menu-appbar"
-              keepMounted
-              onClose={handleClose}
-              open={open}
+          <Menu
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            id="menu-appbar"
+            keepMounted
+            onClose={handleClose}
+            open={open}
+          >
+            <MenuItem
+              component={Link}
+              onClick={handleClose}
+              to="/"
             >
-              <MenuItem
-                component={Link}
-                onClick={handleClose}
-                to="/"
-              >
-                Home
-              </MenuItem>
+              Home
+            </MenuItem>
 
-              <MenuItem
-                component={Link}
-                onClick={handleClose}
-                to="/packages"
-              >
-                Package Manager
-              </MenuItem>
+            <MenuItem
+              component={Link}
+              onClick={handleClose}
+              to="/packages"
+            >
+              Package Manager
+            </MenuItem>
 
-              <MenuItem
-                component={Link}
-                onClick={handleClose}
-                to="/startup"
-              >
-                Startup
-              </MenuItem>
+            <MenuItem
+              component={Link}
+              onClick={handleClose}
+              to="/startup"
+            >
+              Startup
+            </MenuItem>
 
-              <MenuItem
-                component={Link}
-                onClick={handleClose}
-                to="/cli"
-              >
-                CLI
-              </MenuItem>
+            <MenuItem
+              component={Link}
+              onClick={handleClose}
+              to="/cli"
+            >
+              CLI
+            </MenuItem>
 
-              <MenuItem
-                component={Link}
-                onClick={handleClose}
-                to="/wtfos"
-              >
-                WTFOS
-              </MenuItem>
+            <MenuItem
+              component={Link}
+              onClick={handleClose}
+              to="/wtfos"
+            >
+              WTFOS
+            </MenuItem>
 
-              <MenuItem
+            <MenuItem
+              component={Link}
+              onClick={handleClose}
+              to="/root"
+            >
+              Root
+            </MenuItem>
+
+            <MenuItem
                 component={Link}
                 onClick={handleClose}
                 to="/about"
-              >
-                About fpv.wtf
-              </MenuItem>
-            </Menu>}
+            >
+              About fpv.wtf
+            </MenuItem>
+
+          </Menu>
 
           <Typography
             component="div"

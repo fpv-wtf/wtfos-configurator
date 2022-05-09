@@ -4,7 +4,7 @@ import React, {
   useEffect,
   useRef,
   useState,
-}  from "react";
+} from "react";
 import {
   useDispatch,
   useSelector,
@@ -12,7 +12,6 @@ import {
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -45,6 +44,7 @@ import {
 import { selectHasOpkgBinary } from "../device/deviceSlice";
 
 import SetupHint from "../setup/SetupHint";
+import Spinner from "../loading/Spinner";
 
 export default function Packages({ adb }) {
   const tableEl = useRef();
@@ -199,23 +199,7 @@ export default function Packages({ adb }) {
         <SetupHint />}
 
       {!fetched && hasOpkgBinary &&
-        <Stack
-          alignItems="center"
-          justifyContent="center"
-          spacing={2}
-          sx={{ display: "flex" }}
-        >
-          <Box
-            justifyContent="center"
-            sx={{ display: "flex" }}
-          >
-            <CircularProgress />
-          </Box>
-
-          <Typography>
-            Fetching packages...
-          </Typography>
-        </Stack>}
+        <Spinner text="Fetching packages..." />}
 
       {fetched && hasOpkgBinary &&
         <Stack

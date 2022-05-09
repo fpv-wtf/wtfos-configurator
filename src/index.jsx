@@ -10,7 +10,7 @@ import {
 import Box from "@mui/material/Box";
 
 import { store } from "./app/store";
-import App from "./App";
+import Router from "./Router";
 import reportWebVitals from "./reportWebVitals";
 
 import "./index.css";
@@ -45,7 +45,7 @@ root.render(
             color: "text.primary",
           }}
         >
-          <App />
+          <Router />
         </Box>
       </ThemeProvider>
     </Provider>

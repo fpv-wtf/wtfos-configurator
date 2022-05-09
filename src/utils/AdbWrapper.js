@@ -25,7 +25,7 @@ export default class AdbWrapper {
         opkg: "/opt/etc/opkg.conf",
       },
       proxy: "http://127.0.0.1:8089",
-      linkFunctions: ["wget", "vi", "ping"],
+      linkFunctions: ["wget"],
       opkgLists: "/opt/var/opkg-lists",
     };
   }
@@ -306,8 +306,7 @@ export default class AdbWrapper {
       socket.readable.pipeTo(new WritableStream({
         write: async (chunk) => {
           try {
-            const request = proxy.getRequestObject(chunk);
-            const response = await proxy.proxyRequest(request);
+            const response = await proxy.proxyRequest(chunk);
             const buffer = await proxy.getResponseBuffer(response);
 
             writer.write(buffer);

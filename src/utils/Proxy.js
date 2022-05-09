@@ -4,11 +4,11 @@ export default class Proxy {
   }
 
   /**
-   * Build a request objact from a buffer
+   * Get URL and method from a http request buffer
    *
    * Caution: this only handles requests  without a body.
    */
-  getRequestObject(buffer) {
+  getRequestFiledsBuffer(buffer) {
     const decoder = new TextDecoder();
     const string = decoder.decode(buffer);
     const lines = string.split("\n");
@@ -19,11 +19,13 @@ export default class Proxy {
         const method = fields[0];
         const url = fields[1];
 
-        const request = new Request(url, { method });
-        return request;
+        return {
+          method,
+          url,
+        };
       }
 
-      throw new Error("Filed count does not match.");
+      throw new Error("Fileds count does not match.");
     }
 
     throw new Error("Buffer is empty.");
@@ -53,14 +55,28 @@ export default class Proxy {
    * failed because of a CORS error, in this case try to fetch it again using
    * a CORS proxy.
    */
-  async proxyRequest(request) {
+  async proxyRequest(buffer) {
+    const {
+      method,
+      url,
+    } = this.getRequestFiledsBuffer(buffer);
+
+    /**
+     * Rewrite http:// to https://
+     *
+     * If https is not available it will fallback to the cors request
+     * with the original url anyway.
+     */
+    const httpsUrl = url.replace(/^http:\/\//, "https://");
+
     let response = null;
     try {
+      const request = new Request(httpsUrl, { method });
       response = await fetch(request);
       return response;
     } catch(e) {
-      const corsProxyUrl = this.corsProxy + request.url;
-      const corsRequest = new Request(corsProxyUrl);
+      const corsProxyUrl = this.corsProxy + url;
+      const corsRequest = new Request(corsProxyUrl, { method });
       try {
         response = await fetch(corsRequest);
         return response;
