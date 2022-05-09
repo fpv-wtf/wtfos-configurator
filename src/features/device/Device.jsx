@@ -1,16 +1,23 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { useSelector } from "react-redux";
 
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 
 import ConnectButton from "./ConnectButton";
 
+import Spinner from "../loading/Spinner";
+
+import { selectRebooting } from "./deviceSlice";
+
 export default function Device({
   error,
   handleDeviceConnect,
 }) {
-  return (
+  const isRebooting = useSelector(selectRebooting);
+
+  let content = (
     <Stack
       marginBottom={2}
       spacing={2}
@@ -31,6 +38,12 @@ export default function Device({
       />
     </Stack>
   );
+
+  if(isRebooting) {
+    content = <Spinner text="Rebooting..." />;
+  }
+
+  return content;
 }
 
 Device.defaultProps = { error: false };

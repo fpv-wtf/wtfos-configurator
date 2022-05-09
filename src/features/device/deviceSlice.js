@@ -13,6 +13,7 @@ const initialState = {
     hasOpkgBinary: false,
   },
   log: [],
+  rebooting: false,
 };
 
 export const checkBinaries = createAsyncThunk(
@@ -39,6 +40,11 @@ export const deviceSlice = createSlice({
     connected: (state) => {
       state.status = "connected";
       state.connected = true;
+
+      if(state.rebooting) {
+        state.rebooting = false;
+        state.log = [...state.log, "Done!"];
+      }
     },
     connecting: (state) => {
       state.error = false;
@@ -57,6 +63,9 @@ export const deviceSlice = createSlice({
     installing: (state) => {
       state.status = "installing";
     },
+    rebooting: (state, action) => {
+      state.rebooting = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -74,6 +83,7 @@ export const {
   connectionFailed,
   disconnected,
   installing,
+  rebooting,
 } = deviceSlice.actions;
 
 export const selectConnected = (state) => state.device.connected;
@@ -82,6 +92,7 @@ export const selectHasHttpProxy = (state) => state.device.hasHttpProxy;
 export const selectHasDinitBinary = (state) => state.device.binaries.hasDinitBinary;
 export const selectHasOpkgBinary = (state) => state.device.binaries.hasOpkgBinary;
 export const selectLog = (state) => state.device.log;
+export const selectRebooting = (state) => state.device.rebooting;
 export const selectStatus = (state) => state.device.status;
 
 export default deviceSlice.reducer;

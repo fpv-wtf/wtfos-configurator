@@ -78,7 +78,6 @@ function App() {
         const autoConnect = async() => {
           const devices = await AdbWebUsbBackend.getDevices();
           if(devices.length > 0) {
-            dispatch(connecting());
             await connectToDevice(devices[0]);
           }
         };

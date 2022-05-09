@@ -1,5 +1,8 @@
 import PropTypes from "prop-types";
-import React, { useCallback }  from "react";
+import React, {
+  useEffect,
+  useCallback,
+} from "react";
 import {
   useDispatch,
   useSelector,
@@ -16,12 +19,14 @@ import {
   appendToLog,
   checkBinaries,
   clearLog,
+  rebooting,
   selectHasOpkgBinary,
   selectLog,
 } from "../device/deviceSlice";
 
 import {
   processing,
+  removeWTFOS,
   selectProcessing,
 } from "../packages/packagesSlice";
 
@@ -34,11 +39,15 @@ export default function Remove({ adb }) {
 
   const onClick = useCallback(async (device) => {
     dispatch(clearLog());
-    dispatch(processing(true));
-
-    await adb.removeWTFOS((message) => {
-      dispatch(appendToLog(message));
-    });
+    dispatch(removeWTFOS({
+      adb,
+      callback: (message) => {
+        dispatch(appendToLog(message));
+      },
+      setRebooting: () => {
+        dispatch(rebooting(true));
+      },
+    }));
 
     dispatch(processing(false));
     dispatch(checkBinaries(adb));

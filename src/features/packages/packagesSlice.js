@@ -89,6 +89,28 @@ export const upgrade = createAsyncThunk(
   }
 );
 
+export const installWTFOS = createAsyncThunk(
+  "packages/installWTFOS",
+  async ({
+    adb,
+    callback,
+    setRebooting,
+  }) => {
+    await adb.installWTFOS(callback, setRebooting);
+  }
+);
+
+export const removeWTFOS = createAsyncThunk(
+  "packages/removeWTFOS",
+  async ({
+    adb,
+    callback,
+    setRebooting,
+  }) => {
+    await adb.removeWTFOS(callback, setRebooting);
+  }
+);
+
 function filterPackages(packages, filter) {
   let filtered = packages.filter((item) => (
     filter.repo === "all" ||
@@ -203,6 +225,18 @@ export const packagesSlice = createSlice({
         state.fetchedUpgradable = false;
       })
       .addCase(upgrade.fulfilled, (state, action) => {
+        state.processing = false;
+      })
+      .addCase(installWTFOS.pending, (state, action) => {
+        state.processing = true;
+      })
+      .addCase(installWTFOS.fulfilled, (state, action) => {
+        state.processing = false;
+      })
+      .addCase(removeWTFOS.pending, (state, action) => {
+        state.processing = true;
+      })
+      .addCase(removeWTFOS.fulfilled, (state, action) => {
         state.processing = false;
       });
   },

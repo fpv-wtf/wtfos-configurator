@@ -341,7 +341,7 @@ export default class AdbWrapper {
     return output.exitCode === 0;
   }
 
-  async installWTFOS(statusCallback) {
+  async installWTFOS(statusCallback, setRebooting) {
     const binPath = `${this.wtfos.path}/opt/bin`;
 
     // Check for supported devices
@@ -455,25 +455,13 @@ export default class AdbWrapper {
       return;
     }
 
-    statusCallback("Starting dinit...");
-    /**
-     * This needs to be spawned, otherwise it will be blocked.
-     * We can not use spawnAndWait here for that reason and just need to assume
-     * that dinit startup worked out.
-     */
-    this.adb.subprocess.spawn([
-      "HOME=/data",
-      "/opt/bin/busybox nohup",
-      this.wtfos.bin.dinit,
-      "-u -d",
-      this.wtfos.config.dinit,
-      "&",
-    ]);
+    statusCallback("Rebooting...");
+    await this.executeCommand("reboot");
 
-    statusCallback("Setup done!");
+    setRebooting();
   }
 
-  async removeWTFOS(statusCallback) {
+  async removeWTFOS(statusCallback, setRebooting) {
     statusCallback("Removing WTFOS packages...");
     let output = await this.executeCommand([
       this.wtfos.bin.opkg,
@@ -500,5 +488,10 @@ export default class AdbWrapper {
     }
 
     statusCallback("Removed WTFOS!");
+
+    statusCallback("Rebooting...");
+    await this.executeCommand("reboot");
+
+    setRebooting();
   }
 }

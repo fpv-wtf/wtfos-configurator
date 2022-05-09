@@ -1,5 +1,8 @@
 import PropTypes from "prop-types";
-import React, { useCallback }  from "react";
+import React, {
+  useEffect,
+  useCallback,
+}  from "react";
 import {
   useDispatch,
   useSelector,
@@ -16,12 +19,13 @@ import {
   appendToLog,
   checkBinaries,
   clearLog,
+  rebooting,
   selectHasOpkgBinary,
   selectLog,
 } from "../device/deviceSlice";
 
 import {
-  processing,
+  installWTFOS,
   selectProcessing,
 } from "../packages/packagesSlice";
 
@@ -34,15 +38,20 @@ export default function Install({ adb }) {
 
   const onClick = useCallback(async (device) => {
     dispatch(clearLog());
-    dispatch(processing(true));
-
-    await adb.installWTFOS((message) => {
-      dispatch(appendToLog(message));
-    });
-
-    dispatch(processing(false));
-    dispatch(checkBinaries(adb));
+    dispatch(installWTFOS({
+      adb,
+      callback: (message) => {
+        dispatch(appendToLog(message));
+      },
+      setRebooting: () => {
+        dispatch(rebooting(true));
+      },
+    }));
   }, [adb, dispatch]);
+
+  useEffect(() => {
+    dispatch(checkBinaries(adb));
+  }, [adb, dispatch, isProcessing]);
 
   const renderedLog = log.map((line) => {
     return (
