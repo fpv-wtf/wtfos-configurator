@@ -5,6 +5,7 @@ import {
 
 const initialState = {
   connected: false,
+  hasAdb: false,
   error: false,
   status: "idle",
   hasHttpProxy: false,
@@ -70,6 +71,9 @@ export const deviceSlice = createSlice({
     checked: (state, action) => {
       state.checked = action.payload;
     },
+    setAdb: (state, action) => {
+      state.hasAdb = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -89,8 +93,10 @@ export const {
   disconnected,
   installing,
   rebooting,
+  setAdb,
 } = deviceSlice.actions;
 
+export const selectHasAdb = (state) => state.device.hasAdb;
 export const selectChecked = (state) => state.device.checked;
 export const selectConnected = (state) => state.device.connected;
 export const selectError = (state) => state.device.error;

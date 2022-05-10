@@ -7,6 +7,7 @@ import {
   useSelector,
 } from "react-redux";
 
+import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import List from "@mui/material/List";
@@ -31,6 +32,8 @@ import {
   selectRooting,
 } from "./rootSlice";
 
+import { selectHasAdb } from "../device/deviceSlice";
+
 const exploit = new Exploit();
 
 export default function Root() {
@@ -39,8 +42,10 @@ export default function Root() {
   const unlockStep = useRef(1);
   const disconnected = useRef(false);
   const rebooting = useRef(false);
+  const running = useRef(false);
 
   const attempted = useSelector(selectAttempted);
+  const hasAdb = useSelector(selectHasAdb);
   const log = useSelector(selectLog);
   const rooting = useSelector(selectRooting);
 
@@ -66,10 +71,14 @@ export default function Root() {
     };
 
     const runUnlock = async () => {
-      if(unlockStep.current > 0) {
+      if(unlockStep.current > 0 && !running.current) {
+        running.current = true;
+
         let maxTry = 10;
         let currentTry = 0;
         let done = false;
+        let shouldRunUnlock = false;
+
         while(currentTry < maxTry && !done) {
           try {
             switch (unlockStep.current) {
@@ -102,7 +111,8 @@ export default function Root() {
                 if(!restart) {
                   log("Step 2 - Success!");
                   await exploit.sleep(3000);
-                  runUnlock();
+
+                  shouldRunUnlock = true;
                 } else {
                   log("Step 2 - Success! Rebooting...");
                   rebooting.current = true;
@@ -120,7 +130,7 @@ export default function Root() {
                 unlockStep.current = 4;
                 done = true;
 
-                runUnlock();
+                shouldRunUnlock = true;
               } break;
 
               case 4: {
@@ -146,15 +156,18 @@ export default function Root() {
                 if (currentTry === 0) {
                   log("Attempting Step 5...");
                 }
-                await exploit.unlockStep5();
+                const isRebooting = await exploit.unlockStep5();
 
-                log("Step 5 - Success! Rebooting...");
-
-                rebooting.current = true;
                 unlockStep.current = 6;
                 done = true;
 
-                exploit.restart();
+                if(isRebooting) {
+                  rebooting.current = true;
+                  log("Step 5 - Success! Rebooting...");
+                } else {
+                  log("Step 5 - Success!");
+                  shouldRunUnlock = true;
+                }
               } break;
 
               case 6: {
@@ -201,6 +214,11 @@ export default function Root() {
         if(!done && disconnected.current) {
           log("Device went away...");
         }
+
+        running.current = false;
+        if(shouldRunUnlock) {
+          runUnlock();
+        }
       }
     };
 
@@ -218,6 +236,10 @@ export default function Root() {
         exploit.setPort(port);
         await exploit.makeConnection();
 
+        // Wait a bit after reconnection to make sure the device does not go
+        // away again.
+        await exploit.sleep(3000);
+
         // Run the next unlock step (or the failed one if device went away)
         runUnlock();
       }
@@ -225,7 +247,6 @@ export default function Root() {
 
     navigator.serial.addEventListener("connect", reConnect);
     navigator.serial.addEventListener("disconnect", () => {
-      console.log("Disconnect");
       disconnected.current = true;
 
       if(!rooting && attempted) {
@@ -249,20 +270,27 @@ export default function Root() {
       <Header />
 
       <Stack spacing={2}>
-        <Button
-          disabled={rooting}
-          onClick={handleClick}
-          variant="contained"
-        >
-          Root Device
-        </Button>
+        <>
+          <Button
+            disabled={rooting}
+            onClick={handleClick}
+            variant="contained"
+          >
+            Root Device
+          </Button>
 
-        {log.length > 0 &&
-          <Paper>
-            <List>
-              {renderedLog}
-            </List>
-          </Paper>}
+          {hasAdb &&
+            <Alert severity="success">
+              Device already rooted
+            </Alert>}
+
+          {log.length > 0 &&
+            <Paper>
+              <List>
+                {renderedLog}
+              </List>
+            </Paper>}
+        </>
       </Stack>
     </Container>
   );

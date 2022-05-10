@@ -36,6 +36,11 @@ export default function Header({ deviceName }) {
     case "/packages": title = "Packages"; break;
     case "/startup": title = "Startup"; break;
     case "/about": title = "About fpv.wtf"; break;
+    case "/root": title = "Root"; break;
+    case "/wtfos": title = "WTFOS"; break;
+    case "/wtfos/update": title = "WTFOS - Update"; break;
+    case "/wtfos/install": title = "WTFOS - Install"; break;
+    case "/wtfos/remove": title = "WTFOS - Remove"; break;
     default: title = "Home";
   }
 
