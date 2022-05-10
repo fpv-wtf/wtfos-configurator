@@ -1,16 +1,7 @@
-import React, {
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
-import {
-  useDispatch,
-  useSelector,
-} from "react-redux";
+import PropTypes from "prop-types";
+import React from "react";
+import { useSelector } from "react-redux";
 
-import AdbWebCredentialStore from "@yume-chan/adb-credential-web";
-import AdbWebUsbBackend, { AdbWebUsbBackendWatcher } from "@yume-chan/adb-backend-webusb";
-import { Adb } from "@yume-chan/adb";
 import {
   Routes,
   Route,
@@ -20,8 +11,6 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 
 import "./App.css";
-
-import AdbWrapper from "./utils/AdbWrapper";
 
 import Device from "./features/device/Device";
 import Header from "./features/header/Header";
@@ -37,76 +26,16 @@ import Remove from "./features/setup/Remove";
 import Update from "./features/setup/Update";
 
 import {
-  checkBinaries,
-  connected,
-  connecting,
-  connectionFailed,
-  disconnected,
   selectConnected,
   selectError,
 } from "./features/device/deviceSlice";
 
-function App() {
-  const dispatch = useDispatch();
-
+function App({
+  adb,
+  handleAdbConnectClick,
+}) {
   const isConnected = useSelector(selectConnected);
   const error = useSelector(selectError);
-
-  const [adb, setAdb] = useState(null);
-
-  const connectToDevice = useCallback(async (device) => {
-    try {
-      const credentialStore = new AdbWebCredentialStore();
-      const streams = await device.connect();
-      const adbLocal = await Adb.authenticate(streams, credentialStore, undefined);
-      const adbWrapper = new AdbWrapper(adbLocal);
-
-      await adbWrapper.establishReverseSocket(1);
-
-      setAdb(adbWrapper);
-      dispatch(connected());
-      dispatch(checkBinaries(adbWrapper));
-    } catch(e) {
-      console.log(e);
-      dispatch(connectionFailed());
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    const getDevices = async () => {
-      if(!isConnected) {
-        const autoConnect = async() => {
-          const devices = await AdbWebUsbBackend.getDevices();
-          if(devices.length > 0) {
-            await connectToDevice(devices[0]);
-          }
-        };
-        await autoConnect();
-
-        // Automatically connect/disconnect on plugin
-        new AdbWebUsbBackendWatcher(async (id) => {
-          if(!id) {
-            dispatch(disconnected());
-          } else {
-            await autoConnect();
-          }
-        });
-      }
-    };
-    getDevices();
-  }, [isConnected, connectToDevice, dispatch]);
-
-  const handleDeviceConnect = useCallback(async() => {
-    dispatch(connecting());
-
-    try {
-      const device = await AdbWebUsbBackend.requestDevice();
-      await connectToDevice(device);
-    } catch(e) {
-      console.log(e);
-      dispatch(connectionFailed());
-    }
-  }, [connectToDevice, dispatch]);
 
   return (
     <Container
@@ -114,14 +43,14 @@ function App() {
       sx={{ paddingBottom: 3 }}
     >
       <Header
-        deviceName={(isConnected && adb) ? adb.getDevice() : null}
+        deviceName={(isConnected && adb) ? adb.getDevice() : "No device found"}
       />
 
       {!isConnected  &&
         <Stack>
           <Device
             error={error}
-            handleDeviceConnect={handleDeviceConnect}
+            handleDeviceConnect={handleAdbConnectClick}
           />
         </Stack>}
 
@@ -172,5 +101,12 @@ function App() {
     </Container>
   );
 }
+
+App.defaultProps = { adb: null };
+
+App.propTypes = {
+  adb: PropTypes.shape(),
+  handleAdbConnectClick: PropTypes.func.isRequired,
+};
 
 export default App;

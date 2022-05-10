@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 
 import Container from "@mui/material/Container";
@@ -9,13 +10,15 @@ import Header from "../header/Header";
 import Team from "./Team";
 import Support from "./Support";
 
-export default function About() {
+export default function About({ adb }) {
   return(
     <Container
       fixed
       sx={{ paddingBottom: 3 }}
     >
-      <Header />
+      <Header
+        deviceName={(adb) ? adb.getDevice() : "No device found"}
+      />
 
       <Stack
         marginBottom={2}
@@ -52,3 +55,7 @@ export default function About() {
     </Container>
   );
 }
+
+About.defaultProps = { adb: null };
+
+About.propTypes = { adb: PropTypes.shape() };

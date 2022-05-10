@@ -169,6 +169,9 @@ export const packagesSlice = createSlice({
     processing: (state, event) => {
       state.processing = event.payload;
     },
+    reset: (state, event) => {
+      state = initialState;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -214,9 +217,9 @@ export const packagesSlice = createSlice({
       })
       .addCase(fetchUpgradable.pending, (state, action) => {
         state.processing = true;
-        state.fetchedUpgradable = true;
       })
       .addCase(fetchUpgradable.fulfilled, (state, action) => {
+        state.fetchedUpgradable = true;
         state.upgradable = action.payload;
         state.processing = false;
       })
@@ -246,6 +249,7 @@ export const {
   installedFilter,
   processing,
   repo,
+  reset,
   search,
 } = packagesSlice.actions;
 

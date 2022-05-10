@@ -14,6 +14,7 @@ const initialState = {
   },
   log: [],
   rebooting: false,
+  checked: false,
 };
 
 export const checkBinaries = createAsyncThunk(
@@ -66,6 +67,9 @@ export const deviceSlice = createSlice({
     rebooting: (state, action) => {
       state.rebooting = action.payload;
     },
+    checked: (state, action) => {
+      state.checked = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -77,6 +81,7 @@ export const deviceSlice = createSlice({
 
 export const {
   appendToLog,
+  checked,
   clearLog,
   connected,
   connecting,
@@ -86,6 +91,7 @@ export const {
   rebooting,
 } = deviceSlice.actions;
 
+export const selectChecked = (state) => state.device.checked;
 export const selectConnected = (state) => state.device.connected;
 export const selectError = (state) => state.device.error;
 export const selectHasHttpProxy = (state) => state.device.hasHttpProxy;

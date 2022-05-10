@@ -28,7 +28,6 @@ import {
 
 import {
   fetchUpgradable,
-  processing,
   selectFetchedUpgradable,
   selectProcessing,
   selectUpgradable,
@@ -74,22 +73,27 @@ export default function Update({ adb }) {
 
   return(
     <Stack spacing={2}>
-
-      <Button
-        disabled={
-          status === "installing" ||
-          !hasOpkgBinary ||
-          isProcessing ||
-          upgradable.length === 0
-        }
-        onClick={handleWTFOSUpdate}
-        variant="contained"
-      >
-        Update WTFOS
-      </Button>
-
-      {isProcessing &&
+      {isProcessing && !fetchedUpgradable &&
         <Spinner text="Checking packages..." />}
+
+      {upgradable.length > 0 &&
+        <Button
+          disabled={
+            status === "installing" ||
+            !hasOpkgBinary ||
+            isProcessing ||
+            upgradable.length === 0
+          }
+          onClick={handleWTFOSUpdate}
+          variant="contained"
+        >
+          Update WTFOS
+        </Button>}
+
+      {upgradable.length === 0 && !isProcessing &&
+        <Alert severity="success">
+          Everything up to date!
+        </Alert>}
 
       {upgradable.length > 0 &&
         <TableContainer
@@ -117,12 +121,6 @@ export default function Update({ adb }) {
             </TableBody>
           </Table>
         </TableContainer>}
-
-      {upgradable.length === 0 && !processing &&
-        <Alert severity="success">
-          Everything up to date!
-        </Alert>}
-
     </Stack>
   );
 }
