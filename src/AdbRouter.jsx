@@ -80,7 +80,6 @@ export default function AdbRouter() {
           dispatch(checked(false));
         } else {
           if(!isRooting) {
-            console.log("Not rooting, try to connect");
             await autoConnect();
           }
         }
@@ -92,11 +91,18 @@ export default function AdbRouter() {
 
   useEffect(() => {
     if(!isChecked && !adb && !isRooting) {
-      console.log("Not checked");
       dispatch(checked(true));
       autoConnect();
     }
   }, [adb, autoConnect, dispatch, isChecked, isRooting]);
+
+  // Try to connect when comming from rooting menu
+  useEffect(() => {
+    if(!isRooting && !adb) {
+      dispatch(checked(true));
+      autoConnect();
+    }
+  }, [adb, autoConnect, dispatch, isRooting]);
 
   const handleDeviceConnect = useCallback(async() => {
     dispatch(connecting());
