@@ -17,14 +17,16 @@ import Tile from "../tile/Tile";
 
 import {
   selectConnected,
+  selectHasAdb,
   selectHasDinitBinary,
   selectHasOpkgBinary,
 } from "../device/deviceSlice";
 
 export default function Tiles() {
-  const isConnected = useSelector(selectConnected);
+  const hasAdb = useSelector(selectHasAdb);
   const hasDinitBinary = useSelector(selectHasDinitBinary);
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
+  const isConnected = useSelector(selectConnected);
 
   return(
     <Grid
@@ -93,6 +95,22 @@ export default function Tiles() {
           disabled={!isConnected}
           linkTo="wtfos"
           title="WTFOS"
+        >
+          <RocketLaunchIcon fontSize="large" />
+        </Tile>
+      </Grid>
+
+      <Grid
+        item
+        md={3}
+        sm={6}
+        xs={12}
+      >
+        <Tile
+          description="Before installing WTFOS you will have to root your device, set it free - OWN it!"
+          disabled={isConnected && hasAdb}
+          linkTo="root"
+          title="Root"
         >
           <RocketLaunchIcon fontSize="large" />
         </Tile>
