@@ -129,8 +129,7 @@ export default function Root() {
                 try {
                   await exploit.restart();
                 } catch (e) {
-                  console.log("Device might already be restarting");
-                  console.log(e);
+                  console.log("Device might already be restarting", e);
                 }
               } break;
 

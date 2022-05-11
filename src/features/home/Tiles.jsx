@@ -8,6 +8,7 @@ import HelpIcon from "@mui/icons-material/Help";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import StartIcon from "@mui/icons-material/Start";
 import TerminalIcon from "@mui/icons-material/Terminal";
+import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 
 import SvgIcon from "@mui/material/SvgIcon";
 import { ReactComponent as AlienSvg } from "../../assets/icons/alien-white.svg";
@@ -112,7 +113,7 @@ export default function Tiles() {
           linkTo="root"
           title="Root"
         >
-          <RocketLaunchIcon fontSize="large" />
+          <AccessibilityNewIcon fontSize="large" />
         </Tile>
       </Grid>
 
