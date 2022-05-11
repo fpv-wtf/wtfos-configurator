@@ -6,11 +6,9 @@ import {
 } from "react-redux";
 
 import Button from "@mui/material/Button";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
+
+import Log from "../log/Log";
 
 import {
   appendToLog,
@@ -18,11 +16,9 @@ import {
   clearLog,
   rebooting,
   selectHasOpkgBinary,
-  selectLog,
 } from "../device/deviceSlice";
 
 import {
-  processing,
   removeWTFOS,
   selectProcessing,
 } from "../packages/packagesSlice";
@@ -31,11 +27,11 @@ export default function Remove({ adb }) {
   const dispatch = useDispatch();
 
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
-  const log = useSelector(selectLog);
   const isProcessing = useSelector(selectProcessing);
 
   const onClick = useCallback(async (device) => {
     dispatch(clearLog());
+
     dispatch(removeWTFOS({
       adb,
       callback: (message) => {
@@ -46,25 +42,11 @@ export default function Remove({ adb }) {
       },
     }));
 
-    dispatch(processing(false));
     dispatch(checkBinaries(adb));
   }, [adb, dispatch]);
 
-  const renderedLog = log.map((line) => {
-    return (
-      <ListItem key={line}>
-        <Typography
-          sx={{ fontFamily: "Monospace" }}
-        >
-          {line}
-        </Typography>
-      </ListItem>
-    );
-  });
-
   return(
     <Stack spacing={2}>
-
       <Button
         disabled={!hasOpkgBinary || isProcessing}
         onClick={onClick}
@@ -73,13 +55,7 @@ export default function Remove({ adb }) {
         Remove WTFOS
       </Button>
 
-      {log.length > 0 &&
-        <Paper>
-          <List>
-            {renderedLog}
-          </List>
-        </Paper>}
-
+      <Log />
     </Stack>
   );
 }

@@ -2,18 +2,16 @@ import PropTypes from "prop-types";
 import React, {
   useEffect,
   useCallback,
-}  from "react";
+} from "react";
 import {
   useDispatch,
   useSelector,
 } from "react-redux";
 
 import Button from "@mui/material/Button";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
+
+import Log from "../log/Log";
 
 import {
   appendToLog,
@@ -21,7 +19,6 @@ import {
   clearLog,
   rebooting,
   selectHasOpkgBinary,
-  selectLog,
 } from "../device/deviceSlice";
 
 import {
@@ -33,7 +30,6 @@ export default function Install({ adb }) {
   const dispatch = useDispatch();
 
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
-  const log = useSelector(selectLog);
   const isProcessing = useSelector(selectProcessing);
 
   const onClick = useCallback(async (device) => {
@@ -53,21 +49,8 @@ export default function Install({ adb }) {
     dispatch(checkBinaries(adb));
   }, [adb, dispatch, isProcessing]);
 
-  const renderedLog = log.map((line) => {
-    return (
-      <ListItem key={line}>
-        <Typography
-          sx={{ fontFamily: "Monospace" }}
-        >
-          {line}
-        </Typography>
-      </ListItem>
-    );
-  });
-
   return(
     <Stack spacing={2}>
-
       <Button
         disabled={hasOpkgBinary || isProcessing}
         onClick={onClick}
@@ -76,13 +59,7 @@ export default function Install({ adb }) {
         Install WTFOS
       </Button>
 
-      {log.length > 0 &&
-        <Paper>
-          <List>
-            {renderedLog}
-          </List>
-        </Paper>}
-
+      <Log />
     </Stack>
   );
 }

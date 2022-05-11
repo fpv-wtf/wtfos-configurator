@@ -10,12 +10,9 @@ import {
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 
+import Log from "../log/Log";
 import Header from "../header/Header";
 
 import { PortLostError } from "../../utils/Errors";
@@ -28,7 +25,6 @@ import {
   root,
   success,
   selectAttempted,
-  selectLog,
   selectRooting,
 } from "./rootSlice";
 
@@ -46,21 +42,7 @@ export default function Root() {
 
   const attempted = useSelector(selectAttempted);
   const hasAdb = useSelector(selectHasAdb);
-  const log = useSelector(selectLog);
   const rooting = useSelector(selectRooting);
-
-  const renderedLog = log.map((line, index) => {
-    const key = `${index}-${line}`;
-    return (
-      <ListItem key={key}>
-        <Typography
-          sx={{ fontFamily: "Monospace" }}
-        >
-          {line}
-        </Typography>
-      </ListItem>
-    );
-  });
 
   const handleClick = useCallback(async() => {
     dispatch(root());
@@ -284,12 +266,7 @@ export default function Root() {
               Device already rooted
             </Alert>}
 
-          {log.length > 0 &&
-            <Paper>
-              <List>
-                {renderedLog}
-              </List>
-            </Paper>}
+          <Log />
         </>
       </Stack>
     </Container>
