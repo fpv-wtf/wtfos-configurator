@@ -45,22 +45,26 @@ export default function AdbRouter() {
   const [watcher, setWatcher] = useState(null);
 
   const connectToDevice = useCallback(async (device) => {
-    try {
-      const credentialStore = new AdbWebCredentialStore();
-      const streams = await device.connect();
-      const adbLocal = await Adb.authenticate(streams, credentialStore, undefined);
-      const adbWrapper = new AdbWrapper(adbLocal);
-      await adbWrapper.establishReverseSocket(1);
+    if(device) {
+      try {
+        const credentialStore = new AdbWebCredentialStore();
+        const streams = await device.connect();
+        const adbLocal = await Adb.authenticate(streams, credentialStore, undefined);
+        const adbWrapper = new AdbWrapper(adbLocal);
+        await adbWrapper.establishReverseSocket(1);
 
-      setAdb(adbWrapper);
+        setAdb(adbWrapper);
 
+        dispatch(reset());
+        dispatch(connected());
+        dispatch(deviceSetAdb(true));
+        dispatch(checkBinaries(adbWrapper));
+      } catch(e) {
+        console.log(e);
+        dispatch(connectionFailed());
+      }
+    } else {
       dispatch(reset());
-      dispatch(connected());
-      dispatch(deviceSetAdb(true));
-      dispatch(checkBinaries(adbWrapper));
-    } catch(e) {
-      console.log(e);
-      dispatch(connectionFailed());
     }
   }, [dispatch]);
 

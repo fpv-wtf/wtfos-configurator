@@ -20,7 +20,6 @@ import Exploit from "../../utils/obfuscated-exploit/Exploit";
 //import Exploit from "../../utils/exploit/Exploit";
 
 import {
-  appendToLog,
   reset,
   root,
   success,
@@ -28,7 +27,10 @@ import {
   selectRooting,
 } from "./rootSlice";
 
-import { selectHasAdb } from "../device/deviceSlice";
+import {
+  appendToLog,
+  selectHasAdb,
+} from "../device/deviceSlice";
 
 const exploit = new Exploit();
 
@@ -177,8 +179,6 @@ export default function Root() {
             } else {
               console.log(e);
               currentTry += 1;
-
-              await exploit.sleep(1000);
             }
           }
         }

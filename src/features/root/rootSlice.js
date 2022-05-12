@@ -4,7 +4,6 @@ const initialState = {
   attempted: false,
   rooting: false,
   success: false,
-  log: [],
 };
 
 export const rootSlice = createSlice({
@@ -28,9 +27,6 @@ export const rootSlice = createSlice({
     clearLog: (state) => {
       state.log = [];
     },
-    appendToLog: (state, action) => {
-      state.log = [...state.log, action.payload];
-    },
     reset: (state) => {
       state = { ...initialState };
     },
@@ -47,7 +43,6 @@ export const {
 } = rootSlice.actions;
 
 export const selectAttempted = (state) => state.root.attempted;
-export const selectLog = (state) => state.root.log;
 export const selectRooting = (state) => state.root.rooting;
 export const selectSuccess = (state) => state.root.success;
 
