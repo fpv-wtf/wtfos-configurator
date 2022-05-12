@@ -223,7 +223,7 @@ export default class AdbWrapper {
     return services;
   }
 
-  async getServicePids() {
+  async getServiceInfo() {
     const blacklist = ["boot"];
     const output = await this.executeCommand([
       "HOME=/data",
@@ -232,18 +232,31 @@ export default class AdbWrapper {
     ]);
     let lines = output.stdout.split("\n").filter((item) => item);
     let mapped = lines.map((item) => {
+      const encodedStatus = item.substring(0, 10);
       const shortened = item.substring(11);
       const fields = shortened.split("(pid: ");
 
+      const hasPid = fields.length > 1;
+      let status = hasPid ? "running" : "stopped";
+      if(!hasPid) {
+        // Could be a script - if enabled and no PID
+        const started = /{\+}/.test(encodedStatus);
+        status = started ? "started" : "stopped";
+      }
+
       return {
+        status,
         name: fields[0].trim(),
-        pid: fields.length > 1 ? fields[1].slice(0, -1) : null,
+        pid: hasPid ? fields[1].slice(0, -1) : null,
       };
     });
     mapped = mapped.filter((item) => !blacklist.includes(item.name));
 
     const pids = mapped.reduce((result, item) => {
-      result[item.name] = item.pid;
+      result[item.name] = {
+        pid: item.pid,
+        status: item.status,
+      };
 
       return result;
     }, {});
@@ -254,13 +267,13 @@ export default class AdbWrapper {
   async getServices() {
     const available = await this.getAvailableServices();
     const enabled = await this.getEnabledServices();
-    const pids = await this.getServicePids();
+    const info = await this.getServiceInfo();
 
     const services = available.map((item) => {
       return {
         name: item,
         enabled: enabled.includes(item),
-        pid: pids[item] || null,
+        info: info[item] || null,
       };
     });
 

@@ -87,13 +87,19 @@ export default function Startup({ adb }) {
         </TableCell>
 
         <TableCell align="right">
-          {item.enabled && item.pid &&
+          {item.enabled && item.info.status === "running" && item.info.pid &&
             <Chip
               color="success"
-              label={`running (PID: ${item.pid})`}
+              label={`running (PID: ${item.info.pid})`}
             />}
 
-          {item.enabled && !item.pid &&
+          {item.enabled && item.info.status === "started" && !item.info.pid &&
+            <Chip
+              color="success"
+              label="started"
+            />}
+
+          {item.enabled && item.info.status === "stopped" && !item.info.pid &&
             <Chip
               color="error"
               label="stopped"
