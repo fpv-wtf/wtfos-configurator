@@ -15,9 +15,11 @@ export default function Log() {
     return null;
   }
 
-  const renderedLog = log.map((line) => {
+  const renderedLog = log.map((line, index) => {
+    const key = `${line}-${index}`;
+
     return (
-      <ListItem key={line}>
+      <ListItem key={key}>
         <Typography
           sx={{ fontFamily: "Monospace" }}
         >
