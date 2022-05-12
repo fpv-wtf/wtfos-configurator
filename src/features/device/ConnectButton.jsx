@@ -4,14 +4,14 @@ import { useSelector } from "react-redux";
 
 import Button from "@mui/material/Button";
 
-import { selectStatus } from "./deviceSlice";
+import { selectConnected } from "./deviceSlice";
 
 export default function ConnectButton({ onClick }) {
-  const status = useSelector(selectStatus);
+  const connected = useSelector(selectConnected);
 
   return (
     <Button
-      disabled={status !== "idle"}
+      disabled={connected}
       onClick={onClick}
       variant="contained"
     >
