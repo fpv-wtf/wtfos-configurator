@@ -27,7 +27,10 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 
+import ErrorLog from "../log/Error";
+
 import {
+  clearError,
   fetchPackages,
   installedFilter,
   installPackage,
@@ -48,6 +51,7 @@ import Spinner from "../loading/Spinner";
 
 export default function Packages({ adb }) {
   const tableEl = useRef();
+  const scrollListenerId = useRef();
 
   const dispatch = useDispatch();
 
@@ -115,7 +119,8 @@ export default function Packages({ adb }) {
   }, [filtered, loading, renderOffset]);
 
   useEffect(() => {
-    window.removeEventListener("scroll", scrollListener);
+    window.removeEventListener("scroll", scrollListenerId.current);
+    scrollListenerId.current = scrollListener;
     window.addEventListener("scroll", scrollListener);
   }, [scrollListener]);
 
@@ -134,6 +139,10 @@ export default function Packages({ adb }) {
       name,
     }));
   }, [adb, dispatch]);
+
+  useEffect(() => {
+    dispatch(clearError());
+  }, [dispatch]);
 
   const rows = renderRows.map((item) => {
     return (
@@ -205,6 +214,8 @@ export default function Packages({ adb }) {
         <Stack
           spacing={2}
         >
+          <ErrorLog title="Error during package installation:" />
+
           <Box
             component="form"
             noValidate

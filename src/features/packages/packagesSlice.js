@@ -16,6 +16,7 @@ const initialState = {
   fetched: false,
   fetchedUpgradable: false,
   processing: false,
+  error: [],
 };
 
 export const removePackage = createAsyncThunk(
@@ -41,9 +42,10 @@ export const installPackage = createAsyncThunk(
   async ({
     adb,
     name,
-  }) => {
+  }, { rejectWithValue }) => {
+    let output = ["ERROR: Unknown error during installation."];
     try {
-      const output = await adb.installPackage(name);
+      output = await adb.installPackage(name);
 
       if(output.exitCode === 0) {
         return name;
@@ -51,6 +53,12 @@ export const installPackage = createAsyncThunk(
     } catch(e) {
       console.log(e);
     }
+
+    if(output.stdout) {
+      output = output.stdout.split("\n");
+    }
+
+    return rejectWithValue(output);
   }
 );
 
@@ -172,6 +180,9 @@ export const packagesSlice = createSlice({
     reset: (state, event) => {
       state = initialState;
     },
+    clearError: (state, event) => {
+      state.error = initialState.error;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -189,31 +200,20 @@ export const packagesSlice = createSlice({
         state.processing = true;
       })
       .addCase(removePackage.fulfilled, (state, action) => {
-        const name = action.payload;
-        state.packages = state.packages.map((item) => {
-          if(item.name === name) {
-            item.installed = false;
-          }
-
-          return item;
-        });
-        state.filtered = filterPackages(state.packages, state.filter);
+        state.fetched = false;
         state.processing = false;
       })
       .addCase(installPackage.pending, (state, action) => {
         state.processing = true;
       })
       .addCase(installPackage.fulfilled, (state, action) => {
-        const name = action.payload;
-        state.packages = state.packages.map((item) => {
-          if(item.name === name) {
-            item.installed = true;
-          }
-
-          return item;
-        });
-        state.filtered = filterPackages(state.packages, state.filter);
+        state.fetched = false;
         state.processing = false;
+      })
+      .addCase(installPackage.rejected, (state, action) => {
+        state.error = action.payload;
+        state.processing = false;
+        state.fetched = false;
       })
       .addCase(fetchUpgradable.pending, (state, action) => {
         state.processing = true;
@@ -246,6 +246,7 @@ export const packagesSlice = createSlice({
 });
 
 export const {
+  clearError,
   installedFilter,
   processing,
   repo,
@@ -254,6 +255,7 @@ export const {
 } = packagesSlice.actions;
 
 export const selectRepos = (state) => state.packages.repos;
+export const selectError = (state) => state.packages.error;
 export const selectFetched = (state) => state.packages.fetched;
 export const selectFetchedUpgradable = (state) => state.packages.fetchedUpgradable;
 export const selectFilter = (state) => state.packages.filter;
