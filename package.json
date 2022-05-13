@@ -33,7 +33,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext .jsx,.js",
     "lint-commit": "with-staged '**/*.{js,jsx}' -- yarn eslint",
-    "obfuscate": "javascript-obfuscator src/utils/exploit --output src/utils/obfuscated-exploit --split-strings=true --string-array-encoding base64,rc4 --disable-console-output=true"
+    "remove-console": "babel --plugins transform-remove-console ./src/utils/exploit-bak --out-dir ./src/utils/exploit-no-console",
+    "js-obfuscate": "javascript-obfuscator ./src/utils/exploit-no-console --output src/utils/obfuscated-exploit --split-strings=true --string-array-encoding base64,rc4",
+    "obfuscate": "yarn run remove-console && yarn run js-obfuscate"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +56,8 @@
     ]
   },
   "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "eslint-plugin-react": "^7.29.4",
     "javascript-obfuscator": "^4.0.0"
   },

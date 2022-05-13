@@ -179,6 +179,8 @@ export default function Root() {
             } else {
               console.log(e);
               currentTry += 1;
+
+              await exploit.sleep(1000);
             }
           }
         }
