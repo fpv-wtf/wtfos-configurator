@@ -49,7 +49,7 @@ export default class AdbWrapper {
   async executeCommand(command) {
     const commandArray = Array.isArray(command) ? command : [command];
     const fullCommand = [
-      "export PATH=$PATH:/opt/bin:/opt/sbin:/system/bin;",
+      ". /etc/mkshrc;",
       ...commandArray,
       ";echo $?",
     ];
@@ -57,6 +57,14 @@ export default class AdbWrapper {
     let lines = output.stdout.split("\n");
     lines = lines.filter((line) => line);
     const exitCode = lines.pop();
+
+    // Remove first line in case it is reporting the debug state which might
+    // happen on some devices when sourcing /etc/mkshrc
+    if(lines.length > 0) {
+      if(lines[0].startsWith("[sec_debug_state")) {
+        lines.shift();
+      }
+    }
 
     output.exitCode = parseInt(exitCode);
     output.stdout = lines.join("\n");
@@ -226,7 +234,6 @@ export default class AdbWrapper {
   async getServiceInfo() {
     const blacklist = ["boot"];
     const output = await this.executeCommand([
-      "HOME=/data",
       this.wtfos.bin.dinitctl,
       "-u list",
     ]);
@@ -282,7 +289,6 @@ export default class AdbWrapper {
 
   async enableService(name) {
     const output = await this.executeCommand([
-      "HOME=/data",
       this.wtfos.bin.dinitctl,
       "-u enable",
       escapeArg(name),
@@ -293,7 +299,6 @@ export default class AdbWrapper {
 
   async disableService(name) {
     const output = await this.executeCommand([
-      "HOME=/data",
       this.wtfos.bin.dinitctl,
       "-u disable",
       escapeArg(name),
