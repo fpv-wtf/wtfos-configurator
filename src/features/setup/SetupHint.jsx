@@ -10,7 +10,7 @@ export default function SetupHint() {
     <Alert severity="warning">
       <Typography>
         You should &nbsp;
-        <Link href="/setup">
+        <Link href="/wtfos/install">
           install WTFOS now
         </Link>
         . This is required for adding new packages and service management.
