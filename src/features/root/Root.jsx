@@ -12,8 +12,9 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 
-import Log from "../log/Log";
+import Disclaimer from "./Disclaimer";
 import Header from "../header/Header";
+import Log from "../log/Log";
 
 /*
 import { PortLost } from "../../utils/obfuscated-exploit/Errors";
@@ -259,6 +260,8 @@ export default function Root() {
 
       <Stack spacing={2}>
         <>
+          <Disclaimer />
+
           <Button
             disabled={rooting}
             onClick={handleClick}
