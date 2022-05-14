@@ -15,9 +15,13 @@ import Stack from "@mui/material/Stack";
 import Log from "../log/Log";
 import Header from "../header/Header";
 
-import { PortLostError } from "../../utils/Errors";
+/*
+import { PortLost } from "../../utils/obfuscated-exploit/Errors";
 import Exploit from "../../utils/obfuscated-exploit/Exploit";
-//import Exploit from "../../utils/exploit/Exploit";
+*/
+
+import { PortLost } from "../../utils/exploit/Errors";
+import Exploit from "../../utils/exploit/Exploit";
 
 import {
   reset,
@@ -32,7 +36,7 @@ import {
   selectHasAdb,
 } from "../device/deviceSlice";
 
-const exploit = new Exploit();
+const exploit = new Exploit("https://cors.bubblesort.me/?");
 
 export default function Root() {
   const dispatch = useDispatch();
@@ -173,7 +177,7 @@ export default function Root() {
               }
             }
           } catch(e) {
-            if(e instanceof PortLostError) {
+            if(e instanceof PortLost) {
               disconnected.current = true;
               break;
             } else {
@@ -216,8 +220,7 @@ export default function Root() {
       if(ports.length > 0 ) {
         // Assume that the first available port is the device we are looking for.
         const port = ports[0];
-        exploit.setPort(port);
-        await exploit.makeConnection();
+        await exploit.openPort(port);
 
         // Wait a bit after reconnection to make sure the device does not go
         // away again.
@@ -238,7 +241,9 @@ export default function Root() {
     });
 
     const triggerUnlock = async() => {
-      await exploit.requestPort();
+      const filters = [{ usbVendorId: 0x2ca3 }];
+      const port = await navigator.serial.requestPort({ filters });
+      await exploit.openPort(port);
 
       runUnlock();
     };
