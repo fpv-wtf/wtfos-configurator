@@ -424,6 +424,7 @@ export default class AdbWrapper {
     if(!exists) {
       statusCallback("Installing entware (can take a couple of minutes)...");
       output = await this.executeCommand([
+        "export PATH=$PATH:/opt/bin:/opt/sbin:/system/bin;",
         `export http_proxy="${this.wtfos.proxy}";`,
         "wget -q -O - http://bin.entware.net/armv7sf-k3.2/installer/alternative.sh | sh",
       ]);
@@ -453,9 +454,10 @@ export default class AdbWrapper {
     }
 
     statusCallback("Updating package list...");
-    output = await this.executeCommand(
-      `${this.wtfos.bin.opkg} update`
-    );
+    output = await this.executeCommand([
+      "export PATH=$PATH:/opt/bin:/opt/sbin:/system/bin;",
+      `${this.wtfos.bin.opkg} update`,
+    ]);
     if(output.exitCode !== 0) {
       statusCallback("ERROR: Failed updating package list");
       console.log(output);
@@ -464,6 +466,7 @@ export default class AdbWrapper {
 
     statusCallback("Installing WTFOS (can take a couple of minutes)...");
     output = await this.executeCommand([
+      "export PATH=$PATH:/opt/bin:/opt/sbin:/system/bin;",
       this.wtfos.bin.opkg,
       "install wtfos",
     ]);
