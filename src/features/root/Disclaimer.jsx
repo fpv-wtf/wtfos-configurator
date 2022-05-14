@@ -13,31 +13,31 @@ export default function Disclaimer() {
       </Typography>
 
       <List>
-        <ListItem>
+        <ListItem dense>
           <Typography>
             Make sure that the device to be rooted is powered from a reliable power source
           </Typography>
         </ListItem>
 
-        <ListItem>
+        <ListItem dense>
           <Typography>
             Make sure that the device is properly cooled if necessary
           </Typography>
         </ListItem>
 
-        <ListItem>
+        <ListItem dense>
           <Typography>
             Only have one device connected/paired
           </Typography>
         </ListItem>
 
-        <ListItem>
+        <ListItem dense>
           <Typography>
             Do not power off during rooting
           </Typography>
         </ListItem>
 
-        <ListItem>
+        <ListItem dense>
           <Typography>
             Proceed at your own risk
           </Typography>
