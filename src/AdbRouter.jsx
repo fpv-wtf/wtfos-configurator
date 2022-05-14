@@ -76,7 +76,7 @@ export default function AdbRouter() {
   }, [connectToDevice]);
 
   useEffect(() => {
-    if(!watcher) {
+    if(!watcher && window.navigator.usb) {
       const watcher = new AdbWebUsbBackendWatcher(async (id) => {
         if(!id) {
           setAdb(null);

@@ -7,8 +7,8 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 import ConnectButton from "./ConnectButton";
-
 import Spinner from "../loading/Spinner";
+import Webusb from "../disclaimer/Webusb";
 
 import { selectRebooting } from "./deviceSlice";
 
@@ -24,7 +24,11 @@ export default function Device({
       spacing={2}
       sx={{ width: "100%" }}
     >
-      { !error &&
+
+      {!window.navigator.usb &&
+        <Webusb />}
+
+      { !error && window.navigator.usb &&
         <Alert severity="warning">
           <Typography>
             Connect your rooted goggles or airunit via USB, make sure they are powered and hit the connect button.
@@ -38,9 +42,7 @@ export default function Device({
           </Typography>
         </Alert>}
 
-      <ConnectButton
-        onClick={handleDeviceConnect}
-      />
+      <ConnectButton onClick={handleDeviceConnect} />
     </Stack>
   );
 

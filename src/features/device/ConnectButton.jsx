@@ -11,7 +11,7 @@ export default function ConnectButton({ onClick }) {
 
   return (
     <Button
-      disabled={connected}
+      disabled={connected || !window.navigator.usb}
       onClick={onClick}
       variant="contained"
     >

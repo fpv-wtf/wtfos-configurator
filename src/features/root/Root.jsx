@@ -16,6 +16,7 @@ import Typography from "@mui/material/Typography";
 import Disclaimer from "../disclaimer/Disclaimer";
 import Header from "../header/Header";
 import Log from "../log/Log";
+import Webusb from "../disclaimer/Webusb";
 
 import { PortLost } from "../../utils/obfuscated-exploit/Errors";
 import Exploit from "../../utils/obfuscated-exploit/Exploit";
@@ -261,6 +262,9 @@ export default function Root() {
 
       <Stack spacing={2}>
         <>
+          {!window.navigator.usb &&
+            <Webusb />}
+
           <Disclaimer
             lines={[
               "Make sure that the device to be rooted is powered from a reliable power source",
@@ -273,7 +277,7 @@ export default function Root() {
           />
 
           <Button
-            disabled={rooting}
+            disabled={rooting || !window.navigator.usb}
             onClick={handleClick}
             variant="contained"
           >
