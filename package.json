@@ -33,7 +33,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext .jsx,.js",
     "lint-commit": "with-staged '**/*.{js,jsx}' -- yarn eslint",
-    "remove-console": "babel --plugins transform-remove-console ./src/utils/exploit-bak --out-dir ./src/utils/exploit-no-console",
+    "remove-console": "babel --plugins transform-remove-console ./src/utils/exploit --out-dir ./src/utils/exploit-no-console",
     "js-obfuscate": "javascript-obfuscator ./src/utils/exploit-no-console --output src/utils/obfuscated-exploit --split-strings=true --string-array-encoding base64,rc4",
     "obfuscate": "yarn run remove-console && yarn run js-obfuscate"
   },
