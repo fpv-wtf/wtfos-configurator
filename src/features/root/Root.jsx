@@ -12,7 +12,7 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 
-import Disclaimer from "./Disclaimer";
+import Disclaimer from "../disclaimer/Disclaimer";
 import Header from "../header/Header";
 import Log from "../log/Log";
 
@@ -260,7 +260,16 @@ export default function Root() {
 
       <Stack spacing={2}>
         <>
-          <Disclaimer />
+          <Disclaimer
+            lines={[
+              "Make sure that the device to be rooted is powered from a reliable power source",
+              "Make sure that the device is properly cooled if necessary",
+              "Only have one device connected/paired",
+              "Do not power off during rooting",
+              "Proceed at your own risk",
+            ]}
+            title="Disclaimer:"
+          />
 
           <Button
             disabled={rooting}
