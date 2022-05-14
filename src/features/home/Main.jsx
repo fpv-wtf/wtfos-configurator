@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 
+import Recovery from "../disclaimer/Recovery";
 import SetupHint from "../setup/SetupHint";
 import Tiles from "./Tiles";
 
@@ -33,6 +34,8 @@ export default function Main() {
 
       {!hasOpkgBinary && isConnected &&
         <SetupHint />}
+
+      <Recovery />
     </Stack>
   );
 }

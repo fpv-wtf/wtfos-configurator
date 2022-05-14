@@ -11,6 +11,7 @@ import {
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
+import Disclaimer from "../disclaimer/Disclaimer";
 import Log from "../log/Log";
 
 import {
@@ -51,6 +52,15 @@ export default function Install({ adb }) {
 
   return(
     <Stack spacing={2}>
+      <Disclaimer
+        lines={[
+          "WTFOS is in BETA state!",
+          "Things might not work as expected",
+          "Proceed at your own risk",
+        ]}
+        title="Disclaimer:"
+      />
+
       <Button
         disabled={hasOpkgBinary || isProcessing}
         onClick={onClick}
