@@ -20,6 +20,7 @@ import Home from "./features/home/Main";
 import Packages from "./features/packages/Packages";
 import Startup from "./features/startup/Startup";
 
+import Error404 from "./features/404/404";
 import Setup from "./features/setup/Setup";
 import Install from "./features/setup/Install";
 import Remove from "./features/setup/Remove";
@@ -97,6 +98,11 @@ function App({
               path="startup"
             />
           </>}
+
+        <Route
+          element={<Error404 />}
+          path="/*"
+        />
       </Routes>
     </Container>
   );
