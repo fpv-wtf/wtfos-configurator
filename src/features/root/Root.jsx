@@ -11,6 +11,7 @@ import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
 import Disclaimer from "../disclaimer/Disclaimer";
 import Header from "../header/Header";
@@ -281,7 +282,9 @@ export default function Root() {
 
           {hasAdb &&
             <Alert severity="success">
-              Device already rooted
+              <Typography>
+                Device already rooted
+              </Typography>
             </Alert>}
 
           <Log />

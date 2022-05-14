@@ -19,7 +19,10 @@ export default function Log() {
     const key = `${line}-${index}`;
 
     return (
-      <ListItem key={key}>
+      <ListItem
+        dense
+        key={key}
+      >
         <Typography
           sx={{ fontFamily: "Monospace" }}
         >

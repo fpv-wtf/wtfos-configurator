@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
 import ConnectButton from "./ConnectButton";
 
@@ -25,12 +26,16 @@ export default function Device({
     >
       { !error &&
         <Alert severity="warning">
-          Connect your rooted goggles or airunit via USB, make sure they are powered and hit the connect button.
+          <Typography>
+            Connect your rooted goggles or airunit via USB, make sure they are powered and hit the connect button.
+          </Typography>
         </Alert>}
 
       { error &&
         <Alert severity="error">
-          Could not connect to device, make sure that no other adb server is running on your machine and that you are not connected in another tab/window.
+          <Typography>
+            Could not connect to device, make sure that no other adb server is running on your machine and that you are not connected in another tab/window.
+          </Typography>
         </Alert>}
 
       <ConnectButton

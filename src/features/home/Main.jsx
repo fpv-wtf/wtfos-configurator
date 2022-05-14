@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
 import Recovery from "../disclaimer/Recovery";
 import SetupHint from "../setup/SetupHint";
@@ -25,7 +26,9 @@ export default function Main() {
     >
       {isConnected &&
         <Alert severity="success">
-          Successfully connected to your device.
+          <Typography>
+            Successfully connected to your device.
+          </Typography>
         </Alert>}
 
       <Stack>
