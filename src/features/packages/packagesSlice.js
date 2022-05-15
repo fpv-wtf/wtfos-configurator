@@ -177,12 +177,10 @@ export const packagesSlice = createSlice({
     processing: (state, event) => {
       state.processing = event.payload;
     },
-    reset: (state, event) => {
-      state = initialState;
-    },
     clearError: (state, event) => {
       state.error = initialState.error;
     },
+    reset: () => initialState,
   },
   extraReducers: (builder) => {
     builder
