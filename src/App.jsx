@@ -13,7 +13,7 @@ import Stack from "@mui/material/Stack";
 import "./App.css";
 
 import Device from "./features/device/Device";
-import Header from "./features/header/Header";
+import Header from "./features/navigation/Header";
 
 import Cli from "./features/cli/Cli";
 import Home from "./features/home/Main";

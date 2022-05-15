@@ -5,8 +5,7 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-import Header from "../header/Header";
-
+import Header from "../navigation/Header";
 import Team from "./Team";
 import Support from "./Support";
 

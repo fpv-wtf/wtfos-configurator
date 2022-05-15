@@ -14,7 +14,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 import Disclaimer from "../disclaimer/Disclaimer";
-import Header from "../header/Header";
+import Header from "../navigation/Header";
 import Log from "../log/Log";
 import Webusb from "../disclaimer/Webusb";
 
