@@ -20,7 +20,7 @@ export default function Footer() {
       }}
     >
       <Container fixed>
-        <Paper elevation="1">
+        <Paper elevation={1}>
           <Grid
             container
           >
