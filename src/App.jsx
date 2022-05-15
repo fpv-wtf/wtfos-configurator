@@ -61,43 +61,47 @@ function App({
           path="/"
         />
 
-        {isConnected && adb &&
-          <>
-            <Route
-              element={<Cli adb={adb} />}
-              path="cli"
-            />
+        <Route
+          element={(isConnected && adb) ? <Cli adb={adb} /> : null}
+          path="cli"
+          render={isConnected && adb}
+        />
 
-            <Route
-              element={<Setup />}
-              path="wtfos"
-            />
+        <Route
+          element={(isConnected) ? <Setup /> : null}
+          path="wtfos"
+          render={isConnected && adb}
+        />
 
-            <Route
-              element={<Remove adb={adb} />}
-              path="wtfos/remove"
-            />
+        <Route
+          element={(isConnected && adb) ? <Remove adb={adb} /> : null}
+          path="wtfos/remove"
+          render={isConnected && adb}
+        />
 
-            <Route
-              element={<Install adb={adb} />}
-              path="wtfos/install"
-            />
+        <Route
+          element={(isConnected && adb) ? <Install adb={adb} /> : null}
+          path="wtfos/install"
+          render={isConnected && adb}
+        />
 
-            <Route
-              element={<Update adb={adb} />}
-              path="wtfos/update"
-            />
+        <Route
+          element={(isConnected && adb) ? <Update adb={adb} /> : null}
+          path="wtfos/update"
+          render={isConnected && adb}
+        />
 
-            <Route
-              element={<Packages adb={adb} />}
-              path="packages"
-            />
+        <Route
+          element={(isConnected && adb) ? <Packages adb={adb} /> : null}
+          path="packages"
+          render={isConnected && adb}
+        />
 
-            <Route
-              element={<Startup adb={adb} />}
-              path="startup"
-            />
-          </>}
+        <Route
+          element={(isConnected && adb) ? <Startup adb={adb} /> : null}
+          path="startup"
+          render={isConnected && adb}
+        />
 
         <Route
           element={<Error404 />}
