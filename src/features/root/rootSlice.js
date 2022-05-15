@@ -24,18 +24,11 @@ export const rootSlice = createSlice({
       state.rooting = false;
       state.success = false;
     },
-    clearLog: (state) => {
-      state.log = [];
-    },
-    reset: (state) => {
-      state = { ...initialState };
-    },
+    reset: () => initialState,
   },
 });
 
 export const {
-  appendToLog,
-  clearLog,
   fail,
   reset,
   root,

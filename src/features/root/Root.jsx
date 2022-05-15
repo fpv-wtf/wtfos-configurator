@@ -239,16 +239,20 @@ export default function Root() {
       disconnected.current = true;
 
       if(!rooting && attempted) {
-        dispatch(reset);
+        dispatch(reset());
       }
     });
 
     const triggerUnlock = async() => {
       const filters = [{ usbVendorId: 0x2ca3 }];
-      const port = await navigator.serial.requestPort({ filters });
-      await exploit.openPort(port);
+      try {
+        const port = await navigator.serial.requestPort({ filters });
+        await exploit.openPort(port);
 
-      runUnlock();
+        runUnlock();
+      } catch(e) {
+        dispatch(reset());
+      }
     };
     triggerUnlock();
   }, [attempted, dispatch, rooting]);
