@@ -121,8 +121,8 @@ export const removeWTFOS = createAsyncThunk(
 
 function filterPackages(packages, filter) {
   let filtered = packages.filter((item) => (
-    filter.repo === "all" ||
-    filter.repo === item.repo
+    (filter.repo === "all" || filter.search) ||
+    (filter.repo === item.repo && !filter.search)
   ));
 
   filtered = filtered.filter((item) => {

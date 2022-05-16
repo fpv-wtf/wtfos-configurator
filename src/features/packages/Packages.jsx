@@ -227,6 +227,7 @@ export default function Packages({ adb }) {
               </InputLabel>
 
               <Select
+                disabled={filter.search}
                 id="package-state-select"
                 label="Packages"
                 onChange={handleRepoChange}
