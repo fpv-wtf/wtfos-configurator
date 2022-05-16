@@ -1,6 +1,7 @@
 import React, {
   useCallback,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import {
@@ -27,12 +28,12 @@ import {
   connected,
   connecting,
   connectionFailed,
-  disconnected,
+  reset as resetDevice,
   selectChecked,
   setAdb as deviceSetAdb,
 } from "./features/device/deviceSlice";
 
-import { reset } from "./features/packages/packagesSlice";
+import { reset as resetPackages } from "./features/packages/packagesSlice";
 import { selectRooting } from "./features/root/rootSlice";
 
 export default function AdbRouter() {
@@ -42,11 +43,18 @@ export default function AdbRouter() {
   const isRooting = useSelector(selectRooting);
 
   const [adb, setAdb] = useState(null);
+  const adbRef = useRef();
+
+  const [device, setDevice] = useState(null);
+  const deviceRef = useRef();
+
   const [watcher, setWatcher] = useState(null);
 
   const connectToDevice = useCallback(async (device) => {
     if(device) {
       try {
+        setDevice(device);
+
         const credentialStore = new AdbWebCredentialStore();
         const streams = await device.connect();
         const adbLocal = await Adb.authenticate(streams, credentialStore, undefined);
@@ -55,7 +63,7 @@ export default function AdbRouter() {
 
         setAdb(adbWrapper);
 
-        dispatch(reset());
+        dispatch(resetPackages());
         dispatch(connected());
         dispatch(deviceSetAdb(true));
         dispatch(checkBinaries(adbWrapper));
@@ -64,7 +72,7 @@ export default function AdbRouter() {
         dispatch(connectionFailed());
       }
     } else {
-      dispatch(reset());
+      dispatch(resetPackages());
     }
   }, [dispatch]);
 
@@ -76,12 +84,19 @@ export default function AdbRouter() {
   }, [connectToDevice]);
 
   useEffect(() => {
+    adbRef.current = adb;
+  }, [adb]);
+
+  useEffect(() => {
+    deviceRef.current = device;
+  }, [device]);
+
+  useEffect(() => {
     if(!watcher && window.navigator.usb) {
       const watcher = new AdbWebUsbBackendWatcher(async (id) => {
         if(!id) {
           setAdb(null);
-          dispatch(disconnected());
-          dispatch(checked(false));
+          dispatch(resetDevice());
         } else {
           if(!isRooting) {
             await autoConnect();
@@ -100,14 +115,6 @@ export default function AdbRouter() {
     }
   }, [adb, autoConnect, dispatch, isChecked, isRooting]);
 
-  // Try to connect when comming from rooting menu
-  useEffect(() => {
-    if(!isRooting && !adb) {
-      dispatch(checked(true));
-      autoConnect();
-    }
-  }, [adb, autoConnect, dispatch, isRooting]);
-
   const handleDeviceConnect = useCallback(async() => {
     dispatch(connecting());
 
@@ -119,6 +126,15 @@ export default function AdbRouter() {
       dispatch(connectionFailed());
     }
   }, [connectToDevice, dispatch]);
+
+  useEffect(() => {
+    dispatch(resetDevice());
+
+    // Close the ADB device when moving to different route
+    return async() => {
+      await deviceRef.current._device.close();
+    };
+  }, [dispatch]);
 
   return(
     <Routes>

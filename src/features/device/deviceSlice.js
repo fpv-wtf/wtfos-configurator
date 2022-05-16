@@ -74,6 +74,7 @@ export const deviceSlice = createSlice({
     setAdb: (state, action) => {
       state.hasAdb = action.payload;
     },
+    reset: () => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -93,6 +94,7 @@ export const {
   disconnected,
   installing,
   rebooting,
+  reset,
   setAdb,
 } = deviceSlice.actions;
 
