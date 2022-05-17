@@ -18,11 +18,17 @@ import Header from "../navigation/Header";
 import Log from "../log/Log";
 import Webusb from "../disclaimer/Webusb";
 
-import { PortLost } from "../../utils/obfuscated-exploit/Errors";
+import {
+  PatchFailed,
+  PortLost,
+} from "../../utils/obfuscated-exploit/Errors";
 import Exploit from "../../utils/obfuscated-exploit/Exploit";
 
 /*
-import { PortLost } from "../../utils/exploit/Errors";
+import {
+  PatchFailed,
+  PortLost,
+} from "../../utils/exploit/Errors";
 import Exploit from "../../utils/exploit/Exploit";
 */
 
@@ -183,11 +189,15 @@ export default function Root() {
             if(e instanceof PortLost) {
               disconnected.current = true;
               break;
+            } else if(e instanceof PatchFailed) {
+              log("Rewinding to Step 2...");
+
+              unlockStep.current = 2;
+
+              currentTry += 1;
+              await exploit.sleep(1000);
             } else {
               console.log(e);
-              if(e.message) {
-                console.log("Error:", e.message);
-              }
 
               currentTry += 1;
               await exploit.sleep(1000);
@@ -229,7 +239,7 @@ export default function Root() {
         await exploit.openPort(port);
 
         // Wait a bit after reconnection to make sure the device does not go
-        // away again.
+        // away again and services had time to restart.
         await exploit.sleep(3000);
 
         // Run the next unlock step (or the failed one if device went away)
