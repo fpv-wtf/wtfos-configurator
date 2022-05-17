@@ -16,6 +16,10 @@ const initialState = {
   log: [],
   rebooting: false,
   checked: false,
+  temperature: null,
+  device: null,
+  productType:null,
+  niceName: null,
 };
 
 export const checkBinaries = createAsyncThunk(
@@ -74,6 +78,43 @@ export const deviceSlice = createSlice({
     setAdb: (state, action) => {
       state.hasAdb = action.payload;
     },
+    setTemperature: (state, action) => {
+      state.temperature = action.payload;
+    },
+    setProductInfo: (state, action) => {
+      const {
+        device,
+        productType,
+      } = action.payload;
+      state.device = device;
+      state.productType = productType;
+
+      switch(device) {
+        case "pigeon_wm150_gls": {
+          state.niceName = "DJI FPV Goggles V1";
+        } break;
+
+        case "pigeon_wm170_gls": {
+          state.niceName = "DJI FPV Goggles V2 (FPV Mode)";
+
+          if(productType === "wm150_gls") {
+            state.niceName = "DJI FPV Goggles V2 (DIY Mode)";
+          }
+        } break;
+
+        case "pigeon_wm150": {
+          state.niceName = "DJI FPV Air Unit";
+        } break;
+
+        case "pigeon_wm150_tiny": {
+          state.niceName = "DJI FPV Air Unit Light (Caddx Vista)";
+        } break;
+
+        default: {
+          state.niceName = "Unknown";
+        }
+      }
+    },
     reset: () => initialState,
   },
   extraReducers: (builder) => {
@@ -96,6 +137,8 @@ export const {
   rebooting,
   reset,
   setAdb,
+  setProductInfo,
+  setTemperature,
 } = deviceSlice.actions;
 
 export const selectHasAdb = (state) => state.device.hasAdb;
@@ -106,7 +149,9 @@ export const selectHasHttpProxy = (state) => state.device.hasHttpProxy;
 export const selectHasDinitBinary = (state) => state.device.binaries.hasDinitBinary;
 export const selectHasOpkgBinary = (state) => state.device.binaries.hasOpkgBinary;
 export const selectLog = (state) => state.device.log;
+export const selectNiceName = (state) => state.device.niceName;
 export const selectRebooting = (state) => state.device.rebooting;
 export const selectStatus = (state) => state.device.status;
+export const selectTemperature = (state) => state.device.temperature;
 
 export default deviceSlice.reducer;

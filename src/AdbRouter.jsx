@@ -31,6 +31,8 @@ import {
   reset as resetDevice,
   selectChecked,
   setAdb as deviceSetAdb,
+  setProductInfo,
+  setTemperature,
 } from "./features/device/deviceSlice";
 
 import { reset as resetPackages } from "./features/packages/packagesSlice";
@@ -43,12 +45,13 @@ export default function AdbRouter() {
   const isRooting = useSelector(selectRooting);
 
   const [adb, setAdb] = useState(null);
-  const adbRef = useRef();
-
   const [device, setDevice] = useState(null);
-  const deviceRef = useRef();
-
   const [watcher, setWatcher] = useState(null);
+  const [intervalId, setIntervalId] = useState(null);
+
+  const adbRef = useRef();
+  const deviceRef = useRef();
+  const intervalRef = useRef();
 
   const connectToDevice = useCallback(async (device) => {
     if(device) {
@@ -62,6 +65,18 @@ export default function AdbRouter() {
         await adbWrapper.establishReverseSocket(1);
 
         setAdb(adbWrapper);
+
+        const checkTemp = async () => {
+          const temp = await adbWrapper.getTemperature();
+          dispatch(setTemperature(temp));
+        };
+
+        const newIntervalId = setInterval(checkTemp, 3000);
+        setIntervalId(newIntervalId);
+        await checkTemp();
+
+        const info = await adbWrapper.getProductInfo();
+        dispatch(setProductInfo(info));
 
         dispatch(resetPackages());
         dispatch(connected());
@@ -92,11 +107,17 @@ export default function AdbRouter() {
   }, [device]);
 
   useEffect(() => {
+    intervalRef.current = intervalId;
+  }, [intervalId]);
+
+  useEffect(() => {
     if(!watcher && window.navigator.usb) {
       const watcher = new AdbWebUsbBackendWatcher(async (id) => {
         if(!id) {
           setAdb(null);
           dispatch(resetDevice());
+          clearInterval(intervalRef.current);
+          setIntervalId(null);
         } else {
           if(!isRooting) {
             await autoConnect();
@@ -130,8 +151,9 @@ export default function AdbRouter() {
   useEffect(() => {
     dispatch(resetDevice());
 
-    // Close the ADB device when moving to different route
+    // Clean up when switching context
     return async() => {
+      clearInterval(intervalRef.current);
       await deviceRef.current._device.close();
     };
   }, [dispatch]);
@@ -139,7 +161,7 @@ export default function AdbRouter() {
   return(
     <Routes>
       <Route
-        element={<About adb={adb} />}
+        element={<About />}
         path="/about"
       />
 

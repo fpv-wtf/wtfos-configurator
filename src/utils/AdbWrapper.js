@@ -311,6 +311,31 @@ export default class AdbWrapper {
     return await this.adb.subprocess.shell();
   }
 
+  async getTemperature() {
+    const output = await this.executeCommand([
+      "cat /sys/devices/platform/soc/f0a00000.apb/f0a71000.omc/temp1",
+    ]);
+
+    return output.stdout;
+  }
+
+  async getProductInfo() {
+    let output = await this.executeCommand([
+      "unrd product_type",
+    ]);
+    const productType = output.stdout;
+
+    output = await this.executeCommand([
+      "getprop ro.product.device",
+    ]);
+    const device = output.stdout;
+
+    return {
+      productType,
+      device,
+    };
+  }
+
   /**
    * The port here does not really matter. It is just used to identify it in
    * the handler later on.

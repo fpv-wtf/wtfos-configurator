@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
 import React, {
   useCallback,
   useState,
 } from "react";
+import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
@@ -16,8 +16,26 @@ import Typography from "@mui/material/Typography";
 
 import { Link } from "react-router-dom";
 
-export default function Header({ deviceName }) {
+import {
+  selectConnected,
+  selectNiceName,
+  selectTemperature,
+} from "../device/deviceSlice";
+
+export default function Header() {
   const location = useLocation();
+
+  const isConnected = useSelector(selectConnected);
+  const temperature = useSelector(selectTemperature);
+  const niceName = useSelector(selectNiceName);
+
+  let name = "";
+  if(isConnected) {
+    name = niceName;
+    if(temperature) {
+      name += ` - ${temperature}°C`;
+    }
+  }
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -144,14 +162,10 @@ export default function Header({ deviceName }) {
           </Typography>
 
           <Typography>
-            {deviceName}
+            {name}
           </Typography>
         </Toolbar>
       </AppBar>
     </Box>
   );
 }
-
-Header.defaultProps = { deviceName: "" };
-
-Header.propTypes = { deviceName: PropTypes.string };

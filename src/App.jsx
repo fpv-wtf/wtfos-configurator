@@ -35,17 +35,15 @@ function App({
   adb,
   handleAdbConnectClick,
 }) {
-  const isConnected = useSelector(selectConnected);
   const error = useSelector(selectError);
+  const isConnected = useSelector(selectConnected);
 
   return (
     <Container
       fixed
       sx={{ paddingBottom: 3 }}
     >
-      <Header
-        deviceName={(isConnected && adb) ? adb.getDevice() : "No device found"}
-      />
+      <Header />
 
       {!isConnected  &&
         <Stack>
