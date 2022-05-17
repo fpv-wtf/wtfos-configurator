@@ -282,10 +282,15 @@ export default function Root() {
           {!window.navigator.usb &&
             <Webusb />}
 
+          <Alert severity="error">
+            <Typography sx={{ fontWeight: "bold" }}>
+              If you are rooting an Air Unit - especially Air Unit light (Caddx Vista) - make sure that it is actively cooled by pointing a fan at it.
+            </Typography>
+          </Alert>
+
           <Disclaimer
             lines={[
               "Make sure that the device to be rooted is powered from a reliable power source",
-              "Make sure that the device is properly cooled if necessary",
               "Only have one device connected/paired",
               "Do not power off during rooting",
               "Proceed at your own risk",
