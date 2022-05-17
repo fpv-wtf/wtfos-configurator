@@ -185,8 +185,11 @@ export default function Root() {
               break;
             } else {
               console.log(e);
-              currentTry += 1;
+              if(e.message) {
+                console.log("Error:", e.message);
+              }
 
+              currentTry += 1;
               await exploit.sleep(1000);
             }
           }
