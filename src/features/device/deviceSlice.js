@@ -115,6 +115,10 @@ export const deviceSlice = createSlice({
         }
       }
     },
+    contextReset: (state) => {
+      state.checked = false;
+      state.temperature = null;
+    },
     reset: () => initialState,
   },
   extraReducers: (builder) => {
@@ -132,6 +136,7 @@ export const {
   connected,
   connecting,
   connectionFailed,
+  contextReset,
   disconnected,
   installing,
   rebooting,

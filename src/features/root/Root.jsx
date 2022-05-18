@@ -298,6 +298,13 @@ export default function Root() {
             title="Disclaimer:"
           />
 
+          {hasAdb &&
+            <Alert severity="success">
+              <Typography>
+                Device already rooted
+              </Typography>
+            </Alert>}
+
           <Button
             disabled={rooting || !window.navigator.usb}
             onClick={handleClick}
@@ -305,13 +312,6 @@ export default function Root() {
           >
             Root Device
           </Button>
-
-          {hasAdb &&
-            <Alert severity="success">
-              <Typography>
-                Device already rooted
-              </Typography>
-            </Alert>}
 
           <Log />
         </>

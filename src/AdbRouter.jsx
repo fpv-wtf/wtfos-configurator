@@ -28,6 +28,7 @@ import {
   connected,
   connecting,
   connectionFailed,
+  contextReset,
   reset as resetDevice,
   selectChecked,
   setAdb as deviceSetAdb,
@@ -36,22 +37,21 @@ import {
 } from "./features/device/deviceSlice";
 
 import { reset as resetPackages } from "./features/packages/packagesSlice";
-import { selectRooting } from "./features/root/rootSlice";
 
 export default function AdbRouter() {
   const dispatch = useDispatch();
 
   const isChecked = useSelector(selectChecked);
-  const isRooting = useSelector(selectRooting);
 
   const [adb, setAdb] = useState(null);
   const [device, setDevice] = useState(null);
-  const [watcher, setWatcher] = useState(null);
   const [intervalId, setIntervalId] = useState(null);
+  const [watcher, setWatcher] = useState(null);
 
   const adbRef = useRef();
   const deviceRef = useRef();
   const intervalRef = useRef();
+  const watcherRef = useRef();
 
   const connectToDevice = useCallback(async (device) => {
     if(device) {
@@ -94,6 +94,7 @@ export default function AdbRouter() {
   const autoConnect = useCallback(async() => {
     const devices = await AdbWebUsbBackend.getDevices();
     if(devices.length > 0) {
+      // Assume first device is the device we want to connect to
       await connectToDevice(devices[0]);
     }
   }, [connectToDevice]);
@@ -111,6 +112,10 @@ export default function AdbRouter() {
   }, [intervalId]);
 
   useEffect(() => {
+    watcherRef.current = watcher;
+  }, [watcher]);
+
+  useEffect(() => {
     if(!watcher && window.navigator.usb) {
       const watcher = new AdbWebUsbBackendWatcher(async (id) => {
         if(!id) {
@@ -119,22 +124,21 @@ export default function AdbRouter() {
           clearInterval(intervalRef.current);
           setIntervalId(null);
         } else {
-          if(!isRooting) {
-            await autoConnect();
-          }
+          await autoConnect();
         }
       });
 
       setWatcher(watcher);
     }
-  }, [autoConnect, connectToDevice, dispatch, isRooting, watcher]);
+  }, [autoConnect, connectToDevice, dispatch, watcher]);
 
   useEffect(() => {
-    if(!isChecked && !adb && !isRooting) {
+    // Automatically try to connect to device when application starts up
+    if(!isChecked && !adb) {
       dispatch(checked(true));
       autoConnect();
     }
-  }, [adb, autoConnect, dispatch, isChecked, isRooting]);
+  }, [adb, autoConnect, dispatch, isChecked]);
 
   const handleDeviceConnect = useCallback(async() => {
     dispatch(connecting());
@@ -143,18 +147,25 @@ export default function AdbRouter() {
       const device = await AdbWebUsbBackend.requestDevice();
       await connectToDevice(device);
     } catch(e) {
-      console.log(e);
       dispatch(connectionFailed());
     }
   }, [connectToDevice, dispatch]);
 
   useEffect(() => {
-    dispatch(resetDevice());
+    dispatch(contextReset());
 
-    // Clean up when switching context
+    // Clean up when switching context (onUnmount)
     return async() => {
+      dispatch(contextReset());
+
+      watcherRef.current.dispose();
       clearInterval(intervalRef.current);
       await deviceRef.current._device.close();
+
+      setAdb(null);
+      setDevice(null);
+      setIntervalId(null);
+      setWatcher(null);
     };
   }, [dispatch]);
 
