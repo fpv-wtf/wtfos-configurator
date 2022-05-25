@@ -172,7 +172,7 @@ export default class AdbWrapper {
 
     await this.updataPackages();
     output = await this.adb.subprocess.spawnAndWait([
-      "/opt/bin/opkg",
+      this.wtfos.bin.opkg,
       "list",
     ]);
 
