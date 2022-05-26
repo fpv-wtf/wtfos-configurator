@@ -38,6 +38,10 @@ export default class AdbWrapper {
     return this.adb.device;
   }
 
+  filterInvalidFn = (item) => {
+    return item.installed || (!!item.version && !item.name?.includes(" "));
+  };
+
   /**
    * Returns an object which should contain stdout, stderr and exitCode.
    * Unfortunately this only works on Android 7 and above, this means that
@@ -138,7 +142,7 @@ export default class AdbWrapper {
           current: fields[1],
           latest: fields[2],
         };
-      });
+      }).filter(this.filterInvalidFn);
     } catch(e) {
       console.log(e);
     }
@@ -202,10 +206,7 @@ export default class AdbWrapper {
         description: fields[2] || "",
         installed: installed.includes(fields[0]),
       };
-    })
-      .filter((item) => {
-        return item.installed || (!!item.version && !item.name?.includes(" "));
-      });
+    }).filter(this.filterInvalidFn);
 
     return packages;
   }
