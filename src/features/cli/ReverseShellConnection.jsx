@@ -43,7 +43,9 @@ export default function ReverseShellConnection({ reverseShellSocket }) {
   const theme = useTheme();
 
   useEffect(() => {
-    setConnected(reverseShellSocket.isConnected());
+    const isConnected = reverseShellSocket.isConnected();
+    setConnected(isConnected);
+    setExpanded(isConnected);
     reverseShellSocket.setConnectionCallback((c) => {
       setConnecting(false);
       setConnected(c);
