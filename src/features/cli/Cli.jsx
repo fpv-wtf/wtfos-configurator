@@ -25,17 +25,21 @@ export default function Cli({ adb }) {
     const setup = async() => {
       const socket = await adb.getShellSocket();
       const writer = socket.stdin.getWriter();
+      const reverseShellSocket = adb.getReverseShellSocket();
 
       socket.stdout.pipeTo(new WritableStream({
         write: (chunk) => {
           terminal.write(chunk);
+          reverseShellSocket.write(chunk);
         },
       }));
 
-      terminal.onData((data) => {
+      const onDataFn = (data) => {
         const buffer = encodeUtf8(data);
         writer.write(buffer);
-      });
+      };
+      terminal.onData(onDataFn);
+      reverseShellSocket.onData(onDataFn);
     };
     setup();
   }, [adb]);
@@ -61,7 +65,7 @@ export default function Cli({ adb }) {
         />
 
         <ReverseShellConnection
-          reverseShellSocket={adb.reverseShellSocket}
+          reverseShellSocket={adb.getReverseShellSocket()}
         />
       </Stack>
     </Container>

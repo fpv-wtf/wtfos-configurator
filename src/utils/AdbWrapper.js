@@ -41,6 +41,10 @@ export default class AdbWrapper {
     return this.adb.device;
   }
 
+  getReverseShellSocket() {
+    return this.reverseShellSocket;
+  }
+
   filterInvalidFn = (item) => {
     return item.installed || (!!item.version && !item.name?.includes(" "));
   };
