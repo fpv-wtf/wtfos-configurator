@@ -33,3 +33,22 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.
 Your app is ready to be deployed!
+
+## Reverse-Shell to device
+
+In the project directory, run:
+
+### `yarn device-shell`
+
+This will spawn a reverse-shell-server on port `8000`.  
+you can change the port by passing `-p PORT` or `--port PORT`
+
+After that, head over to the CLI-Tab, expand the "Reverse Shell"-card and connect.  
+You will now have a shell on your device from your regular terminal.
+
+The shell is "persistent" when navigating the configurator as long as you don't refresh the page.  
+The web-based shell and the reverse-shell are synced.
+
+Press Ctrl+D in the reverse-shell to disconnect and exit.
+
+Sources for the reverse-shell-server can be found [here](https://github.com/Alia5/wtfos-configurator-reverse-shell-server)
