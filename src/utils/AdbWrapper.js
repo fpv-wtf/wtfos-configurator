@@ -172,7 +172,7 @@ export default class AdbWrapper {
 
     await this.updataPackages();
     output = await this.adb.subprocess.spawnAndWait([
-      "/opt/bin/opkg",
+      this.wtfos.bin.opkg,
       "list",
     ]);
 
@@ -202,7 +202,10 @@ export default class AdbWrapper {
         description: fields[2] || "",
         installed: installed.includes(fields[0]),
       };
-    });
+    })
+      .filter((item) => {
+        return item.installed || (!!item.version && !item.name?.includes(" "));
+      });
 
     return packages;
   }
