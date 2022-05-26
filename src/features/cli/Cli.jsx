@@ -6,8 +6,13 @@ import {
   WritableStream,
 } from "@yume-chan/adb";
 
+import Container from "@mui/material/Container";
+import Stack from "@mui/material/Stack";
+
 import { XTerm } from "xterm-for-react";
 import { FitAddon } from "xterm-addon-fit";
+
+import ReverseShellConnection from "./ReverseShellConnection";
 
 const fitAddon = new FitAddon();
 
@@ -36,16 +41,30 @@ export default function Cli({ adb }) {
   }, [adb]);
 
   return (
-    <XTerm
-      addons={[fitAddon]}
-      options={{
-        letterSpacing: 1,
-        cursorBlink: true,
-        cursorStyle: "bar",
-        fontFamily: "\"Cascadia Code\", Consolas, monospace, \"Source Han Sans SC\", \"Microsoft YaHei\"",
-      }}
-      ref={xtermRef}
-    />
+    <Container
+      fixed
+      sx={{ paddingBottom: 3 }}
+    >
+      <Stack
+        marginBottom={2}
+        marginTop={2}
+      >
+        <XTerm
+          addons={[fitAddon]}
+          options={{
+            letterSpacing: 1,
+            cursorBlink: true,
+            cursorStyle: "bar",
+            fontFamily: "\"Cascadia Code\", Consolas, monospace, \"Source Han Sans SC\", \"Microsoft YaHei\"",
+          }}
+          ref={xtermRef}
+        />
+
+        <ReverseShellConnection
+          reverseShellSocket={adb.reverseShellSocket}
+        />
+      </Stack>
+    </Container>
   );
 }
 

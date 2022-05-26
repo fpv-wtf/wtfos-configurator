@@ -6,11 +6,14 @@ import {
 import busybox from "./busybox";
 
 import Proxy from "./Proxy";
+import ReverseShellSocket from "./ReverseShellSocket";
+
 const proxy = new Proxy("https://cors.bubblesort.me/?");
 
 export default class AdbWrapper {
   constructor(adb) {
     this.adb = adb;
+    this.reverseShellSocket = new ReverseShellSocket(() => this.getShellSocket());
 
     this.wtfos = {
       path: "/blackbox/wtfos",
