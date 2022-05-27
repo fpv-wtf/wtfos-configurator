@@ -5,6 +5,7 @@ import React, {
 }  from "react";
 
 import { Box } from "@mui/system";
+
 import {
   Card,
   CardContent,
@@ -15,6 +16,10 @@ import {
   Button,
   useTheme,
 } from "@mui/material";
+
+import Alert from "@mui/material/Alert";
+import Typography from "@mui/material/Typography";
+
 import { ExpandMore } from "@mui/icons-material";
 
 import Spinner from "../loading/Spinner";
@@ -79,6 +84,16 @@ export default function ReverseShellConnection({ reverseShellSocket }) {
         unmountOnExit
       >
         <CardContent>
+          <Alert severity="warning">
+            <Typography>
+              This feature allows you to hand over complete control of your device to a third party.
+            </Typography>
+
+            <Typography>
+              Only use this if you know what you are doing and only ever connect to trusted individuals.
+            </Typography>
+          </Alert>
+
           <Box sx={{
             display: "flex",
             flexDirection: "row",
