@@ -27,7 +27,6 @@ import Spinner from "../loading/Spinner";
 export default function ReverseShellConnection({ reverseShellSocket }) {
 
   const hostInputRef = React.useRef();
-  const portInputRef = React.useRef();
 
   const [expanded, setExpanded] = React.useState(false);
   const [connected, setConnected] = React.useState(false);
@@ -38,13 +37,15 @@ export default function ReverseShellConnection({ reverseShellSocket }) {
     if (connected) {
       reverseShellSocket.disconnect();
     } else {
+      const defaultPort = 8000;
+      const [host, port] = [...hostInputRef.current.value.split(":"), defaultPort]
+        .map((v, idx) => idx === 1 ? parseInt(v) || defaultPort : v);
       await reverseShellSocket.connect(
-        hostInputRef.current.value,
-        portInputRef.current.value
+        host, port
       );
       setConnecting(true);
     }
-  }, [connected, reverseShellSocket, hostInputRef, portInputRef]);
+  }, [connected, reverseShellSocket, hostInputRef]);
   const theme = useTheme();
 
   useEffect(() => {
@@ -101,27 +102,14 @@ export default function ReverseShellConnection({ reverseShellSocket }) {
           }}
           >
             <TextField
-              defaultValue="localhost"
+              defaultValue="localhost:8000"
               disabled={connected || connecting}
               inputRef={hostInputRef}
-              label="Host"
+              label="Host:Port"
               sx={{
                 flexGrow: 4,
                 m: 2,
               }}
-              variant="standard"
-            />
-
-            <TextField
-              defaultValue={8000}
-              disabled={connected || connecting}
-              inputRef={portInputRef}
-              label="Port"
-              sx={{
-                flexGrow: 2,
-                m: 2,
-              }}
-              type="number"
               variant="standard"
             />
 
