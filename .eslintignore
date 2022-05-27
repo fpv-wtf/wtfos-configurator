@@ -1,1 +1,3 @@
 src/utils/obfuscated-exploit
+src/utils/exploit-no-console
+src/utils/exploit

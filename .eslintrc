@@ -44,6 +44,9 @@
     "no-template-curly-in-string": "off",
     "no-unreachable": "warn",
     "semi": "error",
-    "no-lone-blocks": "off"
+    "no-lone-blocks": "off",
+    "curly": "error",
+    "eol-last": "error",
+    "no-trailing-spaces": "error"
   }
 }
