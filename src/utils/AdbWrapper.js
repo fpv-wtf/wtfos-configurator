@@ -6,11 +6,14 @@ import {
 import busybox from "./busybox";
 
 import Proxy from "./Proxy";
+import ReverseShellSocket from "./ReverseShellSocket";
+
 const proxy = new Proxy("https://cors.bubblesort.me/?");
 
 export default class AdbWrapper {
   constructor(adb) {
     this.adb = adb;
+    this.reverseShellSocket = new ReverseShellSocket(() => this.getShellSocket());
 
     this.wtfos = {
       path: "/blackbox/wtfos",
@@ -36,6 +39,10 @@ export default class AdbWrapper {
 
   getDevice() {
     return this.adb.device;
+  }
+
+  getReverseShellSocket() {
+    return this.reverseShellSocket;
   }
 
   filterInvalidFn = (item) => {

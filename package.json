@@ -35,7 +35,8 @@
     "lint-commit": "with-staged '**/*.{js,jsx}' -- yarn eslint",
     "remove-console": "babel --plugins transform-remove-console ./src/utils/exploit --out-dir ./src/utils/exploit-no-console",
     "js-obfuscate": "javascript-obfuscator ./src/utils/exploit-no-console --output src/utils/obfuscated-exploit --split-strings=true --string-array-encoding base64,rc4",
-    "obfuscate": "yarn run remove-console && yarn run js-obfuscate"
+    "obfuscate": "yarn run remove-console && yarn run js-obfuscate",
+    "device-shell": "wtfos-configurator-reverse-shell-server"
   },
   "eslintConfig": {
     "extends": [
@@ -59,7 +60,8 @@
     "babel": "^6.23.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "eslint-plugin-react": "^7.29.4",
-    "javascript-obfuscator": "^4.0.0"
+    "javascript-obfuscator": "^4.0.0",
+    "wtfos-configurator-reverse-shell-server": "^0.1.1"
   },
   "pre-commit": [
     "lint-commit"
