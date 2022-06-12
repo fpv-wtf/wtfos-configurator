@@ -30,6 +30,8 @@ export default class AdbWrapper {
       proxy: "http://127.0.0.1:8089",
       linkFunctions: ["wget"],
       opkgLists: "/opt/var/opkg-lists",
+      entwareInstallerUrl: "http://bin.entware.net/armv7sf-k3.2/installer/alternative.sh",
+      opkgConfigUrl: "http://repo.fpv.wtf/pigeon/wtfos-opkg-config_armv7-3.2.ipk",
     };
   }
 
@@ -462,7 +464,7 @@ export default class AdbWrapper {
       output = await this.executeCommand([
         "export PATH=$PATH:/opt/bin:/opt/sbin:/system/bin;",
         `export http_proxy="${this.wtfos.proxy}";`,
-        "wget -q -O - http://bin.entware.net/armv7sf-k3.2/installer/alternative.sh | sh",
+        `wget -q -O - ${this.wtfos.entwareInstallerUrl} | sh`,
       ]);
 
       if(output.exitCode !== 0) {
@@ -472,21 +474,19 @@ export default class AdbWrapper {
       }
     }
 
-    const httpProxyOption = `option http_proxy ${this.wtfos.proxy}`;
-    const repoOption = "src/gz fpv-wtf http://repo.fpv.wtf/pigeon";
+    statusCallback("Updating opkg.config with WTFOS settings...");
+    output = await this.executeCommand([
+      "export PATH=$PATH:/opt/bin:/opt/sbin:/system/bin;",
+      `export http_proxy="${this.wtfos.proxy}";`,
+      "cd /tmp &&",
+      `wget -q -nc ${this.wtfos.opkgConfigUrl} &&`,
+      `${this.wtfos.bin.opkg} install wtfos-opkg-config*`,
+    ]);
 
-    output = await this.executeCommand(`cat ${this.wtfos.config.opkg} | grep "${httpProxyOption}"`);
     if(output.exitCode !== 0) {
-      statusCallback("Adding proxy option to opkg config...");
-
-      this.executeCommand(`echo ${httpProxyOption} >> ${this.wtfos.config.opkg}`);
-    }
-
-    output = await this.executeCommand(`cat ${this.wtfos.config.opkg} | grep "${repoOption}"`);
-    if(output.exitCode !== 0) {
-      statusCallback("Adding WTFOS repo to opkg config...");
-
-      this.executeCommand(`echo ${repoOption} >> ${this.wtfos.config.opkg}`);
+      statusCallback("ERROR: Failed updating opkg.config");
+      console.log(output);
+      return;
     }
 
     statusCallback("Updating package list...");
