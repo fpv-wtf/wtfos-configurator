@@ -1,9 +1,13 @@
 import React, {
   useCallback,
+  useEffect,
   useState,
 } from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+} from "react-router-dom";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -14,7 +18,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
-import { Link } from "react-router-dom";
+import ReactGA from "react-ga4";
 
 import {
   selectConnected,
@@ -47,6 +51,13 @@ export default function Header() {
   const handleClick = useCallback((event) => {
     setAnchorEl(event.currentTarget);
   }, []);
+
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: location.pathname,
+    });
+  }, [location.pathname]);
 
   let title = "Home";
   switch(location.pathname) {
