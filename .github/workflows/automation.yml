@@ -8,6 +8,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  REACT_APP_GA_MEASUREMENT_ID: G-3T3DMGBBJ0
+
 jobs:
   build:
     runs-on: ubuntu-latest
