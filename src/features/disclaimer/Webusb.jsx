@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import Alert from "@mui/material/Alert";
 import Link from "@mui/material/Link";
@@ -7,21 +8,24 @@ import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
 
 export default function Disclaimer() {
+  const { t } = useTranslation("disclaimer");
+
   return(
     <Alert severity="error">
       <Typography sx={{ fontWeight: "bold" }}>
-        Browser not supported!
+        {t("browserNotSupported")}
       </Typography>
 
       <Typography>
-        Your browser does not support webusb functionality. Please use a &nbsp;
+        {t("browserNotSupportedText")}
+        &nbsp;
         <Link href="https://caniuse.com/webusb">
-          browser which provides this functionality.
+          {t("browserNotSupportedLink")}
         </Link>
       </Typography>
 
       <Typography>
-        Supported (and tested) browsers are:
+        {t("browserSupported")}
       </Typography>
 
       <List>
@@ -38,11 +42,11 @@ export default function Disclaimer() {
         </ListItem>
 
         <ListItem dense>
-          Some Android phones
+          {t("browserSupportedAndroid")}
         </ListItem>
 
         <ListItem dense>
-          Other Chromium based browsers
+          {t("browserSupportedOther")}
         </ListItem>
       </List>
     </Alert>

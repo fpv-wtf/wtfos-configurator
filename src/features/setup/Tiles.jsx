@@ -13,6 +13,7 @@ import {
   selectHasDinitBinary,
   selectHasOpkgBinary,
 } from "../device/deviceSlice";
+import { t } from "i18next";
 
 export default function Tiles() {
   const hasDinitBinary = useSelector(selectHasDinitBinary);
@@ -31,10 +32,10 @@ export default function Tiles() {
         xs={12}
       >
         <Tile
-          description="Install WTFOS to your device to install community contrsibuted software."
+          description={t("tileInstallDescription")}
           disabled={hasOpkgBinary}
           linkTo="/wtfos/install"
-          title="Install"
+          title={t("tileInstallTitle")}
         >
           <DownloadIcon fontSize="large" />
         </Tile>
@@ -47,10 +48,10 @@ export default function Tiles() {
         xs={12}
       >
         <Tile
-          description="Update WTFOS and installed packages to stay up to date."
+          description={t("tileUpdateDescription")}
           disabled={!hasDinitBinary}
           linkTo="/wtfos/update"
-          title="Update"
+          title={t("tileUpdateTitle")}
         >
           <UpdateIcon fontSize="large" />
         </Tile>
@@ -63,10 +64,10 @@ export default function Tiles() {
         xs={12}
       >
         <Tile
-          description="Remove WTFOS from your device. This will revert all changes apart from the root unlock itself."
+          description={t("tileRemoveDescription")}
           disabled={!hasDinitBinary}
           linkTo="/wtfos/remove"
-          title="Remove"
+          title={t("tileRemoveTitle")}
         >
           <DeleteIcon fontSize="large" />
         </Tile>

@@ -3,10 +3,10 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
-import { I18nextProvider } from 'react-i18next';
-import i18next from 'i18next';
+import { I18nextProvider } from "react-i18next";
+import i18next from "i18next";
 
-import { Cookies } from 'react-cookie';
+import { Cookies } from "react-cookie";
 import ReactGA from "react-ga4";
 
 import {
@@ -36,7 +36,22 @@ const darkTheme = createTheme({
   },
 });
 
-const resources = { en: { common: require('./translations/en/common.json') } };
+const resources = {
+  en: {
+    about: require("./translations/en/about.json"),
+    cli: require("./translations/en/cli.json"),
+    common: require("./translations/en/common.json"),
+    disclaimer: require("./translations/en/disclaimer.json"),
+    cookie: require("./translations/en/cookie.json"),
+    error: require("./translations/en/error.json"),
+    home: require("./translations/en/home.json"),
+    navigation: require("./translations/en/navigation.json"),
+    packages: require("./translations/en/packages.json"),
+    root: require("./translations/en/root.json"),
+    setup: require("./translations/en/setup.json"),
+    startup: require("./translations/en/startup.json"),
+  },
+};
 i18next.init({
   interpolation: { escapeValue: false },
   lng: "en",

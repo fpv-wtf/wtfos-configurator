@@ -3,6 +3,7 @@ import React, {
   useCallback,
   useEffect,
 }  from "react";
+import { useTranslation } from "react-i18next";
 
 import { Box } from "@mui/system";
 
@@ -25,6 +26,8 @@ import { ExpandMore } from "@mui/icons-material";
 import Spinner from "../loading/Spinner";
 
 export default function ReverseShellConnection({ reverseShellSocket }) {
+  const { t } = useTranslation("cli");
+  const { tc } = useTranslation("common");
 
   const hostInputRef = React.useRef();
 
@@ -87,11 +90,11 @@ export default function ReverseShellConnection({ reverseShellSocket }) {
         <CardContent>
           <Alert severity="warning">
             <Typography>
-              This feature allows you to hand over complete control of your device to a third party.
+              {t("description")}
             </Typography>
 
             <Typography>
-              Only use this if you know what you are doing and only ever connect to trusted individuals.
+              {t("warning")}
             </Typography>
           </Alert>
 
@@ -105,7 +108,7 @@ export default function ReverseShellConnection({ reverseShellSocket }) {
               defaultValue="localhost:8000"
               disabled={connected || connecting}
               inputRef={hostInputRef}
-              label="Host:Port"
+              label={t("label")}
               sx={{
                 flexGrow: 4,
                 m: 2,
@@ -121,7 +124,7 @@ export default function ReverseShellConnection({ reverseShellSocket }) {
               }}
               variant="contained"
             >
-              { connected ? "Disconnect" : "Connect" }
+              { connected ? tc("disconnect") : tc("connect") }
             </Button>
 
             {

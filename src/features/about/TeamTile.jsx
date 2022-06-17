@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
@@ -20,6 +21,8 @@ export default function TeamTile({
   twitter,
   description,
 }) {
+  const { t } = useTranslation("about");
+
   return (
     <Card
       sx={{
@@ -35,7 +38,7 @@ export default function TeamTile({
           fontColor="text.main"
           position="top-right"
         >
-          HONORARY
+          {t("honorary")}
         </CornerRibbon>
       )}
 

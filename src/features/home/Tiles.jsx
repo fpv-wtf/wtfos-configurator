@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import Grid from "@mui/material/Grid";
 
@@ -13,7 +14,6 @@ import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import SvgIcon from "@mui/material/SvgIcon";
 import { ReactComponent as AlienSvg } from "../../assets/icons/alien-white.svg";
 
-
 import Tile from "../tile/Tile";
 
 import {
@@ -24,6 +24,8 @@ import {
 } from "../device/deviceSlice";
 
 export default function Tiles() {
+  const { t } = useTranslation("home");
+
   const hasAdb = useSelector(selectHasAdb);
   const hasDinitBinary = useSelector(selectHasDinitBinary);
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
@@ -42,10 +44,10 @@ export default function Tiles() {
         xs={12}
       >
         <Tile
-          description="Expand functionality of your devive by installing additional packages developed by the community."
+          description={t("tilePackageManagerDescription")}
           disabled={!hasOpkgBinary || !isConnected}
           linkTo="packages"
-          title="Package Manager"
+          title={t("tilePackageManagerTitle")}
         >
           <DownloadIcon fontSize="large" />
         </Tile>
@@ -58,10 +60,10 @@ export default function Tiles() {
         xs={12}
       >
         <Tile
-          description="Manage applications that should be run on startup to permanently enable functionality once the device is powered up."
+          description={t("tileStartupDescription")}
           disabled={!hasDinitBinary || !isConnected}
           linkTo="startup"
-          title="Startup"
+          title={t("tileStartupTitle")}
         >
           <StartIcon fontSize="large" />
         </Tile>
@@ -74,10 +76,10 @@ export default function Tiles() {
         xs={12}
       >
         <Tile
-          description="Interactive Shell Session. Run commands as you please, you should be knowing what you are doing."
+          description={t("tileCliDescription")}
           disabled={!isConnected}
           linkTo="cli"
-          title="CLI"
+          title={t("tileCliTitle")}
         >
           <TerminalIcon
             fontSize="large"
@@ -92,10 +94,10 @@ export default function Tiles() {
         xs={12}
       >
         <Tile
-          description="Install, maintain or Remove WTFOS - the operating system for all community contributed functionality."
+          description={t("tileWtfosDescription")}
           disabled={!isConnected}
           linkTo="wtfos"
-          title="WTFOS"
+          title={t("tileWtfosTitle")}
         >
           <RocketLaunchIcon fontSize="large" />
         </Tile>
@@ -108,10 +110,10 @@ export default function Tiles() {
         xs={12}
       >
         <Tile
-          description="Before installing WTFOS you will have to root your device, set it free - OWN it!"
+          description={t("tileRootDescription")}
           disabled={isConnected && hasAdb}
           linkTo="root"
-          title="Root"
+          title={t("tileRootTitle")}
         >
           <AccessibilityNewIcon fontSize="large" />
         </Tile>
@@ -124,9 +126,9 @@ export default function Tiles() {
         xs={12}
       >
         <Tile
-          description="If you have any feedback, questions or want to contribute additional functionality, join our community on Discord."
+          description={t("tileSupportDescription")}
           href="https://discord.com/invite/3rpnBBJKtU"
-          title="Support"
+          title={t("tileSupportTitle")}
         >
           <HelpIcon fontSize="large" />
         </Tile>
@@ -139,9 +141,9 @@ export default function Tiles() {
         xs={12}
       >
         <Tile
-          description="fpv.wtf is a group of enthusiasts working to improve the digital FPV experience."
+          description={t("tileAboutDescription")}
           linkTo="about"
-          title="About fpv.wtf"
+          title={t("tileAboutTitle")}
         >
           <SvgIcon
             component={AlienSvg}

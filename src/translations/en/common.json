@@ -1,5 +1,6 @@
 {
-  "cookieText": "This page uses Google Analytics for tracking purposes in order to improve user experience, please allow us to do so. Data is not shared with any other third party and it is also not being used to target you with ads.",
-  "cookieAccept": "Accept",
-  "cookieDecline": "Decline"
+  "disconnect": "Disconnect",
+  "connect": "Connect",
+  "connectDevice": "Connect to Device",
+  "rebooting": "Rebooting..."
 }
