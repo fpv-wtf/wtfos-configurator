@@ -33,20 +33,20 @@ export default function CookieBanner() {
       hitType: "pageview",
       page: location.pathname,
     });
-  });
+  }, [location.pathname, setCookie]);
 
   const handleDecline = useCallback(() => {
     setOpen(false);
 
     setCookie("consentClicked", true);
     setCookie("consentGiven", false);
-  });
+  }, [setCookie]);
 
   useEffect(() => {
     if(!cookie.consentClicked) {
       setOpen(true);
     }
-  }, []);
+  }, [cookie.consentClicked]);
 
   return(
     <Snackbar
