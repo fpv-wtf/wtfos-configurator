@@ -3,19 +3,21 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
+import { Cookies } from 'react-cookie';
+import ReactGA from "react-ga4";
+
 import {
   ThemeProvider,
   createTheme,
 } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 
-import ReactGA from "react-ga4";
-
 import { store } from "./app/store";
 import Router from "./Router";
 import reportWebVitals from "./reportWebVitals";
 
 import "./index.css";
+import CookieBanner from "./features/banner/Cookie";
 
 const darkTheme = createTheme({
   palette: {
@@ -32,11 +34,14 @@ const darkTheme = createTheme({
 });
 
 if(process.env.REACT_APP_GA_MEASUREMENT_ID) {
+  const cookies = new Cookies();
+  const consentGiven = cookies.get("consentClicked");
+
   ReactGA.initialize(process.env.REACT_APP_GA_MEASUREMENT_ID);
 
   ReactGA._gtag("consent", "default", {
     ad_storage: "denied",
-    analytics_storage: "denied",
+    analytics_storage: consentGiven ? "granted" : "denied",
   });
 }
 
@@ -57,6 +62,8 @@ root.render(
         >
           <Router />
         </Box>
+
+        <CookieBanner />
       </ThemeProvider>
     </Provider>
   </BrowserRouter>
