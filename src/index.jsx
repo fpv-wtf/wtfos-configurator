@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
-import { Cookies } from 'react-cookie';
+import { Cookies } from "react-cookie";
 import ReactGA from "react-ga4";
 
 import {
