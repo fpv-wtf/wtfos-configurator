@@ -6,7 +6,7 @@ import React,
 } from "react";
 import { useLocation } from "react-router-dom";
 
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 import ReactGA from "react-ga4";
 
 import Button from "@mui/material/Button";
@@ -20,7 +20,7 @@ import Typography from "@mui/material/Typography";
 export default function CookieBanner() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const [cookie, setCookie] = useCookies(['consentClicked', 'consentGiven']);
+  const [cookie, setCookie] = useCookies(["consentClicked", "consentGiven"]);
 
   const handleAccept = useCallback(() => {
     setOpen(false);
