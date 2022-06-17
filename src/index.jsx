@@ -3,6 +3,9 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
+import { I18nextProvider } from 'react-i18next';
+import i18next from 'i18next';
+
 import { Cookies } from 'react-cookie';
 import ReactGA from "react-ga4";
 
@@ -33,6 +36,14 @@ const darkTheme = createTheme({
   },
 });
 
+const resources = { en: { common: require('./translations/en/common.json') } };
+i18next.init({
+  interpolation: { escapeValue: false },
+  lng: "en",
+  fallbackLng: "en",
+  resources,
+});
+
 if(process.env.REACT_APP_GA_MEASUREMENT_ID) {
   const cookies = new Cookies();
   const consentGiven = cookies.get("consentClicked");
@@ -49,24 +60,26 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <ThemeProvider theme={darkTheme}>
-        <Box
-          sx={{
-            display: "flex",
-            width: "100%",
-            minHeight: "100%",
-            color: "text.primary",
-          }}
-        >
-          <Router />
-        </Box>
+  <I18nextProvider i18n={i18next}>
+    <BrowserRouter>
+      <Provider store={store}>
+        <ThemeProvider theme={darkTheme}>
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              minHeight: "100%",
+              color: "text.primary",
+            }}
+          >
+            <Router />
+          </Box>
 
-        <CookieBanner />
-      </ThemeProvider>
-    </Provider>
-  </BrowserRouter>
+          <CookieBanner />
+        </ThemeProvider>
+      </Provider>
+    </BrowserRouter>
+  </I18nextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
