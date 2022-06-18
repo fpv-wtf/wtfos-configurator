@@ -72,7 +72,7 @@ export default function CookieBanner() {
                 <Typography
                   margin={1}
                 >
-                  This page uses Google Analytics for tracking purposes in order to improve user experience, please allow us to do so. Data is not shared with any other third party and it is also not being used to target you with ads.
+                  This page uses Google Analytics to improve the user experience. Your data will not be shared with any 3rd parties nor to target any advertising. Please allow the use of cookies for these purposes.
                 </Typography>
               </Grid>
 
