@@ -1,6 +1,6 @@
 {
   "step1": "Attempting Step 1...",
-  "foundDevice": " - Found Device: {device}",
+  "foundDevice": " - Found Device: {{device}}",
   "step1Success": "Step 1 - Success! Rebooting...",
   "step2": "Attempting Step 2...",
   "step2Success": "Step 2 - Success!",
@@ -14,7 +14,7 @@
   "step5Reboot": "Step 2 - Success! Rebooting...",
   "done": "All done - your device has been successfully rooted!",
   "rewind2": "Rewinding to Step 2...",
-  "failed": "Failed after {maxTry} retries.",
+  "failed": "Failed after {{maxTry}} retries.",
   "deviceLost": "Device went away...",
   "deviceBack": "Device came back...",
   "cooling": "If you are rooting an Air Unit - especially Air Unit light (Caddx Vista) - make sure that it is actively cooled by pointing a fan at it.",

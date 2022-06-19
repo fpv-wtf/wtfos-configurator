@@ -203,7 +203,7 @@ export default function Packages({ adb }) {
     );
   });
 
-  const packageString = t("matchCount", { values: { count: filtered.length } });
+  const packageString = t("matchCount", { count: filtered.length } );
   return (
     <>
       {!hasOpkgBinary &&

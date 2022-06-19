@@ -92,7 +92,7 @@ export default function Startup({ adb }) {
           {item.enabled && item.info.status === "running" && item.info.pid &&
             <Chip
               color="success"
-              label={t("running", { values: { pid: item.info.pid } })}
+              label={t("running", { pid: item.info.pid } )}
             />}
 
           {item.enabled && item.info.status === "started" && !item.info.pid &&

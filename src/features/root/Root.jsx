@@ -88,7 +88,7 @@ export default function Root() {
 
                 const device = await exploit.unlockStep1();
 
-                log(t("foundDevice", { values: { device } }));
+                log(t("foundDevice", { device } ));
                 log(t("step1Success"));
 
                 rebooting.current = true;
@@ -208,7 +208,7 @@ export default function Root() {
         }
 
         if(!done && !disconnected.current) {
-          log(t("failed", { values: { maxTry } }));
+          log(t("failed", { maxTry } ));
           try {
             exploit.closePort();
           } catch (e) {
