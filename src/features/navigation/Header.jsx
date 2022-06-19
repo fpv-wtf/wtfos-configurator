@@ -21,6 +21,8 @@ import Typography from "@mui/material/Typography";
 
 import ReactGA from "react-ga4";
 
+import LanguageSwitcher from "./LanguageSwitcher";
+
 import {
   selectConnected,
   selectNiceName,
@@ -177,6 +179,8 @@ export default function Header() {
           <Typography>
             {name}
           </Typography>
+
+          <LanguageSwitcher />
         </Toolbar>
       </AppBar>
     </Box>
