@@ -18,7 +18,9 @@ export default function Device({
   handleDeviceConnect,
 }) {
   const { t } = useTranslation("error");
-  const { tc } = useTranslation("common");
+
+  const translation = useTranslation("common");
+  const tc = translation.t;
 
   const isRebooting = useSelector(selectRebooting);
 

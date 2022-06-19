@@ -27,7 +27,9 @@ import Spinner from "../loading/Spinner";
 
 export default function ReverseShellConnection({ reverseShellSocket }) {
   const { t } = useTranslation("cli");
-  const { tc } = useTranslation("common");
+
+  const translation = useTranslation("common");
+  const tc = translation.t;
 
   const hostInputRef = React.useRef();
 
