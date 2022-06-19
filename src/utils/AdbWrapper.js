@@ -513,6 +513,7 @@ export default class AdbWrapper {
     }
 
     statusCallback("Rebooting...");
+    await this.executeCommand("sync");
     await this.executeCommand("reboot");
 
     setRebooting();
@@ -547,6 +548,7 @@ export default class AdbWrapper {
     statusCallback("Removed WTFOS!");
 
     statusCallback("Rebooting...");
+    await this.executeCommand("sync");
     await this.executeCommand("reboot");
 
     setRebooting();

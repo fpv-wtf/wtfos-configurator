@@ -8,6 +8,7 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -27,6 +28,7 @@ import {
 } from "../device/deviceSlice";
 
 export default function Header() {
+  const { t } = useTranslation("navigation");
   const location = useLocation();
 
   const isConnected = useSelector(selectConnected);
@@ -61,16 +63,16 @@ export default function Header() {
 
   let title = "Home";
   switch(location.pathname) {
-    case "/cli": title = "CLI"; break;
-    case "/packages": title = "Packages"; break;
-    case "/startup": title = "Startup"; break;
-    case "/about": title = "About fpv.wtf"; break;
-    case "/root": title = "Root"; break;
-    case "/wtfos": title = "WTFOS"; break;
-    case "/wtfos/update": title = "WTFOS - Update"; break;
-    case "/wtfos/install": title = "WTFOS - Install"; break;
-    case "/wtfos/remove": title = "WTFOS - Remove"; break;
-    default: title = "Home";
+    case "/cli": title = t("titleCli"); break;
+    case "/packages": title = t("titlePackages"); break;
+    case "/startup": title = t("titleStartup"); break;
+    case "/about": title = t("titleAbout"); break;
+    case "/root": title = t("titleRoot"); break;
+    case "/wtfos": title = t("titleWtfos"); break;
+    case "/wtfos/update": title = t("titleWtfosUpdate"); break;
+    case "/wtfos/install": title = t("titleWtfosInstall"); break;
+    case "/wtfos/remove": title = t("titleWtfosRemove"); break;
+    default: title = t("titleHome");
   }
 
   return (
@@ -112,7 +114,7 @@ export default function Header() {
               onClick={handleClose}
               to="/"
             >
-              Home
+              {t("menuHome")}
             </MenuItem>
 
             <MenuItem
@@ -120,7 +122,7 @@ export default function Header() {
               onClick={handleClose}
               to="/packages"
             >
-              Package Manager
+              {t("menuPackageManager")}
             </MenuItem>
 
             <MenuItem
@@ -128,7 +130,7 @@ export default function Header() {
               onClick={handleClose}
               to="/startup"
             >
-              Startup
+              {t("menuStartup")}
             </MenuItem>
 
             <MenuItem
@@ -136,7 +138,7 @@ export default function Header() {
               onClick={handleClose}
               to="/cli"
             >
-              CLI
+              {t("menuCli")}
             </MenuItem>
 
             <MenuItem
@@ -144,7 +146,7 @@ export default function Header() {
               onClick={handleClose}
               to="/wtfos"
             >
-              WTFOS
+              {t("menuWtfos")}
             </MenuItem>
 
             <MenuItem
@@ -152,7 +154,7 @@ export default function Header() {
               onClick={handleClose}
               to="/root"
             >
-              Root
+              {t("menuRoot")}
             </MenuItem>
 
             <MenuItem
@@ -160,7 +162,7 @@ export default function Header() {
               onClick={handleClose}
               to="/about"
             >
-              About fpv.wtf
+              {t("menuAbout")}
             </MenuItem>
           </Menu>
 

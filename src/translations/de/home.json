@@ -1,0 +1,17 @@
+{
+  "connected": "Erfolgreich mit deinem Gerät verbunden.",
+  "tilePackageManagerTitle": "Paket-Manager",
+  "tilePackageManagerDescription": "Erweitere die Funktionalität deines Gerätes durch die Installation zusätzlicher Pakete, die von der Community entwickelt wurden.",
+  "tileStartupTitle": "Beim Start",
+  "tileStartupDescription": "Verwalte Anwendungen, die beim Start ausgeführt werden sollen, um die Funktionalität dauerhaft zu aktivieren, sobald das Gerät eingeschalten wird.",
+  "tileCliTitle": "CLI",
+  "tileCliDescription": "Interaktive Shell Session. Führe Befehle aus, du solltest wissen, was du tust.",
+  "tileWtfosTitle": "WTFOS",
+  "tileWtfosDescription": "WTFOS installieren, verwalten oder entfernen - das Betriebssystem für alle Community-Funktionen.",
+  "tileRootTitle": "Root",
+  "tileRootDescription": "Bevor du WTFOS installierst, musst du dein Gerät rooten, setze es Frei - OWN es!",
+  "tileSupportTitle": "Hilfe",
+  "tileSupportDescription": "Wenn du Feedback hast oder weitere Funktionen beitragen möchtest, trete unserer Community auf Discord bei.",
+  "tileAboutTitle": "Über fpv.wtf",
+  "tileAboutDescription": "fpv.wtf ist eine Gruppe von Enthusiasten, die daran arbeiten, das digitale FPV-Erlebnis zu verbessern."
+}

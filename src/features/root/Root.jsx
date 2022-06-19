@@ -6,6 +6,7 @@ import {
   useDispatch,
   useSelector,
 } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
@@ -50,6 +51,7 @@ import {
 const exploit = new Exploit("https://cors.bubblesort.me/?");
 
 export default function Root() {
+  const { t } = useTranslation("root");
   const dispatch = useDispatch();
 
   const unlockStep = useRef(1);
@@ -83,13 +85,13 @@ export default function Root() {
             switch (unlockStep.current) {
               case 1: {
                 if (currentTry === 0) {
-                  log("Attempting Step 1...");
+                  log(t("step1"));
                 }
 
                 const device = await exploit.unlockStep1();
 
-                log(` - Found Device: ${device}`);
-                log("Step 1 - Success! Rebooting...");
+                log(t("foundDevice", { device } ));
+                log(t("step1Success"));
 
                 rebooting.current = true;
                 unlockStep.current = 2;
@@ -100,7 +102,7 @@ export default function Root() {
 
               case 2: {
                 if (currentTry === 0) {
-                  log("Attempting Step 2...");
+                  log(t("step2"));
                 }
                 const restart = await exploit.unlockStep2();
 
@@ -108,12 +110,12 @@ export default function Root() {
                 done = true;
 
                 if(!restart) {
-                  log("Step 2 - Success!");
+                  log(t("step2Success"));
                   await exploit.sleep(3000);
 
                   shouldRunUnlock = true;
                 } else {
-                  log("Step 2 - Success! Rebooting...");
+                  log(t("step2SuccessReboot"));
                   rebooting.current = true;
                   await exploit.restart();
                 }
@@ -121,10 +123,10 @@ export default function Root() {
 
               case 3: {
                 if (currentTry === 0) {
-                  log("Attempting Step 3...");
+                  log(t("step3"));
                 }
                 await exploit.unlockStep3();
-                log("Step 3 - Success!");
+                log(t("step3Success"));
 
                 unlockStep.current = 4;
                 done = true;
@@ -134,10 +136,10 @@ export default function Root() {
 
               case 4: {
                 if (currentTry === 0) {
-                  log("Attempting Step 4...");
+                  log(t("step4"));
                 }
                 await exploit.unlockStep4();
-                log("Step 4 - Success! Rebooting...");
+                log(t("step4Success"));
 
                 rebooting.current = true;
                 unlockStep.current = 5;
@@ -152,7 +154,7 @@ export default function Root() {
 
               case 5: {
                 if (currentTry === 0) {
-                  log("Attempting Step 5...");
+                  log(t("step5"));
                 }
                 const isRebooting = await exploit.unlockStep5();
 
@@ -161,15 +163,15 @@ export default function Root() {
 
                 if(isRebooting) {
                   rebooting.current = true;
-                  log("Step 5 - Success! Rebooting...");
+                  log(t("step5Reboot"));
                 } else {
-                  log("Step 5 - Success!");
+                  log(t("step5Success"));
                   shouldRunUnlock = true;
                 }
               } break;
 
               case 6: {
-                log("All done - your device has been successfully rooted!");
+                log(t("done"));
                 unlockStep.current = 0;
                 done = true;
 
@@ -192,7 +194,14 @@ export default function Root() {
               disconnected.current = true;
               break;
             } else if(e instanceof PatchFailed) {
-              log("Rewinding to Step 2...");
+              log(t("rewind2"));
+
+              Sentry.captureException(e, {
+                extra: {
+                  step: unlockStep.current,
+                  retry: currentTry,
+                },
+              });
 
               Sentry.captureException(e, {
                 extra: {
@@ -234,7 +243,7 @@ export default function Root() {
         }
 
         if(!done && disconnected.current) {
-          log("Device went away...");
+          log(t("deviceLost"));
         }
 
         running.current = false;
@@ -247,7 +256,7 @@ export default function Root() {
     const reConnect = async () => {
       disconnected.current = false;
       if(!rebooting.current && unlockStep.current > 0) {
-        log("Device came back...");
+        log(t("deviceBack"));
       }
       rebooting.current = false;
 
@@ -287,7 +296,7 @@ export default function Root() {
       }
     };
     triggerUnlock();
-  }, [attempted, dispatch, rooting]);
+  }, [attempted, dispatch, rooting, t]);
 
   return(
     <Container
@@ -303,24 +312,24 @@ export default function Root() {
 
           <Alert severity="error">
             <Typography sx={{ fontWeight: "bold" }}>
-              If you are rooting an Air Unit - especially Air Unit light (Caddx Vista) - make sure that it is actively cooled by pointing a fan at it.
+              {t("cooling")}
             </Typography>
           </Alert>
 
           <Disclaimer
             lines={[
-              "Make sure that the device to be rooted is powered from a reliable power source",
-              "Only have one device connected/paired",
-              "Do not power off during rooting",
-              "Proceed at your own risk",
+              t("disclaimerLine1"),
+              t("disclaimerLine2"),
+              t("disclaimerLine3"),
+              t("disclaimerLine4"),
             ]}
-            title="Disclaimer:"
+            title={t("disclaimerTitle")}
           />
 
           {hasAdb &&
             <Alert severity="success">
               <Typography>
-                Device already rooted
+                {t("rooted")}
               </Typography>
             </Alert>}
 
@@ -329,7 +338,7 @@ export default function Root() {
             onClick={handleClick}
             variant="contained"
           >
-            Root Device
+            {t("root")}
           </Button>
 
           <Log />

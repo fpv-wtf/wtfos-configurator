@@ -4,6 +4,7 @@ import {
   useDispatch,
   useSelector,
 } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -24,6 +25,7 @@ import {
 } from "../packages/packagesSlice";
 
 export default function Remove({ adb }) {
+  const { t } = useTranslation("setup");
   const dispatch = useDispatch();
 
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
@@ -52,7 +54,7 @@ export default function Remove({ adb }) {
         onClick={onClick}
         variant="contained"
       >
-        Remove WTFOS
+        {t("remove")}
       </Button>
 
       <Log />

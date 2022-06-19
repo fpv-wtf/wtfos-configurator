@@ -5,8 +5,9 @@ import React,
   useState,
 } from "react";
 import { useLocation } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 import { useCookies } from "react-cookie";
+
 import ReactGA from "react-ga4";
 
 import Button from "@mui/material/Button";
@@ -18,6 +19,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Typography from "@mui/material/Typography";
 
 export default function CookieBanner() {
+  const { t } = useTranslation("cookie");
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const [cookie, setCookie] = useCookies(["consentClicked", "consentGiven"]);
@@ -72,7 +74,7 @@ export default function CookieBanner() {
                 <Typography
                   margin={1}
                 >
-                  This page uses Google Analytics to improve the user experience. Your data will not be shared with any 3rd parties nor to target any advertising. Please allow the use of cookies for these purposes.
+                  {t("text")}
                 </Typography>
               </Grid>
 
@@ -93,7 +95,7 @@ export default function CookieBanner() {
                   sx={{ marginRight: 2 }}
                   variant="outlined"
                 >
-                  Decline
+                  {t("decline")}
                 </Button>
 
                 <Button
@@ -101,7 +103,7 @@ export default function CookieBanner() {
                   sx={{ marginRight: 1 }}
                   variant="contained"
                 >
-                  Accept
+                  {t("accept")}
                 </Button>
               </Grid>
             </Grid>

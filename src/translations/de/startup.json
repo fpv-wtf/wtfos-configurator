@@ -1,0 +1,6 @@
+{
+  "running": "läuft (PID: {{pid}})",
+  "started": "gestartet",
+  "stopped": "gestoppt",
+  "hint": "Aktivierte Services werden während des Startprozesses gestartet."
+}

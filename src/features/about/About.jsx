@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
@@ -9,6 +10,8 @@ import Team from "./Team";
 import Support from "./Support";
 
 export default function About() {
+  const { t } = useTranslation("about");
+
   return(
     <Container
       fixed
@@ -24,7 +27,7 @@ export default function About() {
           component="div"
           variant="h5"
         >
-          Support the effort
+          {t("support")}
         </Typography>
 
         <Stack
@@ -38,7 +41,7 @@ export default function About() {
           component="div"
           variant="h5"
         >
-          Team
+          {t("team")}
         </Typography>
 
         <Stack

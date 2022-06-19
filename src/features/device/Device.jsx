@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
@@ -16,6 +17,11 @@ export default function Device({
   error,
   handleDeviceConnect,
 }) {
+  const { t } = useTranslation("error");
+
+  const translation = useTranslation("common");
+  const tc = translation.t;
+
   const isRebooting = useSelector(selectRebooting);
 
   let content = (
@@ -31,14 +37,14 @@ export default function Device({
       { !error && window.navigator.usb &&
         <Alert severity="warning">
           <Typography>
-            Connect your rooted goggles or airunit via USB, make sure they are powered and hit the connect button.
+            {t("warningConnection")}
           </Typography>
         </Alert>}
 
       { error &&
         <Alert severity="error">
           <Typography>
-            Could not connect to device, make sure that no other adb server is running on your machine and that you are not connected in another tab/window.
+            {t("errorConnection")}
           </Typography>
         </Alert>}
 
@@ -47,7 +53,7 @@ export default function Device({
   );
 
   if(isRebooting) {
-    content = <Spinner text="Rebooting..." />;
+    content = <Spinner text={tc("rebooting")} />;
   }
 
   return content;

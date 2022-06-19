@@ -3,6 +3,9 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
+import { I18nextProvider } from "react-i18next";
+import i18next from "i18next";
+
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
 
@@ -36,6 +39,29 @@ const darkTheme = createTheme({
   },
 });
 
+const resources = {
+  en: {
+    about: require("./translations/en/about.json"),
+    cli: require("./translations/en/cli.json"),
+    common: require("./translations/en/common.json"),
+    disclaimer: require("./translations/en/disclaimer.json"),
+    cookie: require("./translations/en/cookie.json"),
+    error: require("./translations/en/error.json"),
+    home: require("./translations/en/home.json"),
+    navigation: require("./translations/en/navigation.json"),
+    packages: require("./translations/en/packages.json"),
+    root: require("./translations/en/root.json"),
+    setup: require("./translations/en/setup.json"),
+    startup: require("./translations/en/startup.json"),
+  },
+};
+i18next.init({
+  interpolation: { escapeValue: false },
+  lng: "en",
+  fallbackLng: "en",
+  resources,
+});
+
 if(process.env.REACT_APP_GA_MEASUREMENT_ID) {
   const cookies = new Cookies();
   const consentGiven = cookies.get("consentClicked");
@@ -61,24 +87,26 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 
 root.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <ThemeProvider theme={darkTheme}>
-        <Box
-          sx={{
-            display: "flex",
-            width: "100%",
-            minHeight: "100%",
-            color: "text.primary",
-          }}
-        >
-          <Router />
-        </Box>
+  <I18nextProvider i18n={i18next}>
+    <BrowserRouter>
+      <Provider store={store}>
+        <ThemeProvider theme={darkTheme}>
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              minHeight: "100%",
+              color: "text.primary",
+            }}
+          >
+            <Router />
+          </Box>
 
-        <CookieBanner />
-      </ThemeProvider>
-    </Provider>
-  </BrowserRouter>
+          <CookieBanner />
+        </ThemeProvider>
+      </Provider>
+    </BrowserRouter>
+  </I18nextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

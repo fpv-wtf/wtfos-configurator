@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import Link from "@mui/material/Link";
 
@@ -6,14 +7,19 @@ import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
 
 export default function SetupHint() {
+  const { t } = useTranslation("setup");
+
   return(
     <Alert severity="warning">
       <Typography>
-        You should &nbsp;
+        {t("hint1")}
+        &nbsp;
         <Link href="/wtfos/install">
-          install WTFOS now
+          {t("hint2")}
         </Link>
-        . This is required for adding new packages and service management.
+        .
+        &nbsp;
+        {t("hint3")}
       </Typography>
     </Alert>
   );

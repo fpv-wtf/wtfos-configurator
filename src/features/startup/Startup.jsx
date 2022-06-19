@@ -7,6 +7,7 @@ import {
   useDispatch,
   useSelector,
 } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import Alert from "@mui/material/Alert";
 import Chip from "@mui/material/Chip";
@@ -36,6 +37,7 @@ import {
 import { selectHasDinitBinary } from "../device/deviceSlice";
 
 export default function Startup({ adb }) {
+  const { t } = useTranslation("startup");
   const dispatch = useDispatch();
 
   const error = useSelector(selectError);
@@ -90,19 +92,19 @@ export default function Startup({ adb }) {
           {item.enabled && item.info.status === "running" && item.info.pid &&
             <Chip
               color="success"
-              label={`running (PID: ${item.info.pid})`}
+              label={t("running", { pid: item.info.pid } )}
             />}
 
           {item.enabled && item.info.status === "started" && !item.info.pid &&
             <Chip
               color="success"
-              label="started"
+              label={t("started")}
             />}
 
           {item.enabled && item.info.status === "stopped" && !item.info.pid &&
             <Chip
               color="error"
-              label="stopped"
+              label={t("stopped")}
             />}
         </TableCell>
       </TableRow>
@@ -124,7 +126,7 @@ export default function Startup({ adb }) {
           <Box p={2}>
 
             <Typography>
-              Enabled services are started during the bootup process of the device.
+              {t("hint")}
             </Typography>
 
             <Table>
