@@ -14,6 +14,8 @@ import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
+import * as Sentry from "@sentry/react";
+
 import Disclaimer from "../disclaimer/Disclaimer";
 import Header from "../navigation/Header";
 import Log from "../log/Log";
@@ -194,12 +196,26 @@ export default function Root() {
             } else if(e instanceof PatchFailed) {
               log(t("rewind2"));
 
+              Sentry.captureException(e, {
+                extra: {
+                  step: unlockStep.current,
+                  retry: currentTry,
+                },
+              });
+
               unlockStep.current = 2;
 
               currentTry += 1;
               await exploit.sleep(1000);
             } else {
               console.log(e);
+
+              Sentry.captureException(e, {
+                extra: {
+                  step: unlockStep.current,
+                  retry: currentTry,
+                },
+              });
 
               currentTry += 1;
               await exploit.sleep(1000);
@@ -208,7 +224,10 @@ export default function Root() {
         }
 
         if(!done && !disconnected.current) {
-          log(t("failed", { maxTry } ));
+          log(`Failed after ${maxTry} retries.`);
+
+          Sentry.captureMessage(`Failed after ${maxTry} retries.`, { extra: { step: unlockStep.current } });
+
           try {
             exploit.closePort();
           } catch (e) {

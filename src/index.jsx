@@ -6,6 +6,9 @@ import { BrowserRouter } from "react-router-dom";
 import { I18nextProvider } from "react-i18next";
 import i18next from "i18next";
 
+import * as Sentry from "@sentry/react";
+import { BrowserTracing } from "@sentry/tracing";
+
 import { Cookies } from "react-cookie";
 import ReactGA from "react-ga4";
 
@@ -70,6 +73,15 @@ if(process.env.REACT_APP_GA_MEASUREMENT_ID) {
     analytics_storage: consentGiven ? "granted" : "denied",
   });
 }
+
+Sentry.init({
+  dsn: "https://633d17bb49ce4691b74d1687327224c1@o660067.ingest.sentry.io/6516069",
+  integrations: [new BrowserTracing()],
+
+  tracesSampleRate: 1.0,
+});
+
+Sentry.captureMessage(`Failed after xxx retries.`, { extra: { step: "test" } });
 
 const container = document.getElementById("root");
 const root = createRoot(container);
