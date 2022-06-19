@@ -14,6 +14,9 @@ Be aware that the exploit is only available in an obfuscated version. People wit
 git submodule update --init
 ```
 
+### Translations
+If you want the configurator to be available in your language drop my on [discord](https://discord.com/invite/3rpnBBJKtU) and tell us which language you want to add, or contribute translations to available langues on [crowdin](https://crowdin.com/project/wtfos-configurator).
+
 ## Available Scripts
 
 In the project directory, you can run:
