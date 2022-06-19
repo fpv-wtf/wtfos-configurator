@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useCookies } from "react-cookie";
 
+import { useCookies } from "react-cookie";
 import ReactGA from "react-ga4";
 
 import Button from "@mui/material/Button";
@@ -35,20 +36,20 @@ export default function CookieBanner() {
       hitType: "pageview",
       page: location.pathname,
     });
-  });
+  }, [location.pathname, setCookie]);
 
   const handleDecline = useCallback(() => {
     setOpen(false);
 
     setCookie("consentClicked", true);
     setCookie("consentGiven", false);
-  });
+  }, [setCookie]);
 
   useEffect(() => {
     if(!cookie.consentClicked) {
       setOpen(true);
     }
-  }, []);
+  }, [cookie.consentClicked]);
 
   return(
     <Snackbar
