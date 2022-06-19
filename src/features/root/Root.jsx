@@ -203,6 +203,13 @@ export default function Root() {
                 },
               });
 
+              Sentry.captureException(e, {
+                extra: {
+                  step: unlockStep.current,
+                  retry: currentTry,
+                },
+              });
+
               unlockStep.current = 2;
 
               currentTry += 1;
