@@ -1,0 +1,17 @@
+{
+  "connected": "Successfully connected to your device.",
+  "tilePackageManagerTitle": "Package Manager",
+  "tilePackageManagerDescription": "Expand functionality of your devive by installing additional packages developed by the community.",
+  "tileStartupTitle": "Startup",
+  "tileStartupDescription": "Manage applications that should be run on startup to permanently enable functionality once the device is powered up.",
+  "tileCliTitle": "CLI",
+  "tileCliDescription": "Interactive Shell Session. Run commands as you please, you should be knowing what you are doing.",
+  "tileWtfosTitle": "WTFOS",
+  "tileWtfosDescription": "Install, maintain or Remove WTFOS - the operating system for all community contributed functionality.",
+  "tileRootTitle": "Root",
+  "tileRootDescription": "Before installing WTFOS you will have to root your device, set it free - OWN it!",
+  "tileSupportTitle": "Support",
+  "tileSupportDescription": "If you have any feedback, questions or want to contribute additional functionality, join our community on Discord.",
+  "tileAboutTitle": "About fpv.wtf",
+  "tileAboutDescription": "fpv.wtf is a group of enthusiasts working to improve the digital FPV experience."
+}
