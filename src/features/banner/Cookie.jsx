@@ -8,7 +8,6 @@ import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useCookies } from "react-cookie";
 
-import { useCookies } from "react-cookie";
 import ReactGA from "react-ga4";
 
 import Button from "@mui/material/Button";
