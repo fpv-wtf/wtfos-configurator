@@ -81,8 +81,6 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-Sentry.captureMessage("Failed after xxx retries.", { extra: { step: "test" } });
-
 const container = document.getElementById("root");
 const root = createRoot(container);
 
