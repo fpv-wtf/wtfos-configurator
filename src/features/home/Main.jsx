@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import { useSelector } from "react-redux";
 
@@ -16,6 +17,8 @@ import {
 } from "../device/deviceSlice";
 
 export default function Main() {
+  const { t } = useTranslation("home");
+
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const isConnected = useSelector(selectConnected);
 
@@ -27,7 +30,7 @@ export default function Main() {
       {isConnected &&
         <Alert severity="success">
           <Typography>
-            Successfully connected to your device.
+            {t("connected")}
           </Typography>
         </Alert>}
 

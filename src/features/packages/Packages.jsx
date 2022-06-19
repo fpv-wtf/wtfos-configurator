@@ -9,6 +9,7 @@ import {
   useDispatch,
   useSelector,
 } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -50,6 +51,7 @@ import SetupHint from "../setup/SetupHint";
 import Spinner from "../loading/Spinner";
 
 export default function Packages({ adb }) {
+  const { t } = useTranslation("packages");
   const tableEl = useRef();
   const scrollListenerId = useRef();
 
@@ -172,7 +174,7 @@ export default function Packages({ adb }) {
               onClick={removeHandler}
               variant="contained"
             >
-              Remove
+              {t("remove")}
             </Button>}
 
           {!item.installed &&
@@ -183,7 +185,7 @@ export default function Packages({ adb }) {
               onClick={installHandler}
               variant="contained"
             >
-              Install
+              {t("install")}
             </Button>}
         </TableCell>
       </TableRow>
@@ -201,20 +203,20 @@ export default function Packages({ adb }) {
     );
   });
 
-  const packageString = `Found ${filtered.length} packages`;
+  const packageString = t("matchCount", { count: filtered.length } );
   return (
     <>
       {!hasOpkgBinary &&
         <SetupHint />}
 
       {!fetched && hasOpkgBinary &&
-        <Spinner text="Fetching packages..." />}
+        <Spinner text={t("fetching")} />}
 
       {fetched && hasOpkgBinary &&
         <Stack
           spacing={2}
         >
-          <ErrorLog title="Error during package installation:" />
+          <ErrorLog title={t("installationFailed")} />
 
           <Box
             component="form"
@@ -223,18 +225,18 @@ export default function Packages({ adb }) {
           >
             <FormControl sx={{ width: 120 }}>
               <InputLabel id="package-state-select-label">
-                Repo
+                {t("labelRepo")}
               </InputLabel>
 
               <Select
                 disabled={filter.search}
                 id="package-state-select"
-                label="Packages"
+                label={t("labelPackages")}
                 onChange={handleRepoChange}
                 value={filter.repo}
               >
                 <MenuItem value="all">
-                  All
+                  {t("labelAll")}
                 </MenuItem>
 
                 {renderedRepos}
@@ -243,21 +245,21 @@ export default function Packages({ adb }) {
 
             <FormControl sx={{ width: 120 }}>
               <InputLabel id="package-state-select-label">
-                Packages
+                {t("labelPackages")}
               </InputLabel>
 
               <Select
                 id="package-state-select"
-                label="Packages"
+                label={t("labelPackages")}
                 onChange={handleInstallStateChange}
                 value={installed ? "installed" : "all"}
               >
                 <MenuItem value="all">
-                  All
+                  {t("labelAll")}
                 </MenuItem>
 
                 <MenuItem value="installed">
-                  Installed
+                  {t("installed")}
                 </MenuItem>
               </Select>
             </FormControl>
@@ -266,7 +268,7 @@ export default function Packages({ adb }) {
               <TextField
                 defaultValue={filter.search}
                 id="outlined-basic"
-                label="Search..."
+                label={t("labelSearch")}
                 onChange={handleSearchChange}
                 variant="outlined"
               />
@@ -285,15 +287,15 @@ export default function Packages({ adb }) {
               <TableHead>
                 <TableRow>
                   <TableCell>
-                    Name
+                    {t("name")}
                   </TableCell>
 
                   <TableCell>
-                    Version
+                    {t("version")}
                   </TableCell>
 
                   <TableCell>
-                    Description
+                    {t("description")}
                   </TableCell>
 
                   <TableCell />

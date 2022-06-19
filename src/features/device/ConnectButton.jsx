@@ -1,12 +1,14 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import Button from "@mui/material/Button";
 
 import { selectConnected } from "./deviceSlice";
 
 export default function ConnectButton({ onClick }) {
+  const { t } = useTranslation("common");
   const connected = useSelector(selectConnected);
 
   return (
@@ -15,7 +17,7 @@ export default function ConnectButton({ onClick }) {
       onClick={onClick}
       variant="contained"
     >
-      Connect to Device
+      {t("connectDevice")}
     </Button>
   );
 }

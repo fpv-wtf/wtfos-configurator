@@ -7,6 +7,7 @@ import {
   useDispatch,
   useSelector,
 } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
@@ -35,6 +36,7 @@ import {
 } from "../packages/packagesSlice";
 
 export default function Update({ adb }) {
+  const { t } = useTranslation("setup");
   const dispatch = useDispatch();
 
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
@@ -74,7 +76,7 @@ export default function Update({ adb }) {
   return(
     <Stack spacing={2}>
       {isProcessing && !fetchedUpgradable &&
-        <Spinner text="Checking packages..." />}
+        <Spinner text={t("checking")} />}
 
       {upgradable.length > 0 &&
         <Button
@@ -87,12 +89,12 @@ export default function Update({ adb }) {
           onClick={handleWTFOSUpdate}
           variant="contained"
         >
-          Update WTFOS
+          {t("update")}
         </Button>}
 
       {upgradable.length === 0 && !isProcessing &&
         <Alert severity="success">
-          Everything up to date!
+          {t("upToDate")}
         </Alert>}
 
       {upgradable.length > 0 &&
@@ -103,15 +105,15 @@ export default function Update({ adb }) {
             <TableHead>
               <TableRow>
                 <TableCell>
-                  Name
+                  {t("name")}
                 </TableCell>
 
                 <TableCell>
-                  Current
+                  {t("current")}
                 </TableCell>
 
                 <TableCell>
-                  Latest
+                  {t("latest")}
                 </TableCell>
               </TableRow>
             </TableHead>

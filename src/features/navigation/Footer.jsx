@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -9,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import json from "../../../package.json";
 
 export default function Footer() {
+  const { t } = useTranslation("navigation");
   const version = json.version;
 
   return(
@@ -46,9 +48,10 @@ export default function Footer() {
                 margin={1}
                 variant="body2"
               >
-                If you run into any issues, please&nbsp;
+                {t("footerIssue")}
+                &nbsp;
                 <Link href="https://github.com/fpv-wtf/wtfos-configurator/issues">
-                  report them on github
+                  {t("footerIssueLink")}
                 </Link>
                 .
               </Typography>

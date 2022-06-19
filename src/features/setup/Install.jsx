@@ -7,6 +7,7 @@ import {
   useDispatch,
   useSelector,
 } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
@@ -28,6 +29,7 @@ import {
 } from "../packages/packagesSlice";
 
 export default function Install({ adb }) {
+  const { t } = useTranslation("setup");
   const dispatch = useDispatch();
 
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
@@ -54,11 +56,11 @@ export default function Install({ adb }) {
     <Stack spacing={2}>
       <Disclaimer
         lines={[
-          "WTFOS is in BETA state!",
-          "Things might not work as expected",
-          "Proceed at your own risk",
+          t("installDisclaimerLine1"),
+          t("installDisclaimerLine2"),
+          t("installDisclaimerLine3"),
         ]}
-        title="Disclaimer:"
+        title={t("installDisclaimerTitle")}
       />
 
       <Button
@@ -66,7 +68,7 @@ export default function Install({ adb }) {
         onClick={onClick}
         variant="contained"
       >
-        Install WTFOS
+        {t("install")}
       </Button>
 
       <Log />
