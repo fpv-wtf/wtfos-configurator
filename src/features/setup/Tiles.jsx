@@ -14,7 +14,6 @@ import {
   selectHasDinitBinary,
   selectHasOpkgBinary,
 } from "../device/deviceSlice";
-import { t } from "i18next";
 
 export default function Tiles() {
   const { t } = useTranslation("setup");
