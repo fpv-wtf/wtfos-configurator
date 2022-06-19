@@ -25,6 +25,9 @@ import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import CookieBanner from "./features/banner/Cookie";
 
+import settings from "./settings.json";
+import { loadLanguage } from "./utils/LocalStorage";
+
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -39,26 +42,31 @@ const darkTheme = createTheme({
   },
 });
 
-const resources = {
-  en: {
-    about: require("./translations/en/about.json"),
-    cli: require("./translations/en/cli.json"),
-    common: require("./translations/en/common.json"),
-    disclaimer: require("./translations/en/disclaimer.json"),
-    cookie: require("./translations/en/cookie.json"),
-    error: require("./translations/en/error.json"),
-    home: require("./translations/en/home.json"),
-    navigation: require("./translations/en/navigation.json"),
-    packages: require("./translations/en/packages.json"),
-    root: require("./translations/en/root.json"),
-    setup: require("./translations/en/setup.json"),
-    startup: require("./translations/en/startup.json"),
-  },
-};
+const languages = settings.availableLanguages;
+const languageKeys = Object.keys(languages);
+
+const resources = {};
+for(const lang of languageKeys) {
+  resources[lang] = {
+    about: require(`./translations/${lang}/about.json`),
+    cli: require(`./translations/${lang}/cli.json`),
+    common: require(`./translations/${lang}/common.json`),
+    disclaimer: require(`./translations/${lang}/disclaimer.json`),
+    cookie: require(`./translations/${lang}/cookie.json`),
+    error: require(`./translations/${lang}/error.json`),
+    home: require(`./translations/${lang}/home.json`),
+    navigation: require(`./translations/${lang}/navigation.json`),
+    packages: require(`./translations/${lang}/packages.json`),
+    root: require(`./translations/${lang}/root.json`),
+    setup: require(`./translations/${lang}/setup.json`),
+    startup: require(`./translations/${lang}/startup.json`),
+  };
+}
+
 i18next.init({
   interpolation: { escapeValue: false },
-  lng: "en",
-  fallbackLng: "en",
+  lng: loadLanguage(),
+  fallbackLng: settings.defaultLanguage,
   resources,
 });
 
