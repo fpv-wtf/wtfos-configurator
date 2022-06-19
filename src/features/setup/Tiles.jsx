@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import Grid from "@mui/material/Grid";
 
@@ -16,6 +17,7 @@ import {
 import { t } from "i18next";
 
 export default function Tiles() {
+  const { t } = useTranslation("setup");
   const hasDinitBinary = useSelector(selectHasDinitBinary);
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
 

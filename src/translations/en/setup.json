@@ -13,5 +13,7 @@
   "tileUpdateTitle": "Update",
   "tileUpdateDescription": "Update WTFOS and installed packages to stay up to date.",
   "tileRemoveTitle": "Remove",
-  "tileRemoveDescription": "Remove WTFOS from your device. This will revert all changes apart from the root unlock itself."
+  "tileRemoveDescription": "Remove WTFOS from your device. This will revert all changes apart from the root unlock itself.",
+  "upToDate": "Everything up to date!",
+  "checking": "Checking packages..."
 }
