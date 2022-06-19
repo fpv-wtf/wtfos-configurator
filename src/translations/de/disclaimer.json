@@ -1,0 +1,12 @@
+{
+  "title": "Sicherheitsmaßnahmen/Hinweise zur Wiederherstellung:",
+  "line1": "Beim Start von WTFOS wird /system mit einer schreibbaren Kopie der Partition in /blacbkox/wtfos/system.img überschrieben",
+  "line2": "Wenn du die \"Bind\" Taste während des Bootens gedrückt hältst, wird das Starten von WTFOS mit aktiviertem Adb übersprungen, um wtfos löschen oder diagnostizieren zu können",
+  "line3": "Wenn die WTFOS-Skripte ein fatales Problem entdecken, werden sie versuchen, ohne Änderungen - mit aktivierter Abd - zu booten",
+  "browserNotSupported": "Der Browser wird nicht unterstützt!",
+  "browserNotSupportedText": "Dein Browser unterstützt keine Webusb-Funktionalität. Bitte verwende einen",
+  "browserNotSupportedLink": "Browser, der diese Funktionalität bereitstellt.",
+  "browserSupported": "Unterstützte (und getestete) Browser:",
+  "browserSupportedAndroid": "Einige Android Handys",
+  "browserSupportedOther": "Andere Chromium-basierte Browser"
+}
