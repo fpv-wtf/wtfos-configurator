@@ -12,6 +12,8 @@ import { useTranslation } from "react-i18next";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
+import ReactGA from "react-ga4";
+
 import Disclaimer from "../disclaimer/Disclaimer";
 import Log from "../log/Log";
 
@@ -36,6 +38,8 @@ export default function Install({ adb }) {
   const isProcessing = useSelector(selectProcessing);
 
   const onClick = useCallback(async (device) => {
+    ReactGA.gtag("event", "installWtfosTriggered");
+
     dispatch(clearLog());
     dispatch(installWTFOS({
       adb,
@@ -43,6 +47,8 @@ export default function Install({ adb }) {
         dispatch(appendToLog(message));
       },
       setRebooting: () => {
+        ReactGA.gtag("event", "installWtfosDone");
+
         dispatch(rebooting(true));
       },
     }));

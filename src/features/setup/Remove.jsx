@@ -9,6 +9,8 @@ import { useTranslation } from "react-i18next";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
+import ReactGA from "react-ga4";
+
 import Log from "../log/Log";
 
 import {
@@ -32,14 +34,17 @@ export default function Remove({ adb }) {
   const isProcessing = useSelector(selectProcessing);
 
   const onClick = useCallback(async (device) => {
-    dispatch(clearLog());
+    ReactGA.gtag("event", "removeWtfosTriggered");
 
+    dispatch(clearLog());
     dispatch(removeWTFOS({
       adb,
       callback: (message) => {
         dispatch(appendToLog(message));
       },
       setRebooting: () => {
+        ReactGA.gtag("event", "removeWtfosDone");
+
         dispatch(rebooting(true));
       },
     }));
