@@ -19,6 +19,7 @@ import {
   clearLog,
   rebooting,
   selectHasOpkgBinary,
+  selectNiceName,
 } from "../device/deviceSlice";
 
 import {
@@ -32,9 +33,10 @@ export default function Remove({ adb }) {
 
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const isProcessing = useSelector(selectProcessing);
+  const deviceName = useSelector(selectNiceName);
 
   const onClick = useCallback(async (device) => {
-    ReactGA.gtag("event", "removeWtfosTriggered");
+    ReactGA.gtag("event", "removeWtfosTriggered", { deviceName });
 
     dispatch(clearLog());
     dispatch(removeWTFOS({
@@ -43,7 +45,7 @@ export default function Remove({ adb }) {
         dispatch(appendToLog(message));
       },
       setRebooting: () => {
-        ReactGA.gtag("event", "removeWtfosDone");
+        ReactGA.gtag("event", "removeWtfosDone", { deviceName });
 
         dispatch(rebooting(true));
       },
