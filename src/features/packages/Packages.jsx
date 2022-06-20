@@ -28,6 +28,8 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 
+import ReactGA from "react-ga4";
+
 import ErrorLog from "../log/Error";
 
 import {
@@ -44,6 +46,8 @@ import {
   selectProcessing,
   selectRepos,
 } from "./packagesSlice";
+
+import { selectNiceName } from "../device/deviceSlice";
 
 import { selectHasOpkgBinary } from "../device/deviceSlice";
 
@@ -63,6 +67,8 @@ export default function Packages({ adb }) {
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const processing = useSelector(selectProcessing);
   const repos = useSelector(selectRepos);
+
+  const deviceName = useSelector(selectNiceName);
 
   const [installed, setInstalled] = useState(filter.installed);
 
@@ -128,6 +134,11 @@ export default function Packages({ adb }) {
 
   const removeHandler = useCallback((event) => {
     const name = event.target.dataset["key"];
+    ReactGA.gtag("event", "removePackage", {
+      name,
+      deviceName,
+    });
+
     dispatch(removePackage({
       adb,
       name,
@@ -136,6 +147,11 @@ export default function Packages({ adb }) {
 
   const installHandler = useCallback((event) => {
     const name = event.target.dataset["key"];
+    ReactGA.gtag("event", "installPackage", {
+      name,
+      deviceName,
+    });
+
     dispatch(installPackage({
       adb,
       name,
