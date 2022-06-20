@@ -54,7 +54,7 @@ export default function Install({ adb }) {
         dispatch(rebooting(true));
       },
     }));
-  }, [adb, dispatch]);
+  }, [adb, deviceName, dispatch]);
 
   useEffect(() => {
     dispatch(checkBinaries(adb));

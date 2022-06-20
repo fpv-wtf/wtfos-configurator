@@ -143,7 +143,7 @@ export default function Packages({ adb }) {
       adb,
       name,
     }));
-  }, [adb, dispatch]);
+  }, [adb, deviceName, dispatch]);
 
   const installHandler = useCallback((event) => {
     const name = event.target.dataset["key"];
@@ -156,7 +156,7 @@ export default function Packages({ adb }) {
       adb,
       name,
     }));
-  }, [adb, dispatch]);
+  }, [adb, deviceName, dispatch]);
 
   useEffect(() => {
     dispatch(clearError());

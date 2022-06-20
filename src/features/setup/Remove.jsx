@@ -52,7 +52,7 @@ export default function Remove({ adb }) {
     }));
 
     dispatch(checkBinaries(adb));
-  }, [adb, dispatch]);
+  }, [adb, deviceName, dispatch]);
 
   return(
     <Stack spacing={2}>
