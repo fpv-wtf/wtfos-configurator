@@ -56,13 +56,6 @@ export default function Header() {
     setAnchorEl(event.currentTarget);
   }, []);
 
-  useEffect(() => {
-    ReactGA.send({
-      hitType: "pageview",
-      page: location.pathname,
-    });
-  }, [location.pathname]);
-
   let title = "Home";
   switch(location.pathname) {
     case "/cli": title = t("titleCli"); break;
@@ -76,6 +69,16 @@ export default function Header() {
     case "/wtfos/remove": title = t("titleWtfosRemove"); break;
     default: title = t("titleHome");
   }
+
+  const pageTitle = `${title} - WTFOS Configurator`;
+  document.title = pageTitle;
+
+  useEffect(() => {
+    ReactGA.send({
+      hitType: "pageview",
+      page: location.pathname,
+    });
+  }, [location.pathname]);
 
   return (
     <Box

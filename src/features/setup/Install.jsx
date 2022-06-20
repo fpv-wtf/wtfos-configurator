@@ -12,6 +12,8 @@ import { useTranslation } from "react-i18next";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
+import ReactGA from "react-ga4";
+
 import Disclaimer from "../disclaimer/Disclaimer";
 import Log from "../log/Log";
 
@@ -21,6 +23,7 @@ import {
   clearLog,
   rebooting,
   selectHasOpkgBinary,
+  selectNiceName,
 } from "../device/deviceSlice";
 
 import {
@@ -34,8 +37,11 @@ export default function Install({ adb }) {
 
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const isProcessing = useSelector(selectProcessing);
+  const deviceName = useSelector(selectNiceName);
 
   const onClick = useCallback(async (device) => {
+    ReactGA.gtag("event", "installWtfosTriggered", { deviceName });
+
     dispatch(clearLog());
     dispatch(installWTFOS({
       adb,
@@ -43,6 +49,8 @@ export default function Install({ adb }) {
         dispatch(appendToLog(message));
       },
       setRebooting: () => {
+        ReactGA.gtag("event", "installWtfosDone", { deviceName });
+
         dispatch(rebooting(true));
       },
     }));

@@ -15,6 +15,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
 import * as Sentry from "@sentry/react";
+import ReactGA from "react-ga4";
 
 import Disclaimer from "../disclaimer/Disclaimer";
 import Header from "../navigation/Header";
@@ -64,6 +65,8 @@ export default function Root() {
   const rooting = useSelector(selectRooting);
 
   const handleClick = useCallback(async() => {
+    ReactGA.gtag("event", "rootClicked");
+
     dispatch(root());
 
     const log = (message) => {
@@ -79,6 +82,7 @@ export default function Root() {
         let currentTry = 0;
         let done = false;
         let shouldRunUnlock = false;
+        let device = "Unknown";
 
         while(currentTry < maxTry && !done) {
           try {
@@ -88,7 +92,9 @@ export default function Root() {
                   log(t("step1"));
                 }
 
-                const device = await exploit.unlockStep1();
+                device = await exploit.unlockStep1();
+
+                ReactGA.gtag("event", "rootDevice", { device });
 
                 log(t("foundDevice", { device } ));
                 log(t("step1Success"));
@@ -172,6 +178,13 @@ export default function Root() {
 
               case 6: {
                 log(t("done"));
+
+                ReactGA.gtag("event", "rootDone", {
+                  device,
+                  step: unlockStep.current,
+                  retry: currentTry,
+                });
+
                 unlockStep.current = 0;
                 done = true;
 
@@ -196,15 +209,15 @@ export default function Root() {
             } else if(e instanceof PatchFailed) {
               log(t("rewind2"));
 
-              Sentry.captureException(e, {
-                extra: {
-                  step: unlockStep.current,
-                  retry: currentTry,
-                },
+              ReactGA.gtag("event", "rootRewind", {
+                device,
+                step: unlockStep.current,
+                retry: currentTry,
               });
 
               Sentry.captureException(e, {
                 extra: {
+                  device,
                   step: unlockStep.current,
                   retry: currentTry,
                 },
@@ -219,6 +232,7 @@ export default function Root() {
 
               Sentry.captureException(e, {
                 extra: {
+                  device,
                   step: unlockStep.current,
                   retry: currentTry,
                 },
@@ -232,6 +246,12 @@ export default function Root() {
 
         if(!done && !disconnected.current) {
           log(`Failed after ${maxTry} retries.`);
+
+          ReactGA.gtag("event", "rootFailed", {
+            device,
+            step: unlockStep.current,
+            retries: maxTry,
+          });
 
           Sentry.captureMessage(`Failed after ${maxTry} retries.`, { extra: { step: unlockStep.current } });
 
