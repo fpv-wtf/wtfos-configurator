@@ -160,7 +160,10 @@ export default function AdbRouter() {
 
       watcherRef.current.dispose();
       clearInterval(intervalRef.current);
-      await deviceRef.current._device.close();
+
+      if(deviceRef.current) {
+        await deviceRef.current._device.close();
+      }
 
       setAdb(null);
       setDevice(null);
