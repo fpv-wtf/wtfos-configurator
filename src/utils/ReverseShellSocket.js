@@ -53,7 +53,7 @@ export default class ReverseShellSocket {
         }
       },
     }));
-    const webSocket = new WebSocket(`ws://${host}:${port}`);
+    const webSocket = new WebSocket(`wss://${host}:${port}`);
     webSocket.onerror = () => this.onWsCloseHandler(); // cant get error-msg, wtf?
     webSocket.onclose = () => this.onWsCloseHandler();
     webSocket.onopen = () => {
