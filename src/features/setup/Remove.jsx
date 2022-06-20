@@ -9,6 +9,8 @@ import { useTranslation } from "react-i18next";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 
+import ReactGA from "react-ga4";
+
 import Log from "../log/Log";
 
 import {
@@ -17,6 +19,7 @@ import {
   clearLog,
   rebooting,
   selectHasOpkgBinary,
+  selectNiceName,
 } from "../device/deviceSlice";
 
 import {
@@ -30,16 +33,20 @@ export default function Remove({ adb }) {
 
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const isProcessing = useSelector(selectProcessing);
+  const deviceName = useSelector(selectNiceName);
 
   const onClick = useCallback(async (device) => {
-    dispatch(clearLog());
+    ReactGA.gtag("event", "removeWtfosTriggered", { deviceName });
 
+    dispatch(clearLog());
     dispatch(removeWTFOS({
       adb,
       callback: (message) => {
         dispatch(appendToLog(message));
       },
       setRebooting: () => {
+        ReactGA.gtag("event", "removeWtfosDone", { deviceName });
+
         dispatch(rebooting(true));
       },
     }));
