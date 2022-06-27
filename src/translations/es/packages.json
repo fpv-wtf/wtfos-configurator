@@ -1,15 +1,15 @@
 {
-  "remove": "Remove",
-  "install": "Install",
-  "fetching": "Fetching packages...",
-  "installationFailed": "Error during package installation:",
-  "labelRepo": "Repo",
-  "labelPackages": "Packages",
-  "labelAll": "All",
-  "installed": "Installed",
-  "labelSearch": "Search...",
-  "name": "Name",
-  "version": "Version",
-  "description": "Description",
-  "matchCount": "Found {{count}} packages"
+  "remove": "Eliminar",
+  "install": "Instalar",
+  "fetching": "Obteniendo paquetes...",
+  "installationFailed": "Error durante la instalación del paquete:",
+  "labelRepo": "Repositorio",
+  "labelPackages": "Paquetes",
+  "labelAll": "Todos",
+  "installed": "Instalado",
+  "labelSearch": "Buscar...",
+  "name": "Nombre",
+  "version": "Versión",
+  "description": "Descripción",
+  "matchCount": "Se encontraron {{count}} paquetes"
 }
