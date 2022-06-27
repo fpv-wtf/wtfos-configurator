@@ -1,12 +1,12 @@
 {
-  "title": "Safety measures/recovery hints:",
-  "line1": "When wtfos is started, the /system partition is overwritten with a writable copy of the partition kept in /blacbkox/wtfos/system.img",
-  "line2": "If you hold the bind button down during boot wtfos startup will be skipped with adb enabled to allow for wiping of wtfos or diagnosis",
-  "line3": "If wtfos detects any fatal issues, it will likewise attempt to boot up without any modifications and with adb enabled",
-  "browserNotSupported": "Browser not supported!",
-  "browserNotSupportedText": "Your browser does not support webusb functionality. Please use a",
-  "browserNotSupportedLink": "browser which provides this functionality.",
-  "browserSupported": "The supported (and tested) browsers are:",
-  "browserSupportedAndroid": "Some Android phones",
-  "browserSupportedOther": "Other Chromium based browsers"
+  "title": "Consejos de seguridad:",
+  "line1": "Cuando se inicia wtfos, la partición /system se sobrescribe con una copia escribible de la partición guardada en /blacbkox/wtfos/system.img",
+  "line2": "Si mantiene presionado el botón de \"bindeo\" al arrancar wtfos se omitirá con adb habilitado para permitir la eliminación de wtfos o diagnóstico",
+  "line3": "Si wtfos detecta cualquier problema fatal, intentará arrancar sin modificaciones y con adb habilitado",
+  "browserNotSupported": "Navegador no compatible!",
+  "browserNotSupportedText": "Su navegador no soporta la funcionalidad de webusb. Por favor, utilice un",
+  "browserNotSupportedLink": "navegador que soporte esta función.",
+  "browserSupported": "Los navegadores soportados (y probados) son:",
+  "browserSupportedAndroid": "Algunos teléfonos Android",
+  "browserSupportedOther": "Otros navegadores basados en Chromium"
 }
