@@ -83,7 +83,7 @@ export default function AdbRouter() {
         dispatch(deviceSetAdb(true));
         dispatch(checkBinaries(adbWrapper));
       } catch(e) {
-        console.log(e);
+        console.log("Failed connecting to device:", e);
         dispatch(connectionFailed());
       }
     } else {
@@ -158,8 +158,13 @@ export default function AdbRouter() {
     return async() => {
       dispatch(contextReset());
 
-      watcherRef.current.dispose();
-      clearInterval(intervalRef.current);
+      if(watcherRef.current) {
+        watcherRef.current.dispose();
+      }
+
+      if(intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
 
       if(deviceRef.current) {
         await deviceRef.current._device.close();
