@@ -167,7 +167,11 @@ export default function AdbRouter() {
       }
 
       if(deviceRef.current) {
-        await deviceRef.current._device.close();
+        try {
+          await deviceRef.current._device.close();
+        } catch(e) {
+          console.log("Failed closing device:", e);
+        }
       }
 
       setAdb(null);
