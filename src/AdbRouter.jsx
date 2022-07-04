@@ -134,7 +134,7 @@ export default function AdbRouter() {
 
   useEffect(() => {
     // Automatically try to connect to device when application starts up
-    if(!isChecked && !adb) {
+    if(!isChecked && !adb && window.navigator.usb) {
       dispatch(checked(true));
       autoConnect();
     }
