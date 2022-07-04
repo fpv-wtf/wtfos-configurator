@@ -258,7 +258,7 @@ export default function Root() {
           try {
             exploit.closePort();
           } catch (e) {
-            console.log(e);
+            console.log("Failed closing port:", e);
           }
         }
 
@@ -327,7 +327,7 @@ export default function Root() {
 
       <Stack spacing={2}>
         <>
-          {!window.navigator.usb &&
+          {!window.navigator.serial &&
             <Webusb />}
 
           <Alert severity="error">
@@ -354,7 +354,7 @@ export default function Root() {
             </Alert>}
 
           <Button
-            disabled={rooting || !window.navigator.usb}
+            disabled={rooting || !window.navigator.serial}
             onClick={handleClick}
             variant="contained"
           >
