@@ -1,5 +1,6 @@
 import React, {
   useCallback,
+  useEffect,
   useRef,
 } from "react";
 import {
@@ -60,263 +61,274 @@ export default function Root() {
   const rebooting = useRef(false);
   const running = useRef(false);
 
+  const disconnectListenerRef = useRef();
+  const reConnectListenerRef = useRef();
+
   const attempted = useSelector(selectAttempted);
   const hasAdb = useSelector(selectHasAdb);
   const rooting = useSelector(selectRooting);
 
-  const handleClick = useCallback(async() => {
-    ReactGA.gtag("event", "rootClicked");
+  const log = useCallback((message) => {
+    console.log(message);
+    dispatch(appendToLog(message));
+  }, [dispatch]);
 
-    dispatch(root());
+  const runUnlock = useCallback(async () => {
+    if(unlockStep.current > 0 && !running.current) {
+      running.current = true;
 
-    const log = (message) => {
-      console.log(message);
-      dispatch(appendToLog(message));
-    };
+      let maxTry = 10;
+      let currentTry = 0;
+      let done = false;
+      let shouldRunUnlock = false;
+      let device = "Unknown";
 
-    const runUnlock = async () => {
-      if(unlockStep.current > 0 && !running.current) {
-        running.current = true;
+      while(currentTry < maxTry && !done) {
+        try {
+          switch (unlockStep.current) {
+            case 1: {
+              if (currentTry === 0) {
+                log(t("step1"));
+              }
 
-        let maxTry = 10;
-        let currentTry = 0;
-        let done = false;
-        let shouldRunUnlock = false;
-        let device = "Unknown";
+              device = await exploit.unlockStep1();
 
-        while(currentTry < maxTry && !done) {
-          try {
-            switch (unlockStep.current) {
-              case 1: {
-                if (currentTry === 0) {
-                  log(t("step1"));
-                }
+              ReactGA.gtag("event", "rootDevice", { device });
 
-                device = await exploit.unlockStep1();
+              log(t("foundDevice", { device } ));
+              log(t("step1Success"));
 
-                ReactGA.gtag("event", "rootDevice", { device });
+              rebooting.current = true;
+              unlockStep.current = 2;
+              done = true;
 
-                log(t("foundDevice", { device } ));
-                log(t("step1Success"));
+              await exploit.restart();
+            } break;
 
-                rebooting.current = true;
-                unlockStep.current = 2;
-                done = true;
+            case 2: {
+              if (currentTry === 0) {
+                log(t("step2"));
+              }
+              const restart = await exploit.unlockStep2();
 
-                await exploit.restart();
-              } break;
+              unlockStep.current = 3;
+              done = true;
 
-              case 2: {
-                if (currentTry === 0) {
-                  log(t("step2"));
-                }
-                const restart = await exploit.unlockStep2();
-
-                unlockStep.current = 3;
-                done = true;
-
-                if(!restart) {
-                  log(t("step2Success"));
-                  await exploit.sleep(3000);
-
-                  shouldRunUnlock = true;
-                } else {
-                  log(t("step2SuccessReboot"));
-                  rebooting.current = true;
-                  await exploit.restart();
-                }
-              } break;
-
-              case 3: {
-                if (currentTry === 0) {
-                  log(t("step3"));
-                }
-                await exploit.unlockStep3();
-                log(t("step3Success"));
-
-                unlockStep.current = 4;
-                done = true;
+              if(!restart) {
+                log(t("step2Success"));
+                await exploit.sleep(3000);
 
                 shouldRunUnlock = true;
-              } break;
-
-              case 4: {
-                if (currentTry === 0) {
-                  log(t("step4"));
-                }
-                await exploit.unlockStep4();
-                log(t("step4Success"));
-
+              } else {
+                log(t("step2Reboot"));
                 rebooting.current = true;
-                unlockStep.current = 5;
-                done = true;
-
-                try {
-                  await exploit.restart();
-                } catch (e) {
-                  console.log("Device might already be restarting", e);
-                }
-              } break;
-
-              case 5: {
-                if (currentTry === 0) {
-                  log(t("step5"));
-                }
-                const isRebooting = await exploit.unlockStep5();
-
-                unlockStep.current = 6;
-                done = true;
-
-                if(isRebooting) {
-                  rebooting.current = true;
-                  log(t("step5Reboot"));
-                } else {
-                  log(t("step5Success"));
-                  shouldRunUnlock = true;
-                }
-              } break;
-
-              case 6: {
-                log(t("done"));
-
-                ReactGA.gtag("event", "rootDone", {
-                  device,
-                  step: unlockStep.current,
-                  retry: currentTry,
-                });
-
-                unlockStep.current = 0;
-                done = true;
-
-                try {
-                  exploit.closePort();
-                } catch(e) {
-                  console.log(e);
-                }
-
-                dispatch(success());
-              } break;
-
-              default: {
-                console.log("Unknown Unlock Step", unlockStep);
-                done = true;
+                await exploit.restart();
               }
-            }
-          } catch(e) {
-            if(e instanceof PortLost) {
-              disconnected.current = true;
-              break;
-            } else if(e instanceof PatchFailed) {
-              log(t("rewind2"));
+            } break;
 
-              ReactGA.gtag("event", "rootRewind", {
+            case 3: {
+              if (currentTry === 0) {
+                log(t("step3"));
+              }
+              await exploit.unlockStep3();
+              log(t("step3Success"));
+
+              unlockStep.current = 4;
+              done = true;
+
+              shouldRunUnlock = true;
+            } break;
+
+            case 4: {
+              if (currentTry === 0) {
+                log(t("step4"));
+              }
+              await exploit.unlockStep4();
+              log(t("step4Success"));
+
+              rebooting.current = true;
+              unlockStep.current = 5;
+              done = true;
+
+              try {
+                await exploit.restart();
+              } catch (e) {
+                console.log("Device might already be restarting", e);
+              }
+            } break;
+
+            case 5: {
+              if (currentTry === 0) {
+                log(t("step5"));
+              }
+              const isRebooting = await exploit.unlockStep5();
+
+              unlockStep.current = 6;
+              done = true;
+
+              if(isRebooting) {
+                rebooting.current = true;
+                log(t("step5Reboot"));
+              } else {
+                log(t("step5Success"));
+                shouldRunUnlock = true;
+              }
+            } break;
+
+            case 6: {
+              log(t("done"));
+
+              ReactGA.gtag("event", "rootDone", {
                 device,
                 step: unlockStep.current,
                 retry: currentTry,
               });
 
-              Sentry.captureException(e, {
-                extra: {
-                  device,
-                  step: unlockStep.current,
-                  retry: currentTry,
-                },
-              });
+              unlockStep.current = 0;
+              done = true;
 
-              unlockStep.current = 2;
+              try {
+                exploit.closePort();
+              } catch(e) {
+                console.log("Failed closing port:", e);
+              }
 
-              currentTry += 1;
-              await exploit.sleep(1000);
-            } else {
-              console.log(e);
+              dispatch(success());
+            } break;
 
-              Sentry.captureException(e, {
-                extra: {
-                  device,
-                  step: unlockStep.current,
-                  retry: currentTry,
-                },
-              });
-
-              currentTry += 1;
-              await exploit.sleep(1000);
+            default: {
+              console.log("Unknown Unlock Step", unlockStep);
+              done = true;
             }
           }
-        }
+        } catch(e) {
+          if(e instanceof PortLost) {
+            disconnected.current = true;
+            break;
+          } else if(e instanceof PatchFailed) {
+            log(t("manualReboot"));
 
-        if(!done && !disconnected.current) {
-          log(`Failed after ${maxTry} retries.`);
+            ReactGA.gtag("event", "patchFailed", {
+              device,
+              step: unlockStep.current,
+              retry: currentTry,
+            });
 
-          ReactGA.gtag("event", "rootFailed", {
-            device,
-            step: unlockStep.current,
-            retries: maxTry,
-          });
+            Sentry.captureException(e, {
+              extra: {
+                device,
+                step: unlockStep.current,
+                retry: currentTry,
+              },
+            });
 
-          Sentry.captureMessage(`Failed after ${maxTry} retries.`, { extra: { step: unlockStep.current } });
+            rebooting.current = true;
+            unlockStep.current = 2;
+            done = true;
+          } else {
+            console.log("Unlock step failed:", e);
 
-          try {
-            exploit.closePort();
-          } catch (e) {
-            console.log("Failed closing port:", e);
+            Sentry.captureException(e, {
+              extra: {
+                device,
+                step: unlockStep.current,
+                retry: currentTry,
+              },
+            });
+
+            currentTry += 1;
+            await exploit.sleep(1000);
           }
         }
+      }
 
-        if(!done && disconnected.current) {
-          log(t("deviceLost"));
-        }
+      if(!done && !disconnected.current) {
+        log(`Failed after ${maxTry} retries.`);
 
-        running.current = false;
-        if(shouldRunUnlock) {
-          runUnlock();
+        ReactGA.gtag("event", "rootFailed", {
+          device,
+          step: unlockStep.current,
+          retries: maxTry,
+        });
+
+        Sentry.captureMessage(`Failed after ${maxTry} retries.`, { extra: { step: unlockStep.current } });
+
+        try {
+          exploit.closePort();
+        } catch (e) {
+          console.log("Failed closing port:", e);
         }
       }
-    };
 
-    const reConnect = async () => {
-      disconnected.current = false;
-      if(!rebooting.current && unlockStep.current > 0) {
-        log(t("deviceBack"));
+      if(!done && disconnected.current) {
+        log(t("deviceLost"));
       }
-      rebooting.current = false;
 
-      const ports = await navigator.serial.getPorts();
-      if(ports.length > 0 ) {
-        // Assume that the first available port is the device we are looking for.
-        const port = ports[0];
-        await exploit.openPort(port);
-
-        // Wait a bit after reconnection to make sure the device does not go
-        // away again and services had time to restart.
-        await exploit.sleep(3000);
-
-        // Run the next unlock step (or the failed one if device went away)
+      running.current = false;
+      if(shouldRunUnlock) {
         runUnlock();
       }
-    };
+    }
+  }, [dispatch, log, t]);
 
-    navigator.serial.addEventListener("connect", reConnect);
-    navigator.serial.addEventListener("disconnect", () => {
-      disconnected.current = true;
+  const reConnectListener = useCallback(async () => {
+    disconnected.current = false;
+    if(!rebooting.current && unlockStep.current > 0) {
+      log(t("deviceBack"));
+    }
+    rebooting.current = false;
 
-      if(!rooting && attempted) {
-        dispatch(reset());
-      }
-    });
+    const ports = await navigator.serial.getPorts();
+    if(ports.length > 0 ) {
+      // Assume that the first available port is the device we are looking for.
+      const port = ports[0];
+      await exploit.openPort(port);
 
-    const triggerUnlock = async() => {
-      const filters = [{ usbVendorId: 0x2ca3 }];
-      try {
-        const port = await navigator.serial.requestPort({ filters });
-        await exploit.openPort(port);
+      // Wait a bit after reconnection to make sure the device does not go
+      // away again and services had time to restart.
+      await exploit.sleep(3000);
 
-        runUnlock();
-      } catch(e) {
-        dispatch(reset());
-      }
-    };
+      // Run the next unlock step (or the failed one if device went away)
+      runUnlock();
+    }
+  }, [log, runUnlock, t]);
+
+  const disconnectListener = useCallback(() => {
+    disconnected.current = true;
+
+    if(!rooting && attempted) {
+      dispatch(reset());
+    }
+  }, [attempted, dispatch, rooting]);
+
+  const triggerUnlock = useCallback(async() => {
+    const filters = [{ usbVendorId: 0x2ca3 }];
+    try {
+      const port = await navigator.serial.requestPort({ filters });
+      await exploit.openPort(port);
+
+      runUnlock();
+    } catch(e) {
+      dispatch(reset());
+    }
+  }, [dispatch, runUnlock]);
+
+  useEffect(() => {
+    navigator.serial.removeEventListener("connect", reConnectListenerRef.current);
+    reConnectListenerRef.current = reConnectListener;
+    navigator.serial.addEventListener("connect", reConnectListenerRef.current);
+
+    navigator.serial.removeEventListener("disconnect", disconnectListenerRef.current);
+    disconnectListenerRef.current = disconnectListener;
+    navigator.serial.addEventListener("disconnect", disconnectListenerRef.current);
+  }, [disconnectListener, reConnectListener]);
+
+  const handleClick = useCallback(async() => {
+    ReactGA.gtag("event", "rootClicked");
+
+    dispatch(root());
     triggerUnlock();
-  }, [attempted, dispatch, rooting, t]);
+  }, [dispatch, triggerUnlock]);
 
   return(
     <Container
