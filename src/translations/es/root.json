@@ -13,7 +13,7 @@
   "step5Success": "Paso 5 - ¡Éxito!",
   "step5Reboot": "Paso 5 - ¡Éxito! Reiniciando...",
   "done": "Todo hecho - ¡tu dispositivo ha sido rooteado con éxito!",
-  "rewind2": "Volviendo al paso 2...",
+  "manualReboot": "Failed! Please power cycle your device now...",
   "failed": "Error después de {{maxTry}} reintentos.",
   "deviceLost": "El dispositivo desapareció...",
   "deviceBack": "El dispositivo regresó...",
