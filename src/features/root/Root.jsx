@@ -170,7 +170,7 @@ export default function Root() {
                 rebooting.current = true;
                 log(t("step5Reboot"));
               } else {
-                log(t("step5Success"));
+                log(t("step5Skip"));
                 shouldRunUnlock = true;
               }
             } break;
@@ -314,13 +314,15 @@ export default function Root() {
   }, [dispatch, runUnlock]);
 
   useEffect(() => {
-    navigator.serial.removeEventListener("connect", reConnectListenerRef.current);
-    reConnectListenerRef.current = reConnectListener;
-    navigator.serial.addEventListener("connect", reConnectListenerRef.current);
+    if(navigator.serial) {
+      navigator.serial.removeEventListener("connect", reConnectListenerRef.current);
+      reConnectListenerRef.current = reConnectListener;
+      navigator.serial.addEventListener("connect", reConnectListenerRef.current);
 
-    navigator.serial.removeEventListener("disconnect", disconnectListenerRef.current);
-    disconnectListenerRef.current = disconnectListener;
-    navigator.serial.addEventListener("disconnect", disconnectListenerRef.current);
+      navigator.serial.removeEventListener("disconnect", disconnectListenerRef.current);
+      disconnectListenerRef.current = disconnectListener;
+      navigator.serial.addEventListener("disconnect", disconnectListenerRef.current);
+    }
   }, [disconnectListener, reConnectListener]);
 
   const handleClick = useCallback(async() => {
