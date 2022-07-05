@@ -24,5 +24,6 @@
   "disclaimerLine3": "Während des rootens das Gerät nicht ausschalten",
   "disclaimerLine4": "Auf eigene Gefahr fortfahren",
   "rooted": "Gerät bereits gerootet",
-  "root": "Gerät rooten"
+  "root": "Gerät rooten",
+  "rebootTimeout": "Aborted! Device did not reboot in time, please power cycle and try again."
 }
