@@ -10,7 +10,7 @@
   "step4": "Versuch Schritt 4...",
   "step4Success": "Schritt 4 - Erfolgreich! Neustart...",
   "step5": "Versuch Schritt 5...",
-  "step5Success": "Schritt 2 - Erfolgreich!",
+  "step5Skip": "Step 5 - Skipped - Success!",
   "step5Reboot": "Schritt 2 - Erfolgreich! Neustart...",
   "done": "Alles erledigt - dein Gerät wurde erfolgreich gerootet!",
   "manualReboot": "Failed! Please power cycle your device now...",
