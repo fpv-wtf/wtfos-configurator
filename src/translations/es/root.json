@@ -24,5 +24,6 @@
   "disclaimerLine3": "No apagar durante el proceso de rooteo",
   "disclaimerLine4": "Proceda bajo su propio riesgo",
   "rooted": "El dispositivo ya está rooteado",
-  "root": "Rootear dispositivo"
+  "root": "Rootear dispositivo",
+  "rebootTimeout": "Aborted! Device did not reboot in time, please power cycle and try again."
 }
