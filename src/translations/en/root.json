@@ -10,7 +10,7 @@
   "step4": "Attempting Step 4...",
   "step4Success": "Step 4 - Success! Rebooting...",
   "step5": "Attempting Step 5...",
-  "step5Success": "Step 5 - Success!",
+  "step5Skip": "Step 5 - Skipped - Success!",
   "step5Reboot": "Step 5 - Success! Rebooting...",
   "done": "All done - your device has been successfully rooted!",
   "manualReboot": "Failed! Please power cycle your device now...",
