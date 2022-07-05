@@ -11,18 +11,19 @@
   "step4Success": "Step 4 - Success! Rebooting...",
   "step5": "Attempting Step 5...",
   "step5Skip": "Step 5 - Skipped - Success!",
-  "step5Reboot": "Step 2 - Success! Rebooting...",
+  "step5Reboot": "Step 5 - Success! Rebooting...",
   "done": "All done - your device has been successfully rooted!",
   "manualReboot": "Failed! Please power cycle your device now...",
   "failed": "Failed after {{maxTry}} retries.",
   "deviceLost": "Device went away...",
   "deviceBack": "Device came back...",
-  "cooling": "If you are rooting an Air Unit - especially Air Unit light (Caddx Vista) - make sure that it is actively cooled by pointing a fan at it.",
+  "cooling": "If you are rooting an Air Unit - especially Air Unit Lite (Caddx Vista) - make sure that it is actively cooled by pointing a fan at it.",
   "disclaimerTitle": "Disclaimer:",
   "disclaimerLine1": "Make sure that the device to be rooted is powered from a reliable power source",
   "disclaimerLine2": "Only have one device connected/paired",
   "disclaimerLine3": "Do not power off during rooting",
   "disclaimerLine4": "Proceed at your own risk",
   "rooted": "Device already rooted",
-  "root": "Root Device"
+  "root": "Root Device",
+  "rebootTimeout": "Aborted! Device did not reboot in time, please power cycle and try again."
 }
