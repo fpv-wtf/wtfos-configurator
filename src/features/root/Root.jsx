@@ -38,6 +38,7 @@ import Exploit from "../../utils/exploit/Exploit";
 */
 
 import {
+  fail,
   reset,
   root,
   success,
@@ -57,12 +58,14 @@ export default function Root() {
   const dispatch = useDispatch();
 
   const unlockStep = useRef(1);
+  const unlockStepLast = useRef(1);
   const disconnected = useRef(false);
   const rebooting = useRef(false);
   const running = useRef(false);
 
   const disconnectListenerRef = useRef();
   const reConnectListenerRef = useRef();
+  const rebootTimeoutRef = useRef();
 
   const attempted = useSelector(selectAttempted);
   const hasAdb = useSelector(selectHasAdb);
@@ -74,6 +77,15 @@ export default function Root() {
   }, [dispatch]);
 
   const runUnlock = useCallback(async () => {
+    const waitForReboot = () => {
+      const rebootTimeoutSeconds = 60;
+
+      return setTimeout(() => {
+        unlockStep.current = 7;
+        runUnlock();
+      }, rebootTimeoutSeconds * 1000);
+    };
+
     if(unlockStep.current > 0 && !running.current) {
       running.current = true;
 
@@ -102,6 +114,9 @@ export default function Root() {
               unlockStep.current = 2;
               done = true;
 
+              unlockStepLast.current = 1;
+              rebootTimeoutRef.current = waitForReboot();
+
               await exploit.restart();
             } break;
 
@@ -121,6 +136,10 @@ export default function Root() {
                 shouldRunUnlock = true;
               } else {
                 log(t("step2Reboot"));
+
+                unlockStepLast.current = 2;
+                rebootTimeoutRef.current = waitForReboot();
+
                 rebooting.current = true;
                 await exploit.restart();
               }
@@ -151,6 +170,9 @@ export default function Root() {
               done = true;
 
               try {
+                unlockStepLast.current = 4;
+                rebootTimeoutRef.current = waitForReboot();
+
                 await exploit.restart();
               } catch (e) {
                 console.log("Device might already be restarting", e);
@@ -169,6 +191,9 @@ export default function Root() {
               if(isRebooting) {
                 rebooting.current = true;
                 log(t("step5Reboot"));
+
+                unlockStepLast.current = 5;
+                rebootTimeoutRef.current = waitForReboot();
               } else {
                 log(t("step5Skip"));
                 shouldRunUnlock = true;
@@ -194,6 +219,23 @@ export default function Root() {
               }
 
               dispatch(success());
+            } break;
+
+            case 7: {
+              log(t("rebootTimeout"));
+
+              unlockStep.current = 0;
+              done = true;
+
+              ReactGA.gtag("event", "rebootTimeout", {
+                device,
+                step: unlockStepLast.current,
+                retry: currentTry,
+              });
+
+              Sentry.captureMessage("Reebot timout reached.", { extra: { step: unlockStepLast.current } });
+
+              dispatch(fail());
             } break;
 
             default: {
@@ -272,26 +314,30 @@ export default function Root() {
   }, [dispatch, log, t]);
 
   const reConnectListener = useCallback(async () => {
-    disconnected.current = false;
-    if(!rebooting.current && unlockStep.current > 0) {
-      log(t("deviceBack"));
+    if(rooting) {
+      clearInterval(rebootTimeoutRef.current);
+
+      disconnected.current = false;
+      if(!rebooting.current && unlockStep.current > 0) {
+        log(t("deviceBack"));
+      }
+      rebooting.current = false;
+
+      const ports = await navigator.serial.getPorts();
+      if(ports.length > 0 ) {
+        // Assume that the first available port is the device we are looking for.
+        const port = ports[0];
+        await exploit.openPort(port);
+
+        // Wait a bit after reconnection to make sure the device does not go
+        // away again and services had time to restart.
+        await exploit.sleep(3000);
+
+        // Run the next unlock step (or the failed one if device went away)
+        runUnlock();
+      }
     }
-    rebooting.current = false;
-
-    const ports = await navigator.serial.getPorts();
-    if(ports.length > 0 ) {
-      // Assume that the first available port is the device we are looking for.
-      const port = ports[0];
-      await exploit.openPort(port);
-
-      // Wait a bit after reconnection to make sure the device does not go
-      // away again and services had time to restart.
-      await exploit.sleep(3000);
-
-      // Run the next unlock step (or the failed one if device went away)
-      runUnlock();
-    }
-  }, [log, runUnlock, t]);
+  }, [log, rooting, runUnlock, t]);
 
   const disconnectListener = useCallback(() => {
     disconnected.current = true;

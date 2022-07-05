@@ -24,5 +24,6 @@
   "disclaimerLine3": "Do not power off during rooting",
   "disclaimerLine4": "Proceed at your own risk",
   "rooted": "Device already rooted",
-  "root": "Root Device"
+  "root": "Root Device",
+  "rebootTimeout": "Aborted! Device did not reboot in time, please power cycle and try again."
 }
