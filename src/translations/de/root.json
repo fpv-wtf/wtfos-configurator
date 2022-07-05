@@ -13,7 +13,7 @@
   "step5Success": "Schritt 2 - Erfolgreich!",
   "step5Reboot": "Schritt 2 - Erfolgreich! Neustart...",
   "done": "Alles erledigt - dein Gerät wurde erfolgreich gerootet!",
-  "rewind2": "Zurück zu Schritt 2...",
+  "manualReboot": "Failed! Please power cycle your device now...",
   "failed": "Fehlgeschlagen nach {{maxTry}} Versuchen.",
   "deviceLost": "Gerät ist weg...",
   "deviceBack": "Gerät ist zurück...",
