@@ -13,7 +13,7 @@
   "step5Success": "Step 5 - Success!",
   "step5Reboot": "Step 5 - Success! Rebooting...",
   "done": "All done - your device has been successfully rooted!",
-  "rewind2": "Rewinding to Step 2...",
+  "manualReboot": "Failed! Please power cycle your device now...",
   "failed": "Failed after {{maxTry}} retries.",
   "deviceLost": "Device went away...",
   "deviceBack": "Device came back...",

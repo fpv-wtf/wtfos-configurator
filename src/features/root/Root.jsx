@@ -190,7 +190,7 @@ export default function Root() {
               try {
                 exploit.closePort();
               } catch(e) {
-                console.log(e);
+                console.log("Failed closing port:", e);
               }
 
               dispatch(success());
@@ -206,9 +206,9 @@ export default function Root() {
             disconnected.current = true;
             break;
           } else if(e instanceof PatchFailed) {
-            log(t("rewind2"));
+            log(t("manualReboot"));
 
-            ReactGA.gtag("event", "rootRewind", {
+            ReactGA.gtag("event", "patchFailed", {
               device,
               step: unlockStep.current,
               retry: currentTry,
@@ -222,12 +222,11 @@ export default function Root() {
               },
             });
 
+            rebooting.current = true;
             unlockStep.current = 2;
-
-            currentTry += 1;
-            await exploit.sleep(1000);
+            done = true;
           } else {
-            console.log(e);
+            console.log("Unlock step failed:", e);
 
             Sentry.captureException(e, {
               extra: {
@@ -273,8 +272,6 @@ export default function Root() {
   }, [dispatch, log, t]);
 
   const reConnectListener = useCallback(async () => {
-    console.log("reConnect");
-
     disconnected.current = false;
     if(!rebooting.current && unlockStep.current > 0) {
       log(t("deviceBack"));
