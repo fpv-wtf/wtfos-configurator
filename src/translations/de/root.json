@@ -25,5 +25,6 @@
   "disclaimerLine4": "Auf eigene Gefahr fortfahren",
   "rooted": "Gerät bereits gerootet",
   "root": "Gerät rooten",
-  "rebootTimeout": "Aborted! Device did not reboot in time, please power cycle and try again."
+  "rebootTimeout": "Aborted! Device did not reboot in time, please power cycle and try again.",
+  "rebootTimeShort": "Reboot time suspiciously short - rebooting one more time for good measure..."
 }
