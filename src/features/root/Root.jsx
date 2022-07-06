@@ -52,6 +52,8 @@ import {
 } from "../device/deviceSlice";
 
 const exploit = new Exploit("https://cors.bubblesort.me/?");
+const rebootTimeMinSeconds = 7;
+const rebootTimeMaxSeconds = 60;
 
 export default function Root() {
   const { t } = useTranslation("root");
@@ -67,25 +69,48 @@ export default function Root() {
   const reConnectListenerRef = useRef();
   const rebootTimeoutRef = useRef();
 
+  const timeStarted = useRef();
+  const timeRebootInitiated = useRef();
+  const rebootRetried = useRef(false);
+
   const attempted = useSelector(selectAttempted);
   const hasAdb = useSelector(selectHasAdb);
   const rooting = useSelector(selectRooting);
 
+  let runUnlock;
+
   const log = useCallback((message) => {
-    console.log(message);
-    dispatch(appendToLog(message));
+    const now = new Date();
+    const difference = new Date(now - timeStarted.current);
+    let minutes = difference.getMinutes();
+    let seconds = difference.getSeconds();
+
+    minutes = minutes < 10 ? `0${minutes}` : minutes;
+    seconds = seconds < 10 ? `0${seconds}` : seconds;
+
+    const formatted = `${minutes}:${seconds} ${message}`;
+
+    console.log(formatted);
+    dispatch(appendToLog(formatted));
   }, [dispatch]);
 
-  const runUnlock = useCallback(async () => {
-    const waitForReboot = () => {
-      const rebootTimeoutSeconds = 60;
+  const waitForReboot = useCallback(() => {
+    return setTimeout(() => {
+      unlockStep.current = 7;
+      runUnlock();
+    }, rebootTimeMaxSeconds * 1000);
+  }, [runUnlock]);
 
-      return setTimeout(() => {
-        unlockStep.current = 7;
-        runUnlock();
-      }, rebootTimeoutSeconds * 1000);
-    };
+  const initiateReboot = useCallback(async() => {
+    rebooting.current = true;
+    timeRebootInitiated.current = new Date();
+    clearTimeout(rebootTimeoutRef.current);
+    rebootTimeoutRef.current = waitForReboot();
 
+    await exploit.restart();
+  }, [waitForReboot]);
+
+  runUnlock = useCallback(async () => {
     if(unlockStep.current > 0 && !running.current) {
       running.current = true;
 
@@ -110,14 +135,12 @@ export default function Root() {
               log(t("foundDevice", { device } ));
               log(t("step1Success"));
 
-              rebooting.current = true;
-              unlockStep.current = 2;
               done = true;
-
+              unlockStep.current = 2;
               unlockStepLast.current = 1;
-              rebootTimeoutRef.current = waitForReboot();
+              rebooting.current = true;
 
-              await exploit.restart();
+              await initiateReboot();
             } break;
 
             case 2: {
@@ -126,8 +149,9 @@ export default function Root() {
               }
               const restart = await exploit.unlockStep2();
 
-              unlockStep.current = 3;
               done = true;
+              unlockStep.current = 3;
+              unlockStepLast.current = 2;
 
               if(!restart) {
                 log(t("step2Success"));
@@ -136,12 +160,7 @@ export default function Root() {
                 shouldRunUnlock = true;
               } else {
                 log(t("step2Reboot"));
-
-                unlockStepLast.current = 2;
-                rebootTimeoutRef.current = waitForReboot();
-
-                rebooting.current = true;
-                await exploit.restart();
+                await initiateReboot();
               }
             } break;
 
@@ -165,14 +184,19 @@ export default function Root() {
               await exploit.unlockStep4();
               log(t("step4Success"));
 
-              rebooting.current = true;
-              unlockStep.current = 5;
               done = true;
+              unlockStep.current = 5;
+              unlockStepLast.current = 4;
+
+              rebooting.current = true;
+              timeRebootInitiated.current = new Date();
+              clearTimeout(rebootTimeoutRef.current);
+              rebootTimeoutRef.current = waitForReboot();
+
+              // Wait a bit since the device might reboot after command invocation
+              exploit.sleep(3000);
 
               try {
-                unlockStepLast.current = 4;
-                rebootTimeoutRef.current = waitForReboot();
-
                 await exploit.restart();
               } catch (e) {
                 console.log("Device might already be restarting", e);
@@ -185,14 +209,16 @@ export default function Root() {
               }
               const isRebooting = await exploit.unlockStep5();
 
-              unlockStep.current = 6;
               done = true;
+              unlockStep.current = 6;
+              unlockStepLast.current = 5;
 
               if(isRebooting) {
-                rebooting.current = true;
                 log(t("step5Reboot"));
 
-                unlockStepLast.current = 5;
+                rebooting.current = true;
+                timeRebootInitiated.current = new Date();
+                clearTimeout(rebootTimeoutRef.current);
                 rebootTimeoutRef.current = waitForReboot();
               } else {
                 log(t("step5Skip"));
@@ -201,24 +227,27 @@ export default function Root() {
             } break;
 
             case 6: {
-              log(t("done"));
+              if(!rebootTimeoutRef.current) {
+                log(t("done"));
 
-              ReactGA.gtag("event", "rootDone", {
-                device,
-                step: unlockStep.current,
-                retry: currentTry,
-              });
+                ReactGA.gtag("event", "rootDone", {
+                  device,
+                  step: unlockStep.current,
+                  retry: currentTry,
+                });
 
-              unlockStep.current = 0;
-              done = true;
+                unlockStep.current = 0;
 
-              try {
-                exploit.closePort();
-              } catch(e) {
-                console.log("Failed closing port:", e);
+                try {
+                  exploit.closePort();
+                } catch(e) {
+                  console.log("Failed closing port:", e);
+                }
+
+                dispatch(success());
               }
 
-              dispatch(success());
+              done = true;
             } break;
 
             case 7: {
@@ -302,20 +331,32 @@ export default function Root() {
         }
       }
 
-      if(!done && disconnected.current) {
-        log(t("deviceLost"));
-      }
-
       running.current = false;
       if(shouldRunUnlock) {
         runUnlock();
       }
     }
-  }, [dispatch, log, t]);
+  }, [dispatch, initiateReboot, log, runUnlock, t, waitForReboot]);
 
   const reConnectListener = useCallback(async () => {
     if(rooting) {
-      clearInterval(rebootTimeoutRef.current);
+      clearTimeout(rebootTimeoutRef.current);
+      rebootTimeoutRef.current = null;
+
+      if(rebooting.current) {
+        const now = new Date();
+        const diff = new Date(now - timeRebootInitiated.current);
+        const seconds = diff.getSeconds();
+
+        if(seconds < rebootTimeMinSeconds && !rebootRetried.current) {
+          rebootRetried.current = true;
+          log(t("rebootTimeShort"));
+
+          await initiateReboot();
+          return;
+        }
+      }
+      rebootRetried.current = false;
 
       disconnected.current = false;
       if(!rebooting.current && unlockStep.current > 0) {
@@ -327,25 +368,34 @@ export default function Root() {
       if(ports.length > 0 ) {
         // Assume that the first available port is the device we are looking for.
         const port = ports[0];
-        await exploit.openPort(port);
 
-        // Wait a bit after reconnection to make sure the device does not go
-        // away again and services had time to restart.
-        await exploit.sleep(3000);
+        try {
+          // Wait a bit after reconnection to make sure the device does not go
+          // away again and services had time to restart.
+          await exploit.sleep(3000);
+          await exploit.openPort(port);
 
-        // Run the next unlock step (or the failed one if device went away)
-        runUnlock();
+          // Run the next unlock step (or the failed one if device went away)
+          runUnlock();
+        } catch(e) {
+          console.log("Failed opening port:", e);
+          Sentry.captureException(e);
+        }
       }
     }
-  }, [log, rooting, runUnlock, t]);
+  }, [initiateReboot, log, rooting, runUnlock, t]);
 
   const disconnectListener = useCallback(() => {
     disconnected.current = true;
 
+    if(!rebooting.current && unlockStep.current > 0) {
+      log(t("deviceLost"));
+    }
+
     if(!rooting && attempted) {
       dispatch(reset());
     }
-  }, [attempted, dispatch, rooting]);
+  }, [attempted, dispatch, log, rooting, t]);
 
   const triggerUnlock = useCallback(async() => {
     const filters = [{ usbVendorId: 0x2ca3 }];
@@ -373,6 +423,7 @@ export default function Root() {
 
   const handleClick = useCallback(async() => {
     ReactGA.gtag("event", "rootClicked");
+    timeStarted.current = new Date();
 
     dispatch(root());
     triggerUnlock();
