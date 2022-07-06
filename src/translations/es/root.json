@@ -10,10 +10,10 @@
   "step4": "Intentando el paso 4...",
   "step4Success": "Paso 4 - ¡Éxito! Reiniciando...",
   "step5": "Intentando el paso 5...",
-  "step5Skip": "Step 5 - Skipped - Success!",
+  "step5Skip": "¡Paso 5 - Omitido - Éxito!",
   "step5Reboot": "Paso 5 - ¡Éxito! Reiniciando...",
   "done": "Todo hecho - ¡tu dispositivo ha sido rooteado con éxito!",
-  "manualReboot": "Failed! Please power cycle your device now...",
+  "manualReboot": "¡Error! Por favor, apague y encienda su dispositivo ahora...",
   "failed": "Error después de {{maxTry}} reintentos.",
   "deviceLost": "El dispositivo desapareció...",
   "deviceBack": "El dispositivo regresó...",
@@ -25,5 +25,5 @@
   "disclaimerLine4": "Proceda bajo su propio riesgo",
   "rooted": "El dispositivo ya está rooteado",
   "root": "Rootear dispositivo",
-  "rebootTimeout": "Aborted! Device did not reboot in time, please power cycle and try again."
+  "rebootTimeout": "¡Abortado! El dispositivo no se reinició a tiempo, por favor apagar y encender y volver a intentarlo."
 }
