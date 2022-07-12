@@ -26,7 +26,10 @@ import "./index.css";
 import CookieBanner from "./features/banner/Cookie";
 
 import settings from "./settings.json";
-import { loadLanguage } from "./utils/LocalStorage";
+import {
+  loadLanguage,
+  loadTraceId,
+} from "./utils/LocalStorage";
 
 const darkTheme = createTheme({
   palette: {
@@ -88,6 +91,7 @@ Sentry.init({
 
   tracesSampleRate: 1.0,
 });
+Sentry.setUser({ id: loadTraceId() });
 
 const container = document.getElementById("root");
 const root = createRoot(container);
