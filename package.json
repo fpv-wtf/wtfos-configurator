@@ -1,6 +1,6 @@
 {
   "name": "wtfos-configurator",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "homepage": "https://testing.fpv.wtf",
   "private": true,
   "dependencies": {
@@ -28,6 +28,7 @@
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "uuid": "^8.3.2",
     "web-vitals": "^2.1.4",
     "with-staged": "^1.0.2",
     "xterm-addon-fit": "^0.5.0",

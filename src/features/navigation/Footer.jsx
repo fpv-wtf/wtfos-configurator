@@ -8,10 +8,12 @@ import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import json from "../../../package.json";
+import { loadTraceId } from "../../utils/LocalStorage";
 
 export default function Footer() {
   const { t } = useTranslation("navigation");
   const version = json.version;
+  const traceId = loadTraceId();
 
   return(
     <Box
@@ -36,6 +38,9 @@ export default function Footer() {
               >
                 v
                 {version}
+                &nbsp;- Trace ID:&nbsp;
+
+                {traceId}
               </Typography>
             </Grid>
 

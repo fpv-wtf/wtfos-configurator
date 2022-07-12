@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 import settings from "../settings.json";
 
 const {
@@ -32,6 +34,17 @@ function loadLanguage() {
   return(storedLanguage || defaultLanguage);
 }
 
+function loadTraceId() {
+  let traceId = localStorage.getItem("traceId");
+  if(!traceId) {
+    traceId = uuidv4();
+    localStorage.setItem("traceId", traceId);
+  }
+
+  return traceId;
+}
+
 export {
   loadLanguage,
+  loadTraceId,
 };
