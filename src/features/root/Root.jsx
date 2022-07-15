@@ -69,7 +69,7 @@ export default function Root() {
   const reConnectListenerRef = useRef();
   const rebootTimeoutRef = useRef();
 
-  const timeStarted = useRef();
+  const timeStarted = useRef(new Date());
   const timeRebootInitiated = useRef();
   const rebootRetried = useRef(false);
 
@@ -386,14 +386,16 @@ export default function Root() {
   }, [initiateReboot, log, rooting, runUnlock, t]);
 
   const disconnectListener = useCallback(() => {
-    disconnected.current = true;
+    if(rooting) {
+      disconnected.current = true;
 
-    if(!rebooting.current && unlockStep.current > 0) {
-      log(t("deviceLost"));
-    }
+      if(!rebooting.current && unlockStep.current > 0) {
+        log(t("deviceLost"));
+      }
 
-    if(!rooting && attempted) {
-      dispatch(reset());
+      if(!rooting && attempted) {
+        dispatch(reset());
+      }
     }
   }, [attempted, dispatch, log, rooting, t]);
 
@@ -414,12 +416,16 @@ export default function Root() {
       navigator.serial.removeEventListener("connect", reConnectListenerRef.current);
       reConnectListenerRef.current = reConnectListener;
       navigator.serial.addEventListener("connect", reConnectListenerRef.current);
+    }
+  }, [reConnectListener]);
 
+  useEffect(() => {
+    if(navigator.serial) {
       navigator.serial.removeEventListener("disconnect", disconnectListenerRef.current);
       disconnectListenerRef.current = disconnectListener;
       navigator.serial.addEventListener("disconnect", disconnectListenerRef.current);
     }
-  }, [disconnectListener, reConnectListener]);
+  }, [disconnectListener]);
 
   const handleClick = useCallback(async() => {
     ReactGA.gtag("event", "rootClicked");

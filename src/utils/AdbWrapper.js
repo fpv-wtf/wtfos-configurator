@@ -142,7 +142,14 @@ export default class AdbWrapper {
         this.wtfos.bin.opkg,
         "list-upgradable",
       ]);
-      upgradable = output.stdout.split("\n").filter((element) => element);
+
+      upgradable = output.stdout.split("\n").filter((line) => line);
+      upgradable = upgradable.filter((line) => {
+        const fields = line.split(" - ");
+
+        return fields.length === 3;
+      });
+
       upgradable = upgradable.map((item) => {
         const fields = item.split(" - ");
 
@@ -151,7 +158,7 @@ export default class AdbWrapper {
           current: fields[1],
           latest: fields[2],
         };
-      }).filter(this.filterInvalidFn);
+      });
     } catch(e) {
       console.log(e);
     }
@@ -159,11 +166,16 @@ export default class AdbWrapper {
     return upgradable;
   }
 
-  async upgradePackages() {
-    await this.executeCommand([
+  async upgradePackages(callback) {
+    const output = await this.executeCommand([
       this.wtfos.bin.opkg,
       "upgrade",
     ]);
+
+    if(callback) {
+      const log = output.stdout.split("\n").filter((line) => line);
+      callback(log);
+    }
   }
 
   async getPackages() {

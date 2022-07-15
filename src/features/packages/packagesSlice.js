@@ -92,8 +92,11 @@ export const fetchUpgradable = createAsyncThunk(
 
 export const upgrade = createAsyncThunk(
   "packages/upgrade",
-  async (adb) => {
-    await adb.upgradePackages();
+  async ({
+    adb,
+    callback,
+  }) => {
+    await adb.upgradePackages(callback);
   }
 );
 
