@@ -15,5 +15,8 @@
   "tileRemoveTitle": "Entfernen",
   "tileRemoveDescription": "Entferne WTFOS von deinem Gerät. Dies wird alle Änderungen außer dem Root-Entsperren selbst rückgängig machen.",
   "upToDate": "Alles ist auf dem neuesten Stand!",
-  "checking": "Paktete werden abgerufen…"
+  "checking": "Paktete werden abgerufen…",
+  "name": "Package Name",
+  "current": "Installed Version",
+  "latest": "Latest Version"
 }
