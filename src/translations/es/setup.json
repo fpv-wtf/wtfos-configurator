@@ -15,5 +15,8 @@
   "tileRemoveTitle": "Eliminar",
   "tileRemoveDescription": "Eliminar WTFOS de su dispositivo. Esto revertirá todos los cambios aparte del propio desbloqueo de root.",
   "upToDate": "Todo está actualizado!",
-  "checking": "Comprobando paquetes..."
+  "checking": "Comprobando paquetes...",
+  "name": "Package Name",
+  "current": "Installed Version",
+  "latest": "Latest Version"
 }
