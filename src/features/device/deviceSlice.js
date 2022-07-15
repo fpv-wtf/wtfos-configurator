@@ -66,6 +66,9 @@ export const deviceSlice = createSlice({
     appendToLog: (state, action) => {
       state.log = [...state.log, action.payload];
     },
+    setLog: (state, action) => {
+      state.log = action.payload;
+    },
     installing: (state) => {
       state.status = "installing";
     },
@@ -142,6 +145,7 @@ export const {
   rebooting,
   reset,
   setAdb,
+  setLog,
   setProductInfo,
   setTemperature,
 } = deviceSlice.actions;

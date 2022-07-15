@@ -21,8 +21,10 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 import Spinner from "../loading/Spinner";
+import Log from "../log/Log";
 
 import {
+  setLog,
   selectHasOpkgBinary,
   selectStatus,
 } from "../device/deviceSlice";
@@ -52,7 +54,12 @@ export default function Update({ adb }) {
   }, [adb, dispatch, fetchedUpgradable, isProcessing]);
 
   const handleWTFOSUpdate = useCallback(() => {
-    dispatch(upgrade(adb));
+    dispatch(upgrade({
+      adb,
+      callback: (log) => {
+        dispatch(setLog(log));
+      },
+    }));
   }, [adb, dispatch]);
 
   const renderedUpgradable = upgradable.map((item) => {
@@ -77,6 +84,9 @@ export default function Update({ adb }) {
     <Stack spacing={2}>
       {isProcessing && !fetchedUpgradable &&
         <Spinner text={t("checking")} />}
+
+      {!isProcessing &&
+        <Log />}
 
       {upgradable.length > 0 &&
         <Button

@@ -166,11 +166,16 @@ export default class AdbWrapper {
     return upgradable;
   }
 
-  async upgradePackages() {
-    await this.executeCommand([
+  async upgradePackages(callback) {
+    const output = await this.executeCommand([
       this.wtfos.bin.opkg,
       "upgrade",
     ]);
+
+    if(callback) {
+      const log = output.stdout.split("\n").filter((line) => line);
+      callback(log);
+    }
   }
 
   async getPackages() {
