@@ -15,5 +15,8 @@
   "tileRemoveTitle": "Remove",
   "tileRemoveDescription": "Remove WTFOS from your device. This will revert all changes apart from the root unlock itself.",
   "upToDate": "Everything up to date!",
-  "checking": "Checking packages..."
+  "checking": "Checking packages...",
+  "name": "Package Name",
+  "current": "Installed Version",
+  "latest": "Latest Version"
 }

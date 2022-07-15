@@ -142,7 +142,14 @@ export default class AdbWrapper {
         this.wtfos.bin.opkg,
         "list-upgradable",
       ]);
-      upgradable = output.stdout.split("\n").filter((element) => element);
+
+      upgradable = output.stdout.split("\n").filter((line) => line);
+      upgradable = upgradable.filter((line) => {
+        const fields = line.split(" - ");
+
+        return fields.length === 3;
+      });
+
       upgradable = upgradable.map((item) => {
         const fields = item.split(" - ");
 
@@ -151,7 +158,7 @@ export default class AdbWrapper {
           current: fields[1],
           latest: fields[2],
         };
-      }).filter(this.filterInvalidFn);
+      });
     } catch(e) {
       console.log(e);
     }
