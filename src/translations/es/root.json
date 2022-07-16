@@ -26,5 +26,5 @@
   "rooted": "El dispositivo ya está rooteado",
   "root": "Rootear dispositivo",
   "rebootTimeout": "¡Abortado! El dispositivo no se reinició a tiempo, por favor apagar y encender y volver a intentarlo.",
-  "rebootTimeShort": "Reboot time suspiciously short - rebooting one more time for good measure..."
+  "rebootTimeShort": "Tiempo de reinicio sospechosamente corto - reiniciar una vez más puede ayudar..."
 }
