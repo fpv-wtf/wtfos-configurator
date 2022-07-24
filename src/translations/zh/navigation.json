@@ -13,9 +13,9 @@
   "titlePackages": "软件包",
   "titleStartup": "启动",
   "titleAbout": "关于 fpv.wtf",
-  "titleRoot": "Root",
+  "titleRoot": "获取root权限",
   "titleWtfos": "WTFOS",
-  "titleWtfosUpdate": "WTFOS - Update",
-  "titleWtfosInstall": "WTFOS - Install",
-  "titleWtfosRemove": "WTFOS - Remove"
+  "titleWtfosUpdate": "WTFOS - 升级",
+  "titleWtfosInstall": "WTFOS - 安装",
+  "titleWtfosRemove": "WTFOS - 移除"
 }
