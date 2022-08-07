@@ -1,13 +1,13 @@
 {
-  "installDisclaimerTitle": "Disclaimer:",
-  "installDisclaimerLine1": "WTFOS ist BETA!",
+  "installDisclaimerTitle": "Haftungsausschluss:",
+  "installDisclaimerLine1": "WTFOS ist im BETA Status!",
   "installDisclaimerLine2": "Dinge funktionieren möglicherweise nicht wie erwartet",
   "installDisclaimerLine3": "Auf eigene Gefahr fortfahren",
   "install": "WTFOS installieren",
   "remove": "WTFOS entfernen",
   "hint1": "Du solltest",
   "hint2": "jetzt WTFOS installieren",
-  "hint3": "Dies ist erforderlich, um neue Pakete und Service management hinzuzufügen.",
+  "hint3": "Dies ist für das Hinzufügen neuer Pakete und die Verwaltung von Diensten erforderlich.",
   "tileInstallTitle": "Installieren",
   "tileInstallDescription": "Installiere WTFOS auf deinem Gerät, um Community-Software zu installieren.",
   "tileUpdateTitle": "Aktualisieren",
@@ -15,8 +15,8 @@
   "tileRemoveTitle": "Entfernen",
   "tileRemoveDescription": "Entferne WTFOS von deinem Gerät. Dies wird alle Änderungen außer dem Root-Entsperren selbst rückgängig machen.",
   "upToDate": "Alles ist auf dem neuesten Stand!",
-  "checking": "Paktete werden abgerufen…",
-  "name": "Package Name",
-  "current": "Installed Version",
-  "latest": "Latest Version"
+  "checking": "Pakete werden abgerufen...",
+  "name": "Paket-Name",
+  "current": "Installierte Version",
+  "latest": "Neueste Version"
 }
