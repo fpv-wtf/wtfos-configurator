@@ -18,13 +18,13 @@
   "deviceLost": "Gerät ist weg...",
   "deviceBack": "Gerät ist zurück...",
   "cooling": "Wenn du eine airunit - insbesondere Air Unit Light (Caddx Vista) - rootest, stelle sicher, dass sie aktiv gekühlt wird, indem Du einen Lüfter darauf richtest.",
-  "disclaimerTitle": "Disclaimer:",
+  "disclaimerTitle": "Haftungsausschluss:",
   "disclaimerLine1": "Stelle  sicher, dass das gerootete Gerät von einer zuverlässigen Stromquelle betrieben wird",
   "disclaimerLine2": "Nur ein Gerät verbunden/gepaired ist",
   "disclaimerLine3": "Während des rootens das Gerät nicht ausschalten",
   "disclaimerLine4": "Auf eigene Gefahr fortfahren",
   "rooted": "Gerät bereits gerootet",
   "root": "Gerät rooten",
-  "rebootTimeout": "Aborted! Device did not reboot in time, please power cycle and try again.",
+  "rebootTimeout": "Abgebrochen! Das Gerät wurde nicht rechtzeitig neu gestartet, bitte schalten Sie es aus und versuchen Sie es erneut.",
   "rebootTimeShort": "Reboot time suspiciously short - rebooting one more time for good measure..."
 }
