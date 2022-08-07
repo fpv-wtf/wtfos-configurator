@@ -1,4 +1,4 @@
 {
-  "description": "此功能允许您将您设备的完全控制权移交给第三方。",
-  "warning": "请当您知道自己在做什么并且只连接到信任的个人连接时才使用它。"
+  "description": "This feature allows you to hand over complete control of your device to a third party.",
+  "warning": "Only use this if you know what you are doing and only ever connect to trusted individuals."
 }
