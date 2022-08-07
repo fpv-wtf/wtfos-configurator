@@ -1,6 +1,6 @@
 {
-  "disconnect": "断开连接",
-  "connect": "连接",
-  "connectDevice": "连接到设备",
-  "rebooting": "正在重启..."
+  "disconnect": "Disconnect",
+  "connect": "Connect",
+  "connectDevice": "Connect to Device",
+  "rebooting": "Rebooting..."
 }
