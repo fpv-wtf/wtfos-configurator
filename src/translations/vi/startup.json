@@ -1,0 +1,6 @@
+{
+  "running": "đang chạy (PID: {{pid}})",
+  "started": "đã bắt đầu",
+  "stopped": "dừng lại",
+  "hint": "Các dịch vụ đã bật được khởi động trong quá trình khởi động của thiết bị."
+}

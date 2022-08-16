@@ -1,0 +1,21 @@
+{
+  "footerIssue": "Nếu bạn gặp phải bất kỳ vấn đề nào, vui lòng",
+  "footerIssueLink": "báo cáo chúng trên github",
+  "menuHome": "Nhà",
+  "menuPackageManager": "Trình quản lý gói",
+  "menuStartup": "Khởi động",
+  "menuCli": "CLI",
+  "menuWtfos": "WTFOS",
+  "menuRoot": "Nguồn gốc",
+  "menuAbout": "Giới thiệu về fpv.wtf",
+  "titleHome": "Nhà",
+  "titleCli": "CLI",
+  "titlePackages": "Các gói",
+  "titleStartup": "Khởi động",
+  "titleAbout": "Giới thiệu về fpv.wtf",
+  "titleRoot": "Nguồn gốc",
+  "titleWtfos": "WTFOS",
+  "titleWtfosUpdate": "WTFOS - Cập nhật",
+  "titleWtfosInstall": "WTFOS - Cài đặt",
+  "titleWtfosRemove": "WTFOS - Xóa"
+}

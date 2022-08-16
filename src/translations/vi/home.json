@@ -1,0 +1,17 @@
+{
+  "connected": "Đã kết nối thành công với thiết bị của bạn.",
+  "tilePackageManagerTitle": "Trình quản lý gói",
+  "tilePackageManagerDescription": "Mở rộng chức năng của thiết bị lệch của bạn bằng cách cài đặt các gói bổ sung do cộng đồng phát triển.",
+  "tileStartupTitle": "Khởi động",
+  "tileStartupDescription": "Quản lý các dịch vụ sẽ tự động khởi động sau khi thiết bị được khởi động.",
+  "tileCliTitle": "CLI",
+  "tileCliDescription": "Phiên Shell tương tác. \nChạy lệnh tùy thích, bạn nên biết mình đang làm gì.",
+  "tileWtfosTitle": "WTFOS",
+  "tileWtfosDescription": "Cài đặt, duy trì hoặc loại bỏ wtfos - hệ điều hành cho tất cả các chức năng do cộng đồng đóng góp.",
+  "tileRootTitle": "Nguồn gốc",
+  "tileRootDescription": "Trước khi cài đặt wtfos, bạn sẽ phải root thiết bị của mình, đặt nó miễn phí - SỞ HỮU!",
+  "tileSupportTitle": "Ủng hộ",
+  "tileSupportDescription": "Nếu bạn có bất kỳ phản hồi, câu hỏi nào hoặc muốn đóng góp thêm chức năng, hãy tham gia cộng đồng của chúng tôi trên Discord.",
+  "tileAboutTitle": "Giới thiệu về fpv.wtf",
+  "tileAboutDescription": "fpv.wtf là một nhóm những người đam mê làm việc để cải thiện trải nghiệm FPV kỹ thuật số."
+}

@@ -1,0 +1,22 @@
+{
+  "installDisclaimerTitle": "Tuyên bố từ chối trách nhiệm:",
+  "installDisclaimerLine1": "WTFOS đang ở trạng thái BETA!",
+  "installDisclaimerLine2": "Mọi thứ có thể không hoạt động như mong đợi",
+  "installDisclaimerLine3": "Tiếp tục với rủi ro của riêng bạn",
+  "install": "Cài đặt WTFOS",
+  "remove": "Xóa WTFOS",
+  "hint1": "Bạn nên",
+  "hint2": "cài đặt WTFOS ngay bây giờ",
+  "hint3": "Điều này là bắt buộc để thêm các gói mới và quản lý dịch vụ.",
+  "tileInstallTitle": "Cài đặt",
+  "tileInstallDescription": "Cài đặt WTFOS vào thiết bị của bạn để cài đặt phần mềm điều chỉnh cộng đồng.",
+  "tileUpdateTitle": "Cập nhật",
+  "tileUpdateDescription": "Cập nhật WTFOS và các gói đã cài đặt để luôn cập nhật.",
+  "tileRemoveTitle": "Loại bỏ",
+  "tileRemoveDescription": "Xóa WTFOS khỏi thiết bị của bạn. \nĐiều này sẽ hoàn nguyên tất cả các thay đổi ngoại trừ chính mở khóa gốc.",
+  "upToDate": "Mọi thứ đều được cập nhật!",
+  "checking": "Đang kiểm tra gói ...",
+  "name": "Tên gói hàng",
+  "current": "Phiên bản đã cài đặt",
+  "latest": "Phiên bản mới nhất"
+}
