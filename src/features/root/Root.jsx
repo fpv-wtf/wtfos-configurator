@@ -369,17 +369,31 @@ export default function Root() {
         // Assume that the first available port is the device we are looking for.
         const port = ports[0];
 
-        try {
-          // Wait a bit after reconnection to make sure the device does not go
-          // away again and services had time to restart.
-          await exploit.sleep(3000);
-          await exploit.openPort(port);
+        // Wait a bit after reconnection to make sure the device does not go
+        // away again and services had time to restart.
+        const maxTries = 5;
+        let currentTries = 0;
+        let connected = false;
 
+        while(currentTries < maxTries) {
+          try {
+            await exploit.sleep(5000);
+            await exploit.openPort(port);
+
+            connected = true;
+            break;
+          } catch(e) {
+            console.log("Failed opening serial port - retrying");
+            currentTries += 1;
+          }
+        }
+
+        if(!connected) {
+          Sentry.captureMessage("Failed connecting to serial port.", { extra: { step: unlockStepLast.current } });
+          log(t("portOpenFailed", { maxTries } ));
+        } else {
           // Run the next unlock step (or the failed one if device went away)
           runUnlock();
-        } catch(e) {
-          console.log("Failed opening port:", e);
-          Sentry.captureException(e);
         }
       }
     }

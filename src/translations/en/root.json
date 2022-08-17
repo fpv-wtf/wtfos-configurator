@@ -23,6 +23,7 @@
   "disclaimerLine2": "Only have one device connected/paired",
   "disclaimerLine3": "Do not power off during rooting",
   "disclaimerLine4": "Proceed at your own risk",
+  "portOpenFailed": "Failed opening serial port after {{maxTries}} retries.",
   "rooted": "Device already rooted",
   "root": "Root Device",
   "rebootTimeout": "Aborted! Device did not reboot in time, please power cycle and try again.",
