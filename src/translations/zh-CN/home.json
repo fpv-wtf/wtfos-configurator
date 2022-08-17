@@ -1,0 +1,17 @@
+{
+  "connected": "已连接至您的设备。",
+  "tilePackageManagerTitle": "软件包管理器",
+  "tilePackageManagerDescription": "通过安装社区开发的额外软件包来扩展您的设备的功能。",
+  "tileStartupTitle": "启动",
+  "tileStartupDescription": "管理设备启动后自动启动的服务。",
+  "tileCliTitle": "命令行界面",
+  "tileCliDescription": "交互式 Shell 会话。你应该知道你在做什么。",
+  "tileWtfosTitle": "WTFOS",
+  "tileWtfosDescription": "安装、维护或移除 wtfos - 所有功能都来自于社区贡献的操作系统。",
+  "tileRootTitle": "越狱",
+  "tileRootDescription": "在安装 wtfos 之前，您将您的设备越狱，释放它 - 完全拥有它！",
+  "tileSupportTitle": "支持",
+  "tileSupportDescription": "如果您有任何反馈，问题或想要贡献额外的功能，加入我们在 Discord 上的社区。",
+  "tileAboutTitle": "关于 fpv.wtf",
+  "tileAboutDescription": "fpv.wtf是一群致力于改善数字 FPV 体验的爱好者。"
+}
