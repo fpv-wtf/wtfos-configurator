@@ -1,0 +1,12 @@
+{
+  "title": "Các biện pháp an toàn / gợi ý phục hồi:",
+  "line1": "Khi khởi động wtfos, phân vùng / system sẽ bị ghi đè bằng bản sao có thể ghi của phân vùng được lưu trong /blacbkox/wtfos/system.img",
+  "line2": "Nếu bạn giữ nút liên kết trong khi khởi động, khởi động wtfos sẽ bị bỏ qua khi bật adb để cho phép xóa wtfos hoặc chẩn đoán",
+  "line3": "Nếu wtfos phát hiện bất kỳ vấn đề nghiêm trọng nào, nó cũng sẽ cố gắng khởi động mà không cần bất kỳ sửa đổi nào và với adb được bật",
+  "browserNotSupported": "Trình duyệt không được hỗ trợ!",
+  "browserNotSupportedText": "Trình duyệt của bạn không hỗ trợ chức năng webusb. \nVui lòng sử dụng một",
+  "browserNotSupportedLink": "trình duyệt cung cấp chức năng này.",
+  "browserSupported": "Các trình duyệt được hỗ trợ (và được thử nghiệm) là:",
+  "browserSupportedAndroid": "Một số điện thoại Android",
+  "browserSupportedOther": "Các trình duyệt khác dựa trên Chromium"
+}

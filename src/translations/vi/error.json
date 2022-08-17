@@ -1,0 +1,7 @@
+{
+  "error404Title": "404 không tìm thấy",
+  "error404Text": "Không chắc chắn những gì bạn đang tìm kiếm, nhưng trang này không tồn tại. \nCó thể kiểm tra",
+  "error404Link": "trang chủ",
+  "errorConnection": "Không thể kết nối với thiết bị, hãy đảm bảo rằng máy chủ adb không chạy trên máy của bạn (adb kill-server) và bạn không được kết nối trong tab / cửa sổ khác.",
+  "warningConnection": "Kết nối Goggles hoặc Air Unit đã root của bạn qua USB, đảm bảo chúng được bật nguồn và nhấn nút kết nối."
+}

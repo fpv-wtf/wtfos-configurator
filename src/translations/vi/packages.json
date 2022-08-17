@@ -1,0 +1,15 @@
+{
+  "remove": "",
+  "install": "",
+  "fetching": "Đang tìm nạp các gói ...",
+  "installationFailed": "Lỗi trong khi cài đặt gói:",
+  "labelRepo": "Repo",
+  "labelPackages": "Các gói",
+  "labelAll": "Tất cả các",
+  "installed": "Cài đặt",
+  "labelSearch": "Tìm kiếm...",
+  "name": "",
+  "version": "Phiên bản",
+  "description": "Sự mô tả",
+  "matchCount": "Đã tìm thấy {{count}} gói"
+}

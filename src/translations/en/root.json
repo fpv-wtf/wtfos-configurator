@@ -27,5 +27,7 @@
   "rooted": "Device already rooted",
   "root": "Root Device",
   "rebootTimeout": "Aborted! Device did not reboot in time, please power cycle and try again.",
-  "rebootTimeShort": "Reboot time suspiciously short - rebooting one more time for good measure..."
+  "rebootTimeShort": "Reboot time suspiciously short - rebooting one more time for good measure...",
+  "rewind2": "Rewinding to Step 2...",
+  "step5Success": "Step 2 - Success!"
 }
