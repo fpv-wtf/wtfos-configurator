@@ -1,0 +1,7 @@
+{
+  "error404Title": "404 - No Encontrado",
+  "error404Text": "No estoy seguro de lo que estabas buscando, pero esta página no existe. Tal vez compruebe la",
+  "error404Link": "página de inicio",
+  "errorConnection": "No se pudo conectar al dispositivo, asegúrese de que el servidor adb no se está ejecutando en su máquina (adb kill-server) y de que no esté conectado en otra pestaña/ventana.",
+  "warningConnection": "Conecte sus Goggles rooteados o Air Unit vía USB, asegúrese de que están encendidos y pulse el botón conectar."
+}

@@ -1,7 +1,7 @@
 {
-  "error404Title": "404 - Not found",
-  "error404Text": "Not sure what you were looking for, but this page does not exist. Maybe check the",
-  "error404Link": "homepage",
-  "errorConnection": "Could not connect to device, make sure that no other adb server is running on your machine and that you are not connected in another tab/window.",
-  "warningConnection": "Connect your rooted goggles or airunit via USB, make sure they are powered and hit the connect button."
+  "error404Title": "404 页面不存在",
+  "error404Text": "不知道您正在寻找什么，但这个页面不存在。请检查",
+  "error404Link": "首页",
+  "errorConnection": "无法连接到设备， 请确保 adb 服务器未在您的机器上运行 (adb kill-server) 并且您并未在另一个标签/窗口中连接。",
+  "warningConnection": "通过 USB 连接您的已越狱的 眼镜 或 天空端，请确保它们已开启并按下连接按钮。"
 }
