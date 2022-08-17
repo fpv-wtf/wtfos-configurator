@@ -1,6 +1,6 @@
 {
-  "disconnect": "Disconnect",
-  "connect": "Connect",
-  "connectDevice": "Connect to Device",
-  "rebooting": "Rebooting..."
+  "disconnect": "Disconnetti",
+  "connect": "Connetti",
+  "connectDevice": "Connetti al dispositivo",
+  "rebooting": "Sto riavviando..."
 }
