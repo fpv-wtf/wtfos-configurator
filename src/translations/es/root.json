@@ -23,6 +23,7 @@
   "disclaimerLine2": "Sólo tenga un dispositivo conectado/emparejado",
   "disclaimerLine3": "No apagar durante el proceso de rooteo",
   "disclaimerLine4": "Proceda bajo su propio riesgo",
+  "portOpenFailed": "Failed opening serial port after {{maxTries}} retries.",
   "rooted": "El dispositivo ya está rooteado",
   "root": "Rootear dispositivo",
   "rebootTimeout": "¡Abortado! El dispositivo no se reinició a tiempo, por favor apagar y encender y volver a intentarlo.",
