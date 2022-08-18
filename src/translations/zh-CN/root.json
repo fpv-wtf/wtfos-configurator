@@ -27,5 +27,6 @@
   "rooted": "设备已 root",
   "root": "Root 设备",
   "rebootTimeout": "中止！设备未能及时重启，请重新为设备上电",
-  "rebootTimeShort": "重启用时过短 - 为保证正确计数请再次重启设备"
+  "rebootTimeShort": "重启用时过短 - 为保证正确计数请再次重启设备",
+  "unlockFailed": "Unlock failed, please power-cycle your device and try again."
 }
