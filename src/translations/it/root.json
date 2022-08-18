@@ -28,5 +28,5 @@
   "root": "Roota il dispositivo",
   "rebootTimeout": "Operazione Interrotta! Il dispositivo non si è riavviato nel tempo previsto, si prega di spegnere e riaccendere il dispositivo e di riprovare.",
   "rebootTimeShort": "Tempo di riavvio troppo breve - riavvio ulteriormente per sicurezza...",
-  "unlockFailed": "Unlock failed, please power-cycle your device and try again."
+  "unlockFailed": "Sblocco non riuscito, spegnere e riaccendere il dispositivo e riprovare."
 }
