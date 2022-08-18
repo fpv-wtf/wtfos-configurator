@@ -26,6 +26,7 @@ import Webusb from "../disclaimer/Webusb";
 import {
   PatchFailed,
   PortLost,
+  UnlockFailed,
 } from "../../utils/obfuscated-exploit/Errors";
 import Exploit from "../../utils/obfuscated-exploit/Exploit";
 
@@ -33,8 +34,9 @@ import Exploit from "../../utils/obfuscated-exploit/Exploit";
 import {
   PatchFailed,
   PortLost,
+  UnlockFailed,
 } from "../../utils/exploit/Errors";
-import Exploit from "../../utils/exploit/Exploit";
+import Exploit from "../../utils/exploit/Exploit.js";
 */
 
 import {
@@ -181,6 +183,7 @@ export default function Root() {
               if (currentTry === 0) {
                 log(t("step4"));
               }
+
               await exploit.unlockStep4();
               log(t("step4Success"));
 
@@ -193,8 +196,17 @@ export default function Root() {
               clearTimeout(rebootTimeoutRef.current);
               rebootTimeoutRef.current = waitForReboot();
 
-              // Wait a bit since the device might reboot after command invocation
-              exploit.sleep(3000);
+              await exploit.sleep(3000);
+
+              /**
+               * Step 4 waits for response, the following outcomes are possible:
+               * 1. No response: Device might already be rebooting
+               * 2. Response with return code 0x00 - everything went well
+               * 3. Non 0x00 response code - there was some error
+               *
+               * Cases 1 and 2 are fine and expected, case 3 will thorw an error,
+               * rooting has to be restarted after a power cycle
+               */
 
               try {
                 await exploit.restart();
@@ -273,7 +285,12 @@ export default function Root() {
             }
           }
         } catch(e) {
-          if(e instanceof PortLost) {
+          if(e instanceof UnlockFailed) {
+            log(t("unlockFailed"));
+
+            shouldRunUnlock = false;
+            done = true;
+          } else if(e instanceof PortLost) {
             disconnected.current = true;
             break;
           } else if(e instanceof PatchFailed) {
