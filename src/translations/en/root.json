@@ -27,6 +27,5 @@
   "rooted": "Device already rooted",
   "root": "Root Device",
   "rebootTimeout": "Aborted! Device did not reboot in time, please power cycle and try again.",
-  "rebootTimeShort": "Reboot time suspiciously short - rebooting one more time for good measure...",
-  "unlockFailed": "Unlock failed, please power-cycle your device and try again."
+  "rebootTimeShort": "Reboot time suspiciously short - rebooting one more time for good measure..."
 }
