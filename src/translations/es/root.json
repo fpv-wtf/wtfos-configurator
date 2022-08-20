@@ -23,10 +23,10 @@
   "disclaimerLine2": "Sólo tenga un dispositivo conectado/emparejado",
   "disclaimerLine3": "No apagar durante el proceso de rooteo",
   "disclaimerLine4": "Proceda bajo su propio riesgo",
-  "portOpenFailed": "Failed opening serial port after {{maxTries}} retries.",
+  "portOpenFailed": "Error al abrir el puerto serial después de {{maxTries}} reintentos.",
   "rooted": "El dispositivo ya está rooteado",
   "root": "Rootear dispositivo",
   "rebootTimeout": "¡Abortado! El dispositivo no se reinició a tiempo, por favor apagar y encender y volver a intentarlo.",
   "rebootTimeShort": "Tiempo de reinicio sospechosamente corto - reiniciar una vez más puede ayudar...",
-  "unlockFailed": "Unlock failed, please power-cycle your device and try again."
+  "unlockFailed": "Desbloqueo fallido, por favor apaga y enciende tu dispositivo e inténtalo de nuevo."
 }
