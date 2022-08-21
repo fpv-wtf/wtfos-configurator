@@ -1,6 +1,6 @@
 {
   "step1": "正在尝试步骤 1...",
-  "foundDevice": " - 找到设备:{{device}}",
+  "foundDevice": " - Found Device: {{device}}, Version: {{version}}",
   "step1Success": "步骤 1 - 成功！重启中...",
   "step2": "正在尝试步骤 2...",
   "step2Success": "步骤 2 - 成功！",
