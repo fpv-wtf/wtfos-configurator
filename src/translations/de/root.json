@@ -1,6 +1,6 @@
 {
   "step1": "Versuch Schritt 1...",
-  "foundDevice": " - Found Device: {{device}}, Version: {{version}}",
+  "foundDevice": " - Gerät gefunden: {{device}}, Version: {{version}}",
   "step1Success": "Schritt 1 - Erfolgreich! Neustart...",
   "step2": "Versuch Schritt 2...",
   "step2Success": "Schritt 2 - Erfolgreich!",
@@ -23,10 +23,10 @@
   "disclaimerLine2": "Habe nur ein Gerät verbunden/gekoppelt",
   "disclaimerLine3": "Während des Root Vorgang das Gerät nicht ausschalten",
   "disclaimerLine4": "Auf eigene Gefahr fortfahren",
-  "portOpenFailed": "Failed opening serial port after {{maxTries}} retries.",
+  "portOpenFailed": "Öffnen der seriellen Schnittstelle nach {{maxTries}} Wiederholungsversuchen fehlgeschlagen.",
   "rooted": "Gerät bereits gerootet",
   "root": "Gerät rooten",
   "rebootTimeout": "Abgebrochen! Das Gerät wurde nicht rechtzeitig neu gestartet, bitte schalten Sie es aus und versuchen Sie es erneut.",
   "rebootTimeShort": "Neustart verdächtig kurz - zur Sicherheit noch einmal neu starten...",
-  "unlockFailed": "Unlock failed, please power-cycle your device and try again."
+  "unlockFailed": "Entsperren fehlgeschlagen, bitte starten Sie Ihr Gerät neu und versuchen Sie es erneut."
 }
