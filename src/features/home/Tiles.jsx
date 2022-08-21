@@ -10,6 +10,7 @@ import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import StartIcon from "@mui/icons-material/Start";
 import TerminalIcon from "@mui/icons-material/Terminal";
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
+import AddBoxIcon from "@mui/icons-material/AddBox";
 
 import SvgIcon from "@mui/material/SvgIcon";
 import { ReactComponent as AlienSvg } from "../../assets/icons/alien-white.svg";
@@ -116,6 +117,22 @@ export default function Tiles() {
           title={t("tileRootTitle")}
         >
           <AccessibilityNewIcon fontSize="large" />
+        </Tile>
+      </Grid>
+
+      <Grid
+        item
+        md={3}
+        sm={6}
+        xs={12}
+      >
+        <Tile
+          description={t("tileExpandDescription")}
+          disabled={isConnected && hasAdb}
+          linkTo="expand"
+          title={t("tileExpandTitle")}
+        >
+          <AddBoxIcon fontSize="large" />
         </Tile>
       </Grid>
 

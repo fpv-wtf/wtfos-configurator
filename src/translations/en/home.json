@@ -13,5 +13,7 @@
   "tileSupportTitle": "Support",
   "tileSupportDescription": "If you have any feedback, questions or want to contribute additional functionality, join our community on Discord.",
   "tileAboutTitle": "About fpv.wtf",
-  "tileAboutDescription": "fpv.wtf is a group of enthusiasts working to improve the digital FPV experience."
+  "tileAboutDescription": "fpv.wtf is a group of enthusiasts working to improve the digital FPV experience.",
+  "tileExpandTitle": "Expand",
+  "tileExpandDescription": "Expand your device by adding additional functionality through easily installable packages."
 }

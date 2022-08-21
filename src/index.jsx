@@ -55,6 +55,7 @@ for(const lang of languageKeys) {
     cli: require(`./translations/${lang}/cli.json`),
     common: require(`./translations/${lang}/common.json`),
     disclaimer: require(`./translations/${lang}/disclaimer.json`),
+    expand: require(`./translations/${lang}/expand.json`),
     cookie: require(`./translations/${lang}/cookie.json`),
     error: require(`./translations/${lang}/error.json`),
     home: require(`./translations/${lang}/home.json`),

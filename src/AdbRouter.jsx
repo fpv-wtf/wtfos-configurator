@@ -20,6 +20,7 @@ import { Adb } from "@yume-chan/adb";
 import AdbWrapper from "./utils/AdbWrapper";
 
 import About from "./features/about/About";
+import Expand from "./features/expand/Expand";
 import App from "./App";
 
 import {
@@ -186,6 +187,11 @@ export default function AdbRouter() {
       <Route
         element={<About />}
         path="/about"
+      />
+
+      <Route
+        element={<Expand />}
+        path="/expand"
       />
 
       <Route

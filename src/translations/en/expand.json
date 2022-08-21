@@ -1,0 +1,6 @@
+{
+  "titleExpand": "Expand",
+  "textExpand": "WTFOS can be easily expanded by installing packages through our official repository. A list of all available packages can be found in our <a href=\"http://repo.fpv.wtf/pigeon/\">repository index<a>.",
+  "titleContribute": "Contribute",
+  "textContribute": "We encourage everyone to contribute their ideas and features they want to see. If you have an idea, feel free to drop by on <a href=\"https://discord.com/invite/3rpnBBJKtU\">Discord</a> to discuss it. If you have functionality ready to go, submit a PR to the <a href=\"https://github.com/fpv-wtf/opkg-repo\">repository</a>. There you will also find all needed information regarding packaging, versioning and automated builds for your feature."
+}
