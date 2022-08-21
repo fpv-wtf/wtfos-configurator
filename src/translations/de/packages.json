@@ -1,9 +1,9 @@
 {
   "remove": "Entfernen",
   "install": "Installieren",
-  "fetching": "Paktete werden abgerufen…",
-  "installationFailed": "Fehler während Paket installation:",
-  "labelRepo": "Repo",
+  "fetching": "Pakete werden abgerufen...",
+  "installationFailed": "Fehler während Paket Installation:",
+  "labelRepo": "Quelle",
   "labelPackages": "Pakete",
   "labelAll": "Alle",
   "installed": "Installiert",

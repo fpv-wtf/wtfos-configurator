@@ -26,6 +26,7 @@ import Webusb from "../disclaimer/Webusb";
 import {
   PatchFailed,
   PortLost,
+  UnlockFailed,
 } from "../../utils/obfuscated-exploit/Errors";
 import Exploit from "../../utils/obfuscated-exploit/Exploit";
 
@@ -33,8 +34,9 @@ import Exploit from "../../utils/obfuscated-exploit/Exploit";
 import {
   PatchFailed,
   PortLost,
+  UnlockFailed,
 } from "../../utils/exploit/Errors";
-import Exploit from "../../utils/exploit/Exploit";
+import Exploit from "../../utils/exploit/Exploit.js";
 */
 
 import {
@@ -102,12 +104,16 @@ export default function Root() {
   }, [runUnlock]);
 
   const initiateReboot = useCallback(async() => {
-    rebooting.current = true;
-    timeRebootInitiated.current = new Date();
-    clearTimeout(rebootTimeoutRef.current);
-    rebootTimeoutRef.current = waitForReboot();
+    try {
+      await exploit.restart();
 
-    await exploit.restart();
+      rebooting.current = true;
+      timeRebootInitiated.current = new Date();
+      clearTimeout(rebootTimeoutRef.current);
+      rebootTimeoutRef.current = waitForReboot();
+    } catch(e) {
+      console.log("Rebooting failed...");
+    }
   }, [waitForReboot]);
 
   runUnlock = useCallback(async () => {
@@ -119,6 +125,7 @@ export default function Root() {
       let done = false;
       let shouldRunUnlock = false;
       let device = "Unknown";
+      let version = "Unknown";
 
       while(currentTry < maxTry && !done) {
         try {
@@ -129,10 +136,17 @@ export default function Root() {
               }
 
               device = await exploit.unlockStep1();
+              version = await exploit.getVersion();
 
-              ReactGA.gtag("event", "rootDevice", { device });
+              ReactGA.gtag("event", "rootDevice", {
+                device,
+                version,
+              });
 
-              log(t("foundDevice", { device } ));
+              log(t("foundDevice", {
+                device,
+                version,
+              }));
               log(t("step1Success"));
 
               done = true;
@@ -181,6 +195,7 @@ export default function Root() {
               if (currentTry === 0) {
                 log(t("step4"));
               }
+
               await exploit.unlockStep4();
               log(t("step4Success"));
 
@@ -188,19 +203,18 @@ export default function Root() {
               unlockStep.current = 5;
               unlockStepLast.current = 4;
 
-              rebooting.current = true;
-              timeRebootInitiated.current = new Date();
-              clearTimeout(rebootTimeoutRef.current);
-              rebootTimeoutRef.current = waitForReboot();
+              /**
+               * Step 4 waits for response, the following outcomes are possible:
+               * 1. No response: Device might already be rebooting
+               * 2. Response with return code 0x00 - everything went well
+               * 3. Non 0x00 response code - there was some error
+               *
+               * Cases 1 and 2 are fine and expected, case 3 will thorw an error,
+               * rooting has to be restarted after a power cycle
+               */
 
-              // Wait a bit since the device might reboot after command invocation
-              exploit.sleep(3000);
-
-              try {
-                await exploit.restart();
-              } catch (e) {
-                console.log("Device might already be restarting", e);
-              }
+              await exploit.sleep(3000);
+              await initiateReboot();
             } break;
 
             case 5: {
@@ -273,7 +287,12 @@ export default function Root() {
             }
           }
         } catch(e) {
-          if(e instanceof PortLost) {
+          if(e instanceof UnlockFailed) {
+            log(t("unlockFailed"));
+
+            shouldRunUnlock = false;
+            done = true;
+          } else if(e instanceof PortLost) {
             disconnected.current = true;
             break;
           } else if(e instanceof PatchFailed) {
@@ -364,37 +383,13 @@ export default function Root() {
       }
       rebooting.current = false;
 
+      // Make sure at least one port is available and run unlock
+      await exploit.sleep(3000);
       const ports = await navigator.serial.getPorts();
       if(ports.length > 0 ) {
-        // Assume that the first available port is the device we are looking for.
-        const port = ports[0];
-
-        // Wait a bit after reconnection to make sure the device does not go
-        // away again and services had time to restart.
-        const maxTries = 5;
-        let currentTries = 0;
-        let connected = false;
-
-        while(currentTries < maxTries) {
-          try {
-            await exploit.sleep(5000);
-            await exploit.openPort(port);
-
-            connected = true;
-            break;
-          } catch(e) {
-            console.log("Failed opening serial port - retrying");
-            currentTries += 1;
-          }
-        }
-
-        if(!connected) {
-          Sentry.captureMessage("Failed connecting to serial port.", { extra: { step: unlockStepLast.current } });
-          log(t("portOpenFailed", { maxTries } ));
-        } else {
-          // Run the next unlock step (or the failed one if device went away)
-          runUnlock();
-        }
+        runUnlock();
+      } else {
+        console.log("No serial ports found");
       }
     }
   }, [initiateReboot, log, rooting, runUnlock, t]);

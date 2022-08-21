@@ -1,0 +1,15 @@
+{
+  "remove": "Eliminar",
+  "install": "Instalar",
+  "fetching": "Obteniendo paquetes...",
+  "installationFailed": "Error durante la instalación del paquete:",
+  "labelRepo": "Repositorio",
+  "labelPackages": "Paquetes",
+  "labelAll": "Todos",
+  "installed": "Instalado",
+  "labelSearch": "Buscar...",
+  "name": "Nombre",
+  "version": "Versión",
+  "description": "Descripción",
+  "matchCount": "Se encontraron {{count}} paquetes"
+}

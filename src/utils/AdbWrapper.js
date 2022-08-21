@@ -481,7 +481,7 @@ export default class AdbWrapper {
 
       if(output.exitCode !== 0) {
         statusCallback("ERROR: Failed installing entware");
-        console.log(output);
+        output.stdout.split("\n").forEach((line) => statusCallback(line));
         return;
       }
     }
@@ -497,7 +497,7 @@ export default class AdbWrapper {
 
     if(output.exitCode !== 0) {
       statusCallback("ERROR: Failed updating opkg.config");
-      console.log(output);
+      output.stdout.split("\n").forEach((line) => statusCallback(line));
       return;
     }
 
@@ -508,7 +508,7 @@ export default class AdbWrapper {
     ]);
     if(output.exitCode !== 0) {
       statusCallback("ERROR: Failed updating package list");
-      console.log(output);
+      output.stdout.split("\n").forEach((line) => statusCallback(line));
       return;
     }
 
@@ -520,7 +520,7 @@ export default class AdbWrapper {
     ]);
     if(output.exitCode !== 0) {
       statusCallback("ERROR: Failed installing WTFOS");
-      console.log(output);
+      output.stdout.split("\n").forEach((line) => statusCallback(line));
       return;
     }
 
@@ -540,7 +540,7 @@ export default class AdbWrapper {
     ]);
     if(output.exitCode !== 0) {
       statusCallback("ERROR: Failed removing WTFOS");
-      console.log(output);
+      output.stdout.split("\n").forEach((line) => statusCallback(line));
       return;
     }
 
@@ -553,11 +553,9 @@ export default class AdbWrapper {
     output = await this.executeCommand(`rm -r ${this.wtfos.path}`);
     if(output.exitCode !== 0) {
       statusCallback("ERROR: Failed cleaning up");
-      console.log(output);
+      output.stdout.split("\n").forEach((line) => statusCallback(line));
       return;
     }
-
-    statusCallback("Removed WTFOS!");
 
     statusCallback("Rebooting...");
     await this.executeCommand("sync");

@@ -1,0 +1,22 @@
+{
+  "installDisclaimerTitle": "Esclusione di Responsabilità:",
+  "installDisclaimerLine1": "WTFOS è ancora una versione BETA!",
+  "installDisclaimerLine2": "Le funzioni potrebbero non funzionare correttamente",
+  "installDisclaimerLine3": "Continua a tuo rischio e pericolo!",
+  "install": "Installa WTFOS",
+  "remove": "Rimuovi WTFOS",
+  "hint1": "Dovresti",
+  "hint2": "installare WTFOS adesso",
+  "hint3": "Questo è necessario per aggiungere nuovi pacchetti e per la gestione dei servizi.",
+  "tileInstallTitle": "Installa",
+  "tileInstallDescription": "Installa WTFOS sul tuo dispositivo per installare il software della comunità.",
+  "tileUpdateTitle": "Aggiornamento",
+  "tileUpdateDescription": "Aggiorna WTFOS e i relativi pacchetti installati per avere l'ultima versione disponibile.",
+  "tileRemoveTitle": "Rimuovi",
+  "tileRemoveDescription": "Rimuovere WTFOS dal tuo dispositivo. Questo ripristinerà tutte le modifiche tranne lo sblocco della root.",
+  "upToDate": "Tutto aggiornato!",
+  "checking": "Controllo i pacchetti...",
+  "name": "Nome del pacchetto",
+  "current": "Versione installata",
+  "latest": "Ultima versione"
+}

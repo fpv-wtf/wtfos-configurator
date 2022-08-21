@@ -1,0 +1,21 @@
+{
+  "footerIssue": "Se si verifica un problema, ti preghiamo di",
+  "footerIssueLink": "segnalarlo su GitHub",
+  "menuHome": "Home",
+  "menuPackageManager": "Gestore dei pacchetti",
+  "menuStartup": "Avvio",
+  "menuCli": "CLI",
+  "menuWtfos": "WTFOS",
+  "menuRoot": "Radice",
+  "menuAbout": "Informazioni su fpv.wtf",
+  "titleHome": "Home",
+  "titleCli": "CLI",
+  "titlePackages": "Pacchetti",
+  "titleStartup": "Avvio",
+  "titleAbout": "Informazioni su fpv.wtf",
+  "titleRoot": "Root",
+  "titleWtfos": "WTFOS",
+  "titleWtfosUpdate": "WTFOS - Aggiornamenti",
+  "titleWtfosInstall": "WTFOS - Installazione",
+  "titleWtfosRemove": "WTFOS - Elimina"
+}
