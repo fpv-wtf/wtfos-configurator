@@ -1,6 +1,6 @@
 {
   "step1": "Intentando el paso 1...",
-  "foundDevice": " - Found Device: {{device}}, Version: {{version}}",
+  "foundDevice": " - Dispositivo encontrado: {{device}}, Versión: {{version}}",
   "step1Success": "Paso 1 - ¡Éxito! Reiniciando...",
   "step2": "Intentando el paso 2...",
   "step2Success": "Paso 2 - ¡Éxito!",
