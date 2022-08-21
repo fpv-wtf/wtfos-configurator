@@ -104,12 +104,16 @@ export default function Root() {
   }, [runUnlock]);
 
   const initiateReboot = useCallback(async() => {
-    rebooting.current = true;
-    timeRebootInitiated.current = new Date();
-    clearTimeout(rebootTimeoutRef.current);
-    rebootTimeoutRef.current = waitForReboot();
+    try {
+      await exploit.restart();
 
-    await exploit.restart();
+      rebooting.current = true;
+      timeRebootInitiated.current = new Date();
+      clearTimeout(rebootTimeoutRef.current);
+      rebootTimeoutRef.current = waitForReboot();
+    } catch(e) {
+      console.log("Rebooting failed...");
+    }
   }, [waitForReboot]);
 
   runUnlock = useCallback(async () => {
@@ -121,6 +125,7 @@ export default function Root() {
       let done = false;
       let shouldRunUnlock = false;
       let device = "Unknown";
+      let version = "Unknown";
 
       while(currentTry < maxTry && !done) {
         try {
@@ -131,10 +136,17 @@ export default function Root() {
               }
 
               device = await exploit.unlockStep1();
+              version = await exploit.getVersion();
 
-              ReactGA.gtag("event", "rootDevice", { device });
+              ReactGA.gtag("event", "rootDevice", {
+                device,
+                version,
+              });
 
-              log(t("foundDevice", { device } ));
+              log(t("foundDevice", {
+                device,
+                version,
+              }));
               log(t("step1Success"));
 
               done = true;
@@ -191,13 +203,6 @@ export default function Root() {
               unlockStep.current = 5;
               unlockStepLast.current = 4;
 
-              rebooting.current = true;
-              timeRebootInitiated.current = new Date();
-              clearTimeout(rebootTimeoutRef.current);
-              rebootTimeoutRef.current = waitForReboot();
-
-              await exploit.sleep(3000);
-
               /**
                * Step 4 waits for response, the following outcomes are possible:
                * 1. No response: Device might already be rebooting
@@ -208,11 +213,8 @@ export default function Root() {
                * rooting has to be restarted after a power cycle
                */
 
-              try {
-                await exploit.restart();
-              } catch (e) {
-                console.log("Device might already be restarting", e);
-              }
+              await exploit.sleep(3000);
+              await initiateReboot();
             } break;
 
             case 5: {
@@ -382,9 +384,12 @@ export default function Root() {
       rebooting.current = false;
 
       // Make sure at least one port is available and run unlock
+      await exploit.sleep(3000);
       const ports = await navigator.serial.getPorts();
       if(ports.length > 0 ) {
         runUnlock();
+      } else {
+        console.log("No serial ports found");
       }
     }
   }, [initiateReboot, log, rooting, runUnlock, t]);
