@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import React, {
-  createRef,
   useCallback,
   useEffect,
   useRef,
@@ -15,7 +14,6 @@ import { useTranslation } from "react-i18next";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
-import Grow from '@mui/material/Grow';
 import InputLabel from "@mui/material/InputLabel";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
@@ -171,17 +169,17 @@ export default function Packages({ adb }) {
         link.parentNode.removeChild(link);
       }),
     }));
-  });
+  }, [adb, dispatch]);
 
   const closeHandler = useCallback((event) => {
     setMenuOpen(null);
-  });
+  }, [setMenuOpen]);
 
   const moreHandler = useCallback((event) => {
     setAnchorEl(event.currentTarget);
     const name = event.target.dataset["key"];
     setMenuOpen(name);
-  });
+  }, [setAnchorEl, setMenuOpen]);
 
   const installHandler = useCallback((event) => {
     const name = event.target.dataset["key"];
@@ -224,7 +222,7 @@ export default function Packages({ adb }) {
             <div>
               <Button
                 aria-controls={`${item.name}-menu`}
-                aria-expanded={menuOpen === item.name ? 'true' : undefined}
+                aria-expanded={menuOpen === item.name ? "true" : undefined}
                 aria-haspopup="true"
                 color="success"
                 data-key={item.name}
@@ -237,7 +235,7 @@ export default function Packages({ adb }) {
               </Button>
 
               <Menu
-                MenuListProps={{ 'aria-labelledby': `${item.name}-menu` }}
+                MenuListProps={{ "aria-labelledby": `${item.name}-menu` }}
                 anchorEl={anchorEl}
                 id={`${item.name}-menu`}
                 onClose={closeHandler}

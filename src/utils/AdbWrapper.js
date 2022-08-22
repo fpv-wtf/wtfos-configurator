@@ -121,7 +121,6 @@ export default class AdbWrapper {
     const directory = "/blackbox/wtfos.log";
     const directories = [directory];
     const result = await this.tarFiles(directories);
-    const text = new TextDecoder().decode(result);
 
     if(callback) {
       callback(result);
