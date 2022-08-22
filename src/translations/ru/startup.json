@@ -1,0 +1,6 @@
+{
+  "running": "running (PID: {{pid}})",
+  "started": "started",
+  "stopped": "stopped",
+  "hint": "Enabled services are started during the boot process of the device."
+}
