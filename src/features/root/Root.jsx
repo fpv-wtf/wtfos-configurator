@@ -43,9 +43,11 @@ import {
   fail,
   reset,
   root,
+  selecting,
   success,
   selectAttempted,
   selectRooting,
+  selectSelecting,
 } from "./rootSlice";
 
 import {
@@ -78,6 +80,7 @@ export default function Root() {
   const attempted = useSelector(selectAttempted);
   const hasAdb = useSelector(selectHasAdb);
   const rooting = useSelector(selectRooting);
+  const isSelecting = useSelector(selectSelecting);
 
   let runUnlock;
 
@@ -348,6 +351,8 @@ export default function Root() {
         } catch (e) {
           console.log("Failed closing port:", e);
         }
+
+        dispatch(fail());
       }
 
       running.current = false;
@@ -414,6 +419,11 @@ export default function Root() {
       const port = await navigator.serial.requestPort({ filters });
       await exploit.openPort(port);
 
+      ReactGA.gtag("event", "rootClicked");
+      timeStarted.current = new Date();
+
+      dispatch(root());
+
       runUnlock();
     } catch(e) {
       dispatch(reset());
@@ -437,10 +447,7 @@ export default function Root() {
   }, [disconnectListener]);
 
   const handleClick = useCallback(async() => {
-    ReactGA.gtag("event", "rootClicked");
-    timeStarted.current = new Date();
-
-    dispatch(root());
+    dispatch(selecting());
     triggerUnlock();
   }, [dispatch, triggerUnlock]);
 
@@ -480,7 +487,7 @@ export default function Root() {
             </Alert>}
 
           <Button
-            disabled={rooting || !window.navigator.serial}
+            disabled={isSelecting || rooting || !window.navigator.serial}
             onClick={handleClick}
             variant="contained"
           >
