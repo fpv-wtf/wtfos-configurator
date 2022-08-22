@@ -122,6 +122,18 @@ export const removeWTFOS = createAsyncThunk(
   }
 );
 
+export const downloadDiagnostics = createAsyncThunk(
+  "packages/downloadDiagnostics",
+  async ({
+    adb,
+    name,
+    callback,
+  }) => {
+    console.log("Download diagnostics for", name);
+    await adb.downloadDiagnostics(name, callback);
+  }
+);
+
 function filterPackages(packages, filter) {
   let filtered = packages.filter((item) => (
     (filter.repo === "all" || filter.search) ||
@@ -241,6 +253,12 @@ export const packagesSlice = createSlice({
         state.processing = true;
       })
       .addCase(removeWTFOS.fulfilled, (state, action) => {
+        state.processing = false;
+      })
+      .addCase(downloadDiagnostics.pending, (state, action) => {
+        state.processing = true;
+      })
+      .addCase(downloadDiagnostics.fulfilled, (state, action) => {
         state.processing = false;
       });
   },

@@ -85,6 +85,57 @@ export default class AdbWrapper {
     return output;
   }
 
+  /**
+   * Returns an Uint8Array representing the response.
+   *
+   * Be aware that you will have STDOUT and STDERR in the response. This is a
+   * limitiation of the Android version the DJI hardware uses. In order to only
+   * get STDOUT, redirect stderr to /dev/null in your command. Eg.:
+   *
+   * cat /invalid.path 2>/dev/null
+   */
+  async getBytes(command) {
+    const process = await this.adb.subprocess.spawn(command);
+
+    let output = new Uint8Array();
+    const pipe = process.stdout.pipeTo(new WritableStream({
+      write: (chunk) => {
+        console.log(chunk);
+        output = new Uint8Array([...output, ...chunk]);
+      },
+    }));
+    await pipe;
+
+    return output;
+  }
+
+  async tarFiles(paths) {
+    const allPaths = paths.join(" ");
+    const command = `tar -zc ${allPaths} 2>/dev/null`;
+    const result = await this.getBytes(command);
+
+    return result;
+  }
+
+  async downloadDiagnostics(name, callback) {
+    const directory = "/blackbox/wtfos.log";
+    const directories = [directory];
+    const result = await this.tarFiles(directories);
+    const text = new TextDecoder().decode(result);
+
+    if(callback) {
+      callback(result);
+    }
+  }
+
+  async getFile() {
+    const result = await this.getBytes("tar -zcv /init.rc 2>/dev/null");
+    const text = new TextDecoder().decode(result);
+
+    console.log(result);
+    console.log(text);
+  }
+
   async installPackage(name) {
     return await this.executeCommand([
       this.wtfos.bin.opkg,

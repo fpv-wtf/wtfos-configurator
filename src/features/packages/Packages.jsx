@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React, {
+  createRef,
   useCallback,
   useEffect,
   useRef,
@@ -14,7 +15,9 @@ import { useTranslation } from "react-i18next";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
+import Grow from '@mui/material/Grow';
 import InputLabel from "@mui/material/InputLabel";
+import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Stack from "@mui/material/Stack";
@@ -34,6 +37,7 @@ import ErrorLog from "../log/Error";
 
 import {
   clearError,
+  downloadDiagnostics,
   fetchPackages,
   installedFilter,
   installPackage,
@@ -58,6 +62,7 @@ export default function Packages({ adb }) {
   const { t } = useTranslation("packages");
   const tableEl = useRef();
   const scrollListenerId = useRef();
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const dispatch = useDispatch();
 
@@ -76,6 +81,8 @@ export default function Packages({ adb }) {
   const [renderOffset, setRenderOffset] = useState(50);
   const [renderRows, setRenderRows] = useState(filtered.slice(0, step));
   const [loading, setLoading] = useState(false);
+
+  const [menuOpen, setMenuOpen] = useState(null);
 
   const handleInstallStateChange = useCallback((event) => {
     const installed = event.target.value === "installed";
@@ -145,6 +152,37 @@ export default function Packages({ adb }) {
     }));
   }, [adb, deviceName, dispatch]);
 
+  const downloadDiagnosticsHandler = useCallback((event) => {
+    setMenuOpen(null);
+    const name = event.target.dataset["key"];
+
+    dispatch(downloadDiagnostics({
+      adb,
+      name,
+      callback: ((data) => {
+        const fileName = `${name}.tar.gz`;
+        const url = window.URL.createObjectURL(new Blob([data]));
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", fileName);
+
+        document.body.appendChild(link);
+        link.click();
+        link.parentNode.removeChild(link);
+      }),
+    }));
+  });
+
+  const closeHandler = useCallback((event) => {
+    setMenuOpen(null);
+  });
+
+  const moreHandler = useCallback((event) => {
+    setAnchorEl(event.currentTarget);
+    const name = event.target.dataset["key"];
+    setMenuOpen(name);
+  });
+
   const installHandler = useCallback((event) => {
     const name = event.target.dataset["key"];
     ReactGA.gtag("event", "installPackage", {
@@ -162,7 +200,7 @@ export default function Packages({ adb }) {
     dispatch(clearError());
   }, [dispatch]);
 
-  const rows = renderRows.map((item) => {
+  const rows = renderRows.map((item, index) => {
     return (
       <TableRow key={item.name}>
         <TableCell sx={{ width: 250 }}>
@@ -179,6 +217,40 @@ export default function Packages({ adb }) {
 
         <TableCell>
           {item.description}
+        </TableCell>
+
+        <TableCell>
+          {item.installed && item.repo === "fpv-wtf" &&
+            <div>
+              <Button
+                aria-controls={`${item.name}-menu`}
+                aria-expanded={menuOpen === item.name ? 'true' : undefined}
+                aria-haspopup="true"
+                color="success"
+                data-key={item.name}
+                disabled={processing}
+                id={`${item.name}-button`}
+                onClick={moreHandler}
+                variant="contained"
+              >
+                {t("more")}
+              </Button>
+
+              <Menu
+                MenuListProps={{ 'aria-labelledby': `${item.name}-menu` }}
+                anchorEl={anchorEl}
+                id={`${item.name}-menu`}
+                onClose={closeHandler}
+                open={menuOpen === item.name}
+              >
+                <MenuItem
+                  data-key={item.name}
+                  onClick={downloadDiagnosticsHandler}
+                >
+                  {t("downloadDiagnostics")}
+                </MenuItem>
+              </Menu>
+            </div>}
         </TableCell>
 
         <TableCell align="right">
@@ -313,6 +385,8 @@ export default function Packages({ adb }) {
                   <TableCell>
                     {t("description")}
                   </TableCell>
+
+                  <TableCell />
 
                   <TableCell />
                 </TableRow>
