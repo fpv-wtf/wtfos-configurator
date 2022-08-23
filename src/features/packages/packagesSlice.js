@@ -129,7 +129,6 @@ export const downloadDiagnostics = createAsyncThunk(
     name,
     callback,
   }) => {
-    console.log("Download diagnostics for", name);
     await adb.downloadDiagnostics(name, callback);
   }
 );

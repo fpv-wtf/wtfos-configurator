@@ -13,6 +13,11 @@ import { useTranslation } from "react-i18next";
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Menu from "@mui/material/Menu";
@@ -61,6 +66,8 @@ export default function Packages({ adb }) {
   const tableEl = useRef();
   const scrollListenerId = useRef();
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const [showNoDiagnosticsDialog, setShowNoDiagnosticsDialog] = React.useState(false);
 
   const dispatch = useDispatch();
 
@@ -158,15 +165,19 @@ export default function Packages({ adb }) {
       adb,
       name,
       callback: ((data) => {
-        const fileName = `${name}.tar.gz`;
-        const url = window.URL.createObjectURL(new Blob([data]));
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", fileName);
+        if(data.length > 0) {
+          const fileName = `${name}.tar.gz`;
+          const url = window.URL.createObjectURL(new Blob([data]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", fileName);
 
-        document.body.appendChild(link);
-        link.click();
-        link.parentNode.removeChild(link);
+          document.body.appendChild(link);
+          link.click();
+          link.parentNode.removeChild(link);
+        } else {
+          setShowNoDiagnosticsDialog(true);
+        }
       }),
     }));
   }, [adb, dispatch]);
@@ -174,6 +185,10 @@ export default function Packages({ adb }) {
   const closeHandler = useCallback((event) => {
     setMenuOpen(null);
   }, [setMenuOpen]);
+
+  const closeDiagnosticDialogHandler = useCallback((event) => {
+    setShowNoDiagnosticsDialog(false);
+  }, [setShowNoDiagnosticsDialog]);
 
   const moreHandler = useCallback((event) => {
     setAnchorEl(event.currentTarget);
@@ -297,6 +312,32 @@ export default function Packages({ adb }) {
 
       {!fetched && hasOpkgBinary &&
         <Spinner text={t("fetching")} />}
+
+      <Dialog
+        aria-describedby="alert-dialog-description"
+        aria-labelledby="alert-dialog-title"
+        onClose={closeDiagnosticDialogHandler}
+        open={showNoDiagnosticsDialog}
+      >
+        <DialogTitle id="alert-dialog-title">
+          {t("titleNoDiagnosticData")}
+        </DialogTitle>
+
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {t("textNoDiagnosticData")}
+          </DialogContentText>
+        </DialogContent>
+
+        <DialogActions>
+          <Button
+            autoFocus
+            onClick={closeDiagnosticDialogHandler}
+          >
+            {t("ok")}
+          </Button>
+        </DialogActions>
+      </Dialog>
 
       {fetched && hasOpkgBinary &&
         <Stack

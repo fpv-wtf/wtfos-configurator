@@ -13,5 +13,8 @@
   "description": "Description",
   "matchCount": "Found {{count}} packages",
   "more": "More",
-  "downloadDiagnostics": "Download Diagnostics"
+  "downloadDiagnostics": "Download Diagnostics",
+  "titleNoDiagnosticData": "No diagnostic data",
+  "textNoDiagnosticData": "No diagnostic data could be fetched for this package.",
+  "ok": "OK"
 }
