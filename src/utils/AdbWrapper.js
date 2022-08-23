@@ -118,21 +118,28 @@ export default class AdbWrapper {
   }
 
   async downloadDiagnostics(name, callback) {
-    const directory = "/blackbox/wtfos.log";
-    const directories = [directory];
-    const result = await this.tarFiles(directories);
+    let directories = [
+      `${this.wtfos.path}/opt/etc/package-config/${name}`,
+      `${this.wtfos.path}/opt/etc/package-logs/${name}`,
+    ];
+
+    const filterDirecotries = async (directories, predicate) => Promise.all(directories.map(predicate));
+    let availbaleDirectories = await filterDirecotries(directories, async (directory) => {
+      const exists = await this.dirExists(directory);
+      if(exists) {
+        return directory;
+      }
+    });
+    availbaleDirectories = availbaleDirectories.filter((directory) => directory);
+
+    let result = [];
+    if(availbaleDirectories.length > 0) {
+      result = await this.tarFiles(directories);
+    }
 
     if(callback) {
       callback(result);
     }
-  }
-
-  async getFile() {
-    const result = await this.getBytes("tar -zcv /init.rc 2>/dev/null");
-    const text = new TextDecoder().decode(result);
-
-    console.log(result);
-    console.log(text);
   }
 
   async installPackage(name) {
