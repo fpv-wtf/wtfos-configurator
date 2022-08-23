@@ -47,8 +47,19 @@ export default class AdbWrapper {
     return this.reverseShellSocket;
   }
 
-  filterInvalidFn = (item) => {
+  filterInvalidPackages = (item) => {
     return item.installed || (!!item.version && !item.name?.includes(" "));
+  };
+
+  splitPackageString = (item) => {
+    const delimiter = " - ";
+    const fields = item.split(delimiter);
+
+    return {
+      name: fields[0],
+      version: fields[1],
+      description: fields[2] ? fields.slice(2).join(delimiter) : "",
+    };
   };
 
   /**
@@ -135,6 +146,8 @@ export default class AdbWrapper {
   }
 
   async getUpgradablePackages() {
+    const delimiter = " - ";
+
     let upgradable = [];
     try {
       await this.updataPackages();
@@ -145,18 +158,18 @@ export default class AdbWrapper {
 
       upgradable = output.stdout.split("\n").filter((line) => line);
       upgradable = upgradable.filter((line) => {
-        const fields = line.split(" - ");
+        const fields = line.split(delimiter);
 
         return fields.length === 3;
       });
 
       upgradable = upgradable.map((item) => {
-        const fields = item.split(" - ");
+        const fields = item.split(delimiter);
 
         return {
           name: fields[0],
           current: fields[1],
-          latest: fields[2],
+          latest: fields.slice(2).join(delimiter),
         };
       });
     } catch(e) {
@@ -190,9 +203,9 @@ export default class AdbWrapper {
 
     let lines = output.stdout.split("\n").filter((element) => element);
     const installed = lines.map((item) => {
-      const fields = item.split(" - ");
+      const fields = this.splitPackageString(item);
 
-      return fields[0];
+      return fields.name;
     });
 
     await this.updataPackages();
@@ -210,10 +223,10 @@ export default class AdbWrapper {
 
     lines = output.stdout.split("\n").filter((element) => element);
     const packages = lines.map((item) => {
-      const fields = item.split(" - ");
-      const name = fields[0];
+      const fields = this.splitPackageString(item);
+
       const repo = repoKeys.find((key) => {
-        if(repos[key].includes(name)) {
+        if(repos[key].includes(fields.name)) {
           return key;
         }
 
@@ -221,13 +234,13 @@ export default class AdbWrapper {
       });
 
       return {
-        name: name,
+        name: fields.name,
         repo: repo,
-        version: fields[1],
-        description: fields[2] || "",
-        installed: installed.includes(fields[0]),
+        version: fields.version,
+        description: fields.description,
+        installed: installed.includes(fields.name),
       };
-    }).filter(this.filterInvalidFn);
+    }).filter(this.filterInvalidPackages);
 
     return packages;
   }
