@@ -15,5 +15,8 @@
   "tileAboutTitle": "About fpv.wtf",
   "tileAboutDescription": "fpv.wtf is a group of enthusiasts working to improve the digital FPV experience.",
   "tileExpandTitle": "Expand",
-  "tileExpandDescription": "Expand your device by adding additional functionality through easily installable packages."
+  "tileExpandDescription": "Expand your device by adding additional functionality through easily installable packages.",
+  "wtfosDescriptionParagraph1": "wtfos is a community framework for modifying the firmware of DJI FPV Goggles and Air Units enabled by <a href=\"https://github.com/fpv-wtf/margerine\" target=\"_blank\">margerine</a>.",
+  "wtfosDescriptionParagraph2": "wtfos can be easily expanded by installing packages through our official repository. A list of all currently available packages can be found in our <a href=\"http://repo.fpv.wtf/pigeon/\" target=\"_blank\">repository index</a>.",
+  "wtfosDescriptionParagraph3": "We encourage everyone to contribute their ideas and features they want to see. If you have an idea, feel free to drop by on <a href=\"https://discord.com/invite/3rpnBBJKtU\" target=\"_blank\">Discord</a> to discuss it. If you have functionality ready to go, submit a PR to the <a href=\"https://github.com/fpv-wtf/opkg-repo\" target=\"_blank\">repository</a>. You will also find all needed information regarding packaging, versioning and automated builds for your feature."
 }
