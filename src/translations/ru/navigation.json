@@ -1,0 +1,21 @@
+{
+  "footerIssue": "Если вы столкнулись с кими-либо проблемами, пожалуйста",
+  "footerIssueLink": "сообщите о них на github",
+  "menuHome": "Главная",
+  "menuPackageManager": "Менеджер пакетов",
+  "menuStartup": "Загрузка системы",
+  "menuCli": "Терминал",
+  "menuWtfos": "WTFOS",
+  "menuRoot": "Root",
+  "menuAbout": "О проекте fpv.wtf",
+  "titleHome": "Главная",
+  "titleCli": "Терминал",
+  "titlePackages": "Пакеты",
+  "titleStartup": "Загрузка системы",
+  "titleAbout": "О проекте fpv.wtf",
+  "titleRoot": "Root",
+  "titleWtfos": "WTFOS",
+  "titleWtfosUpdate": "WTFOS - Обновление",
+  "titleWtfosInstall": "WTFOS - Установка",
+  "titleWtfosRemove": "WTFOS - Удаление"
+}

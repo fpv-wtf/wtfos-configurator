@@ -1,6 +1,6 @@
 {
   "step1": "正在尝试步骤 1...",
-  "foundDevice": " - 找到设备:{{device}}",
+  "foundDevice": " - Found Device: {{device}}, Version: {{version}}",
   "step1Success": "步骤 1 - 成功！重启中...",
   "step2": "正在尝试步骤 2...",
   "step2Success": "步骤 2 - 成功！",
@@ -27,5 +27,6 @@
   "rooted": "设备已 root",
   "root": "Root 设备",
   "rebootTimeout": "中止！设备未能及时重启，请重新为设备上电",
-  "rebootTimeShort": "重启用时过短 - 为保证正确计数请再次重启设备"
+  "rebootTimeShort": "重启用时过短 - 为保证正确计数请再次重启设备",
+  "unlockFailed": "Unlock failed, please power-cycle your device and try again."
 }
