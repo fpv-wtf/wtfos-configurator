@@ -1,12 +1,16 @@
+import { Buffer } from "buffer";
+
 import {
   escapeArg,
   WrapReadableStream,
 } from "@yume-chan/adb";
+import { ReactReduxContext } from "react-redux";
 
 import busybox from "./busybox";
 
 import Proxy from "./Proxy";
 import ReverseShellSocket from "./ReverseShellSocket";
+import { imageListItemBarClasses } from "@mui/material";
 
 const proxy = new Proxy("https://cors.bubblesort.me/?");
 
@@ -32,6 +36,7 @@ export default class AdbWrapper {
       opkgLists: "/opt/var/opkg-lists",
       entwareInstallerUrl: "http://bin.entware.net/armv7sf-k3.2/installer/alternative.sh",
       opkgConfigUrl: "http://repo.fpv.wtf/pigeon/wtfos-opkg-config_armv7-3.2.ipk",
+      healthchecksUrl: "https://github.com/fpv-wtf/wtfos-healthchecks/releases/latest/download/healthchecks.tar.gz",
     };
   }
 
@@ -542,6 +547,57 @@ export default class AdbWrapper {
     await this.executeCommand("reboot");
 
     setRebooting();
+  }
+
+  async installHealthchecks(statusCallback) {
+    statusCallback("Fetching Healthcheck package...");
+    try {
+      const buffer = Buffer.from(`GET ${this.wtfos.healthchecksUrl}`);
+      const response = await proxy.proxyRequest(buffer);
+      const blob = await response.blob();
+      const file = new File([blob], "healthchecks.tar.gz");
+
+      const stream = new WrapReadableStream(file.stream());
+      const sync = await this.adb.sync();
+      await stream.pipeTo(sync.write("/tmp/healthchecks.tar.gz"));
+    } catch(e) {
+      statusCallback("ERROR: Failed fetching Healthchecks");
+      return;
+    }
+
+    statusCallback("Extracting Healthcheck package...");
+    let output = await this.executeCommand([
+      "busybox gunzip -c /tmp/healthchecks.tar.gz | tar -x -C /tmp",
+    ]);
+    if(output.exitCode !== 0) {
+      statusCallback("ERROR: Failed extracting Healthchecks");
+      output.stdout.split("\n").forEach((line) => statusCallback(line));
+      return;
+    }
+
+    statusCallback("Gathering available healthchecks...");
+    output = await this.executeCommand([
+      "ls /tmp/healthchecks/tests",
+    ]);
+    if(output.exitCode !== 0) {
+      statusCallback("ERROR: Failed extracting Healthchecks");
+      output.stdout.split("\n").forEach((line) => statusCallback(line));
+      return;
+    }
+
+    const lines = output.stdout.split("\n").map((item) => {
+      return {
+        id: item.split("-")[0],
+        name: item.split("-").slice(1).join("-").split(".").slice(0, -1).join("."),
+        path: `/tmp/healthchecks/tests/${item}`,
+      };
+    });
+
+    console.log(lines);
+  }
+
+  async getHealthchecks() {
+
   }
 
   async removeWTFOS(statusCallback, setRebooting) {

@@ -111,6 +111,16 @@ export const installWTFOS = createAsyncThunk(
   }
 );
 
+export const installHealthchecks = createAsyncThunk(
+  "packages/installHealthchecks",
+  async ({
+    adb,
+    callback,
+  }) => {
+    await adb.installHealthchecks(callback);
+  }
+);
+
 export const removeWTFOS = createAsyncThunk(
   "packages/removeWTFOS",
   async ({
@@ -241,6 +251,12 @@ export const packagesSlice = createSlice({
         state.processing = true;
       })
       .addCase(removeWTFOS.fulfilled, (state, action) => {
+        state.processing = false;
+      })
+      .addCase(installHealthchecks.pending, (state, action) => {
+        state.processing = true;
+      })
+      .addCase(installHealthchecks.fulfilled, (state, action) => {
         state.processing = false;
       });
   },

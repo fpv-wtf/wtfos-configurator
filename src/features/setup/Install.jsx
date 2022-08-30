@@ -27,6 +27,7 @@ import {
 } from "../device/deviceSlice";
 
 import {
+  installHealthchecks,
   installWTFOS,
   selectProcessing,
 } from "../packages/packagesSlice";
@@ -43,6 +44,13 @@ export default function Install({ adb }) {
     ReactGA.gtag("event", "installWtfosTriggered", { deviceName });
 
     dispatch(clearLog());
+    dispatch(installHealthchecks({
+      adb,
+      callback: (message) => {
+        dispatch(appendToLog(message));
+      },
+    }));
+    /*
     dispatch(installWTFOS({
       adb,
       callback: (message) => {
@@ -54,6 +62,7 @@ export default function Install({ adb }) {
         dispatch(rebooting(true));
       },
     }));
+    */
   }, [adb, deviceName, dispatch]);
 
   useEffect(() => {
