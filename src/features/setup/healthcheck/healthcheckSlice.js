@@ -2,7 +2,6 @@ import {
   createAsyncThunk,
   createSlice,
 } from "@reduxjs/toolkit";
-import { AdbSyncStatErrorCode } from "@yume-chan/adb";
 
 const initialState = {
   checks: [],
@@ -16,12 +15,44 @@ export const installHealthchecks = createAsyncThunk(
   "healthcheck/installHealthchecks",
   async ({
     adb,
-    callback,
+    log,
+    done,
   }) => {
-    const checks = await adb.installHealthchecks(callback);
-    return checks;
+    await adb.installHealthchecks(log, done);
   }
 );
+
+export const runHealthcheckUnits = createAsyncThunk(
+  "healthcheck/runHealthcheckUnits",
+  async ({
+    adb,
+    log,
+  }) => {
+    return await adb.runHealthcheckUnits(log);
+  }
+);
+
+export const runHealthcheckFix = createAsyncThunk(
+  "healthcheck/runHealthcheckFix",
+  async ({
+    adb,
+    path,
+    log,
+    done,
+  }) => {
+    await adb.runHealthcheckFix(path, log, done);
+  }
+);
+
+const checkPassed = (state) => {
+  let passed = true;
+  for(let i = 0; i < state.checks.length; i += 1) {
+    const item = state.checks[i];
+    passed = passed && item.passed;
+  }
+
+  state.passed = passed;
+};
 
 export const healthcheckSlice = createSlice({
   name: "healthcheck",
@@ -33,8 +64,22 @@ export const healthcheckSlice = createSlice({
         state.processing = true;
       })
       .addCase(installHealthchecks.fulfilled, (state, action) => {
-        state.checks = action.payload;
         state.installed = true;
+        state.processing = false;
+      })
+      .addCase(runHealthcheckUnits.pending, (state, action) => {
+        state.processing = true;
+      })
+      .addCase(runHealthcheckUnits.fulfilled, (state, action) => {
+        state.checks = action.payload;
+        state.processing = false;
+
+        checkPassed(state);
+      })
+      .addCase(runHealthcheckFix.pending, (state, action) => {
+        state.processing = true;
+      })
+      .addCase(runHealthcheckFix.fulfilled, (state, action) => {
         state.processing = false;
       });
   },

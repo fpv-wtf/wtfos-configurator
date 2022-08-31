@@ -1,4 +1,3 @@
-
 import PropTypes from "prop-types";
 import React, {
   useEffect,
@@ -20,11 +19,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import CancelIcon from "@mui/icons-material/Cancel";
+import Disclaimer from "../../disclaimer/Disclaimer";
 
 import {
   installHealthchecks,
+  runHealthcheckFix,
+  runHealthcheckUnits,
   selectChecks,
   selectPassed,
   selectProcessing,
@@ -44,60 +44,59 @@ export default function Healthcheck({
 
   const handleFix = useCallback(async (event) => {
     const path = event.target.dataset["path"];
-    console.log('Handle fix', path);
-  });
-
-  const handleInstall = useCallback(async (device) => {
-    dispatch(clearLog());
-    dispatch(installHealthchecks({
+    dispatch(runHealthcheckFix({
       adb,
-      callback: (message) => {
+      path,
+      log: (message) => {
         dispatch(appendToLog(message));
+      },
+      done: () => {
+        dispatch(runHealthcheckUnits({
+          adb,
+          log: (message) => {
+            dispatch(appendToLog(message));
+          },
+        }));
       },
     }));
   }, [adb, dispatch]);
 
+  useEffect(() => {
+    dispatch(clearLog());
+    dispatch(installHealthchecks({
+      adb,
+      log: (message) => {
+        dispatch(appendToLog(message));
+      },
+      done: () => {
+        dispatch(runHealthcheckUnits({
+          adb,
+          log: (message) => {
+            dispatch(appendToLog(message));
+          },
+        }));
+      },
+    }));
+  }, []);
+
   let HealthcheckTable = null;
-  if(checks.length > 0) {
-    const rows = checks.map((item) => {
-      console.log(item);
+  const failed = checks.filter((item) => !item.passed);
+  if(failed.length > 0) {
+    const rows = failed.map((item, index) => {
       return (
         <TableRow key={item.id}>
-          <TableCell sx={{
-            maxWidth: 100,
-            wordWrap: "break-word",
-          }}
-          >
-            {item.id}
-          </TableCell>
-
-          <TableCell>
-            {item.name}
-          </TableCell>
-
           <TableCell dangerouslySetInnerHTML={{ __html: item.output.join("<br />") }} />
 
-          <TableCell>
+          <TableCell sx={{ textAlign: "right" }}>
             {!item.passed && item.fixable &&
               <Button
                 data-path={item.path}
+                disabled={index !== 0 || isProcessing}
                 onClick={handleFix}
                 variant="contained"
               >
                 {t("fix")}
               </Button>}
-          </TableCell>
-
-          <TableCell sx={{ textAlign: "center" }}>
-            {item.passed &&
-              <CheckCircleIcon
-                color="success"
-              />}
-
-            {!item.passed &&
-              <CancelIcon
-                color="error"
-              />}
           </TableCell>
         </TableRow>
       );
@@ -111,18 +110,8 @@ export default function Healthcheck({
           <TableHead>
             <TableRow>
               <TableCell>
-                {t("testNr")}
-              </TableCell>
-
-              <TableCell>
-                {t("testName")}
-              </TableCell>
-
-              <TableCell>
                 {t("message")}
               </TableCell>
-
-              <TableCell />
 
               <TableCell />
             </TableRow>
@@ -138,15 +127,15 @@ export default function Healthcheck({
 
   return(
     <Stack spacing={2}>
-      {HealthcheckTable}
+      {failed.length > 0 &&
+        <Disclaimer
+          lines={[
+            t("warningDescription"),
+          ]}
+          title={t("warningTitle")}
+        />}
 
-      <Button
-        disabled={isProcessing || healthchecksPassed}
-        onClick={handleInstall}
-        variant="contained"
-      >
-        {t("runHealthchecks")}
-      </Button>
+      {HealthcheckTable}
     </Stack>
   );
 }

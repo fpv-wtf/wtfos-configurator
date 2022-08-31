@@ -549,7 +549,7 @@ export default class AdbWrapper {
     setRebooting();
   }
 
-  async installHealthchecks(statusCallback) {
+  async installHealthchecks(statusCallback, doneCallback) {
     statusCallback("Fetching Healthcheck package...");
     try {
       const buffer = Buffer.from(`GET ${this.wtfos.healthchecksUrl}`);
@@ -575,8 +575,23 @@ export default class AdbWrapper {
       return;
     }
 
-    const results = await this.runHealthcheckUnits(statusCallback);
-    return results;
+    doneCallback();
+  }
+
+  async runHealthcheckFix(path, statusCallback, doneCallback) {
+    statusCallback(`Running: ${path} fix`);
+    let output = await this.executeCommand([
+      "sh",
+      path,
+      "fix",
+    ]);
+    if(output.exitCode !== 0) {
+      statusCallback("ERROR: Automated fix failed");
+      output.stdout.split("\n").forEach((line) => statusCallback(line));
+      return;
+    }
+
+    doneCallback();
   }
 
   async runHealthcheckUnits(statusCallback) {
@@ -601,6 +616,7 @@ export default class AdbWrapper {
       };
     });
 
+    statusCallback("Running available healthchecks...");
     for(let i = 0; i < units.length; i += 1) {
       const unit = units[i];
       const path = unit.path;

@@ -1,6 +1,6 @@
 {
-  "testNr": "Nr.",
-  "testName": "Name",
-  "message": "Message",
-  "fix": "Attempt Fix"
+  "message": "Failed Healthchecks",
+  "fix": "Attempt Fix",
+  "warningTitle": "Automated fixes:",
+  "warningDescription": "When attempting an automated fix, your device might rebooted in the process. This is normal, just stay tuned, the Healthchecks will update automatically."
 }

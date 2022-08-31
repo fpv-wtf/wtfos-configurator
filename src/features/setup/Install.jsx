@@ -75,11 +75,12 @@ export default function Install({ adb }) {
         title={t("installDisclaimerTitle")}
       />
 
-      <Healthcheck
-        adb={adb}
-        appendToLog={appendToLog}
-        clearLog={clearLog}
-      />
+      {!healthchecksPassed &&
+        <Healthcheck
+          adb={adb}
+          appendToLog={appendToLog}
+          clearLog={clearLog}
+        />}
 
       <Button
         disabled={hasOpkgBinary || isProcessing || !healthchecksPassed}
