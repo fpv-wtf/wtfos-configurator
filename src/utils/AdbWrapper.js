@@ -575,29 +575,46 @@ export default class AdbWrapper {
       return;
     }
 
+    const results = await this.runHealthcheckUnits(statusCallback);
+    return results;
+  }
+
+  async runHealthcheckUnits(statusCallback) {
     statusCallback("Gathering available healthchecks...");
-    output = await this.executeCommand([
-      "ls /tmp/healthchecks/tests",
+    let output = await this.executeCommand([
+      "ls /tmp/healthchecks/units",
     ]);
     if(output.exitCode !== 0) {
-      statusCallback("ERROR: Failed extracting Healthchecks");
+      statusCallback("ERROR: Failed listing Healthchecks");
       output.stdout.split("\n").forEach((line) => statusCallback(line));
       return;
     }
 
-    const lines = output.stdout.split("\n").map((item) => {
+    const units = output.stdout.split("\n").map((item) => {
       return {
         id: item.split("-")[0],
         name: item.split("-").slice(1).join("-").split(".").slice(0, -1).join("."),
-        path: `/tmp/healthchecks/tests/${item}`,
+        path: `/tmp/healthchecks/units/${item}`,
+        passed: false,
+        fixable: false,
+        output: [],
       };
     });
 
-    console.log(lines);
-  }
+    for(let i = 0; i < units.length; i += 1) {
+      const unit = units[i];
+      const path = unit.path;
+      output = await this.executeCommand([
+        "sh",
+        path,
+      ]);
 
-  async getHealthchecks() {
+      unit.passed = output.exitCode === 0;
+      unit.fixable = output.exitCode === 2;
+      unit.output = output.stdout.split("\n");
+    }
 
+    return units;
   }
 
   async removeWTFOS(statusCallback, setRebooting) {

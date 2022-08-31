@@ -15,6 +15,7 @@ import Stack from "@mui/material/Stack";
 import ReactGA from "react-ga4";
 
 import Disclaimer from "../disclaimer/Disclaimer";
+import Healthcheck from "./healthcheck/Healthcheck";
 import Log from "../log/Log";
 
 import {
@@ -27,10 +28,11 @@ import {
 } from "../device/deviceSlice";
 
 import {
-  installHealthchecks,
   installWTFOS,
   selectProcessing,
 } from "../packages/packagesSlice";
+
+import { selectPassed } from "./healthcheck/healthcheckSlice";
 
 export default function Install({ adb }) {
   const { t } = useTranslation("setup");
@@ -39,18 +41,12 @@ export default function Install({ adb }) {
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const isProcessing = useSelector(selectProcessing);
   const deviceName = useSelector(selectNiceName);
+  const healthchecksPassed = useSelector(selectPassed);
 
-  const onClick = useCallback(async (device) => {
+  const handleInstall = useCallback(async (device) => {
     ReactGA.gtag("event", "installWtfosTriggered", { deviceName });
 
     dispatch(clearLog());
-    dispatch(installHealthchecks({
-      adb,
-      callback: (message) => {
-        dispatch(appendToLog(message));
-      },
-    }));
-    /*
     dispatch(installWTFOS({
       adb,
       callback: (message) => {
@@ -62,7 +58,6 @@ export default function Install({ adb }) {
         dispatch(rebooting(true));
       },
     }));
-    */
   }, [adb, deviceName, dispatch]);
 
   useEffect(() => {
@@ -80,9 +75,15 @@ export default function Install({ adb }) {
         title={t("installDisclaimerTitle")}
       />
 
+      <Healthcheck
+        adb={adb}
+        appendToLog={appendToLog}
+        clearLog={clearLog}
+      />
+
       <Button
-        disabled={hasOpkgBinary || isProcessing}
-        onClick={onClick}
+        disabled={hasOpkgBinary || isProcessing || !healthchecksPassed}
+        onClick={handleInstall}
         variant="contained"
       >
         {t("install")}
