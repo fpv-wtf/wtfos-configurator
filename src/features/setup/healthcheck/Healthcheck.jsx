@@ -26,7 +26,6 @@ import {
   runHealthcheckFix,
   runHealthcheckUnits,
   selectChecks,
-  selectPassed,
   selectProcessing,
 } from "./healthcheckSlice";
 
@@ -40,7 +39,6 @@ export default function Healthcheck({
 
   const checks = useSelector(selectChecks);
   const isProcessing = useSelector(selectProcessing);
-  const healthchecksPassed = useSelector(selectPassed);
 
   const handleFix = useCallback(async (event) => {
     const path = event.target.dataset["path"];
@@ -59,7 +57,7 @@ export default function Healthcheck({
         }));
       },
     }));
-  }, [adb, dispatch]);
+  }, [adb, appendToLog, dispatch]);
 
   useEffect(() => {
     dispatch(clearLog());
@@ -77,7 +75,7 @@ export default function Healthcheck({
         }));
       },
     }));
-  }, []);
+  }, [adb, appendToLog, clearLog, dispatch]);
 
   let HealthcheckTable = null;
   const failed = checks.filter((item) => !item.passed);
@@ -125,15 +123,18 @@ export default function Healthcheck({
     );
   }
 
+  if(failed.length < 1) {
+    return null;
+  }
+
   return(
     <Stack spacing={2}>
-      {failed.length > 0 &&
-        <Disclaimer
-          lines={[
-            t("warningDescription"),
-          ]}
-          title={t("warningTitle")}
-        />}
+      <Disclaimer
+        lines={[
+          t("warningDescription"),
+        ]}
+        title={t("warningTitle")}
+      />
 
       {HealthcheckTable}
     </Stack>
