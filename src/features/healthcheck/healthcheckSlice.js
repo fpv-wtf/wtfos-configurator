@@ -8,7 +8,7 @@ const initialState = {
   passed: false,
   installed: false,
   processing: false,
-  error: [],
+  failed: false,
 };
 
 export const installHealthchecks = createAsyncThunk(
@@ -45,13 +45,6 @@ export const runHealthcheckFix = createAsyncThunk(
 );
 
 const checkPassed = (state) => {
-  let passed = true;
-  for(let i = 0; i < state.checks.length; i += 1) {
-    const item = state.checks[i];
-    passed = passed && item.passed;
-  }
-
-  state.passed = passed;
 };
 
 export const healthcheckSlice = createSlice({
@@ -65,22 +58,25 @@ export const healthcheckSlice = createSlice({
       })
       .addCase(installHealthchecks.fulfilled, (state, action) => {
         state.installed = true;
-        state.processing = false;
+        //state.processing = false;
       })
       .addCase(runHealthcheckUnits.pending, (state, action) => {
         state.processing = true;
       })
       .addCase(runHealthcheckUnits.fulfilled, (state, action) => {
-        state.checks = action.payload;
+        state.checks = action.payload || [];
         state.processing = false;
 
+        if(state.checks.length < 1) {
+          state.failed = true;
+        }
         checkPassed(state);
       })
       .addCase(runHealthcheckFix.pending, (state, action) => {
         state.processing = true;
       })
       .addCase(runHealthcheckFix.fulfilled, (state, action) => {
-        state.processing = false;
+        //state.processing = false;
       });
   },
 });
@@ -92,5 +88,6 @@ export const selectPassed = (state) => state.healthcheck.passed;
 export const selectInstalled = (state) => state.healthcheck.installed;
 export const selectProcessing = (state) => state.healthcheck.processing;
 export const selectError = (state) => state.healthcheck.error;
+export const selectFailed = (state) => state.healthcheck.failed;
 
 export default healthcheckSlice.reducer;

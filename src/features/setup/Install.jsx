@@ -15,7 +15,6 @@ import Stack from "@mui/material/Stack";
 import ReactGA from "react-ga4";
 
 import Disclaimer from "../disclaimer/Disclaimer";
-import Healthcheck from "./healthcheck/Healthcheck";
 import Log from "../log/Log";
 
 import {
@@ -32,7 +31,7 @@ import {
   selectProcessing,
 } from "../packages/packagesSlice";
 
-import { selectPassed } from "./healthcheck/healthcheckSlice";
+import { selectPassed } from "../healthcheck/healthcheckSlice";
 
 export default function Install({ adb }) {
   const { t } = useTranslation("setup");
@@ -74,13 +73,6 @@ export default function Install({ adb }) {
         ]}
         title={t("installDisclaimerTitle")}
       />
-
-      {!healthchecksPassed &&
-        <Healthcheck
-          adb={adb}
-          appendToLog={appendToLog}
-          clearLog={clearLog}
-        />}
 
       <Button
         disabled={hasOpkgBinary || isProcessing || !healthchecksPassed}

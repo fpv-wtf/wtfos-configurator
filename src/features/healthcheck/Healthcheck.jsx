@@ -9,7 +9,9 @@ import {
 } from "react-redux";
 import { useTranslation } from "react-i18next";
 
+import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Table from "@mui/material/Table";
@@ -18,14 +20,17 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import Typography from "@mui/material/Typography";
 
-import Disclaimer from "../../disclaimer/Disclaimer";
+import Disclaimer from "../disclaimer/Disclaimer";
+import Spinner from "../loading/Spinner";
 
 import {
   installHealthchecks,
   runHealthcheckFix,
   runHealthcheckUnits,
   selectChecks,
+  selectFailed,
   selectProcessing,
 } from "./healthcheckSlice";
 
@@ -38,42 +43,43 @@ export default function Healthcheck({
   const dispatch = useDispatch();
 
   const checks = useSelector(selectChecks);
+  const checksFailed = useSelector(selectFailed);
   const isProcessing = useSelector(selectProcessing);
+
+  const log = (message) => {
+    if(appendToLog) {
+      dispatch(appendToLog(message));
+    } else {
+      console.log(message);
+    }
+  };
+
+  const dispatchRunHealthcheckUnits = () => {
+    dispatch(runHealthcheckUnits({
+      adb,
+      log,
+    }));
+  };
 
   const handleFix = useCallback(async (event) => {
     const path = event.target.dataset["path"];
     dispatch(runHealthcheckFix({
       adb,
       path,
-      log: (message) => {
-        dispatch(appendToLog(message));
-      },
-      done: () => {
-        dispatch(runHealthcheckUnits({
-          adb,
-          log: (message) => {
-            dispatch(appendToLog(message));
-          },
-        }));
-      },
+      log,
+      done: dispatchRunHealthcheckUnits,
     }));
   }, [adb, appendToLog, dispatch]);
 
   useEffect(() => {
-    dispatch(clearLog());
+    if(clearLog) {
+      dispatch(clearLog());
+    }
+
     dispatch(installHealthchecks({
       adb,
-      log: (message) => {
-        dispatch(appendToLog(message));
-      },
-      done: () => {
-        dispatch(runHealthcheckUnits({
-          adb,
-          log: (message) => {
-            dispatch(appendToLog(message));
-          },
-        }));
-      },
+      log,
+      done: dispatchRunHealthcheckUnits,
     }));
   }, [adb, appendToLog, clearLog, dispatch]);
 
@@ -107,11 +113,17 @@ export default function Healthcheck({
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>
-                {t("message")}
-              </TableCell>
+              <TableCell colSpan={2}>
+                <Alert severity="warning">
+                  <Typography sx={{ fontWeight: "bold" }}>
+                    {t("message")}
+                  </Typography>
 
-              <TableCell />
+                  <Typography>
+                    {t("warningDescription")}
+                  </Typography>
+                </Alert>
+              </TableCell>
             </TableRow>
           </TableHead>
 
@@ -123,26 +135,63 @@ export default function Healthcheck({
     );
   }
 
+  if(checksFailed) {
+    return (
+      <Stack marginBottom={2}>
+        <Alert severity="warning">
+          <Typography>
+            {t("failed")}
+          </Typography>
+        </Alert>
+      </Stack>
+    );
+  }
+
   if(failed.length < 1) {
     return null;
   }
 
   return(
-    <Stack spacing={2}>
-      <Disclaimer
-        lines={[
-          t("warningDescription"),
-        ]}
-        title={t("warningTitle")}
-      />
+    <Box
+      sx={{ position: "relative" }}
+    >
+      <Stack
+        marginBottom={2}
+        spacing={2}
+      >
+        {HealthcheckTable}
+      </Stack>
 
-      {HealthcheckTable}
-    </Stack>
+      {isProcessing &&
+        <Box
+          sx={{
+            top: "0",
+            left: "0",
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            background: "rgba(0, 0, 0, 0.7)",
+          }}
+        >
+          <Spinner
+            text={t("loading")}
+          />
+        </Box>}
+    </Box>
   );
 }
 
+Healthcheck.defaultProps = {
+  appendToLog: null,
+  clearLog: null,
+};
+
 Healthcheck.propTypes = {
   adb: PropTypes.shape().isRequired,
-  appendToLog: PropTypes.func.isRequired,
-  clearLog: PropTypes.func.isRequired,
+  appendToLog: PropTypes.func,
+  clearLog: PropTypes.func,
 };
