@@ -22,7 +22,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 
-import Disclaimer from "../disclaimer/Disclaimer";
 import Spinner from "../loading/Spinner";
 
 import {
@@ -46,20 +45,20 @@ export default function Healthcheck({
   const checksFailed = useSelector(selectFailed);
   const isProcessing = useSelector(selectProcessing);
 
-  const log = (message) => {
+  const log = useCallback((message) => {
     if(appendToLog) {
       dispatch(appendToLog(message));
     } else {
       console.log(message);
     }
-  };
+  }, [appendToLog, dispatch]);
 
-  const dispatchRunHealthcheckUnits = () => {
+  const dispatchRunHealthcheckUnits = useCallback(() => {
     dispatch(runHealthcheckUnits({
       adb,
       log,
     }));
-  };
+  }, [adb, dispatch, log]);
 
   const handleFix = useCallback(async (event) => {
     const path = event.target.dataset["path"];
@@ -69,7 +68,7 @@ export default function Healthcheck({
       log,
       done: dispatchRunHealthcheckUnits,
     }));
-  }, [adb, appendToLog, dispatch]);
+  }, [adb, dispatch, dispatchRunHealthcheckUnits, log]);
 
   useEffect(() => {
     if(clearLog) {
@@ -81,7 +80,7 @@ export default function Healthcheck({
       log,
       done: dispatchRunHealthcheckUnits,
     }));
-  }, [adb, appendToLog, clearLog, dispatch]);
+  }, [adb, appendToLog, clearLog, dispatch, dispatchRunHealthcheckUnits, log]);
 
   let HealthcheckTable = null;
   const failed = checks.filter((item) => !item.passed);

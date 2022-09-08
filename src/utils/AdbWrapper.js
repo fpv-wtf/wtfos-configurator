@@ -9,7 +9,6 @@ import busybox from "./busybox";
 
 import Proxy from "./Proxy";
 import ReverseShellSocket from "./ReverseShellSocket";
-import { ThirtyFpsSelect } from "@mui/icons-material";
 
 const proxy = new Proxy("https://cors.bubblesort.me/?");
 
