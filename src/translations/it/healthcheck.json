@@ -1,8 +1,8 @@
 {
-  "message": "Failed health checks",
-  "fix": "Attempt Fix",
-  "warningTitle": "Automated fixes:",
-  "warningDescription": "Don't worry, this is normal and can happen due to various reasons, including bugs in the underlaying operating system. The configurator can help you fix these issues. When attempting an automated fix, your device might reboot in the process. In some specific cases you may need to re-root your device after a reboot, before health checks can continue.",
-  "failed": "Failed running health-checks.",
+  "message": "Controlli di congruenza falliti",
+  "fix": "Tentativo di riparazione",
+  "warningTitle": "Correzioni automatiche:",
+  "warningDescription": "Non ti preoccupare, questo è normale e può capitare per vari motivi, tra cui bug nel sistema operativo. Il configuratore dovrebbe aiutarti a risolvere questi problemi. Quando si tenta una correzione automatica, il dispositivo potrebbe riavviare il sistema. In rari casi specifici potrebbe essere necessario dover nuovamente eseguire il root del dispositivo dopo il riavvio, prima che i controlli di congruenza possano continuare.",
+  "failed": "Test di congruenza falliti.",
   "loading": "Si prega di attendere..."
 }
