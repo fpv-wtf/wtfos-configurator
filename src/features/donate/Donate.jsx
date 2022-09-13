@@ -37,9 +37,7 @@ export default function Donate() {
   const [subscription, setSubscription] = useState(false);
   const [donationText, setDonationText] = useState(t("donate") + " " + marks[2].label);
 
-  if(amount === 0) {
-    setDonationText(t("no"));
-  }
+
 
   const setReminderNever = useCallback(() => {
     const nextReminder = new Date();
@@ -57,6 +55,9 @@ export default function Donate() {
     const selectedAmount = customValue || amount;
     const subscriptionText = subscription ? " " + t("monthly") : "";
     setDonationText(t("donate") + ` $${selectedAmount}${subscriptionText}`);
+    if(parseInt(selectedAmount) === 0) {
+      setDonationText(t("no"));
+    }
   }, [amount, customValue, setDonationText, subscription, t]);
 
   const handleSliderChange = useCallback((e, value) => {
@@ -89,7 +90,7 @@ export default function Donate() {
   }, [setReminderNever]);
 
   const handleCustomAmountUpdate = useCallback((e) => {
-    const value = e.target.value;
+    const value = parseInt(e.target.value);
 
     setDisableSlider(value > 0);
     setCustomValue(value);
@@ -159,8 +160,12 @@ export default function Donate() {
           }}
         >
           <Button
+            color="secondary"
             onClick={handleSkipClick}
-            sx={{ marginRight: 2 }}
+            sx={{
+              marginRight: 2,
+              backgroundColor: "gray",
+            }}
             variant="contained"
           >
             {t("cancel")}
