@@ -44,7 +44,18 @@ function loadTraceId() {
   return traceId;
 }
 
+function loadDonationState() {
+  const reminderDate = localStorage.getItem("donationState");
+  if(reminderDate) {
+    const now = new Date().getTime();
+    return now < parseInt(reminderDate);
+  }
+
+  return false;
+}
+
 export {
+  loadDonationState,
   loadLanguage,
   loadTraceId,
 };

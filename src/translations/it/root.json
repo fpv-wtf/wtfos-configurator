@@ -1,6 +1,6 @@
 {
   "step1": "Tentativo fase 1...",
-  "foundDevice": " - Trovato dispositivo: {{device}}",
+  "foundDevice": " - Dispositivo trovato: {{device}}, Versione: {{version}}",
   "step1Success": "Fase 1 eseguita con successo! Riavvio in corso...",
   "step2": "Tentativo fase 2...",
   "step2Success": "Fase 2 eseguita con successo!",
@@ -27,5 +27,6 @@
   "rooted": "Il dispositivo è già rootato",
   "root": "Roota il dispositivo",
   "rebootTimeout": "Operazione Interrotta! Il dispositivo non si è riavviato nel tempo previsto, si prega di spegnere e riaccendere il dispositivo e di riprovare.",
-  "rebootTimeShort": "Tempo di riavvio troppo breve - riavvio ulteriormente per sicurezza..."
+  "rebootTimeShort": "Tempo di riavvio troppo breve - riavvio ulteriormente per sicurezza...",
+  "unlockFailed": "Sblocco non riuscito, spegnere e riaccendere il dispositivo e riprovare."
 }

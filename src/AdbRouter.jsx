@@ -37,6 +37,7 @@ import {
 } from "./features/device/deviceSlice";
 
 import { reset as resetPackages } from "./features/packages/packagesSlice";
+import { reset as resetHealthchecks } from "./features/healthcheck/healthcheckSlice";
 
 export default function AdbRouter() {
   const dispatch = useDispatch();
@@ -62,32 +63,44 @@ export default function AdbRouter() {
         const streams = await device.connect();
         const adbLocal = await Adb.authenticate(streams, credentialStore, undefined);
         const adbWrapper = new AdbWrapper(adbLocal);
-        await adbWrapper.establishReverseSocket(1);
 
-        setAdb(adbWrapper);
-
+        /**
+         * The temperature check has two functions:
+         * 1. Obviously checking the temperature
+         * 2. Setting the adb prop sometimes adb is not connectible from the beginning
+         *    and requests to it might fail. As soon as the temperature is successfully
+         *    returned, we can be confident that ADB is ready for our requests.
+         */
         const checkTemp = async () => {
           const temp = await adbWrapper.getTemperature();
+          if(temp && temp > 0 && !adbRef.current) {
+            setAdb(adbWrapper);
+
+            await adbWrapper.establishReverseSocket(1);
+
+            const info = await adbWrapper.getProductInfo();
+            dispatch(setProductInfo(info));
+
+            dispatch(resetPackages());
+            dispatch(resetHealthchecks());
+            dispatch(connected());
+            dispatch(deviceSetAdb(true));
+            dispatch(checkBinaries(adbWrapper));
+          }
+
           dispatch(setTemperature(temp));
         };
 
         const newIntervalId = setInterval(checkTemp, 3000);
         setIntervalId(newIntervalId);
         await checkTemp();
-
-        const info = await adbWrapper.getProductInfo();
-        dispatch(setProductInfo(info));
-
-        dispatch(resetPackages());
-        dispatch(connected());
-        dispatch(deviceSetAdb(true));
-        dispatch(checkBinaries(adbWrapper));
       } catch(e) {
         console.log("Failed connecting to device:", e);
         dispatch(connectionFailed());
       }
     } else {
       dispatch(resetPackages());
+      dispatch(resetHealthchecks());
     }
   }, [dispatch]);
 

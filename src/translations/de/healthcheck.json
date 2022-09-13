@@ -1,0 +1,9 @@
+{
+  "message": "Fehlgeschlagene Integritätsprüfungen",
+  "fix": "Versuch Fehler zu beheben",
+  "warningTitle": "Automatische Reparaturen:",
+  "warningDescription": "Keine Sorge, das ist normal und kann aus verschiedenen Gründen auftreten, unter anderem wegen Fehlern im zugrunde liegenden Betriebssystem. Der Konfigurator kann Ihnen helfen, diese Probleme zu beheben. Wenn Sie versuchen, das Problem automatisch zu beheben, kann es sein, dass Ihr Gerät dabei neu startet. In bestimmten Fällen müssen Sie Ihr Gerät nach einem Neustart neu rooten, bevor die Systemprüfungen fortgesetzt werden können.",
+  "failed": "Systemdiagnose fehlgeschlagen.",
+  "loading": "Bitte warten...",
+  "testNr": "Test Nr."
+}

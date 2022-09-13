@@ -1,6 +1,6 @@
 {
   "step1": "Intentando el paso 1...",
-  "foundDevice": " - Dispositivo encontrado: {{device}}",
+  "foundDevice": " - Dispositivo encontrado: {{device}}, Versión: {{version}}",
   "step1Success": "Paso 1 - ¡Éxito! Reiniciando...",
   "step2": "Intentando el paso 2...",
   "step2Success": "Paso 2 - ¡Éxito!",
@@ -23,9 +23,10 @@
   "disclaimerLine2": "Sólo tenga un dispositivo conectado/emparejado",
   "disclaimerLine3": "No apagar durante el proceso de rooteo",
   "disclaimerLine4": "Proceda bajo su propio riesgo",
-  "portOpenFailed": "Failed opening serial port after {{maxTries}} retries.",
+  "portOpenFailed": "Error al abrir el puerto serial después de {{maxTries}} reintentos.",
   "rooted": "El dispositivo ya está rooteado",
   "root": "Rootear dispositivo",
   "rebootTimeout": "¡Abortado! El dispositivo no se reinició a tiempo, por favor apagar y encender y volver a intentarlo.",
-  "rebootTimeShort": "Tiempo de reinicio sospechosamente corto - reiniciar una vez más puede ayudar..."
+  "rebootTimeShort": "Tiempo de reinicio sospechosamente corto - reiniciar una vez más puede ayudar...",
+  "unlockFailed": "Desbloqueo fallido, por favor apaga y enciende tu dispositivo e inténtalo de nuevo."
 }

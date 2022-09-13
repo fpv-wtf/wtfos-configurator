@@ -1,0 +1,15 @@
+{
+  "remove": "Удалить",
+  "install": "Установить",
+  "fetching": "Проверка пакетов...",
+  "installationFailed": "Ошибка установки пакета:",
+  "labelRepo": "Репозиторий",
+  "labelPackages": "Пакеты",
+  "labelAll": "Все",
+  "installed": "Установленные",
+  "labelSearch": "Поиск...",
+  "name": "Название",
+  "version": "Версия",
+  "description": "Описание",
+  "matchCount": "Найдено {{count}} пакетов"
+}

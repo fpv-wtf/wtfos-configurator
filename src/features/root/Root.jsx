@@ -22,6 +22,7 @@ import Disclaimer from "../disclaimer/Disclaimer";
 import Header from "../navigation/Header";
 import Log from "../log/Log";
 import Webusb from "../disclaimer/Webusb";
+import Donate from "../donate/Donate";
 
 import {
   PatchFailed,
@@ -53,6 +54,8 @@ import {
   selectHasAdb,
 } from "../device/deviceSlice";
 
+import { selectDonationState } from "../donate/donateSlice";
+
 const exploit = new Exploit("https://cors.bubblesort.me/?");
 const rebootTimeMinSeconds = 7;
 const rebootTimeMaxSeconds = 60;
@@ -78,6 +81,8 @@ export default function Root() {
   const attempted = useSelector(selectAttempted);
   const hasAdb = useSelector(selectHasAdb);
   const rooting = useSelector(selectRooting);
+
+  const donationState = useSelector(selectDonationState);
 
   let runUnlock;
 
@@ -472,6 +477,9 @@ export default function Root() {
             title={t("disclaimerTitle")}
           />
 
+          {!donationState &&
+            <Donate />}
+
           {hasAdb &&
             <Alert severity="success">
               <Typography>
@@ -480,7 +488,7 @@ export default function Root() {
             </Alert>}
 
           <Button
-            disabled={rooting || !window.navigator.serial}
+            disabled={rooting || !window.navigator.serial || !donationState}
             onClick={handleClick}
             variant="contained"
           >
