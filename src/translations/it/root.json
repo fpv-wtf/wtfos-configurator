@@ -1,6 +1,6 @@
 {
   "step1": "Tentativo fase 1...",
-  "foundDevice": " - Found Device: {{device}}, Version: {{version}}",
+  "foundDevice": " - Dispositivo trovato: {{device}}, Versione: {{version}}",
   "step1Success": "Fase 1 eseguita con successo! Riavvio in corso...",
   "step2": "Tentativo fase 2...",
   "step2Success": "Fase 2 eseguita con successo!",
