@@ -26,10 +26,14 @@ import Install from "./features/setup/Install";
 import Remove from "./features/setup/Remove";
 import Update from "./features/setup/Update";
 
+import Healthcheck from "./features/healthcheck/Healthcheck";
+
 import {
   selectConnected,
   selectError,
 } from "./features/device/deviceSlice";
+
+import { selectPassed } from "./features/healthcheck/healthcheckSlice";
 
 function App({
   adb,
@@ -37,6 +41,7 @@ function App({
 }) {
   const error = useSelector(selectError);
   const isConnected = useSelector(selectConnected);
+  const healthchecksPassed = useSelector(selectPassed);
 
   return (
     <Container
@@ -52,6 +57,9 @@ function App({
             handleDeviceConnect={handleAdbConnectClick}
           />
         </Stack>}
+
+      {!healthchecksPassed && isConnected && adb &&
+        <Healthcheck adb={adb} />}
 
       <Routes>
         <Route

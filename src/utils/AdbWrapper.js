@@ -1,3 +1,5 @@
+import { Buffer } from "buffer";
+
 import {
   escapeArg,
   WrapReadableStream,
@@ -32,6 +34,8 @@ export default class AdbWrapper {
       opkgLists: "/opt/var/opkg-lists",
       entwareInstallerUrl: "http://bin.entware.net/armv7sf-k3.2/installer/alternative.sh",
       opkgConfigUrl: "http://repo.fpv.wtf/pigeon/wtfos-opkg-config_armv7-3.2.ipk",
+      healthchecksUrl: "https://github.com/fpv-wtf/wtfos-healthchecks/releases/latest/download/healthchecks.tar.gz",
+      healthchesksPath: "/tmp/healthchecks",
     };
   }
 
@@ -542,6 +546,95 @@ export default class AdbWrapper {
     await this.executeCommand("reboot");
 
     setRebooting();
+  }
+
+  async installHealthchecks(statusCallback, doneCallback) {
+    const healthcheksDirExists = await this.dirExists(this.wtfos.healthchesksPath);
+    if(!healthcheksDirExists) {
+      statusCallback("Fetching Healthcheck package...");
+      try {
+        const buffer = Buffer.from(`GET ${this.wtfos.healthchecksUrl}?cachebust=${Math.random()}`);
+        const response = await proxy.proxyRequest(buffer);
+        const blob = await response.blob();
+        const file = new File([blob], "healthchecks.tar.gz");
+
+        const stream = new WrapReadableStream(file.stream());
+        const sync = await this.adb.sync();
+        await stream.pipeTo(sync.write("/tmp/healthchecks.tar.gz"));
+      } catch(e) {
+        statusCallback("ERROR: Failed fetching Healthchecks");
+        return;
+      }
+
+      statusCallback("Extracting Healthcheck package...");
+      let output = await this.executeCommand([
+        "busybox gunzip -c /tmp/healthchecks.tar.gz | tar -x -C /tmp",
+      ]);
+      if(output.exitCode !== 0) {
+        statusCallback("ERROR: Failed extracting Healthchecks");
+        output.stdout.split("\n").forEach((line) => statusCallback(line));
+        return;
+      }
+    }
+
+    doneCallback();
+  }
+
+  async runHealthcheckFix(path, statusCallback, doneCallback) {
+    statusCallback(`Running: ${path} fix`);
+    let output = await this.executeCommand([
+      "sh",
+      path,
+      "fix",
+    ]);
+    if(output.exitCode !== 0) {
+      statusCallback("ERROR: Automated fix failed");
+      output.stdout.split("\n").forEach((line) => statusCallback(line));
+      return;
+    }
+
+    doneCallback();
+  }
+
+  async runHealthcheckUnits(statusCallback) {
+    statusCallback("Gathering available healthchecks...");
+    let output = null;
+    output = await this.executeCommand([
+      "ls /tmp/healthchecks/units",
+    ]);
+    if(output.exitCode !== 0) {
+      statusCallback("ERROR: Failed listing Healthchecks");
+      output.stdout.split("\n").forEach((line) => statusCallback(line));
+      return;
+    }
+
+    const units = output.stdout.split("\n").map((item) => {
+      return {
+        id: item.split("-")[0],
+        name: item.split("-").slice(1).join("-").split(".").slice(0, -1).join("."),
+        path: `/tmp/healthchecks/units/${item}`,
+        passed: false,
+        fixable: false,
+        output: [],
+      };
+    });
+
+    for(let i = 0; i < units.length; i += 1) {
+      const unit = units[i];
+      const path = unit.path;
+
+      statusCallback(`Running ${path}`);
+      output = await this.executeCommand([
+        "sh",
+        path,
+      ]);
+
+      unit.passed = output.exitCode === 0;
+      unit.fixable = output.exitCode === 2;
+      unit.output = output.stdout.split("\n");
+    }
+
+    return units;
   }
 
   async removeWTFOS(statusCallback, setRebooting) {
