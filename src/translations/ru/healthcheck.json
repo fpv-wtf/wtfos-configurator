@@ -4,6 +4,5 @@
   "warningTitle": "Automated fixes:",
   "warningDescription": "Don't worry, this is normal and can happen due to various reasons, including bugs in the underlaying operating system. The configurator can help you fix these issues. When attempting an automated fix, your device might reboot in the process. In some specific cases you may need to re-root your device after a reboot, before health checks can continue.",
   "failed": "Failed running health-checks.",
-  "loading": "Please wait...",
-  "testNr": "Test Nr."
+  "loading": "Пожалуйста, подождите..."
 }
