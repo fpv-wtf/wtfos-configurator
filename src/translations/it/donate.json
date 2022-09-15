@@ -1,11 +1,11 @@
 {
-  "title": "Supportci, grazie!",
-  "description": "il Team di fpv.wtf ti chiede di prendere in considerazione una modesta donazione di soli $10 per ciascun dispositivo che vuoi rootare. Questo ci aiuterà a comprare ulteriori dispositivi utili alla ricerca e sviluppo e per aiutarci a finanziare un magnifico software per i sistemi FPV. Comunque, qualora non tu non potessi aiutareci nello sviluppo, lo capiremo e saremo comunque sempre Amici. Ci sta?",
+  "title": "Supportaci, grazie!",
+  "description": "Il Team di fpv.wtf ti chiede di prendere in considerazione una modesta donazione di soli $10 per ciascun dispositivo che vuoi rootare. Questo ci aiuterà a comprare ulteriori dispositivi utili alla ricerca e sviluppo e per aiutarci a finanziare un magnifico software per i sistemi FPV. Comunque, qualora non tu non potessi aiutarci nello sviluppo, lo capiremo e saremo comunque sempre Amici. Ci sta?",
   "supporter": "Re-occuring donations available for BFFs.",
-  "cancel": "I already paid",
-  "donate": "Donate",
-  "no": "No, thank you",
-  "custom": "Custom Amount",
-  "subscription": "Re-occuring, monthly donation",
-  "monthly": "monthly"
+  "cancel": "Ho già pagato",
+  "donate": "Dona",
+  "no": "No, grazie",
+  "custom": "Importo personalizzato",
+  "subscription": "Ricorrente, donazione mensile",
+  "monthly": "mensile"
 }
