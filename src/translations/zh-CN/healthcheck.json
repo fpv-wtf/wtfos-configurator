@@ -1,9 +1,8 @@
 {
   "message": "Failed health checks",
-  "fix": "Attempt Fix",
-  "warningTitle": "Automated fixes:",
-  "warningDescription": "Don't worry, this is normal and can happen due to various reasons, including bugs in the underlaying operating system. The configurator can help you fix these issues. When attempting an automated fix, your device might reboot in the process. In some specific cases you may need to re-root your device after a reboot, before health checks can continue.",
-  "failed": "Failed running health-checks.",
-  "loading": "Please wait...",
-  "testNr": "Test Nr."
+  "fix": "尝试修复",
+  "warningTitle": "自动修复：",
+  "warningDescription": "别担心，这是正常的，并且可能由于各种原因而发生，包括底层操作系统中的bug。 配置器可以帮助您解决这些问题。 当尝试自动修复时，您的设备可能会在过程中重启。 在某些特定情况下，您可能需要在重启后再次手动重启设备，然后才能继续进行健康检查。",
+  "failed": "无法运行健康检查。",
+  "loading": "请稍候..."
 }
