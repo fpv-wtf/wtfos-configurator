@@ -1,6 +1,6 @@
 {
   "step1": "正在尝试步骤 1...",
-  "foundDevice": " - Found Device: {{device}}, Version: {{version}}",
+  "foundDevice": " - 找到设备: {{device}}, 版本: {{version}}",
   "step1Success": "步骤 1 - 成功！重启中...",
   "step2": "正在尝试步骤 2...",
   "step2Success": "步骤 2 - 成功！",
@@ -23,10 +23,10 @@
   "disclaimerLine2": "每次只连接/配对一个设备",
   "disclaimerLine3": "Root 过程中请勿关闭电源",
   "disclaimerLine4": "风险自负",
-  "portOpenFailed": "Failed opening serial port after {{maxTries}} retries.",
+  "portOpenFailed": "打开串口失败，已经重试 了{{maxTries}} 次",
   "rooted": "设备已 root",
   "root": "Root 设备",
   "rebootTimeout": "中止！设备未能及时重启，请重新为设备上电",
   "rebootTimeShort": "重启用时过短 - 为保证正确计数请再次重启设备",
-  "unlockFailed": "Unlock failed, please power-cycle your device and try again."
+  "unlockFailed": "解锁失败，请给设备重新上电并重试"
 }
