@@ -1,4 +1,4 @@
 {
-  "description": "This feature allows you to hand over complete control of your device to a third party.",
-  "warning": "Only use this if you know what you are doing and only ever connect to trusted individuals."
+  "description": "Cette fonctionnalité vous permet de confier le contrôle complet de votre appareil à un tiers.",
+  "warning": "Utilisez ceci uniquement si vous savez ce que vous faites et que vous ne vous connectez qu'à des personnes de confiance."
 }
