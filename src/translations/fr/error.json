@@ -3,5 +3,5 @@
   "error404Text": "Je ne suis pas sûr de ce que vous cherchiez, mais cette page n'existe pas. Allez faire un tour sur le ",
   "error404Link": "menu",
   "errorConnection": "Impossible de se connecter au périphérique, assurez-vous qu'un serveur adb ne fonctionne pas sur votre machine (adb kill-server) et que vous n'êtes pas connecté dans un autre onglet/fenêtre.",
-  "warningConnection": "Connect your rooted Goggles or Air Unit via USB, make sure they are powered on and hit the connect button."
+  "warningConnection": "Connectez vos lunettes ou votre Air Unit rootées via USB, assurez-vous qu'elles sont allumées et appuyez sur le bouton de connexion."
 }
