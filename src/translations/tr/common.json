@@ -1,6 +1,6 @@
 {
-  "disconnect": "Disconnect",
-  "connect": "Connect",
-  "connectDevice": "Connect to Device",
-  "rebooting": "Rebooting..."
+  "disconnect": "Bağlantıyı kes",
+  "connect": "Bağlan",
+  "connectDevice": "Cihaza bağlan",
+  "rebooting": "Yeniden başlatılıyor..."
 }
