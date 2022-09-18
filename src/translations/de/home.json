@@ -1,7 +1,7 @@
 {
   "connected": "Erfolgreich mit deinem Gerät verbunden.",
   "tilePackageManagerTitle": "Paket-Manager",
-  "tilePackageManagerDescription": "Erweiter die Funktionalität deines Geräts, indem du zusätzliche, von der Community entwickelte Pakete installieren.",
+  "tilePackageManagerDescription": "Erweiter die Funktionalität deines Geräts, indem du zusätzliche, von der Community entwickelte Pakete installierst.",
   "tileStartupTitle": "Beim Start",
   "tileStartupDescription": "Verwalte Anwendungen, die beim Start ausgeführt werden sollen, um die Funktionalität dauerhaft zu aktivieren, sobald das Gerät eingeschalten wird.",
   "tileCliTitle": "Kommandozeile",
