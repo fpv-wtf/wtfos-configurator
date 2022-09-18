@@ -13,5 +13,7 @@
   "tileSupportTitle": "Aide et contact",
   "tileSupportDescription": "Si vous avez des commentaires, des questions ou si vous voulez contribuer à dévellopper des fonctionnalités supplémentaires, rejoignez notre communauté sur Discord.",
   "tileAboutTitle": "À propos de fpv.wtf",
-  "tileAboutDescription": "fpv.wtf est un groupe de passionnés qui travaillent à améliorer l'expérience FPV numérique."
+  "tileAboutDescription": "fpv.wtf est un groupe de passionnés qui travaillent à améliorer l'expérience FPV numérique.",
+  "tileWikiTitle": "Wiki",
+  "tileWikiDescription": "Having issues? Chances are that you will find an answer in our community Wiki."
 }
