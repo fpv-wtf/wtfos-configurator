@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 
 import DownloadIcon from "@mui/icons-material/Download";
 import HelpIcon from "@mui/icons-material/Help";
+import InfoIcon from "@mui/icons-material/Info";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import StartIcon from "@mui/icons-material/Start";
 import TerminalIcon from "@mui/icons-material/Terminal";
@@ -116,6 +117,21 @@ export default function Tiles() {
           title={t("tileRootTitle")}
         >
           <AccessibilityNewIcon fontSize="large" />
+        </Tile>
+      </Grid>
+
+      <Grid
+        item
+        md={3}
+        sm={6}
+        xs={12}
+      >
+        <Tile
+          description={t("tileWikiDescription")}
+          href="https://github.com/fpv-wtf/wtfos/wiki"
+          title={t("tileWikiTitle")}
+        >
+          <InfoIcon fontSize="large" />
         </Tile>
       </Grid>
 
