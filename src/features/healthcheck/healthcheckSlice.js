@@ -45,6 +45,7 @@ export const runHealthcheckFix = createAsyncThunk(
 );
 
 const checkPassed = (state) => {
+  state.passed = state.checks.every((item) => item.passed);
 };
 
 export const healthcheckSlice = createSlice({

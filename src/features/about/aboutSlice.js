@@ -13,10 +13,6 @@ const initialState = {
       description: "Busy flying most of the time",
     },
     {
-      nick: "funnel",
-      description: "Finds all the best shit",
-    },
-    {
       nick: "bri3d",
       name: "Brian Ledbetter",
       twitter: "bri3d",
