@@ -1,7 +1,7 @@
 {
   "connected": "Successfully connected to your device.",
   "tilePackageManagerTitle": "Package Manager",
-  "tilePackageManagerDescription": "Expand functionality of your devive by installing additional packages developed by the community.",
+  "tilePackageManagerDescription": "Expand functionality of your device by installing additional packages developed by the community.",
   "tileStartupTitle": "Startup",
   "tileStartupDescription": "Manage applications that should be run on startup to permanently enable functionality once the device is powered up.",
   "tileCliTitle": "CLI",
@@ -13,5 +13,7 @@
   "tileSupportTitle": "Support",
   "tileSupportDescription": "If you have any feedback, questions or want to contribute additional functionality, join our community on Discord.",
   "tileAboutTitle": "About fpv.wtf",
-  "tileAboutDescription": "fpv.wtf is a group of enthusiasts working to improve the digital FPV experience."
+  "tileAboutDescription": "fpv.wtf is a group of enthusiasts working to improve the digital FPV experience.",
+  "tileWikiTitle": "Wiki",
+  "tileWikiDescription": "Having issues? Chances are that you will find an answer in our community Wiki."
 }

@@ -1,11 +1,11 @@
 {
-  "title": "Support the effort!",
-  "description": "The team at fpv.wtf kindly asks that you consider donating $10 per device you plan to root. This helps us buy more devices for research and fund bounties for awesome software for FPV systems. We totally understand if you can't. Still friends, okay?",
-  "supporter": "Re-occuring donations available for BFFs.",
-  "cancel": "I already paid",
-  "donate": "Donate",
-  "no": "No, thank you",
-  "custom": "Custom Amount",
-  "subscription": "Re-occuring, monthly donation",
-  "monthly": "monthly"
+  "title": "Поддержите проект!",
+  "description": "Команда fpv.wtf просит, чтобы вы рассмотрели возможность о пожертвовании $10 за каждое устройство, которое вы планируете пропатчить. Это поможет оплчивать тестовые устройства и поддерживать фонд вознаграждения разработчиков. Нсли такой возможности нет - ничего страшного, мы все понимаем.",
+  "supporter": "Регулярные платежи доступны для BFF.",
+  "cancel": "Я уже оплатил",
+  "donate": "Поддержать",
+  "no": "Нет, спасибо",
+  "custom": "Другая сумма",
+  "subscription": "Ежемесячное пожертвование",
+  "monthly": "ежемесячно"
 }

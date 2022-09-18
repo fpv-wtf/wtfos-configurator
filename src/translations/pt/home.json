@@ -1,0 +1,19 @@
+{
+  "connected": "Conectado com sucesso ao seu dispositivo.",
+  "tilePackageManagerTitle": "Gerenciador de Pacotes",
+  "tilePackageManagerDescription": "Extenda a funcionalidade de seu dispositivo instalando pacotes adicionais desenvolvidos pela comunidade.",
+  "tileStartupTitle": "Inicialização",
+  "tileStartupDescription": "Gerenciar serviços que devem ser iniciados automaticamente quando o dispositivo for ligado.",
+  "tileCliTitle": "CLI",
+  "tileCliDescription": "Sessão de Terminal Interativo. Execute comandos como preferir, você deve saber o que está fazendo.",
+  "tileWtfosTitle": "WTFOS",
+  "tileWtfosDescription": "Instalar, modificar ou remover wtfos - o sistema operacional com todas as funcionalidades contribuídas pela comunidade.",
+  "tileRootTitle": "Desbloquear",
+  "tileRootDescription": "Antes de instalar o wtfos você terá que desbloquear o seu dispositivo, liberte - tome o controle!",
+  "tileSupportTitle": "Suporte",
+  "tileSupportDescription": "Se você tiver alguma sugestão, dúvidas ou simplesmente deseja contribuir com funcionalidades adicionais, junte-se à nossa comunidade no Discord.",
+  "tileAboutTitle": "Sobre fpv.wtf",
+  "tileAboutDescription": "fpv.wtf é um grupo de entusiastas que trabalham para melhorar a experiência do FPV digital.",
+  "tileWikiTitle": "Wiki",
+  "tileWikiDescription": "Está tendo problemas? É provável que você encontre uma resposta na Wiki de nossa comunidade."
+}
