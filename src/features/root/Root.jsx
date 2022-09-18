@@ -28,6 +28,7 @@ import {
   PatchFailed,
   PortLost,
   UnlockFailed,
+  UnsupportedFirmwareVersion,
 } from "../../utils/obfuscated-exploit/Errors";
 import Exploit from "../../utils/obfuscated-exploit/Exploit";
 
@@ -36,6 +37,7 @@ import {
   PatchFailed,
   PortLost,
   UnlockFailed,
+  UnsupportedFirmwareVersion,
 } from "../../utils/exploit/Errors";
 import Exploit from "../../utils/exploit/Exploit.js";
 */
@@ -292,7 +294,12 @@ export default function Root() {
             }
           }
         } catch(e) {
-          if(e instanceof UnlockFailed) {
+          if(e instanceof UnsupportedFirmwareVersion) {
+            log(t("unsupportedFirmware"));
+
+            shouldRunUnlock = false;
+            done = true;
+          } else if(e instanceof UnlockFailed) {
             log(t("unlockFailed"));
 
             shouldRunUnlock = false;
