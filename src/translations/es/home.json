@@ -1,7 +1,7 @@
 {
   "connected": "Conectado correctamente a tu dispositivo.",
   "tilePackageManagerTitle": "Gestor de paquetes",
-  "tilePackageManagerDescription": "Expand functionality of your device by installing additional packages developed by the community.",
+  "tilePackageManagerDescription": "Expanda la funcionalidad de su dispositivo instalando paquetes adicionales desarrollados por la comunidad.",
   "tileStartupTitle": "Inicio",
   "tileStartupDescription": "Administrar servicios que deben iniciarse automáticamente una vez que el dispositivo está encendido.",
   "tileCliTitle": "CLI",
@@ -13,5 +13,7 @@
   "tileSupportTitle": "Soporte",
   "tileSupportDescription": "Si tienes cualquier comentario, pregunta o quieres contribuir con funcionalidad adicional, únete a nuestra comunidad en Discord.",
   "tileAboutTitle": "Acerca de fpv.wtf",
-  "tileAboutDescription": "fpv.wtf es un grupo de entusiastas que trabajan para mejorar la experiencia digital FPV."
+  "tileAboutDescription": "fpv.wtf es un grupo de entusiastas que trabajan para mejorar la experiencia digital FPV.",
+  "tileWikiTitle": "Wiki",
+  "tileWikiDescription": "¿Tienes problemas? Es probable que encuentres una respuesta en nuestra Wiki de la comunidad."
 }

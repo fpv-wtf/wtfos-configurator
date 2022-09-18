@@ -13,5 +13,7 @@
   "tileSupportTitle": "Поддержка",
   "tileSupportDescription": "Если у вас есть предложения, вопросы или вы хотите внести свой вклад в развитие проекта, присоединяйтесь к нашему сообществу в Discord.",
   "tileAboutTitle": "О проекте fpv.wtf",
-  "tileAboutDescription": "fpv.wtf - группа энтузиастов, работающих над расширением функционала цифрового FPV."
+  "tileAboutDescription": "fpv.wtf - группа энтузиастов, работающих над расширением функционала цифрового FPV.",
+  "tileWikiTitle": "Wiki",
+  "tileWikiDescription": "Having issues? Chances are that you will find an answer in our community Wiki."
 }

@@ -13,5 +13,7 @@
   "tileSupportTitle": "支持",
   "tileSupportDescription": "如果您有任何反馈，问题或想要贡献额外的功能，加入我们在 Discord 上的社区。",
   "tileAboutTitle": "关于 fpv.wtf",
-  "tileAboutDescription": "fpv.wtf是一群致力于改善数字 FPV 体验的爱好者。"
+  "tileAboutDescription": "fpv.wtf是一群致力于改善数字 FPV 体验的爱好者。",
+  "tileWikiTitle": "Wiki",
+  "tileWikiDescription": "Having issues? Chances are that you will find an answer in our community Wiki."
 }
