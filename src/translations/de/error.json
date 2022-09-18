@@ -3,5 +3,5 @@
   "error404Text": "Nicht sicher, was Du gesucht hast, aber diese Seite existiert nicht. Besuche die",
   "error404Link": "Startseite",
   "errorConnection": "Konnte keine Verbindung zum Gerät herstellen, stelle sicher, dass kein anderer Adb-Server auf deinem Rechner läuft und dass Du nicht in einem anderen Tab/Fenster verbunden bist.",
-  "warningConnection": "Verbinden deine gerooteten Brille oder Flugeinheit über USB, stelle sicher, dass sie Strom hat und klicke auf Verbinden."
+  "warningConnection": "Verbinden deine gerooteten Brille oder Air Unit über USB, stelle sicher, dass sie eingeschaltet sind und klicke auf \"Mit Gerät Verbinden\"."
 }
