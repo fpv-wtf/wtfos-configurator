@@ -9,7 +9,7 @@
   "hint2": "install WTFOS now",
   "hint3": "This is required for adding new packages and service management.",
   "tileInstallTitle": "Install",
-  "tileInstallDescription": "Install WTFOS to your device to install community contrsibuted software.",
+  "tileInstallDescription": "Install WTFOS to your device to install community contributed software.",
   "tileUpdateTitle": "Update",
   "tileUpdateDescription": "Update WTFOS and installed packages to stay up to date.",
   "tileRemoveTitle": "Remove",
