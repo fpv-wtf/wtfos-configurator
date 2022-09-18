@@ -1,6 +1,6 @@
 {
   "title": "Меры безопасности/советы по восстановлению:",
-  "line1": "При запуске wtfos раздел /system перезаписывается копией раздела из /blacbkox/wtfos/system.img",
+  "line1": "When wtfos is started, the /system partition is overwritten with a writable copy of the partition kept in /blackbox/wtfos/system.img",
   "line2": "Если удерживать кнопку bind во время загрузки — запуск wtfos будет пропущен с включенным adb, например для удаления wtfos или диагностики",
   "line3": "При обнаружении фатальных проблем, wtfos попытается загрузиться без модификаций и с включенным adb",
   "browserNotSupported": "Браузер не поддерживается!",
