@@ -1,6 +1,6 @@
 {
-  "running": "running (PID: {{pid}})",
-  "started": "started",
-  "stopped": "stopped",
-  "hint": "Enabled services are started during the boot process of the device."
+  "running": "exécution (PID : {{pid}})",
+  "started": "lancé",
+  "stopped": "stoppé",
+  "hint": "Les services activés sont lancés pendant le processus de démarrage du périphérique."
 }

@@ -1,8 +1,8 @@
 {
-  "message": "Failed health checks",
-  "fix": "Attempt Fix",
-  "warningTitle": "Automated fixes:",
-  "warningDescription": "Don't worry, this is normal and can happen due to various reasons, including bugs in the underlaying operating system. The configurator can help you fix these issues. When attempting an automated fix, your device might reboot in the process. In some specific cases you may need to re-root your device after a reboot, before health checks can continue.",
-  "failed": "Failed running health-checks.",
-  "loading": "Please wait..."
+  "message": "Tests de bon fonctionnement échoués",
+  "fix": "Tentative de réparation",
+  "warningTitle": "Corrections automatiques:",
+  "warningDescription": "Ne vous inquiétez pas, ces erreurs sont normales et cela peut se produire à cause de diverses raisons, y compris des bugss dans le système d'exploitation de second plan. Le configurateur peut vous aider à résoudre ces problèmes. Lors de la tentative de correction automatique, votre périphérique peut redémarrer dans le processus. Dans certains cas spécifiques, vous devrez peut-être re-rooter votre appareil après un redémarrage, avant que les tests de bon fonctionnement puissent continuer.",
+  "failed": "Échec de l'exécution des tests de bon fonctionnement.",
+  "loading": "Veuillez patienter..."
 }

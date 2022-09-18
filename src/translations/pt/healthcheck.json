@@ -1,0 +1,8 @@
+{
+  "message": "Falhas de verificação",
+  "fix": "Tentar Correção",
+  "warningTitle": "Correções automatizadas:",
+  "warningDescription": "Não se preocupe, isso é normal e pode acontecer por várias razões, incluindo bugs no sistema operacional. O configurador pode ajudá-lo a corrigir estes problemas. Ao tentar uma correção automatizada, seu dispositivo pode reiniciar no processo. Em alguns casos específicos, você pode precisar refazer o desbloqueio no seu dispositivo após uma reinicialização, antes que as verificações possam continuar.",
+  "failed": "Verificações mal sucedidas.",
+  "loading": "Por favor, aguarde..."
+}

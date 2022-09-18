@@ -9,7 +9,7 @@
   "hint2": "установить WTFOS прямо сейчас",
   "hint3": "Это необходимо для установки новых пакетов и управления сервисами.",
   "tileInstallTitle": "Установить",
-  "tileInstallDescription": "Установить WTFOS на ваше устройство для использования функцинала созданного сообществом.",
+  "tileInstallDescription": "Install WTFOS to your device to install community contributed software.",
   "tileUpdateTitle": "Обновить",
   "tileUpdateDescription": "Обновить WTFOS и все установленные пакеты до последней версии.",
   "tileRemoveTitle": "Удалить",

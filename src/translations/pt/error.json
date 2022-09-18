@@ -1,0 +1,7 @@
+{
+  "error404Title": "404 - Não encontrado",
+  "error404Text": "Não tenho certeza o que você estava procurando, mas esta página não existe. Verifique",
+  "error404Link": "página",
+  "errorConnection": "Não foi possível se conectar ao dispositivo, certifique-se de que o servidor adb não está executando na sua máquina (adb kill-server) e que você não está conectado em outra aba/janela do seu navegador.",
+  "warningConnection": "Conecte seus Óculos ou Air Unit (desbloqueados) via USB, certifique-se de que estão ligados e aperte o botão conectar."
+}
