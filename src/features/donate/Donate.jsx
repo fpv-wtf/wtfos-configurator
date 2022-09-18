@@ -5,6 +5,7 @@ import React, {
 } from "react";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import ReactGA from "react-ga4";
 
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
@@ -74,18 +75,28 @@ export default function Donate() {
     const selectedAmount = customValue || amount;
     if(selectedAmount > 0) {
       let url = `https://opencollective.com/fpv-wtf/donate?amount=${selectedAmount}`;
-      if (subscription) {
+      if(subscription) {
         url += "&interval=month";
       }
       window.open(url, "_blank", "noopener,noreferrer");
 
+      ReactGA.gtag("event", "donation", {
+        value: selectedAmount,
+        currency: "USD",
+        subscription,
+      });
+
       setReminderNever();
     } else {
+      ReactGA.gtag("event", "donationNoThankYou");
+
       setReminder();
     }
   }, [amount, customValue, setReminder, setReminderNever, subscription]);
 
   const handleSkipClick = useCallback(() => {
+    ReactGA.gtag("event", "donationAlreadyPaid");
+
     setReminderNever();
   }, [setReminderNever]);
 
