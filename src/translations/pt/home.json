@@ -1,7 +1,7 @@
 {
   "connected": "Conectado com sucesso ao seu dispositivo.",
   "tilePackageManagerTitle": "Gerenciador de Pacotes",
-  "tilePackageManagerDescription": "Expand functionality of your device by installing additional packages developed by the community.",
+  "tilePackageManagerDescription": "Extenda a funcionalidade de seu dispositivo instalando pacotes adicionais desenvolvidos pela comunidade.",
   "tileStartupTitle": "Inicialização",
   "tileStartupDescription": "Gerenciar serviços que devem ser iniciados automaticamente quando o dispositivo for ligado.",
   "tileCliTitle": "CLI",
