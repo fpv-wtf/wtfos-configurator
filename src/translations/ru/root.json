@@ -28,5 +28,6 @@
   "root": "Root устройства",
   "rebootTimeout": "Отмена! Устройство не перезагрузилось вовремя, отключите/подключите питание и повторите попытку.",
   "rebootTimeShort": "Перезагрузка произошла слишком быстро - попробуйте перезапустить устройство еще раз...",
-  "unlockFailed": "Разблокировака не удалась, попробуйте перазапустить устройство и повторить попытку."
+  "unlockFailed": "Разблокировака не удалась, попробуйте перазапустить устройство и повторить попытку.",
+  "unsupportedFirmware": "The firmware on your device is too new. You may be able to downgrade to V01.01.0606 in DIY mode with DJI FPV Assistant 2 depending on the exact version installed. Please <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>see the wiki</a> for more details."
 }
