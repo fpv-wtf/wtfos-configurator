@@ -2,5 +2,5 @@
   "running": "läuft (PID: {{pid}})",
   "started": "gestartet",
   "stopped": "gestoppt",
-  "hint": "Aktivierte Services werden während des Startprozesses gestartet."
+  "hint": "Aktivierte Dienste werden während des Bootvorgangs des Geräts gestartet."
 }
