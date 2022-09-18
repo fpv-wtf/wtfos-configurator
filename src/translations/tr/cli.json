@@ -1,4 +1,4 @@
 {
-  "description": "This feature allows you to hand over complete control of your device to a third party.",
-  "warning": "Only use this if you know what you are doing and only ever connect to trusted individuals."
+  "description": "Bu özellik, cihazınızın tüm kontrolünü üçüncü bir tarafa devretmenizi sağlar.",
+  "warning": "Bunu yalnızca ne yaptığınızı biliyorsanız ve yalnızca güvenilir kişilerle bağlantı kurmak için kullanın."
 }
