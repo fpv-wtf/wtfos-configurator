@@ -1,6 +1,6 @@
 {
   "title": "Mesures de sécurité/conseils de récupération :",
-  "line1": "Lorsque wtfos est démarré, la partition /system est remplacée par une copie écrivable de la partition conservée dans /blacbkox/wtfos/system.img",
+  "line1": "When wtfos is started, the /system partition is overwritten with a writable copy of the partition kept in /blackbox/wtfos/system.img",
   "line2": "Si vous maintenez le bouton bind enfoncé pendant le démarrage de wtfos, il sera ignoré avec le adb activé pour permettre l'effacement de wtfos ou un diagnostic",
   "line3": "Si wtfos détecte des problèmes majeurs, il tentera de démarrer sans aucune modification et avec adb activé pour effacer wtfos",
   "browserNotSupported": "Navigateur non pris en charge!",
