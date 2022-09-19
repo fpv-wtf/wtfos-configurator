@@ -1,0 +1,21 @@
+{
+  "footerIssue": "Eğer herhangi bir sorunla karşılaşırsanız, lütfen",
+  "footerIssueLink": "github üzerinden raporlayın",
+  "menuHome": "Ana sayfa",
+  "menuPackageManager": "Paket Yöneticisi",
+  "menuStartup": "Başlangıç",
+  "menuCli": "CLI (Komut Satırı Arayüzü)",
+  "menuWtfos": "WTFOS",
+  "menuRoot": "Root",
+  "menuAbout": "fpv.wtf hakkında",
+  "titleHome": "Ana sayfa",
+  "titleCli": "CLI (Komut satırı arayüzü)",
+  "titlePackages": "Paketler",
+  "titleStartup": "Başlangıç",
+  "titleAbout": "fpv.wtf hakkında",
+  "titleRoot": "Root",
+  "titleWtfos": "WTFOS",
+  "titleWtfosUpdate": "WTFOS - Güncelle",
+  "titleWtfosInstall": "WTFOS - Yükle",
+  "titleWtfosRemove": "WTFOS - Kaldır"
+}

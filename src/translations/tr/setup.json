@@ -1,0 +1,22 @@
+{
+  "installDisclaimerTitle": "Uyarılar:",
+  "installDisclaimerLine1": "WTFOS beta sürecindedir!",
+  "installDisclaimerLine2": "Bazı şeyler beklendiği gibi çalışmayabilir",
+  "installDisclaimerLine3": "Tüm riskler size aittir",
+  "install": "WTFOS yükle",
+  "remove": "WTFOS kaldır",
+  "hint1": "Şunu yapman gerekiyor:",
+  "hint2": "WTFOS'u şimdi yükle",
+  "hint3": "Bu, yeni paketler eklemek ve hizmet yönetimi için gereklidir.",
+  "tileInstallTitle": "Yükle",
+  "tileInstallDescription": "Topluluğun katkıda bulunduğu yazılımları yükleyebilmek için WTFOS'u cihazınıza yükleyin.",
+  "tileUpdateTitle": "Güncelle",
+  "tileUpdateDescription": "Güncel kalmak için WTFOS'u ve kurulu paketleri güncelleyin.",
+  "tileRemoveTitle": "Kaldır",
+  "tileRemoveDescription": "WTFOS'u cihazınızdan kaldırın. Bu işlem root dışındaki tüm değişiklikleri geri alacaktır.",
+  "upToDate": "Her şey güncel!",
+  "checking": "Paketler denetleniyor...",
+  "name": "Paket Adı",
+  "current": "Yüklü Sürüm",
+  "latest": "Son Sürüm"
+}

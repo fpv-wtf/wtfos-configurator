@@ -28,5 +28,6 @@
   "root": "Rooter l'appareil",
   "rebootTimeout": "Abandonné ! L'appareil n'a pas redémarré à temps, redémarrez-le et réessayez.",
   "rebootTimeShort": "Le temps de redémarrage est trop court - redémarrez une fois de plus au cas ou...",
-  "unlockFailed": "Le déverrouillage a échoué, veuillez redémarrer votre appareil et réessayez."
+  "unlockFailed": "Le déverrouillage a échoué, veuillez redémarrer votre appareil et réessayez.",
+  "unsupportedFirmware": "The firmware on your device is too new. You may be able to downgrade to V01.01.0606 in DIY mode with DJI FPV Assistant 2 depending on the exact version installed. Please <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>see the wiki</a> for more details."
 }

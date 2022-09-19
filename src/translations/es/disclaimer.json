@@ -1,6 +1,6 @@
 {
   "title": "Consejos de seguridad:",
-  "line1": "Cuando se inicia wtfos, la partición /system se sobrescribe con una copia escribible de la partición guardada en /blacbkox/wtfos/system.img",
+  "line1": "When wtfos is started, the /system partition is overwritten with a writable copy of the partition kept in /blackbox/wtfos/system.img",
   "line2": "Si mantiene presionado el botón de \"bindeo\" al arrancar wtfos se omitirá con adb habilitado para permitir la eliminación de wtfos o diagnóstico",
   "line3": "Si wtfos detecta cualquier problema fatal, intentará arrancar sin modificaciones y con adb habilitado",
   "browserNotSupported": "Navegador no compatible!",
