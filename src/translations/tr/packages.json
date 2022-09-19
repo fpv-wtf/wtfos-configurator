@@ -9,7 +9,7 @@
   "installed": "Yüklendi",
   "labelSearch": "Ara...",
   "name": "Ad",
-  "version": "Versiyon",
+  "version": "Sürüm",
   "description": "Açıklama",
   "matchCount": "{{count}} adet paket bulundu"
 }
