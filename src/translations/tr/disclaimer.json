@@ -4,9 +4,9 @@
   "line2": "Açılış sırasında bağlama(bind) düğmesini basılı tutarsanız wtfos'un silinmesine veya tanılamaya izin vermek için adb devreye sokularak wtfos başlatması atlanır",
   "line3": "Wtfos herhangi bir önemli sorun tespit ederse, adb etkin şekilde herhangi bir değişiklik yapmadan başlatmayı dener",
   "browserNotSupported": "Tarayıcı desteklenmiyor!",
-  "browserNotSupportedText": "Your browser does not support webusb functionality. Please use a",
-  "browserNotSupportedLink": "browser which provides this functionality.",
-  "browserSupported": "The supported (and tested) browsers are:",
-  "browserSupportedAndroid": "Some Android phones",
-  "browserSupportedOther": "Other Chromium based browsers"
+  "browserNotSupportedText": "Tarayıcınız webusb özelliğini desteklememektedir. Lütfen",
+  "browserNotSupportedLink": "bu özelliği destekleyen bir tarayıcı kullanın.",
+  "browserSupported": "Desteklenen(ve test edilmiş) tarayıcılar:",
+  "browserSupportedAndroid": "Bazı Android telefonlar",
+  "browserSupportedOther": "Diğer Chromium tabanlı tarayıcılar"
 }
