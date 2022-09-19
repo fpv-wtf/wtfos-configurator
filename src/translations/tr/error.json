@@ -1,7 +1,7 @@
 {
   "error404Title": "404 - Bulunamadı",
-  "error404Text": "Ne aradığından emin değilim ama böyle bir sayfa yok. Belki şu sayfayı deneyebilirsin:",
-  "error404Link": "anasayfa",
-  "errorConnection": "Could not connect to device, make sure that adb server is not running on your machine (adb kill-server) and that you are not connected in another tab/window.",
-  "warningConnection": "Connect your rooted Goggles or Air Unit via USB, make sure they are powered on and hit the connect button."
+  "error404Text": "Ne aradığından emin değilim ama böyle bir sayfa yok. Belki şu sayfayı deneyebilirsin",
+  "error404Link": "ana sayfa",
+  "errorConnection": "Cihaza bağlanılamadı, bilgisayarınızda adb sunucusunun çalışmadığından (adb kill-server) ve başka bir sekme/pencere ile cihaza bağlı olmadığınızdan emin olun.",
+  "warningConnection": "Rootlanmış Gözlük veya Air Unit/Air Unit Lite'ınızı USB ile bağlayın, cihazların çalışır olduğundan emin olun ve bağlan butonuna basın."
 }
