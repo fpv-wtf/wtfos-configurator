@@ -1,6 +1,6 @@
 {
   "title": "Sicherheitsmaßnahmen/Hinweise zur Wiederherstellung:",
-  "line1": "When wtfos is started, the /system partition is overwritten with a writable copy of the partition kept in /blackbox/wtfos/system.img",
+  "line1": "Wenn WTFOS gestartet ist, wird die Partition /system mit einer beschreibbaren Kopie der Partition überschrieben, die sich in /blackbox/wtfos/system.img befindet.",
   "line2": "Wenn du die \"Bind\" Taste während des Bootens gedrückt hältst, wird das Starten von WTFOS mit aktiviertem Adb übersprungen, um WTFOS löschen oder diagnostizieren zu können",
   "line3": "Wenn die WTFOS-Skripte ein fatales Problem entdecken, werden sie versuchen, ohne Änderungen - mit aktivierter Abd - zu booten",
   "browserNotSupported": "Dieser Browser wird nicht unterstützt!",
