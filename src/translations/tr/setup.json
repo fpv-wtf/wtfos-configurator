@@ -12,11 +12,11 @@
   "tileInstallDescription": "Topluluğun katkıda bulunduğu yazılımları yükleyebilmek için WTFOS'u cihazınıza yükleyin.",
   "tileUpdateTitle": "Güncelle",
   "tileUpdateDescription": "Güncel kalmak için WTFOS'u ve kurulu paketleri güncelleyin.",
-  "tileRemoveTitle": "Remove",
-  "tileRemoveDescription": "Remove WTFOS from your device. This will revert all changes apart from the root unlock itself.",
-  "upToDate": "Everything up to date!",
-  "checking": "Checking packages...",
-  "name": "Package Name",
-  "current": "Installed Version",
-  "latest": "Latest Version"
+  "tileRemoveTitle": "Kaldır",
+  "tileRemoveDescription": "WTFOS'u cihazınızdan kaldırın. Bu işlem root dışındaki tüm değişiklikleri geri alacaktır.",
+  "upToDate": "Her şey güncel!",
+  "checking": "Paketler denetleniyor...",
+  "name": "Paket Adı",
+  "current": "Yüklü Sürüm",
+  "latest": "Son Sürüm"
 }
