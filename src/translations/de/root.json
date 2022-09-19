@@ -21,7 +21,7 @@
   "disclaimerTitle": "Haftungsausschluss:",
   "disclaimerLine1": "Stelle sicher, dass das gerootete Gerät von einer zuverlässigen Stromquelle betrieben wird.",
   "disclaimerLine2": "Habe nur ein Gerät verbunden/gekoppelt.",
-  "disclaimerLine3": "Während des Root Vorgang das Gerät nicht ausschalten.",
+  "disclaimerLine3": "Während des Root Vorgang das Gerät nicht ausschalten",
   "disclaimerLine4": "Auf eigene Gefahr fortfahren",
   "portOpenFailed": "Öffnen der seriellen Schnittstelle nach {{maxTries}} Wiederholungsversuchen fehlgeschlagen.",
   "rooted": "Gerät bereits gerootet",
