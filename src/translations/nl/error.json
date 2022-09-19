@@ -1,7 +1,7 @@
 {
-  "error404Title": "404 - Not found",
-  "error404Text": "Not sure what you were looking for, but this page does not exist. Maybe check the",
-  "error404Link": "homepage",
-  "errorConnection": "Could not connect to device, make sure that adb server is not running on your machine (adb kill-server) and that you are not connected in another tab/window.",
-  "warningConnection": "Connect your rooted Goggles or Air Unit via USB, make sure they are powered on and hit the connect button."
+  "error404Title": "404 - Niet gevonden",
+  "error404Text": "Wat je ook zocht, deze pagina bestaat niet. Kijk anders bij de",
+  "error404Link": "hoofdpagina",
+  "errorConnection": "Kon geen verbinding maken met het apparaat. Zorg er voor dat adb server niet actief is op je computer (adb kill-server) en dat er geen verbinding op een ander tabblad actief is.",
+  "warningConnection": "Sluit je eerder geroote Goggles of Air Unit aan via USB, zorg er voor dat deze aan staat en klik op de verbinden knop."
 }
