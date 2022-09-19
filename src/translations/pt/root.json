@@ -15,7 +15,7 @@
   "done": "Tudo pronto - seu dispositivo foi desbloqueado com sucesso!",
   "manualReboot": "Falhou! Por favor, Desligue e ligue seu dispositivo agora...",
   "failed": "Falha após {{maxTry}} tentativas.",
-  "deviceLost": "O dispositivo foi sumiu...",
+  "deviceLost": "O dispositivo sumiu...",
   "deviceBack": "O dispositivo voltou...",
   "cooling": "Se você está desbloqueando uma Air Unit - especialmente Air Unit Lite (Caddx Vista) - certifique-se de que a mesma esteja sendo resfriada diretamente por uma ventoinha ou ventilador.",
   "disclaimerTitle": "Aviso de responsabilidade:",
@@ -29,5 +29,5 @@
   "rebootTimeout": "Abortado! O dispositivo não reiniciou a tempo, por favor deslique e ligue-o novamente.",
   "rebootTimeShort": "Tempo de reinicialização suspeito (curto) - reiniciando mais uma vez para novo cálculo...",
   "unlockFailed": "Falha no desbloqueio, por favor desligue e ligue o seu dispositivo e tente novamente.",
-  "unsupportedFirmware": "O firmware no seu dispositivo é muito nova. Você pode fazer o downgrade para a versão V01.01.606 em modo DIY com DJI FPV Assistant 2 dependendo da versão instalada. Por favor <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>veja a wiki</a> para mais detalhes."
+  "unsupportedFirmware": "A firmware no seu dispositivo é muito nova. Você pode fazer o downgrade para a versão V01.01.606 em modo DIY com DJI FPV Assistant 2 dependendo da versão instalada. Por favor <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>veja a wiki</a> para mais detalhes."
 }
