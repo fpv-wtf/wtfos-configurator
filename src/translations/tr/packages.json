@@ -1,15 +1,15 @@
 {
-  "remove": "Remove",
-  "install": "Install",
-  "fetching": "Fetching packages...",
-  "installationFailed": "Error during package installation:",
-  "labelRepo": "Repo",
-  "labelPackages": "Packages",
-  "labelAll": "All",
-  "installed": "Installed",
-  "labelSearch": "Search...",
-  "name": "Name",
-  "version": "Version",
-  "description": "Description",
-  "matchCount": "Found {{count}} packages"
+  "remove": "Kaldır",
+  "install": "Yükle",
+  "fetching": "Paketler getiriliyor...",
+  "installationFailed": "Paket kurulumu sırasında hata oluştu:",
+  "labelRepo": "Kaynak",
+  "labelPackages": "Paketler",
+  "labelAll": "Tümü",
+  "installed": "Yüklendi",
+  "labelSearch": "Ara...",
+  "name": "Ad",
+  "version": "Versiyon",
+  "description": "Açıklama",
+  "matchCount": "{{count}} adet paket bulundu"
 }
