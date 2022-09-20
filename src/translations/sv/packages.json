@@ -1,15 +1,15 @@
 {
-  "remove": "Remove",
-  "install": "Install",
-  "fetching": "Fetching packages...",
-  "installationFailed": "Error during package installation:",
-  "labelRepo": "Repo",
-  "labelPackages": "Packages",
-  "labelAll": "All",
-  "installed": "Installed",
-  "labelSearch": "Search...",
-  "name": "Name",
+  "remove": "Ta bort",
+  "install": "Installera",
+  "fetching": "Hämtar paket...",
+  "installationFailed": "Fel vid paketinstallation:",
+  "labelRepo": "Källa",
+  "labelPackages": "Paket",
+  "labelAll": "Alla",
+  "installed": "Installerade",
+  "labelSearch": "Sök...",
+  "name": "Namn",
   "version": "Version",
-  "description": "Description",
-  "matchCount": "Found {{count}} packages"
+  "description": "Beskrivning",
+  "matchCount": "Hittade {{count}} paket"
 }
