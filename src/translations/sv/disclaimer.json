@@ -1,12 +1,12 @@
 {
-  "title": "Safety measures/recovery hints:",
-  "line1": "When wtfos is started, the /system partition is overwritten with a writable copy of the partition kept in /blackbox/wtfos/system.img",
-  "line2": "If you hold the bind button down during boot wtfos startup will be skipped with adb enabled to allow for wiping of wtfos or diagnosis",
-  "line3": "If wtfos detects any fatal issues, it will likewise attempt to boot up without any modifications and with adb enabled",
-  "browserNotSupported": "Browser not supported!",
-  "browserNotSupportedText": "Your browser does not support webusb functionality. Please use a",
-  "browserNotSupportedLink": "browser which provides this functionality.",
-  "browserSupported": "The supported (and tested) browsers are:",
-  "browserSupportedAndroid": "Some Android phones",
-  "browserSupportedOther": "Other Chromium based browsers"
+  "title": "Säkerhetsåtgärder/tips för återhämtning:",
+  "line1": "När wtfos startas skrivs /system partitionen över med en skrivbar kopia av partitionen som hålls i /blackbox/wtfos/system.img",
+  "line2": "Om du håller ned bindeknappen under uppstart kommer wtfos uppstartt hoppas över, med adb aktiverat för att möjliggöra borttagning av wtfos eller felsökning",
+  "line3": "Om wtfos upptäcker några kritiska problem kommer uppstart göras utan några ändringar och med adb aktiverat",
+  "browserNotSupported": "Webbläsaren stöds inte!",
+  "browserNotSupportedText": "Din webbläsare stöder inte webusb-funktionalitet. Använd en",
+  "browserNotSupportedLink": "webbläsare som tillhandahåller denna funktion.",
+  "browserSupported": "De webbläsare som stöds (och testats) är:",
+  "browserSupportedAndroid": "Vissa Android-telefoner",
+  "browserSupportedOther": "Andra Chromiumbaserade webbläsare"
 }
