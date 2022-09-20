@@ -1,7 +1,7 @@
 {
   "connected": "Connexion réussie à votre appareil.",
   "tilePackageManagerTitle": "Gestion des Extensions",
-  "tilePackageManagerDescription": "Expand functionality of your device by installing additional packages developed by the community.",
+  "tilePackageManagerDescription": "Agrandissez les fonctionnalités de votre appareil en installant des extensions supplémentaires développés par la communauté.",
   "tileStartupTitle": "Démarrage",
   "tileStartupDescription": "Gère les extensions qui démarrent automatiquement une fois que l'appareil est allumé.",
   "tileCliTitle": "CLI",
@@ -15,5 +15,5 @@
   "tileAboutTitle": "À propos de fpv.wtf",
   "tileAboutDescription": "fpv.wtf est un groupe de passionnés qui travaillent à améliorer l'expérience FPV numérique.",
   "tileWikiTitle": "Wiki",
-  "tileWikiDescription": "Having issues? Chances are that you will find an answer in our community Wiki."
+  "tileWikiDescription": "Vous avez des problèmes? Il est possible que vous trouviez une réponse dans notre Wiki de la communauté."
 }
