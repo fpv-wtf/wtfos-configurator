@@ -1,6 +1,6 @@
 {
-  "disconnect": "Disconnect",
-  "connect": "Connect",
-  "connectDevice": "Connect to Device",
-  "rebooting": "Rebooting..."
+  "disconnect": "Verbinding verbreken",
+  "connect": "Verbinding maken",
+  "connectDevice": "Verbinding maken met apparaat",
+  "rebooting": "Herstarten..."
 }
