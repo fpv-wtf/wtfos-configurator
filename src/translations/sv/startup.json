@@ -1,6 +1,6 @@
 {
-  "running": "running (PID: {{pid}})",
-  "started": "started",
-  "stopped": "stopped",
-  "hint": "Enabled services are started during the boot process of the device."
+  "running": "kör (PID: {{pid}})",
+  "started": "startad",
+  "stopped": "avbruten",
+  "hint": "Aktiverade tjänster startas under uppstart."
 }
