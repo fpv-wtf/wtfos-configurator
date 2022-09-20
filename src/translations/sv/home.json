@@ -7,13 +7,13 @@
   "tileCliTitle": "CLI",
   "tileCliDescription": "Interaktiv Terminalsession. Kör kommandon som du vill, du bör veta vad du gör.",
   "tileWtfosTitle": "WTFOS",
-  "tileWtfosDescription": "Install, maintain or Remove wtfos - the operating system for all community contributed functionality.",
+  "tileWtfosDescription": "Installera, underhåll eller ta bort wtfos - operativsystemet för alla gemenskapens bidrag till funktionalitet.",
   "tileRootTitle": "Root",
-  "tileRootDescription": "Before installing wtfos you will have to root your device, set it free - OWN it!",
+  "tileRootDescription": "Innan du installerar wtfos måste du roota din enhet, släpp den lös- ÄG den!",
   "tileSupportTitle": "Support",
-  "tileSupportDescription": "If you have any feedback, questions or want to contribute additional functionality, join our community on Discord.",
-  "tileAboutTitle": "About fpv.wtf",
-  "tileAboutDescription": "fpv.wtf is a group of enthusiasts working to improve the digital FPV experience.",
+  "tileSupportDescription": "Om du har någon feedback, frågor eller vill bidra med ytterligare funktionalitet, gå med i vår Discord.",
+  "tileAboutTitle": "Om fpv.wtf",
+  "tileAboutDescription": "fpv.wtf är en grupp entusiaster som arbetar för att förbättra den digitala FPV-upplevelsen.",
   "tileWikiTitle": "Wiki",
-  "tileWikiDescription": "Having issues? Chances are that you will find an answer in our community Wiki."
+  "tileWikiDescription": "Har du problem? Chansen är att du kommer att hitta ett svar i vår Wiki."
 }
