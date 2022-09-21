@@ -1,6 +1,6 @@
 {
   "error404Title": "404 - Niet gevonden",
-  "error404Text": "Wat je ook zocht, deze pagina bestaat niet. Kijk anders bij de",
+  "error404Text": "Wat je ook zocht, deze pagina bestaat niet. Kijk anders op de",
   "error404Link": "hoofdpagina",
   "errorConnection": "Kon geen verbinding maken met het apparaat. Zorg er voor dat adb server niet actief is op je computer (adb kill-server) en dat er geen verbinding op een ander tabblad actief is.",
   "warningConnection": "Sluit je eerder geroote Goggles of Air Unit aan via USB, zorg er voor dat deze aan staat en klik op de verbinden knop."
