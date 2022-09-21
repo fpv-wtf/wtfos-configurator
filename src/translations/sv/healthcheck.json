@@ -1,0 +1,8 @@
+{
+  "message": "Misslyckad hälsokontroll",
+  "fix": "Försök fixa",
+  "warningTitle": "Automatiska åtgärder:",
+  "warningDescription": "Oroa dig inte, detta är normalt och kan hända på grund av olika skäl, inklusive buggar i underläggande operativsystem. Konfiguratorn kan hjälpa dig att åtgärda dessa problem. När du försöker med en automatiserad rättning kan din enhet starta om i processen. I vissa specifika fall kan du behöva rota om enheten efter en omstart, innan hälsokontroller kan fortsätta.",
+  "failed": "Misslyckades att köra hälsokontroller.",
+  "loading": "Vänligen vänta..."
+}

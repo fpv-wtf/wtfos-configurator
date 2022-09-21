@@ -1,0 +1,12 @@
+{
+  "title": "Veiligheidsmaatregelen/herstel tips:",
+  "line1": "Wanneer wtfos is gestart, wordt de /system partitie overschreven met een beschrijfbare kopie van de partitie bewaard in /blackbox/wtfos/system.img",
+  "line2": "Wanneer je de bindknop ingedrukt houdt tijdens het opstarten, wordt de start van wtfos overgeslagen en is adb ingeschakeld om wtfos te wissen of diagnoses te doen",
+  "line3": "Wanneer wtfos fatale problemen detecteerd, dan zal het trachten opnieuw te starten met adb ingeschakeld en zonder overige modificaties uitgeschakeld",
+  "browserNotSupported": "Browser niet ondersteund!",
+  "browserNotSupportedText": "Uw browser ondersteunt geen webusb functionaliteit. Gebruik een",
+  "browserNotSupportedLink": "browser die deze functionaliteit wél biedt.",
+  "browserSupported": "De ondersteunde (en geteste) browsers zijn:",
+  "browserSupportedAndroid": "Sommige Android telefoons",
+  "browserSupportedOther": "Andere Chromium gebaseerde browsers"
+}

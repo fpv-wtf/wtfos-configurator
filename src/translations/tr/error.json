@@ -1,5 +1,5 @@
 {
-  "error404Title": "404 - Bulunamadı",
+  "error404Title": "404 - Sayfa Bulunamadı",
   "error404Text": "Ne aradığından emin değilim ama böyle bir sayfa yok. Belki şu sayfayı deneyebilirsin",
   "error404Link": "ana sayfa",
   "errorConnection": "Cihaza bağlanılamadı, bilgisayarınızda adb sunucusunun çalışmadığından (adb kill-server) ve başka bir sekme/pencere ile cihaza bağlı olmadığınızdan emin olun.",

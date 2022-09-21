@@ -1,0 +1,21 @@
+{
+  "footerIssue": "Om du stöter på några problem, vänligen",
+  "footerIssueLink": "rapportera dem på github",
+  "menuHome": "Hem",
+  "menuPackageManager": "Pakethanterare",
+  "menuStartup": "Uppstart",
+  "menuCli": "CLI",
+  "menuWtfos": "WTFOS",
+  "menuRoot": "Root",
+  "menuAbout": "Om fpv.wtf",
+  "titleHome": "Hem",
+  "titleCli": "CLI",
+  "titlePackages": "Paket",
+  "titleStartup": "Uppstart",
+  "titleAbout": "Om fpv.wtf",
+  "titleRoot": "Root",
+  "titleWtfos": "WTFOS",
+  "titleWtfosUpdate": "WTFOS - Uppdatera",
+  "titleWtfosInstall": "WTFOS - Installera",
+  "titleWtfosRemove": "WTFOS - Ta bort"
+}

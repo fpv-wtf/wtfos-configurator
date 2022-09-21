@@ -9,7 +9,7 @@
   "hint2": "立即安装 WTFOS",
   "hint3": "这是添加新软件包和进行服务管理所必须的",
   "tileInstallTitle": "安装",
-  "tileInstallDescription": "Install WTFOS to your device to install community contributed software.",
+  "tileInstallDescription": "安装 WTFOS 到您的设备以便安装由社区提供的软件.",
   "tileUpdateTitle": "升级",
   "tileUpdateDescription": "升级 WTFOS 和已安装的软件包到最新版本",
   "tileRemoveTitle": "移除",

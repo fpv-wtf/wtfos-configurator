@@ -1,6 +1,6 @@
 {
   "step1": "1. Adım deneniyor...",
-  "foundDevice": " - Cihaz Bulundu: {{device}}, Versiyon: {{version}}",
+  "foundDevice": " - Cihaz Bulundu: {{device}}, Sürüm: {{version}}",
   "step1Success": "1. Adım - Başarılı! Yeniden başlatılıyor...",
   "step2": "2. Adım deneniyor...",
   "step2Success": "2. Adım - Başarılı!",

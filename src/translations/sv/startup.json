@@ -1,0 +1,6 @@
+{
+  "running": "kör (PID: {{pid}})",
+  "started": "startad",
+  "stopped": "avbruten",
+  "hint": "Aktiverade tjänster startas under uppstart."
+}

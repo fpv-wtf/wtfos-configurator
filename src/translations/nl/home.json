@@ -1,0 +1,19 @@
+{
+  "connected": "Succesvol verbonden met je apparaat.",
+  "tilePackageManagerTitle": "Pakket Manager",
+  "tilePackageManagerDescription": "Vergroot de functionaliteit van je apparaat door extra pakketten te installeren die ontwikkeld zijn door de community.",
+  "tileStartupTitle": "Opstarten",
+  "tileStartupDescription": "Beheer diensten die automatisch moeten worden gestart zodra het apparaat is ingeschakeld.",
+  "tileCliTitle": "CLI",
+  "tileCliDescription": "Interactieve Sessie. Voer opdrachten uit zoals je wilt, weest je bewust van wat je doet.",
+  "tileWtfosTitle": "WTFOS",
+  "tileWtfosDescription": "Instelleer, onderhoud of verwijder wtfos - het besturingssysteem voor alle community gecreëerde functionaliteiten.",
+  "tileRootTitle": "Root",
+  "tileRootDescription": "Voordat je wtfos installeert moet je je apparaat rooten, geeft het vrijheid - OWN it!",
+  "tileSupportTitle": "Ondersteuning",
+  "tileSupportDescription": "Als je extra functies wilt bijdragen, feedback of vragen hebt, neem dan deel aan onze community op Discord.",
+  "tileAboutTitle": "Over fpv.wtf",
+  "tileAboutDescription": "fpv.wtf is een groep enthousiastelingen die werken om de digitale FPV ervaring te verbeteren.",
+  "tileWikiTitle": "Wiki",
+  "tileWikiDescription": "Heb je problemen? De kans is groot dat je je antwoord vindt in de door onze gemeenschap gemaakte Wiki."
+}
