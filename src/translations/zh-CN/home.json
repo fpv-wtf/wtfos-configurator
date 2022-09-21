@@ -1,7 +1,7 @@
 {
   "connected": "已连接至您的设备。",
   "tilePackageManagerTitle": "软件包管理器",
-  "tilePackageManagerDescription": "Expand functionality of your device by installing additional packages developed by the community.",
+  "tilePackageManagerDescription": "通过安装社区开发的额外软件包来扩展您设备的功能。",
   "tileStartupTitle": "启动",
   "tileStartupDescription": "管理设备启动后自动启动的服务。",
   "tileCliTitle": "命令行界面",
@@ -15,5 +15,5 @@
   "tileAboutTitle": "关于 fpv.wtf",
   "tileAboutDescription": "fpv.wtf是一群致力于改善数字 FPV 体验的爱好者。",
   "tileWikiTitle": "Wiki",
-  "tileWikiDescription": "Having issues? Chances are that you will find an answer in our community Wiki."
+  "tileWikiDescription": "有问题？大概率可以在我们的社区Wiki找到答案。"
 }
