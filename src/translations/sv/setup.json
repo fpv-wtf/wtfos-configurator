@@ -9,7 +9,7 @@
   "hint2": "installera WTFOS nu",
   "hint3": "Detta krävs för att lägga till nya paket och servicehantering.",
   "tileInstallTitle": "Installera",
-  "tileInstallDescription": "Install WTFOS to your device to install community contributed software.",
+  "tileInstallDescription": "Installera WTFOS på din enhet för att installera programvara som utvecklats av gemenskapen.",
   "tileUpdateTitle": "Uppdatera",
   "tileUpdateDescription": "Uppdatera WTFOS och installerade paket.",
   "tileRemoveTitle": "Ta bort",
