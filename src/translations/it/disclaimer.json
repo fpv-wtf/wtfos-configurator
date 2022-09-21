@@ -1,6 +1,6 @@
 {
   "title": "Misure di sicurezza/suggerimenti per il ripristino:",
-  "line1": "When wtfos is started, the /system partition is overwritten with a writable copy of the partition kept in /blackbox/wtfos/system.img",
+  "line1": "Quando wtfos viene avviato, la partizione /system viene sovrascritta con una copia della partizione contenuta su /blacbkox/wtfos/system.img",
   "line2": "Se tieni premuto il pulsante di bind durante l'avvio, nella fase di boot, wtfos non verrà eseguito con adb abilitato ciò serve a consentire la rimozione di wtfos e/o per la diagnosi",
   "line3": "Se wtfos rileva eventuali problemi gravi, cercherà di avviarsi senza alcuna modifica e con adb abilitato",
   "browserNotSupported": "Browser non supportato!",
