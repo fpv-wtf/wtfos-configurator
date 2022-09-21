@@ -1,15 +1,15 @@
 {
-  "remove": "Remove",
-  "install": "Install",
-  "fetching": "Fetching packages...",
-  "installationFailed": "Error during package installation:",
+  "remove": "Verwijderen",
+  "install": "Installeren",
+  "fetching": "Pakketten ophalen...",
+  "installationFailed": "Fout tijdens installatie van een pakket:",
   "labelRepo": "Repo",
-  "labelPackages": "Packages",
-  "labelAll": "All",
-  "installed": "Installed",
-  "labelSearch": "Search...",
-  "name": "Name",
-  "version": "Version",
-  "description": "Description",
-  "matchCount": "Found {{count}} packages"
+  "labelPackages": "Pakketten",
+  "labelAll": "Alles",
+  "installed": "Geïnstalleerd",
+  "labelSearch": "Zoeken...",
+  "name": "Naam",
+  "version": "Versie",
+  "description": "Beschrijving",
+  "matchCount": "{{count}} pakketten gevonden"
 }
