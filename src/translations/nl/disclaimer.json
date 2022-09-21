@@ -1,12 +1,12 @@
 {
-  "title": "Safety measures/recovery hints:",
-  "line1": "When wtfos is started, the /system partition is overwritten with a writable copy of the partition kept in /blackbox/wtfos/system.img",
-  "line2": "If you hold the bind button down during boot wtfos startup will be skipped with adb enabled to allow for wiping of wtfos or diagnosis",
-  "line3": "If wtfos detects any fatal issues, it will likewise attempt to boot up without any modifications and with adb enabled",
-  "browserNotSupported": "Browser not supported!",
-  "browserNotSupportedText": "Your browser does not support webusb functionality. Please use a",
-  "browserNotSupportedLink": "browser which provides this functionality.",
-  "browserSupported": "The supported (and tested) browsers are:",
-  "browserSupportedAndroid": "Some Android phones",
-  "browserSupportedOther": "Other Chromium based browsers"
+  "title": "Veiligheidsmaatregelen/herstel tips:",
+  "line1": "Wanneer wtfos is gestart, wordt de /system partitie overschreven met een beschrijfbare kopie van de partitie bewaard in /blackbox/wtfos/system.img",
+  "line2": "Wanneer je de bindknop ingedrukt houdt tijdens het opstarten, wordt de start van wtfos overgeslagen en is adb ingeschakeld om wtfos te wissen of diagnoses te doen",
+  "line3": "Wanneer wtfos fatale problemen detecteerd, dan zal het trachten opnieuw te starten met adb ingeschakeld en zonder overige modificaties uitgeschakeld",
+  "browserNotSupported": "Browser niet ondersteund!",
+  "browserNotSupportedText": "Uw browser ondersteunt geen webusb functionaliteit. Gebruik een",
+  "browserNotSupportedLink": "browser die deze functionaliteit wél biedt.",
+  "browserSupported": "De ondersteunde (en geteste) browsers zijn:",
+  "browserSupportedAndroid": "Sommige Android telefoons",
+  "browserSupportedOther": "Andere Chromium gebaseerde browsers"
 }
