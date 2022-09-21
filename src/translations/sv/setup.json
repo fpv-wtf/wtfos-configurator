@@ -11,7 +11,7 @@
   "tileInstallTitle": "Installera",
   "tileInstallDescription": "Install WTFOS to your device to install community contributed software.",
   "tileUpdateTitle": "Uppdatera",
-  "tileUpdateDescription": "Update WTFOS and installed packages to stay up to date.",
+  "tileUpdateDescription": "Uppdatera WTFOS och installerade paket.",
   "tileRemoveTitle": "Ta bort",
   "tileRemoveDescription": "Ta bort WTFOS från din enhet. Detta kommer att återställa alla ändringar förutom rotupplåsningen själv.",
   "upToDate": "Allt är uppdaterat!",
