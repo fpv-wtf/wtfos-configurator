@@ -1,0 +1,6 @@
+{
+  "running": "(PID: {{pid}}) draaien",
+  "started": "gestart",
+  "stopped": "gestopt",
+  "hint": "Ingeschakelde services worden gestart tijdens het opstarten van het apparaat."
+}

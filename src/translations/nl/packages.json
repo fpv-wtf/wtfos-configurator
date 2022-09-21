@@ -1,0 +1,15 @@
+{
+  "remove": "Verwijderen",
+  "install": "Installeren",
+  "fetching": "Pakketten ophalen...",
+  "installationFailed": "Fout tijdens installatie van een pakket:",
+  "labelRepo": "Repo",
+  "labelPackages": "Pakketten",
+  "labelAll": "Alles",
+  "installed": "Geïnstalleerd",
+  "labelSearch": "Zoeken...",
+  "name": "Naam",
+  "version": "Versie",
+  "description": "Beschrijving",
+  "matchCount": "{{count}} pakketten gevonden"
+}

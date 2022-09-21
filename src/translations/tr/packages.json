@@ -1,0 +1,15 @@
+{
+  "remove": "Kaldır",
+  "install": "Yükle",
+  "fetching": "Paketler getiriliyor...",
+  "installationFailed": "Paket kurulumu sırasında hata oluştu:",
+  "labelRepo": "Kaynak",
+  "labelPackages": "Paketler",
+  "labelAll": "Tümü",
+  "installed": "Yüklendi",
+  "labelSearch": "Ara...",
+  "name": "Ad",
+  "version": "Sürüm",
+  "description": "Açıklama",
+  "matchCount": "{{count}} adet paket bulundu"
+}

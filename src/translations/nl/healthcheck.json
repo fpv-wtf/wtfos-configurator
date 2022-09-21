@@ -1,0 +1,8 @@
+{
+  "message": "Controles mislukt",
+  "fix": "Probeer fout te herstellen",
+  "warningTitle": "Geautomatiseerde foutoplossingen:",
+  "warningDescription": "Maak je geen zorgen, dit is normaal en verschillende oorzaken hebben, waaronder bugs in het onderliggende besturingssysteem. De configuratie kan helpen met het oplossen van problemen. Wanneer je een geautomatiseerde oplossing uitvoert kan het voorkomen dat je apparaat uit zichzelf herstart. In sommige gevallen kan het zelfs nodig zijn om je apparaat opnieuw te rooten na een herstart voordat controles vervolgd kunnen worden.",
+  "failed": "Het uitvoeren van controles is mislukt.",
+  "loading": "Een ogenblik geduld..."
+}

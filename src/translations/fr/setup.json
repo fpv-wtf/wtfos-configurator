@@ -9,7 +9,7 @@
   "hint2": "installer WTFOS",
   "hint3": "Ceci est nécessaire pour ajouter de nouvelles extensions et gèrer les services.",
   "tileInstallTitle": "Installer",
-  "tileInstallDescription": "Install WTFOS to your device to install community contributed software.",
+  "tileInstallDescription": "Installez WTFOS sur votre appareil pour implémenter des fonctionnalités développées par la communauté.",
   "tileUpdateTitle": "Mettre à jour",
   "tileUpdateDescription": "Mettez à jour WTFOS et les extensions installés pour rester à jour.",
   "tileRemoveTitle": "Supprimer",

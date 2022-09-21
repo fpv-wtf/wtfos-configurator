@@ -1,0 +1,7 @@
+{
+  "error404Title": "404 - hittades ej",
+  "error404Text": "Inte säker på vad du sökte, men den här sidan finns inte. Kanske kolla in",
+  "error404Link": "hemsida",
+  "errorConnection": "Kunde inte ansluta till enheten, se till att adb server inte körs på din maskin (adb kill-server) och att du inte är ansluten i en annan flik/fönster.",
+  "warningConnection": "Anslut dina rotade Goggles eller Air Unit via USB, se till att de är påslagna och tryck på anslutningsknappen."
+}

@@ -242,7 +242,6 @@ export default function Root() {
                 clearTimeout(rebootTimeoutRef.current);
                 rebootTimeoutRef.current = waitForReboot();
               } else {
-                log(t("step5Skip"));
                 shouldRunUnlock = true;
               }
             } break;

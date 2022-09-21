@@ -1,0 +1,21 @@
+{
+  "footerIssue": "Mocht je tegen problemen aanlopen,",
+  "footerIssueLink": "rapporteer ze dan op github",
+  "menuHome": "Home",
+  "menuPackageManager": "Pakket Manager",
+  "menuStartup": "Opstarten",
+  "menuCli": "CLI",
+  "menuWtfos": "WTFOS",
+  "menuRoot": "Root",
+  "menuAbout": "Over fpv.wtf",
+  "titleHome": "Home",
+  "titleCli": "CLI",
+  "titlePackages": "Pakketten",
+  "titleStartup": "Opstarten",
+  "titleAbout": "Over fpv.wtf",
+  "titleRoot": "Root",
+  "titleWtfos": "WTFOS",
+  "titleWtfosUpdate": "WTFOS - Updaten",
+  "titleWtfosInstall": "WTFOS - Installatie",
+  "titleWtfosRemove": "WTFOS - Verwijderen"
+}

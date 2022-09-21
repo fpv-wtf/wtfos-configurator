@@ -1,6 +1,6 @@
 {
   "title": "Safety measures/recovery hints:",
-  "line1": "When wtfos is started, the /system partition is overwritten with a writable copy of the partition kept in /blacbkox/wtfos/system.img",
+  "line1": "When wtfos is started, the /system partition is overwritten with a writable copy of the partition kept in /blackbox/wtfos/system.img",
   "line2": "If you hold the bind button down during boot wtfos startup will be skipped with adb enabled to allow for wiping of wtfos or diagnosis",
   "line3": "If wtfos detects any fatal issues, it will likewise attempt to boot up without any modifications and with adb enabled",
   "browserNotSupported": "Browser not supported!",

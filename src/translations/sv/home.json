@@ -1,0 +1,19 @@
+{
+  "connected": "Ansluten till din enhet.",
+  "tilePackageManagerTitle": "Pakethanterare",
+  "tilePackageManagerDescription": "Utöka enhetens funktionalitet genom att installera ytterligare paket som utvecklats av gemenskapen.",
+  "tileStartupTitle": "Uppstart",
+  "tileStartupDescription": "Hantera tjänster som ska startas automatiskt.",
+  "tileCliTitle": "CLI",
+  "tileCliDescription": "Interaktiv Terminalsession. Kör kommandon som du vill, du bör veta vad du gör.",
+  "tileWtfosTitle": "WTFOS",
+  "tileWtfosDescription": "Installera, underhåll eller ta bort wtfos - operativsystemet för alla gemenskapens bidrag till funktionalitet.",
+  "tileRootTitle": "Root",
+  "tileRootDescription": "Innan du installerar wtfos måste du roota din enhet, släpp den lös- ÄG den!",
+  "tileSupportTitle": "Support",
+  "tileSupportDescription": "Om du har någon feedback, frågor eller vill bidra med ytterligare funktionalitet, gå med i vår Discord.",
+  "tileAboutTitle": "Om fpv.wtf",
+  "tileAboutDescription": "fpv.wtf är en grupp entusiaster som arbetar för att förbättra den digitala FPV-upplevelsen.",
+  "tileWikiTitle": "Wiki",
+  "tileWikiDescription": "Har du problem? Chansen är att du kommer att hitta ett svar i vår Wiki."
+}

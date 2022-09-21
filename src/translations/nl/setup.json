@@ -1,0 +1,22 @@
+{
+  "installDisclaimerTitle": "Disclaimer:",
+  "installDisclaimerLine1": "WTFOS bevindt zich in de BETA-staat!",
+  "installDisclaimerLine2": "Mogelijk werken de dingen niet zoals verwacht",
+  "installDisclaimerLine3": "Ga verder op eigen risico",
+  "install": "Installeer WTFOS",
+  "remove": "Verwijder WTFOS",
+  "hint1": "Je kunt",
+  "hint2": "installeer WTFOS nu",
+  "hint3": "Dit is nodig om nieuwe pakketten en servicemanagement toe te voegen.",
+  "tileInstallTitle": "Installeren",
+  "tileInstallDescription": "Installeer WTFOS op je apparaat om software van de community te installeren.",
+  "tileUpdateTitle": "Bijwerken",
+  "tileUpdateDescription": "Werk WTFOS bij en geïnstalleerde pakketten blijven up-to-date.",
+  "tileRemoveTitle": "Verwijder",
+  "tileRemoveDescription": "Verwijder WTFOS van je apparaat. Dit draait alle aanpassingen terug behalve de root ontgrendeling zelf.",
+  "upToDate": "Alles is up-to-date!",
+  "checking": "Pakketten controleren...",
+  "name": "Pakketnaam",
+  "current": "Geïnstalleerde Versie",
+  "latest": "Laatste Versie"
+}
