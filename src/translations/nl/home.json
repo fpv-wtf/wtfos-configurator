@@ -5,15 +5,15 @@
   "tileStartupTitle": "Opstarten",
   "tileStartupDescription": "Beheer diensten die automatisch moeten worden gestart zodra het apparaat is ingeschakeld.",
   "tileCliTitle": "CLI",
-  "tileCliDescription": "Interactive Shell Session. Run commands as you please, you should know what you are doing.",
+  "tileCliDescription": "Interactieve Sessie. Voer opdrachten uit zoals je wilt, weest je bewust van wat je doet.",
   "tileWtfosTitle": "WTFOS",
-  "tileWtfosDescription": "Install, maintain or Remove wtfos - the operating system for all community contributed functionality.",
+  "tileWtfosDescription": "Instelleer, onderhoud of verwijder wtfos - het besturingssysteem voor alle community gecreëerde functionaliteiten.",
   "tileRootTitle": "Root",
-  "tileRootDescription": "Before installing wtfos you will have to root your device, set it free - OWN it!",
-  "tileSupportTitle": "Support",
-  "tileSupportDescription": "If you have any feedback, questions or want to contribute additional functionality, join our community on Discord.",
-  "tileAboutTitle": "About fpv.wtf",
-  "tileAboutDescription": "fpv.wtf is a group of enthusiasts working to improve the digital FPV experience.",
+  "tileRootDescription": "Voordat je wtfos installeert moet je je apparaat rooten, geeft het vrijheid - OWN it!",
+  "tileSupportTitle": "Ondersteuning",
+  "tileSupportDescription": "Als je extra functies wilt bijdragen, feedback of vragen hebt, neem dan deel aan onze community op Discord.",
+  "tileAboutTitle": "Over fpv.wtf",
+  "tileAboutDescription": "fpv.wtf is een groep enthousiastelingen die werken om de digitale FPV ervaring te verbeteren.",
   "tileWikiTitle": "Wiki",
-  "tileWikiDescription": "Having issues? Chances are that you will find an answer in our community Wiki."
+  "tileWikiDescription": "Heb je problemen? De kans is groot dat je je antwoord vindt in de door onze gemeenschap gemaakte Wiki."
 }
