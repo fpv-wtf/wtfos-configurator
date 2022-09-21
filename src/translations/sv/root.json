@@ -25,7 +25,7 @@
   "disclaimerLine4": "Använd på egen risk",
   "portOpenFailed": "Det gick inte att öppna seriell port efter {{maxTries}} försök.",
   "rooted": "Enheten är redan rootad",
-  "root": "Root Device",
+  "root": "Root enhet",
   "rebootTimeout": "Avbruten! Enheten startade inte om i tid, vänligen starta om enheten och försök igen.",
   "rebootTimeShort": "Omstartstiden misstänksamt kort - startar om en gång till för säkerhets skull...",
   "unlockFailed": "Upplåsning misslyckades, vänligen starta om din enhet och försök igen.",
