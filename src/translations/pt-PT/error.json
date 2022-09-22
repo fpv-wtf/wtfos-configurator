@@ -1,0 +1,7 @@
+{
+  "error404Title": "404 - Não Encontrada",
+  "error404Text": "Não sei o que procura, mas esta página não existe. Verifique talvez a",
+  "error404Link": "página inicial",
+  "errorConnection": "Não foi possível ligar ao dispositivo, certifique-se de que o servidor adb não está a ser executado na sua máquina (adb kill-server) e que não está ligado noutra aba/janela.",
+  "warningConnection": "Conecte os seus Óculos ou Air Unit com root via USB, certifique-se de que estão ligados e carregue no botão conectar."
+}

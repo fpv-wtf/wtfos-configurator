@@ -1,0 +1,22 @@
+{
+  "installDisclaimerTitle": "Upozornenie:",
+  "installDisclaimerLine1": "WTFOS je v BETA verzii!",
+  "installDisclaimerLine2": "Toto nemusí fungovať tak ako sa očakáva",
+  "installDisclaimerLine3": "Pokračujte na vlastné riziko",
+  "install": "Inštalovať WTFOS",
+  "remove": "Odstrániť WTFOS",
+  "hint1": "Mali by ste",
+  "hint2": "Inštalovať WTFOS teraz",
+  "hint3": "Toto sa vyžaduje pre pridávanie nových balíčkov a riadenie služieb.",
+  "tileInstallTitle": "Inštalovať",
+  "tileInstallDescription": "Install WTFOS to your device to install community contributed software.",
+  "tileUpdateTitle": "Aktualizovať",
+  "tileUpdateDescription": "Update WTFOS and installed packages to stay up to date.",
+  "tileRemoveTitle": "Odstrániť",
+  "tileRemoveDescription": "Remove WTFOS from your device. This will revert all changes apart from the root unlock itself.",
+  "upToDate": "Všetko je aktuálne!",
+  "checking": "Checking packages...",
+  "name": "Názov balíka",
+  "current": "Nainštalovaná verzia",
+  "latest": "Aktuálna verzia"
+}
