@@ -1,8 +1,0 @@
-{
-  "message": "Falhas de verificações de saúde",
-  "fix": "Tentar Correção",
-  "warningTitle": "Correções Automatizadas:",
-  "warningDescription": "Não se preocupe, isto é normal e pode acontecer por várias razões, incluindo bugs no sistema operacional subjacente. O configurador pode ajudá-lo a corrigir estes problemas. Ao tentar uma correção automatizada, o seu dispositivo pode reiniciar no processo. Em alguns casos específicos, pode precisar de refazer o root no seu dispositivo após uma reinicialização, antes que as verificações de saúde possam continuar.",
-  "failed": "Falha ao executar verificações de saúde.",
-  "loading": "Por favor aguarde..."
-}
