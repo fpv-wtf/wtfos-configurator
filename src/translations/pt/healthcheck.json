@@ -1,8 +1,8 @@
 {
-  "message": "Failed health checks",
-  "fix": "Attempt Fix",
-  "warningTitle": "Automated fixes:",
-  "warningDescription": "Don't worry, this is normal and can happen due to various reasons, including bugs in the underlaying operating system. The configurator can help you fix these issues. When attempting an automated fix, your device might reboot in the process. In some specific cases you may need to re-root your device after a reboot, before health checks can continue.",
-  "failed": "Failed running health-checks.",
-  "loading": "Please wait..."
+  "message": "Falhas de verificações de saúde",
+  "fix": "Tentar Correção",
+  "warningTitle": "Correções Automatizadas:",
+  "warningDescription": "Não se preocupe, isto é normal e pode acontecer por várias razões, incluindo bugs no sistema operacional subjacente. O configurador pode ajudá-lo a corrigir estes problemas. Ao tentar uma correção automatizada, o seu dispositivo pode reiniciar no processo. Em alguns casos específicos, pode precisar de refazer o root no seu dispositivo após uma reinicialização, antes que as verificações de saúde possam continuar.",
+  "failed": "Falha ao executar verificações de saúde.",
+  "loading": "Por favor aguarde..."
 }
