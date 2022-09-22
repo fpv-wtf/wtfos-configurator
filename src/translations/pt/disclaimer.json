@@ -1,7 +1,7 @@
 {
   "title": "Medidas de segurança/dicas de recuperação:",
   "line1": "Quando o wtfos é iniciado, a partição /system é substituída por uma cópia gravável da partição mantida em /blackbox/wtfos/system.img",
-  "line2": "Se você mantiver pressionado o botão bind durante o arranque, será saltada a inicialização do wtfos com o adb habilitado, para permitir a limpeza do wtfos ou para diagnóstico",
+  "line2": "Se mantiver pressionado o botão bind durante o arranque, saltará a inicialização do wtfos com o adb habilitado, para permitir a limpeza do wtfos ou para diagnóstico",
   "line3": "Se o wtfos detetar quaisquer problemas fatais, também tentará reiniciar sem quaisquer modificações e com o adb ativado",
   "browserNotSupported": "Navegador não suportado!",
   "browserNotSupportedText": "O seu navegador não suporta a funcionalidade webusb. Por favor, use um",
