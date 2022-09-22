@@ -1,0 +1,12 @@
+{
+  "title": "Dicas de segurança/recuperação:",
+  "line1": "Quando o wtfos é iniciado, a partição /system é substituída por uma cópia mantida em /blackbox/wtfos/system.img, partição na qual possuí permissões de escrita",
+  "line2": "Se você pressionar o botão de sincronização (bind) durante a inicialização, o sistema do wtfos não será carregado e manterá o adb habilitado para permitir a possível remoção do wtfos ou para fins de diagnóstico",
+  "line3": "Se wtfos detectar qualquer error fatal, o mesmo tentará reiniciar sem qualquer modificação e com adb habilitado",
+  "browserNotSupported": "Navegador não suportado!",
+  "browserNotSupportedText": "Seu navegador não oferece suporte a funcionalidade do webusb. Por favor, use um",
+  "browserNotSupportedLink": "navegador que possua esta funcionalidade.",
+  "browserSupported": "Os navegadores compatíveis (e testados) são:",
+  "browserSupportedAndroid": "Alguns telefones Android",
+  "browserSupportedOther": "Outros navegadores baseados no Chromium"
+}

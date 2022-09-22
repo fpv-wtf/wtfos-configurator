@@ -1,0 +1,7 @@
+{
+  "error404Title": "404 - Nenájdené",
+  "error404Text": "Niesme si istý čo ste hľadali ale táto stránka neexistuje. Skúste",
+  "error404Link": "domovskú stránku",
+  "errorConnection": "Neni možné sa pripojiť k zariadeniu, uistite sa ze adb server nebeží na vašom zariadení (adb kill-server) a nieste pripojený v inom okne.",
+  "warningConnection": "Pripojte vaše rootnuté okuliare alebo Air Unit cez USB, uistite sa ze su napájané a stlačte tlačidlo pripojiť"
+}
