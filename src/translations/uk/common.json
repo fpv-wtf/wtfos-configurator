@@ -1,6 +1,6 @@
 {
-  "disconnect": "Disconnect",
-  "connect": "Connect",
-  "connectDevice": "Connect to Device",
-  "rebooting": "Rebooting..."
+  "disconnect": "Від’єднати",
+  "connect": "Під’єднатися",
+  "connectDevice": "Під'єднатися до пристрою",
+  "rebooting": "Система перезавантажується..."
 }
