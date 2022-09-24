@@ -1,12 +1,12 @@
 {
-  "title": "Safety measures/recovery hints:",
-  "line1": "When wtfos is started, the /system partition is overwritten with a writable copy of the partition kept in /blackbox/wtfos/system.img",
-  "line2": "If you hold the bind button down during boot wtfos startup will be skipped with adb enabled to allow for wiping of wtfos or diagnosis",
-  "line3": "If wtfos detects any fatal issues, it will likewise attempt to boot up without any modifications and with adb enabled",
-  "browserNotSupported": "Browser not supported!",
-  "browserNotSupportedText": "Your browser does not support webusb functionality. Please use a",
-  "browserNotSupportedLink": "browser which provides this functionality.",
-  "browserSupported": "The supported (and tested) browsers are:",
-  "browserSupportedAndroid": "Some Android phones",
-  "browserSupportedOther": "Other Chromium based browsers"
+  "title": "Заходи безпеки/поради щодо відновлення:",
+  "line1": "При запуску wtfos розділ /system перезаписується копією розділу, з файлу /blackbox/wtfos/system.img",
+  "line2": "Під час завантаження, утримуючи кнопку bind натиснутою, запуск wtfos буде пропущено з увімкненим adb, щоб дозволити видалити wtfos або провести діагностику",
+  "line3": "Якщо wtfos виявить будь-які критичні проблеми, система спробує завантажитися без будь-яких змін і з увімкненим adb",
+  "browserNotSupported": "Оберіть інший браузер, поточний не підтримується!",
+  "browserNotSupportedText": "Ваш браузер не підтримує функцію webusb. Будь ласка, використовуйте",
+  "browserNotSupportedLink": "браузер, який підтримає цю функцію.",
+  "browserSupported": "Підтримуються (та перевірені) наступні браузери:",
+  "browserSupportedAndroid": "Деякі Android телефони",
+  "browserSupportedOther": "Інші браузери на базі Chromium"
 }
