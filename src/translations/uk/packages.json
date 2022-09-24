@@ -1,15 +1,15 @@
 {
-  "remove": "Remove",
-  "install": "Install",
-  "fetching": "Fetching packages...",
-  "installationFailed": "Error during package installation:",
-  "labelRepo": "Repo",
-  "labelPackages": "Packages",
-  "labelAll": "All",
-  "installed": "Installed",
-  "labelSearch": "Search...",
-  "name": "Name",
-  "version": "Version",
-  "description": "Description",
-  "matchCount": "Found {{count}} packages"
+  "remove": "Видалити",
+  "install": "Встановити",
+  "fetching": "Отримання пакетів...",
+  "installationFailed": "Помилка при встановленні пакета:",
+  "labelRepo": "Репозиторії",
+  "labelPackages": "Пакети",
+  "labelAll": "Усі",
+  "installed": "Встановлені",
+  "labelSearch": "Пошук...",
+  "name": "Назва",
+  "version": "Версія",
+  "description": "Опис",
+  "matchCount": "Знайдено {{count}} пакетів"
 }
