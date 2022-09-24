@@ -1,15 +1,15 @@
 {
-  "remove": "Remove",
-  "install": "Install",
-  "fetching": "Fetching packages...",
-  "installationFailed": "Error during package installation:",
-  "labelRepo": "Repo",
-  "labelPackages": "Packages",
-  "labelAll": "All",
-  "installed": "Installed",
-  "labelSearch": "Search...",
-  "name": "Name",
-  "version": "Version",
-  "description": "Description",
-  "matchCount": "Found {{count}} packages"
+  "remove": "Odstrániť",
+  "install": "Inštalovať",
+  "fetching": "Sťahujem balíčky...",
+  "installationFailed": "Chyba počas inštalácie balíčku:",
+  "labelRepo": "Repozitár",
+  "labelPackages": "Balíčky",
+  "labelAll": "Všetky",
+  "installed": "Nainštalované",
+  "labelSearch": "Hľadať...",
+  "name": "Názov",
+  "version": "Verzia",
+  "description": "Popis",
+  "matchCount": "Nájdených {{count}} balíčkov"
 }
