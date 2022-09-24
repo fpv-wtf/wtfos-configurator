@@ -195,7 +195,36 @@ export default class AdbWrapper {
     }
   }
 
+  async getDetailedPackageInfo(repo) {
+    const output = await this.executeCommand([
+      "gunzip -c",
+      `${this.wtfos.opkgLists}/${repo}`,
+    ]);
+    const lines = output.stdout.split("\n");
+
+    let currentPackage = null;
+    const packages = {};
+    for(let i = 0; i < lines.length; i += 1) {
+      const line = lines[i];
+      const fields = line.split(": ");
+      let key = fields.shift();
+      const value = fields.join(": ");
+
+      if(key === "Package") {
+        packages[value] = {};
+        currentPackage = value;
+      } else {
+        key = key.toLowerCase();
+
+        packages[currentPackage][key] = value;
+      }
+    }
+
+    return packages;
+  }
+
   async getPackages() {
+
     let output = await this.executeCommand([
       this.wtfos.bin.opkg,
       "list-installed",
@@ -225,6 +254,8 @@ export default class AdbWrapper {
     const repos = await this.getPackagesByRepo();
     const repoKeys = Object.keys(repos);
 
+    const details = await this.getDetailedPackageInfo("fpv-wtf");
+
     lines = output.stdout.split("\n").filter((element) => element);
     const packages = lines.map((item) => {
       const fields = this.splitPackageString(item);
@@ -243,6 +274,7 @@ export default class AdbWrapper {
         version: fields.version,
         description: fields.description,
         installed: installed.includes(fields.name),
+        details: details[fields.name] || {},
       };
     }).filter(this.filterInvalidPackages);
 
