@@ -1,0 +1,15 @@
+{
+  "remove": "Видалити",
+  "install": "Встановити",
+  "fetching": "Отримання пакетів...",
+  "installationFailed": "Помилка при встановленні пакета:",
+  "labelRepo": "Репозиторії",
+  "labelPackages": "Пакети",
+  "labelAll": "Усі",
+  "installed": "Встановлені",
+  "labelSearch": "Пошук...",
+  "name": "Назва",
+  "version": "Версія",
+  "description": "Опис",
+  "matchCount": "Знайдено {{count}} пакетів"
+}
