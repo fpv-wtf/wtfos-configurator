@@ -1,7 +1,7 @@
 {
-  "error404Title": "404 - Not found",
-  "error404Text": "Not sure what you were looking for, but this page does not exist. Maybe check the",
-  "error404Link": "homepage",
-  "errorConnection": "Could not connect to device, make sure that adb server is not running on your machine (adb kill-server) and that you are not connected in another tab/window.",
-  "warningConnection": "Connect your rooted Goggles or Air Unit via USB, make sure they are powered on and hit the connect button."
+  "error404Title": "404 - Δε βρέθηκε",
+  "error404Text": "Δεν είμαστε σίγουροι για το τι ψάχνατε, αλλά αυτή η σελίδα δεν υπάρχει. Ίσως ελέγξτε την",
+  "error404Link": "αρχική σελίδα",
+  "errorConnection": "Δεν ήταν δυνατή η σύνδεση στη συσκευή, βεβαιωθείτε ότι ο διακομιστής adb δεν τρέχει στον υπολογιστή σας (adb kill-server) και ότι δεν είστε συνδεδεμένοι σε άλλη καρτέλα/παράθυρο.",
+  "warningConnection": "Συνδέστε τα rooted Goggles ή Air Unit σας μέσω USB, βεβαιωθείτε ότι είναι ενεργοποιημένα και πατήστε το κουμπί σύνδεσης."
 }
