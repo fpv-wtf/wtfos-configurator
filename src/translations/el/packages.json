@@ -1,15 +1,15 @@
 {
-  "remove": "Remove",
-  "install": "Install",
-  "fetching": "Fetching packages...",
-  "installationFailed": "Error during package installation:",
+  "remove": "Αφαίρεση",
+  "install": "Εγκατάσταση",
+  "fetching": "Έλεγχος πακέτων...",
+  "installationFailed": "Σφάλμα κατά την εγκατάσταση πακέτου:",
   "labelRepo": "Repo",
-  "labelPackages": "Packages",
-  "labelAll": "All",
-  "installed": "Installed",
-  "labelSearch": "Search...",
-  "name": "Name",
-  "version": "Version",
-  "description": "Description",
-  "matchCount": "Found {{count}} packages"
+  "labelPackages": "Πακέτα",
+  "labelAll": "Όλα",
+  "installed": "Εγκαταστάθηκε",
+  "labelSearch": "Αναζήτηση...",
+  "name": "Όνομα",
+  "version": "Έκδοση",
+  "description": "Περιγραφή",
+  "matchCount": "Βρέθηκαν {{count}} πακέτα"
 }
