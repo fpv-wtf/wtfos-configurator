@@ -53,6 +53,7 @@ export default function AdbRouter() {
   const deviceRef = useRef();
   const intervalRef = useRef();
   const watcherRef = useRef();
+  const devicePromiseRef = useRef();
 
   const connectToDevice = useCallback(async (device) => {
     if(device) {
@@ -104,13 +105,21 @@ export default function AdbRouter() {
     }
   }, [dispatch]);
 
+  /**
+   * Attempt auto-connecting only if the user does not have the device
+   * selection opened. Otherwise it might lead to brower-crashes.
+   *
+   * Assumes the first matching device to be the device we want to
+   * connect to.
+   */
   const autoConnect = useCallback(async() => {
-    const devices = await AdbWebUsbBackend.getDevices();
-    if(devices.length > 0) {
-      // Assume first device is the device we want to connect to
-      await connectToDevice(devices[0]);
+    if(!devicePromiseRef.current) {
+      const devices = await AdbWebUsbBackend.getDevices();
+      if(devices.length > 0) {
+        await connectToDevice(devices[0]);
+      }
     }
-  }, [connectToDevice]);
+  }, [connectToDevice, devicePromiseRef]);
 
   useEffect(() => {
     adbRef.current = adb;
@@ -157,12 +166,14 @@ export default function AdbRouter() {
     dispatch(connecting());
 
     try {
-      const device = await AdbWebUsbBackend.requestDevice();
+      devicePromiseRef.current = AdbWebUsbBackend.requestDevice();
+      const device = await devicePromiseRef.current;
       await connectToDevice(device);
+      devicePromiseRef.current = null;
     } catch(e) {
       dispatch(connectionFailed());
     }
-  }, [connectToDevice, dispatch]);
+  }, [connectToDevice, devicePromiseRef, dispatch]);
 
   useEffect(() => {
     dispatch(contextReset());
