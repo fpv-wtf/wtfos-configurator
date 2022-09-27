@@ -1,7 +1,7 @@
 {
   "name": "wtfos-configurator",
   "version": "1.0.2",
-  "homepage": "https://fpv.wtf",
+  "homepage": "https://develop.fpv.wtf",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
