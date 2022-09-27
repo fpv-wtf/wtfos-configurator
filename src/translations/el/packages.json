@@ -1,0 +1,15 @@
+{
+  "remove": "Αφαίρεση",
+  "install": "Εγκατάσταση",
+  "fetching": "Έλεγχος πακέτων...",
+  "installationFailed": "Σφάλμα κατά την εγκατάσταση πακέτου:",
+  "labelRepo": "Repo",
+  "labelPackages": "Πακέτα",
+  "labelAll": "Όλα",
+  "installed": "Εγκαταστάθηκε",
+  "labelSearch": "Αναζήτηση...",
+  "name": "Όνομα",
+  "version": "Έκδοση",
+  "description": "Περιγραφή",
+  "matchCount": "Βρέθηκαν {{count}} πακέτα"
+}
