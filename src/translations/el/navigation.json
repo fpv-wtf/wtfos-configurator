@@ -1,0 +1,21 @@
+{
+  "footerIssue": "Εάν αντιμετωπίσετε προβλήματα, παρακαλώ",
+  "footerIssueLink": "αναφέρετε τα στο github",
+  "menuHome": "Αρχική",
+  "menuPackageManager": "Διαχειριστής Πακέτων",
+  "menuStartup": "Εκκίνηση",
+  "menuCli": "CLI",
+  "menuWtfos": "WTFOS",
+  "menuRoot": "Root",
+  "menuAbout": "Σχετικά με το fpv.wtf",
+  "titleHome": "Αρχική",
+  "titleCli": "CLI",
+  "titlePackages": "Πακέτα",
+  "titleStartup": "Εκκίνηση",
+  "titleAbout": "Σχετικά με το fpv.wtf",
+  "titleRoot": "Root",
+  "titleWtfos": "WTFOS",
+  "titleWtfosUpdate": "WTFOS - Ενημέρωση",
+  "titleWtfosInstall": "WTFOS - Εγκατάσταση",
+  "titleWtfosRemove": "WTFOS - Αφαίρεση"
+}
