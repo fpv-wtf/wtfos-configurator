@@ -1,0 +1,33 @@
+name: Sync develop branch to preview repo
+
+on:
+  # Triggers the workflow on push/merge to the develop branch
+  push:
+    branches: [ develop ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: develop
+
+      - run: |
+          rm -r .git
+          echo "# Nothing to see here" > README.md
+          echo "This repository is only a placholder for deploying [development previews](https://develop.fpv.wtf/) of [wtfos configurator](https://github.com/fpv-wtf/wtfos-configurator)." >> README.md
+
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+        with:
+          source-directory: "."
+          destination-github-username: fpv-wtf
+          destination-repository-name: wtfos-configurator-develop-preview
+          target-branch: master
