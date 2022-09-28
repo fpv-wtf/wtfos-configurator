@@ -11,5 +11,6 @@
   "name": "Όνομα",
   "version": "Έκδοση",
   "description": "Περιγραφή",
-  "matchCount": "Βρέθηκαν {{count}} πακέτα"
+  "matchCount": "Βρέθηκαν {{count}} πακέτα",
+  "visitProjectPage": "Visit project page"
 }
