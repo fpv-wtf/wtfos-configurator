@@ -11,5 +11,6 @@
   "name": "Назва",
   "version": "Версія",
   "description": "Опис",
-  "matchCount": "Знайдено {{count}} пакетів"
+  "matchCount": "Знайдено {{count}} пакетів",
+  "visitProjectPage": "Visit project page"
 }
