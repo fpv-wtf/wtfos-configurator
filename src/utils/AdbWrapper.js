@@ -217,6 +217,7 @@ export default class AdbWrapper {
   }
 
   async getPackages() {
+
     let output = await this.executeCommand([
       this.wtfos.bin.opkg,
       "list-installed",

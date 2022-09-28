@@ -191,6 +191,7 @@ export default function Packages({ adb }) {
   }, [dispatch]);
 
   const rows = renderRows.map((item) => {
+    console.log(item.details.homepage);
     return (
       <TableRow key={item.name}>
         <TableCell sx={{ width: 250 }}>
