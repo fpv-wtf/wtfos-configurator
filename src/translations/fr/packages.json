@@ -11,5 +11,6 @@
   "name": "Nom",
   "version": "Version",
   "description": "Description",
-  "matchCount": "{{count}} extensions ont été trouvées"
+  "matchCount": "{{count}} extensions ont été trouvées",
+  "visitProjectPage": "Visit project page"
 }
