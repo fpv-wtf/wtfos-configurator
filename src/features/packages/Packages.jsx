@@ -12,9 +12,13 @@ import {
 import { useTranslation } from "react-i18next";
 
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DownloadIcon from "@mui/icons-material/Download";
 import FormControl from "@mui/material/FormControl";
+import IconButton from "@mui/material/IconButton";
+import InfoIcon from "@mui/icons-material/Info";
 import InputLabel from "@mui/material/InputLabel";
+import Link from "@mui/material/Link";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Stack from "@mui/material/Stack";
@@ -163,6 +167,7 @@ export default function Packages({ adb }) {
   }, [dispatch]);
 
   const rows = renderRows.map((item) => {
+    console.log(item.details.homepage);
     return (
       <TableRow key={item.name}>
         <TableCell sx={{ width: 250 }}>
@@ -181,28 +186,88 @@ export default function Packages({ adb }) {
           {item.description}
         </TableCell>
 
-        <TableCell align="right">
+        <TableCell>
+          {item.details.homepage &&
+            <Link
+              href={item.details.homepage}
+              sx={{
+                whiteSpace: "nowrap",
+                textDecoration: "none",
+              }}
+              target="_blank"
+            >
+              <IconButton
+                aria-label={t("visitProjectPage")}
+                sx={{
+                  width: 65,
+                  height: 65,
+                }}
+                title={t("visitProjectPage")}
+              >
+                <InfoIcon
+                  color="success"
+                  data-key={item.name}
+                  sx={{ fontSize: 40 }}
+                />
+              </IconButton>
+            </Link>}
+        </TableCell>
+
+        <TableCell
+          sx={{ textAlign: "center" }}
+        >
           {item.installed &&
-            <Button
-              color="error"
-              data-key={item.name}
+            <IconButton
+              aria-label={t("remove")}
               disabled={processing}
               onClick={removeHandler}
-              variant="contained"
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                width: 65,
+                height: 65,
+              }}
+              title={t("remove")}
             >
-              {t("remove")}
-            </Button>}
+              <DeleteIcon
+                color="error"
+                data-key={item.name}
+              />
+
+              <Typography
+                color="success"
+                variant="caption"
+              >
+                {t("remove")}
+              </Typography>
+            </IconButton>}
 
           {!item.installed &&
-            <Button
-              color="success"
-              data-key={item.name}
+            <IconButton
+              aria-label={t("install")}
               disabled={processing}
               onClick={installHandler}
-              variant="contained"
+              sx={{
+                display: "inline-flex",
+                flexDirection: "column",
+                width: 65,
+                height: 65,
+              }}
+              title={t("install")}
             >
-              {t("install")}
-            </Button>}
+              <DownloadIcon
+                color="success"
+                data-key={item.name}
+                disabled={processing}
+              />
+
+              <Typography
+                color="success"
+                variant="caption"
+              >
+                {t("install")}
+              </Typography>
+            </IconButton>}
         </TableCell>
       </TableRow>
     );
@@ -313,6 +378,8 @@ export default function Packages({ adb }) {
                   <TableCell>
                     {t("description")}
                   </TableCell>
+
+                  <TableCell />
 
                   <TableCell />
                 </TableRow>
