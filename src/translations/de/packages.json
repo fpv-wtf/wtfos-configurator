@@ -11,5 +11,6 @@
   "name": "Name",
   "version": "Version",
   "description": "Beschreibung",
-  "matchCount": "{{count}} Pakete gefunden"
+  "matchCount": "{{count}} Pakete gefunden",
+  "visitProjectPage": "Visit project page"
 }
