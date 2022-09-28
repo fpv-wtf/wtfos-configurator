@@ -11,5 +11,6 @@
   "name": "Naam",
   "version": "Versie",
   "description": "Beschrijving",
-  "matchCount": "{{count}} pakketten gevonden"
+  "matchCount": "{{count}} pakketten gevonden",
+  "visitProjectPage": "Visit project page"
 }
