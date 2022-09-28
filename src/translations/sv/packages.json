@@ -11,5 +11,6 @@
   "name": "Namn",
   "version": "Version",
   "description": "Beskrivning",
-  "matchCount": "Hittade {{count}} paket"
+  "matchCount": "Hittade {{count}} paket",
+  "visitProjectPage": "Visit project page"
 }
