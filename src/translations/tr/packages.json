@@ -11,5 +11,6 @@
   "name": "Ad",
   "version": "Sürüm",
   "description": "Açıklama",
-  "matchCount": "{{count}} adet paket bulundu"
+  "matchCount": "{{count}} adet paket bulundu",
+  "visitProjectPage": "Visit project page"
 }
