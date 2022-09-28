@@ -20,7 +20,7 @@
   "cooling": "Se stai rootando una Air Unit, e in particolare una Air Unit Lite (Caddx Vista) - assicurarsi che sia ben raffreddata puntando sopra di essa un idoneo ventilatore.",
   "disclaimerTitle": "Esclusione di Responsabilità:",
   "disclaimerLine1": "Assicurati che il dispositivo da rootare sia alimentato da una fonte di alimentazione affidabile",
-  "disclaimerLine2": "Avere solo un dispositivo collegato/accoppiato",
+  "disclaimerLine2": "Di avere solo un dispositivo collegato/accoppiato",
   "disclaimerLine3": "Non spegnere durante il rooting",
   "disclaimerLine4": "Procedi a tuo completo rischio e pericolo",
   "portOpenFailed": "Apertura della porta seriale non riuscita dopo {{maxTries}} tentativi.",
