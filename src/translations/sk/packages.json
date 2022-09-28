@@ -11,5 +11,6 @@
   "name": "Názov",
   "version": "Verzia",
   "description": "Popis",
-  "matchCount": "Nájdených {{count}} balíčkov"
+  "matchCount": "Nájdených {{count}} balíčkov",
+  "visitProjectPage": "Visit project page"
 }
