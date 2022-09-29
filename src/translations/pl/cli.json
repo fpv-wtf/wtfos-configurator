@@ -1,4 +1,4 @@
 {
   "description": "Ta funkcja pozwala przekazać pełną kontrolę nad Twoim urządzeniem osobom trzecim.",
-  "warning": "Only use this if you know what you are doing and only ever connect to trusted individuals."
+  "warning": "Używaj tej opcji tylko wtedy, gdy wiesz, co robisz i tylko gdy łączysz się z zaufanymi osobami."
 }
