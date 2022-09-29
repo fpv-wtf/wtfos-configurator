@@ -33,8 +33,6 @@ import { selectUpgradable } from "../packages/packagesSlice";
 
 export default function Tiles() {
   const { t } = useTranslation("home");
-  const translation = useTranslation("setup");
-  const ts = translation.t;
 
   const gridParent = useRef(null);
 
@@ -80,7 +78,7 @@ export default function Tiles() {
           xs={12}
         >
           <Tile
-            description={ts("tileUpdateDescription")}
+            description={t("tileUpdateDescription")}
             disabled={!hasDinitBinary}
             linkTo="/wtfos/update"
             title={
@@ -88,7 +86,7 @@ export default function Tiles() {
                 badgeContent={upgradable.length}
                 color="secondary"
               >
-                {ts("tileUpdateTitle")}
+                {t("tileUpdateTitle")}
               </Badge>
             }
           >
