@@ -1,5 +1,5 @@
 {
-  "step1": "Próba Kroku 1...",
+  "step1": "Próba kroku 1...",
   "foundDevice": " - Znaleziono urządzenie: {{device}}, Wersja: {{version}}",
   "step1Success": "Krok 1 - Powodzenie! Ponowne uruchamianie...",
   "step2": "Próba kroku 2...",
@@ -17,7 +17,7 @@
   "failed": "Nie udało się po {{maxTry}} ponownych próbach.",
   "deviceLost": "Urządzenie zniknęło...",
   "deviceBack": "Urządzenie wróciło...",
-  "cooling": "Jeśli rootujesz Air Unit - zwłaszcza Air Unit Lite (Caddx Vista) - upewnij się, że jest ona czynnie chłodzona, kierując na niego wentylator.",
+  "cooling": "Jeśli rootujesz Air Unit - zwłaszcza Air Unit Lite (Caddx Vista) - upewnij się, że jest on czynnie chłodzony, kierując na niego wentylator.",
   "disclaimerTitle": "Wyłączenie odpowiedzialności:",
   "disclaimerLine1": "Upewnij się, że urządzenie do zrootowania jest zasilane z niezawodnego źródła zasilania",
   "disclaimerLine2": "Masz tylko jedno urządzenie podłączone/sparowane",
@@ -26,7 +26,7 @@
   "portOpenFailed": "Nie udało się otworzyć portu szeregowego po {{maxTries}} ponownych próbach.",
   "rooted": "Urządzenie jest już zrootowane",
   "root": "Zrootuj urządzenie",
-  "rebootTimeout": "Przerwano! Urządzenie nie uruchomiło się ponownie w czasie, proszę zrestartować urządzenie podłączając ponownie zasilanie i spróbować ponownie.",
+  "rebootTimeout": "Przerwano! Urządzenie nie uruchomiło się ponownie w odpowiednim czasie, proszę zrestartować urządzenie podłączając ponownie zasilanie i spróbować ponownie.",
   "rebootTimeShort": "Podejrzanie krótki czas restartu urządzenia - kolejne ponowne uruchomienie w celu upewnienia się...",
   "unlockFailed": "Odblokowanie nie powiodło się, proszę zrestartować urządzenie podłączając ponownie zasilanie i spróbować ponownie.",
   "unsupportedFirmware": "Firmware na Twoim urządzeniu jest zbyt nowy. Może być możliwe obniżenie do V01.01. 606 w trybie DIY z oprogramowaniem DJI FPV Assistant 2 w zależności od zainstalowanej wersji. Aby uzyskać więcej szczegółów, zobacz <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>wiki</a>."
