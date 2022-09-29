@@ -12,9 +12,9 @@ import Badge from "@mui/material/Badge";
 import Tile from "../tile/Tile";
 
 import {
+  selectHasAdb,
   selectHasDinitBinary,
   selectHasOpkgBinary,
-  selectHasAdb,
 } from "../device/deviceSlice";
 
 import { selectUpgradable } from "../packages/packagesSlice";

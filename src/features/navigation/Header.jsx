@@ -25,10 +25,10 @@ import ReactGA from "react-ga4";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 import {
+  selectHasAdb,
   selectConnected,
   selectNiceName,
   selectTemperature,
-  selectHasAdb,
 } from "../device/deviceSlice";
 
 import { selectUpgradable } from "../packages/packagesSlice";
