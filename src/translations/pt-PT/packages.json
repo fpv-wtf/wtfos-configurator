@@ -1,4 +1,7 @@
 {
+  "updateAvailable": "Update to already installed package is available. For more information hit the update button.",
+  "updatesAvailable": "Updates to already installed packages are available. For more information hit the update button.",
+  "update": "Update",
   "remove": "Remover",
   "install": "Instalar",
   "fetching": "A obter pacotes...",
