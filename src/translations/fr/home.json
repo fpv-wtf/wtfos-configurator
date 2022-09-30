@@ -2,6 +2,8 @@
   "connected": "Connexion réussie à votre appareil.",
   "tilePackageManagerTitle": "Gestion des Extensions",
   "tilePackageManagerDescription": "Agrandissez les fonctionnalités de votre appareil en installant des extensions supplémentaires développés par la communauté.",
+  "tileUpdateTitle": "Update",
+  "tileUpdateDescription": "Update WTFOS and installed packages to stay up to date.",
   "tileStartupTitle": "Démarrage",
   "tileStartupDescription": "Gère les extensions qui démarrent automatiquement une fois que l'appareil est allumé.",
   "tileCliTitle": "CLI",
