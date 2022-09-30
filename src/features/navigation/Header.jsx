@@ -19,6 +19,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Badge from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
 
 import ReactGA from "react-ga4";
 
@@ -32,6 +33,13 @@ import {
 } from "../device/deviceSlice";
 
 import { selectUpgradable } from "../packages/packagesSlice";
+
+const UpdateBadge = styled(Badge)(() => ({
+  "& .MuiBadge-badge": {
+    right: -12,
+    top: 10,
+  },
+}));
 
 export default function Header() {
   const { t } = useTranslation("navigation");
@@ -143,13 +151,12 @@ export default function Header() {
                 onClick={handleClose}
                 to="/wtfos/update"
               >
-                <Badge
+                <UpdateBadge
                   badgeContent={upgradable.length}
                   color="secondary"
                 >
                   {t("menuUpdate")}
-                </Badge>
-
+                </UpdateBadge>
               </MenuItem>
             )}
 
