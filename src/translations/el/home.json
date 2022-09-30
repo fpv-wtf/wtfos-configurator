@@ -2,6 +2,8 @@
   "connected": "Επιτυχής σύνδεση με τη συσκευή σας.",
   "tilePackageManagerTitle": "Διαχείριση πακέτων",
   "tilePackageManagerDescription": "Επεκτείνετε τις λειτουργίες της συσκευής σας εγκαθιστώντας πρόσθετα πακέτα που αναπτύχθηκαν από την κοινότητα.",
+  "tileUpdateTitle": "Update",
+  "tileUpdateDescription": "Update WTFOS and installed packages to stay up to date.",
   "tileStartupTitle": "Εκκίνηση",
   "tileStartupDescription": "Διαχείριση υπηρεσιών που θα πρέπει να εκκινήσουν αυτόματα μόλις η συσκευή είναι ενεργοποιημένη.",
   "tileCliTitle": "CLI",
