@@ -2,6 +2,8 @@
   "connected": "Succesvol verbonden met je apparaat.",
   "tilePackageManagerTitle": "Pakket Manager",
   "tilePackageManagerDescription": "Vergroot de functionaliteit van je apparaat door extra pakketten te installeren die ontwikkeld zijn door de community.",
+  "tileUpdateTitle": "Update",
+  "tileUpdateDescription": "Update WTFOS and installed packages to stay up to date.",
   "tileStartupTitle": "Opstarten",
   "tileStartupDescription": "Beheer diensten die automatisch moeten worden gestart zodra het apparaat is ingeschakeld.",
   "tileCliTitle": "CLI",
