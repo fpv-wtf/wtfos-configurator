@@ -2,6 +2,8 @@
   "connected": "Erfolgreich mit deinem Gerät verbunden.",
   "tilePackageManagerTitle": "Paket-Manager",
   "tilePackageManagerDescription": "Erweiter die Funktionalität deines Geräts, indem du zusätzliche, von der Community entwickelte Pakete installierst.",
+  "tileUpdateTitle": "Update",
+  "tileUpdateDescription": "Update WTFOS and installed packages to stay up to date.",
   "tileStartupTitle": "Systemstart",
   "tileStartupDescription": "Verwalte Dienste, die automatisch gestartet werden sollen, sobald das Gerät hochgefahren wird.",
   "tileCliTitle": "Kommandozeile",
