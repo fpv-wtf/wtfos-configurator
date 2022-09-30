@@ -73,5 +73,8 @@ Tile.propTypes = {
   disabled: PropTypes.bool,
   href: PropTypes.string,
   linkTo: PropTypes.string,
-  title: PropTypes.string,
+  title: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
 };

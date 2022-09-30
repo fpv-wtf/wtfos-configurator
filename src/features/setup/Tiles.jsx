@@ -7,18 +7,24 @@ import Grid from "@mui/material/Grid";
 import DownloadIcon from "@mui/icons-material/Download";
 import DeleteIcon from "@mui/icons-material/Delete";
 import UpdateIcon from "@mui/icons-material/Update";
+import Badge from "@mui/material/Badge";
 
 import Tile from "../tile/Tile";
 
 import {
+  selectHasAdb,
   selectHasDinitBinary,
   selectHasOpkgBinary,
 } from "../device/deviceSlice";
+
+import { selectUpgradable } from "../packages/packagesSlice";
 
 export default function Tiles() {
   const { t } = useTranslation("setup");
   const hasDinitBinary = useSelector(selectHasDinitBinary);
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
+  const hasAdb = useSelector(selectHasAdb);
+  const upgradable = useSelector(selectUpgradable);
 
   return(
     <Grid
@@ -50,9 +56,16 @@ export default function Tiles() {
       >
         <Tile
           description={t("tileUpdateDescription")}
-          disabled={!hasDinitBinary}
+          disabled={!hasDinitBinary || !upgradable.length > 0 || !hasAdb}
           linkTo="/wtfos/update"
-          title={t("tileUpdateTitle")}
+          title={upgradable.length > 0 ? (
+            <Badge
+              badgeContent={upgradable.length}
+              color="secondary"
+            >
+              {t("tileUpdateTitle")}
+            </Badge>
+          ) : t("tileUpdateTitle")}
         >
           <UpdateIcon fontSize="large" />
         </Tile>

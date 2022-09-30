@@ -45,10 +45,12 @@ import {
   repo,
   search,
   selectFetched,
+  selectFetchedUpgradable,
   selectFilter,
   selectFiltered,
   selectProcessing,
   selectRepos,
+  selectUpgradable,
 } from "./packagesSlice";
 
 import { selectNiceName } from "../device/deviceSlice";
@@ -57,6 +59,7 @@ import { selectHasOpkgBinary } from "../device/deviceSlice";
 
 import SetupHint from "../setup/SetupHint";
 import Spinner from "../loading/Spinner";
+import UpdatesBanner from "./UpdatesBanner";
 
 export default function Packages({ adb }) {
   const { t } = useTranslation("packages");
@@ -70,6 +73,8 @@ export default function Packages({ adb }) {
   const filtered = useSelector(selectFiltered);
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const processing = useSelector(selectProcessing);
+  const fetchedUpgradable = useSelector(selectFetchedUpgradable);
+  const upgradable = useSelector(selectUpgradable);
   const repos = useSelector(selectRepos);
 
   const deviceName = useSelector(selectNiceName);
@@ -103,10 +108,10 @@ export default function Packages({ adb }) {
   }, [dispatch]);
 
   useEffect(() => {
-    if(!fetched) {
+    if(!fetched && fetchedUpgradable) {
       dispatch(fetchPackages(adb));
     }
-  }, [adb, dispatch, fetched]);
+  }, [adb, dispatch, fetched, fetchedUpgradable]);
 
   useEffect(() => {
     setRenderRows(filtered.slice(0, step));
@@ -292,6 +297,8 @@ export default function Packages({ adb }) {
 
       {!fetched && hasOpkgBinary &&
         <Spinner text={t("fetching")} />}
+
+      {fetched && upgradable.length > 0 && <UpdatesBanner updatePluralized={upgradable.length > 1} />}
 
       {fetched && hasOpkgBinary &&
         <Stack

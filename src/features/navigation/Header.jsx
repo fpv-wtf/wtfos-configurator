@@ -18,16 +18,28 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import Badge from "@mui/material/Badge";
+import { styled } from "@mui/material/styles";
 
 import ReactGA from "react-ga4";
 
 import LanguageSwitcher from "./LanguageSwitcher";
 
 import {
+  selectHasAdb,
   selectConnected,
   selectNiceName,
   selectTemperature,
 } from "../device/deviceSlice";
+
+import { selectUpgradable } from "../packages/packagesSlice";
+
+const UpdateBadge = styled(Badge)(() => ({
+  "& .MuiBadge-badge": {
+    right: -12,
+    top: 10,
+  },
+}));
 
 export default function Header() {
   const { t } = useTranslation("navigation");
@@ -36,6 +48,9 @@ export default function Header() {
   const isConnected = useSelector(selectConnected);
   const temperature = useSelector(selectTemperature);
   const niceName = useSelector(selectNiceName);
+
+  const hasAdb = useSelector(selectHasAdb);
+  const upgradable = useSelector(selectUpgradable);
 
   let name = "";
   if(isConnected) {
@@ -129,6 +144,21 @@ export default function Header() {
             >
               {t("menuPackageManager")}
             </MenuItem>
+
+            {hasAdb && upgradable.length > 0 && (
+              <MenuItem
+                component={Link}
+                onClick={handleClose}
+                to="/wtfos/update"
+              >
+                <UpdateBadge
+                  badgeContent={upgradable.length}
+                  color="secondary"
+                >
+                  {t("menuUpdate")}
+                </UpdateBadge>
+              </MenuItem>
+            )}
 
             <MenuItem
               component={Link}
