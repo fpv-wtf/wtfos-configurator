@@ -2,6 +2,8 @@
   "connected": "Connesso correttamente al tuo dispositivo.",
   "tilePackageManagerTitle": "Gestore dei pacchetti",
   "tilePackageManagerDescription": "Espandi le funzionalità del tuo dispositivo, installando i pacchetti aggiuntivi sviluppati dalla comunità.",
+  "tileUpdateTitle": "Update",
+  "tileUpdateDescription": "Update WTFOS and installed packages to stay up to date.",
   "tileStartupTitle": "Avvio",
   "tileStartupDescription": "Gestisci i servizi che devono essere avviati automaticamente una volta che il dispositivo è acceso.",
   "tileCliTitle": "CLI",
