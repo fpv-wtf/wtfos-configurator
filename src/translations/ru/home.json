@@ -2,6 +2,8 @@
   "connected": "Устройство успешно подключено.",
   "tilePackageManagerTitle": "Менеджер пакетов",
   "tilePackageManagerDescription": "Расширьте функциональность вашего устройства путем установки дополнительных пакетов, разработанных сообществом.",
+  "tileUpdateTitle": "Update",
+  "tileUpdateDescription": "Update WTFOS and installed packages to stay up to date.",
   "tileStartupTitle": "Запуск",
   "tileStartupDescription": "Управление сервисами, которые должны автоматически запускаться после включения устройства.",
   "tileCliTitle": "Терминал",
