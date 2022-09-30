@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import {
+  useSelector, useDispatch,
+} from "react-redux";
 
 import {
   Routes,
@@ -33,15 +35,29 @@ import {
   selectError,
 } from "./features/device/deviceSlice";
 
+import {
+  fetchUpgradable,
+  selectFetchedUpgradable,
+} from "../src/features/packages/packagesSlice";
+
 import { selectPassed } from "./features/healthcheck/healthcheckSlice";
 
 function App({
   adb,
   handleAdbConnectClick,
 }) {
+  const dispatch = useDispatch();
+
   const error = useSelector(selectError);
   const isConnected = useSelector(selectConnected);
   const healthchecksPassed = useSelector(selectPassed);
+  const fetchedUpgradable = useSelector(selectFetchedUpgradable);
+
+  useEffect(() => {
+    if(!fetchedUpgradable) {
+      dispatch(fetchUpgradable(adb));
+    }
+  }, [adb, dispatch, fetchedUpgradable]);
 
   return (
     <Container
