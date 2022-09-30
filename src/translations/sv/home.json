@@ -2,6 +2,8 @@
   "connected": "Ansluten till din enhet.",
   "tilePackageManagerTitle": "Pakethanterare",
   "tilePackageManagerDescription": "Utöka enhetens funktionalitet genom att installera ytterligare paket som utvecklats av gemenskapen.",
+  "tileUpdateTitle": "Update",
+  "tileUpdateDescription": "Update WTFOS and installed packages to stay up to date.",
   "tileStartupTitle": "Uppstart",
   "tileStartupDescription": "Hantera tjänster som ska startas automatiskt.",
   "tileCliTitle": "CLI",
