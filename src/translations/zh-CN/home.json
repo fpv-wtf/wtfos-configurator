@@ -2,6 +2,8 @@
   "connected": "已连接至您的设备。",
   "tilePackageManagerTitle": "软件包管理器",
   "tilePackageManagerDescription": "通过安装社区开发的额外软件包来扩展您设备的功能。",
+  "tileUpdateTitle": "Update",
+  "tileUpdateDescription": "Update WTFOS and installed packages to stay up to date.",
   "tileStartupTitle": "启动",
   "tileStartupDescription": "管理设备启动后自动启动的服务。",
   "tileCliTitle": "命令行界面",
