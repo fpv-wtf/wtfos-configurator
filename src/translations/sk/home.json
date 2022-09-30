@@ -2,6 +2,8 @@
   "connected": "Úspešne pripojený do vašeho zariadenia.",
   "tilePackageManagerTitle": "Správca balíčkov",
   "tilePackageManagerDescription": "Rozšírte funkčnosť svojho zariadenia inštaláciou ďalších balíčkov vyvinutých komunitou.",
+  "tileUpdateTitle": "Update",
+  "tileUpdateDescription": "Update WTFOS and installed packages to stay up to date.",
   "tileStartupTitle": "Štart",
   "tileStartupDescription": "Spravujte služby, ktoré by sa mali automaticky spustiť po zapnutí zariadenia.",
   "tileCliTitle": "CLI",
