@@ -2,6 +2,8 @@
   "connected": "Successfully connected to your device.",
   "tilePackageManagerTitle": "Package Manager",
   "tilePackageManagerDescription": "Expand functionality of your device by installing additional packages developed by the community.",
+  "tileUpdateTitle": "Update",
+  "tileUpdateDescription": "Update WTFOS and installed packages to stay up to date.",
   "tileStartupTitle": "Startup",
   "tileStartupDescription": "Manage applications that should be run on startup to permanently enable functionality once the device is powered up.",
   "tileCliTitle": "CLI",
