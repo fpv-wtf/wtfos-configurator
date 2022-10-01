@@ -75,6 +75,7 @@ export default function Header() {
   switch(location.pathname) {
     case "/cli": title = t("titleCli"); break;
     case "/packages": title = t("titlePackages"); break;
+    case "/settings": title = t("titleSettings"); break;
     case "/startup": title = t("titleStartup"); break;
     case "/about": title = t("titleAbout"); break;
     case "/root": title = t("titleRoot"); break;
@@ -190,6 +191,14 @@ export default function Header() {
               to="/root"
             >
               {t("menuRoot")}
+            </MenuItem>
+
+            <MenuItem
+              component={Link}
+              onClick={handleClose}
+              to="/settings"
+            >
+              {t("menuSettings")}
             </MenuItem>
 
             <MenuItem

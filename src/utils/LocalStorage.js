@@ -54,8 +54,19 @@ function loadDonationState() {
   return false;
 }
 
+function loadDisclaimersState() {
+  const disclaimersState = localStorage.getItem("disclaimersState");
+  if (!disclaimersState) {
+    localStorage.setItem("disclaimersState", true);
+    return true;
+  }
+
+  return JSON.parse(disclaimersState);
+}
+
 export {
   loadDonationState,
   loadLanguage,
   loadTraceId,
+  loadDisclaimersState,
 };
