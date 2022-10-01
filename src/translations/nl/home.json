@@ -11,6 +11,8 @@
   "tileWtfosTitle": "WTFOS",
   "tileWtfosDescription": "Instelleer, onderhoud of verwijder wtfos - het besturingssysteem voor alle community gecreëerde functionaliteiten.",
   "tileRootTitle": "Root",
+  "tileSettingsDescription": "Change the behaviour of this web application.",
+  "tileSettingsTitle": "Settings",
   "tileRootDescription": "Voordat je wtfos installeert moet je je apparaat rooten, geeft het vrijheid - OWN it!",
   "tileSupportTitle": "Ondersteuning",
   "tileSupportDescription": "Als je extra functies wilt bijdragen, feedback of vragen hebt, neem dan deel aan onze community op Discord.",
