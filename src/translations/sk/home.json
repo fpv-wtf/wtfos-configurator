@@ -11,6 +11,8 @@
   "tileWtfosTitle": "WTFOS",
   "tileWtfosDescription": "Nainštalujte, spravujte alebo odstráňte wtfos - operačný systém pre komunitou prispievané funkcie.",
   "tileRootTitle": "Root",
+  "tileSettingsDescription": "Change the behaviour of this web application.",
+  "tileSettingsTitle": "Settings",
   "tileRootDescription": "Pred inštaláciou wtfos budete musieť rootnuť vaše zariadenie!",
   "tileSupportTitle": "Podpora",
   "tileSupportDescription": "Ak máte akúkoľvek spätnú väzbu, otázky alebo chcete prispieť nejakou funkcionalitou, pripojte sa k našej komunite na Discorde.",
