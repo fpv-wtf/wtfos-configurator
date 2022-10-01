@@ -4,7 +4,7 @@ import { loadDisclaimersState } from "../../utils/LocalStorage";
 
 const initialState = { hasEnabledDisclaimers: loadDisclaimersState() };
 
-export const rootSlice = createSlice({
+export const settingsSlice = createSlice({
   name: "settings",
   initialState,
   reducers: {
@@ -15,8 +15,8 @@ export const rootSlice = createSlice({
   },
 });
 
-export const { persistDisclaimersStatus } = rootSlice.actions;
+export const { persistDisclaimersStatus } = settingsSlice.actions;
 
 export const selectDisclaimersStatus = (state) => state.settings.hasEnabledDisclaimers;
 
-export default rootSlice.reducer;
+export default settingsSlice.reducer;
