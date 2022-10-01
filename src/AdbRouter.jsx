@@ -21,6 +21,7 @@ import AdbWrapper from "./utils/AdbWrapper";
 
 import About from "./features/about/About";
 import App from "./App";
+import Settings from "./features/settings/Settings";
 
 import {
   checkBinaries,
@@ -207,6 +208,11 @@ export default function AdbRouter() {
 
   return(
     <Routes>
+      <Route
+        element={<Settings />}
+        path="/settings"
+      />
+
       <Route
         element={<About />}
         path="/about"

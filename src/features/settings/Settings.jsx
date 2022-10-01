@@ -5,13 +5,17 @@ import {
   useSelector, useDispatch,
 } from "react-redux";
 
-import CheckBox from "@mui/material/Checkbox";
+import Container from "@mui/material/Container";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import FormGroup from "@mui/material/FormGroup";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import Switch from "@mui/material/Switch";
 
 import {
   persistDisclaimersStatus, selectDisclaimersStatus,
 } from "./settingsSlice";
+
+import Header from "../navigation/Header";
 
 export default function Settings() {
   const { t } = useTranslation("settings");
@@ -26,16 +30,26 @@ export default function Settings() {
   const disclaimersCheckboxString = t("disclaimersCheckbox", { state: !disclaimersStatus ? t("enable") : t("disable") } );
 
   return (
-    <FormGroup>
-      <FormControlLabel
-        control={
-          <CheckBox
-            checked={disclaimersStatus}
-            onChange={handleDisclaimerStateChange}
+    <Container
+      fixed
+    >
+      <Header />
+
+      <Stack >
+        <Paper sx={{ paddingX: 3 }}>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={disclaimersStatus}
+                onChange={handleDisclaimerStateChange}
+              />
+            }
+            label={disclaimersCheckboxString}
+            sx={{ paddingY: 1 }}
           />
-        }
-        label={disclaimersCheckboxString}
-      />
-    </FormGroup>
+        </Paper>
+      </Stack>
+
+    </Container>
   );
 }
