@@ -1,5 +1,3 @@
 {
-  "disclaimersCheckbox": "{{state}} Disclaimers and Warnings (I know what I am doing)",
-  "disable": "Disable",
-  "enable": "Enable"
+  "disclaimersCheckbox": "Disclaimers and Warnings (I know what I am doing)"
 }

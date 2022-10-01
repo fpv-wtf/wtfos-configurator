@@ -27,8 +27,6 @@ export default function Settings() {
     dispatch(persistDisclaimersStatus(e.target.checked));
   }, [dispatch]);
 
-  const disclaimersCheckboxString = t("disclaimersCheckbox", { state: !disclaimersStatus ? t("enable") : t("disable") } );
-
   return (
     <Container
       fixed
@@ -44,7 +42,7 @@ export default function Settings() {
                 onChange={handleDisclaimerStateChange}
               />
             }
-            label={disclaimersCheckboxString}
+            label={t("disclaimersCheckbox")}
             sx={{ paddingY: 1 }}
           />
         </Paper>
