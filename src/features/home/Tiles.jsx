@@ -171,7 +171,6 @@ export default function Tiles() {
       >
         <Tile
           description={t("tileSettingsDescription")}
-          disabled={isConnected && hasAdb}
           linkTo="settings"
           title={t("tileSettingsTitle")}
         >
