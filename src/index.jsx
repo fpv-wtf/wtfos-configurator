@@ -27,9 +27,9 @@ import CookieBanner from "./features/banner/Cookie";
 
 import settings from "./settings.json";
 import {
+  loadDisclaimersState,
   loadLanguage,
   loadTraceId,
-  loadDisclaimersState,
 } from "./utils/LocalStorage";
 
 const darkTheme = createTheme({
