@@ -4,6 +4,7 @@ import React, {
   useEffect,
 }  from "react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 import { Box } from "@mui/system";
 
@@ -24,9 +25,11 @@ import Typography from "@mui/material/Typography";
 import { ExpandMore } from "@mui/icons-material";
 
 import Spinner from "../loading/Spinner";
+import { selectDisclaimersStatus } from "../settings/settingsSlice";
 
 export default function ReverseShellConnection({ reverseShellSocket }) {
   const { t } = useTranslation("cli");
+  const disclaimersStatus = useSelector(selectDisclaimersStatus);
 
   const translation = useTranslation("common");
   const tc = translation.t;
@@ -90,15 +93,16 @@ export default function ReverseShellConnection({ reverseShellSocket }) {
         unmountOnExit
       >
         <CardContent>
-          <Alert severity="warning">
-            <Typography>
-              {t("description")}
-            </Typography>
+          {!disclaimersStatus &&
+            <Alert severity="warning">
+              <Typography>
+                {t("description")}
+              </Typography>
 
-            <Typography>
-              {t("warning")}
-            </Typography>
-          </Alert>
+              <Typography>
+                {t("warning")}
+              </Typography>
+            </Alert>}
 
           <Box sx={{
             display: "flex",

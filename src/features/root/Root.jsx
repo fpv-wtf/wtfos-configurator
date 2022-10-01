@@ -56,6 +56,8 @@ import {
   selectHasAdb,
 } from "../device/deviceSlice";
 
+import { selectDisclaimersStatus } from "../settings/settingsSlice";
+
 import { selectDonationState } from "../donate/donateSlice";
 
 const exploit = new Exploit("https://cors.bubblesort.me/?");
@@ -85,6 +87,8 @@ export default function Root() {
   const rooting = useSelector(selectRooting);
 
   const donationState = useSelector(selectDonationState);
+
+  const disclaimersStatus = useSelector(selectDisclaimersStatus);
 
   let runUnlock;
 
@@ -467,21 +471,24 @@ export default function Root() {
           {!window.navigator.serial &&
             <Webusb />}
 
-          <Alert severity="error">
-            <Typography sx={{ fontWeight: "bold" }}>
-              {t("cooling")}
-            </Typography>
-          </Alert>
+          {!disclaimersStatus &&
+            <>
+              <Alert severity="error">
+                <Typography sx={{ fontWeight: "bold" }}>
+                  {t("cooling")}
+                </Typography>
+              </Alert>
 
-          <Disclaimer
-            lines={[
-              t("disclaimerLine1"),
-              t("disclaimerLine2"),
-              t("disclaimerLine3"),
-              t("disclaimerLine4"),
-            ]}
-            title={t("disclaimerTitle")}
-          />
+              <Disclaimer
+                lines={[
+                  t("disclaimerLine1"),
+                  t("disclaimerLine2"),
+                  t("disclaimerLine3"),
+                  t("disclaimerLine4"),
+                ]}
+                title={t("disclaimerTitle")}
+              />
+            </>}
 
           {!donationState &&
             <Donate />}
