@@ -11,6 +11,8 @@
   "tileWtfosTitle": "WTFOS",
   "tileWtfosDescription": "Instalar, mantener o quitar wtfos - el sistema operativo de todas las funcionalidades aportadas por la comunidad.",
   "tileRootTitle": "Rootear",
+  "tileSettingsDescription": "Change the behaviour of this web application.",
+  "tileSettingsTitle": "Settings",
   "tileRootDescription": "Antes de instalar wtfos tendrás que rootear tu dispositivo, ¡Liberalo YA!",
   "tileSupportTitle": "Soporte",
   "tileSupportDescription": "Si tienes cualquier comentario, pregunta o quieres contribuir con funcionalidad adicional, únete a nuestra comunidad en Discord.",
