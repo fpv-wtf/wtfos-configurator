@@ -11,6 +11,8 @@
   "tileWtfosTitle": "WTFOS",
   "tileWtfosDescription": "Zainstaluj, utrzymuj lub usuń wtfos - system operacyjny dla wszystkich funkcji współdzielonych przez społeczność.",
   "tileRootTitle": "Root",
+  "tileSettingsDescription": "Change the behaviour of this web application.",
+  "tileSettingsTitle": "Settings",
   "tileRootDescription": "Zanim zainstalujesz wtfos musisz zrootować swoje urządzenie, uwolnić je - POSIĄŚĆ je!",
   "tileSupportTitle": "Pomoc techniczna",
   "tileSupportDescription": "Jeśli masz jakąś opinię, pytania lub chcesz dodać dodatkowe funkcje, dołącz do naszej społeczności na Discordzie.",
