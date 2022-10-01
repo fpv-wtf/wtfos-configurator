@@ -11,6 +11,8 @@
   "tileWtfosTitle": "WTFOS",
   "tileWtfosDescription": "Wtfos'u kurun, bakımını yapın veya kaldırın - Wtfos: topluluk tarafından sağlanan tüm işlevler için işletim sistemi.",
   "tileRootTitle": "Root",
+  "tileSettingsDescription": "Change the behaviour of this web application.",
+  "tileSettingsTitle": "Settings",
   "tileRootDescription": "Wtfos'u yüklemeden önce cihazınızı rootlayarak onu özgür bırakmanız ve hakimiyeti kurmanız gerekiyor!",
   "tileSupportTitle": "Destek",
   "tileSupportDescription": "Herhangi bir geri bildiriminiz, sorunuz varsa veya ek işlevlere katkıda bulunmak istiyorsanız Discord'daki topluluğumuza katılın.",
