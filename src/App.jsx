@@ -42,6 +42,8 @@ import {
 
 import { selectPassed } from "./features/healthcheck/healthcheckSlice";
 
+import Settings from "./features/settings/Settings";
+
 function App({
   adb,
   handleAdbConnectClick,
@@ -81,6 +83,11 @@ function App({
         <Route
           element={<Home />}
           path="/"
+        />
+
+        <Route
+          element={<Settings />}
+          path="settings"
         />
 
         <Route

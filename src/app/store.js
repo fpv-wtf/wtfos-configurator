@@ -6,6 +6,7 @@ import donateReducer from "../features/donate/donateSlice";
 import healthcheckReducer from "../features/healthcheck/healthcheckSlice";
 import packagesReducer from "../features/packages/packagesSlice";
 import rootReducer from "../features/root/rootSlice";
+import settingsReducer from "../features/settings/settingsSlice";
 import startupReducer from "../features/startup/startupSlice";
 
 export const store = configureStore({
@@ -16,6 +17,7 @@ export const store = configureStore({
     healthcheck: healthcheckReducer,
     packages: packagesReducer,
     root: rootReducer,
+    settings: settingsReducer,
     startup: startupReducer,
   },
 });

@@ -29,6 +29,7 @@ import settings from "./settings.json";
 import {
   loadLanguage,
   loadTraceId,
+  loadDisclaimersState,
 } from "./utils/LocalStorage";
 
 const darkTheme = createTheme({
@@ -63,6 +64,7 @@ for(const lang of languageKeys) {
     navigation: require(`./translations/${lang}/navigation.json`),
     packages: require(`./translations/${lang}/packages.json`),
     root: require(`./translations/${lang}/root.json`),
+    settings: require(`./translations/${lang}/settings.json`),
     setup: require(`./translations/${lang}/setup.json`),
     startup: require(`./translations/${lang}/startup.json`),
   };
@@ -94,6 +96,7 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 Sentry.setUser({ id: loadTraceId() });
+loadDisclaimersState();
 
 const container = document.getElementById("root");
 const root = createRoot(container);
