@@ -42,7 +42,7 @@ export default function Settings() {
                 onChange={handleDisclaimerStateChange}
               />
             }
-            label={t("disclaimersCheckbox")}
+            label={t("disclaimersSetting")}
             sx={{ paddingY: 1 }}
           />
         </Paper>
