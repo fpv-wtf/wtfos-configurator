@@ -11,6 +11,8 @@
   "tileWtfosTitle": "WTFOS",
   "tileWtfosDescription": "安装、维护或移除 wtfos - 所有功能都来自于社区贡献的操作系统。",
   "tileRootTitle": "越狱",
+  "tileSettingsDescription": "Change the behaviour of this web application.",
+  "tileSettingsTitle": "Settings",
   "tileRootDescription": "在安装 wtfos 之前，您将您的设备越狱，释放它 - 完全拥有它！",
   "tileSupportTitle": "支持",
   "tileSupportDescription": "如果您有任何反馈，问题或想要贡献额外的功能，加入我们在 Discord 上的社区。",
