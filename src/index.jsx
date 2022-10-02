@@ -53,6 +53,7 @@ const resources = {};
 for(const lang of languageKeys) {
   resources[lang] = {
     about: require(`./translations/${lang}/about.json`),
+    claimed: require(`./translations/${lang}/claimed.json`),
     cli: require(`./translations/${lang}/cli.json`),
     common: require(`./translations/${lang}/common.json`),
     disclaimer: require(`./translations/${lang}/disclaimer.json`),

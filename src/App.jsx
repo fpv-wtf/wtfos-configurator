@@ -9,29 +9,25 @@ import {
   Route,
 } from "react-router-dom";
 
-import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import { Typography } from "@mui/material";
 
 import "./App.css";
 
-import Device from "./features/device/Device";
-import Header from "./features/navigation/Header";
-
+import Claimed from "./features/overlays/Claimed";
 import Cli from "./features/cli/Cli";
+import Device from "./features/device/Device";
+import Error404 from "./features/404/404";
+import Header from "./features/navigation/Header";
+import Healthcheck from "./features/healthcheck/Healthcheck";
 import Home from "./features/home/Main";
 import Packages from "./features/packages/Packages";
 import Startup from "./features/startup/Startup";
 
-import Error404 from "./features/404/404";
 import Setup from "./features/setup/Setup";
 import Install from "./features/setup/Install";
 import Remove from "./features/setup/Remove";
 import Update from "./features/setup/Update";
-
-import Healthcheck from "./features/healthcheck/Healthcheck";
 
 import {
   selectConnected,
@@ -135,30 +131,8 @@ function App({
         />
       </Routes>
 
-
       {!isMaster &&
-        <Box
-          sx={{
-            background: "rgba(0, 0, 0, 0.85)",
-            position: "fixed",
-            left: "0px",
-            top: "0px",
-            width: "100%",
-            height: "100%",
-            zIndex: "100",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Paper
-            sx={{ padding: 2 }}
-          >
-            <Typography spacing={2}>
-              The app is already open in another tab or window!
-            </Typography>
-          </Paper>
-        </Box>}
+        <Claimed />}
     </Container>
   );
 }
