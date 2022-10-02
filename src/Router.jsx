@@ -6,10 +6,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
-import {
-  useDispatch,
-  useSelector,
-} from "react-redux";
+import { useDispatch } from "react-redux";
 
 import Footer from "./features/navigation/Footer";
 import Root from "./features/root/Root";
@@ -36,7 +33,7 @@ export default function Router() {
       tabGovernor.connect();
       setTabGovernor(tabGovernor);
     }
-  }, [tabGovernor, setMaster, , setTabGovernor]);
+  }, [dispatch, tabGovernor, setTabGovernor]);
 
   return(
     <>
