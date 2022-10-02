@@ -2,6 +2,7 @@ import React, {
   useCallback,
   useEffect,
   useRef,
+  useState,
 } from "react";
 import {
   useDispatch,
@@ -18,11 +19,17 @@ import Typography from "@mui/material/Typography";
 import * as Sentry from "@sentry/react";
 import ReactGA from "react-ga4";
 
+import Claimed from "../overlays/Claimed";
 import Disclaimer from "../disclaimer/Disclaimer";
+import Donate from "../donate/Donate";
 import Header from "../navigation/Header";
 import Log from "../log/Log";
 import Webusb from "../disclaimer/Webusb";
-import Donate from "../donate/Donate";
+
+import {
+  selectCheckedMaster,
+  selectIsMaster,
+} from "../tabGovernor/tabGovernorSlice";
 
 import {
   PatchFailed,
@@ -68,6 +75,8 @@ export default function Root() {
   const { t } = useTranslation("root");
   const dispatch = useDispatch();
 
+  const [autoConnect, setAutoConnect] = useState(false);
+
   const unlockStep = useRef(1);
   const unlockStepLast = useRef(1);
   const disconnected = useRef(false);
@@ -89,6 +98,9 @@ export default function Root() {
   const donationState = useSelector(selectDonationState);
 
   const disclaimersStatus = useSelector(selectDisclaimersStatus);
+
+  const isMaster = useSelector(selectIsMaster);
+  const checkedMasterState = useSelector(selectCheckedMaster);
 
   let runUnlock;
 
@@ -373,7 +385,7 @@ export default function Root() {
   }, [dispatch, initiateReboot, log, runUnlock, t, waitForReboot]);
 
   const reConnectListener = useCallback(async () => {
-    if(rooting) {
+    if(autoConnect) {
       clearTimeout(rebootTimeoutRef.current);
       rebootTimeoutRef.current = null;
 
@@ -407,10 +419,10 @@ export default function Root() {
         console.log("No serial ports found");
       }
     }
-  }, [initiateReboot, log, rooting, runUnlock, t]);
+  }, [initiateReboot, log, runUnlock, t]);
 
   const disconnectListener = useCallback(() => {
-    if(rooting) {
+    if(autoConnect) {
       disconnected.current = true;
 
       if(!rebooting.current && unlockStep.current > 0) {
@@ -421,7 +433,7 @@ export default function Root() {
         dispatch(reset());
       }
     }
-  }, [attempted, dispatch, log, rooting, t]);
+  }, [attempted, autoConnect, dispatch, log, rooting, t]);
 
   const triggerUnlock = useCallback(async() => {
     const filters = [{ usbVendorId: 0x2ca3 }];
@@ -434,6 +446,14 @@ export default function Root() {
       dispatch(reset());
     }
   }, [dispatch, runUnlock]);
+
+  const handleClick = useCallback(async() => {
+    ReactGA.gtag("event", "rootClicked");
+    timeStarted.current = new Date();
+
+    dispatch(root());
+    triggerUnlock();
+  }, [dispatch, triggerUnlock]);
 
   useEffect(() => {
     if(navigator.serial) {
@@ -451,13 +471,10 @@ export default function Root() {
     }
   }, [disconnectListener]);
 
-  const handleClick = useCallback(async() => {
-    ReactGA.gtag("event", "rootClicked");
-    timeStarted.current = new Date();
-
-    dispatch(root());
-    triggerUnlock();
-  }, [dispatch, triggerUnlock]);
+  // Check if we should autoconnect to the device
+  useEffect(() => {
+    setAutoConnect(checkedMasterState && isMaster && rooting);
+  }, [checkedMasterState, isMaster, rooting, setAutoConnect]);
 
   return(
     <Container
@@ -511,6 +528,9 @@ export default function Root() {
           <Log />
         </>
       </Stack>
+
+      {!isMaster &&
+        <Claimed />}
     </Container>
   );
 }
