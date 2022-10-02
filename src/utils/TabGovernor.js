@@ -30,7 +30,6 @@ class TabGovernor {
 
   connect() {
     this.bc.onmessage = (event) => {
-      console.log(event.data);
       const type = event.data.type;
 
       switch(type) {
@@ -92,6 +91,7 @@ class TabGovernor {
   ping() {
     this.timeout = setTimeout(() => {
       this.setMaster(true);
+      this.setCanClaim(true);
     }, this.timeout);
 
     // Ping other tabs and wait for response

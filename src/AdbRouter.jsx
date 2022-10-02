@@ -35,6 +35,7 @@ import {
   setAdb as deviceSetAdb,
   setProductInfo,
   setTemperature,
+  setClaimed,
 } from "./features/device/deviceSlice";
 
 import {
@@ -44,6 +45,8 @@ import {
 
 import { reset as resetPackages } from "./features/packages/packagesSlice";
 import { reset as resetHealthchecks } from "./features/healthcheck/healthcheckSlice";
+
+//import { selectCanClaim } from "../tabGovernor/tabGovernorSlice";
 
 export default function AdbRouter() {
   const dispatch = useDispatch();
@@ -75,6 +78,8 @@ export default function AdbRouter() {
         const streams = await device.connect();
         const adbLocal = await Adb.authenticate(streams, credentialStore, undefined);
         const adbWrapper = new AdbWrapper(adbLocal);
+
+        dispatch(setClaimed(true));
 
         /**
          * The temperature check has two functions:
@@ -240,7 +245,6 @@ export default function AdbRouter() {
           <App
             adb={adb}
             handleAdbConnectClick={handleDeviceConnect}
-            isMaster={isMaster}
           />
         }
         path="/*"

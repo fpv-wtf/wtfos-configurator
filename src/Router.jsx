@@ -23,10 +23,7 @@ import {
   setMaster,
 } from "./features/tabGovernor/tabGovernorSlice";
 
-import {
-  selectClaimed,
-  setClaimed,
-} from "./features/device/deviceSlice";
+import { selectClaimed } from "./features/device/deviceSlice";
 
 export default function Router() {
   const dispatch = useDispatch();
@@ -44,7 +41,6 @@ export default function Router() {
         dispatch(setMaster(isMaster));
         dispatch(checkedMaster(true));
       }, (canClaim) => {
-        console.log("setting canClaim", canClaim);
         dispatch(setCanClaim(canClaim));
       });
       tabGovernor.connect();
@@ -52,7 +48,7 @@ export default function Router() {
     }
   }, [dispatch, tabGovernor, setTabGovernor]);
 
-  // Notify others if we Claimed the device
+  // Notify others that we have claimed the device
   useEffect(() => {
     if(tabGovernor) {
       tabGovernor.deviceClaimed(deviceClaimed);

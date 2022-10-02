@@ -41,10 +41,11 @@ import {
 
 import { selectPassed } from "./features/healthcheck/healthcheckSlice";
 
+import { selectCanClaim } from "./features/tabGovernor/tabGovernorSlice";
+
 function App({
   adb,
   handleAdbConnectClick,
-  isMaster,
 }) {
   const dispatch = useDispatch();
 
@@ -52,6 +53,8 @@ function App({
   const isConnected = useSelector(selectConnected);
   const healthchecksPassed = useSelector(selectPassed);
   const fetchedUpgradable = useSelector(selectFetchedUpgradable);
+
+  const canClaim = useSelector(selectCanClaim);
 
   useEffect(() => {
     if(!fetchedUpgradable) {
@@ -131,7 +134,7 @@ function App({
         />
       </Routes>
 
-      {!isMaster &&
+      {!canClaim &&
         <Claimed />}
     </Container>
   );
@@ -142,7 +145,6 @@ App.defaultProps = { adb: null };
 App.propTypes = {
   adb: PropTypes.shape(),
   handleAdbConnectClick: PropTypes.func.isRequired,
-  isMaster: PropTypes.bool.isRequired,
 };
 
 export default App;

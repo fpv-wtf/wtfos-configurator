@@ -26,11 +26,7 @@ import Header from "../navigation/Header";
 import Log from "../log/Log";
 import Webusb from "../disclaimer/Webusb";
 
-import {
-  selectCheckedMaster,
-  selectCanClaim,
-  selectIsMaster,
-} from "../tabGovernor/tabGovernorSlice";
+import { selectCanClaim } from "../tabGovernor/tabGovernorSlice";
 
 import {
   PatchFailed,
@@ -103,10 +99,7 @@ export default function Root() {
   const disclaimersStatus = useSelector(selectDisclaimersStatus);
 
   const isClaimed = useSelector(selectClaimed);
-
   const canClaim = useSelector(selectCanClaim);
-  //const isMaster = useSelector(selectIsMaster);
-  //const checkedMasterState = useSelector(selectCheckedMaster);
 
   let runUnlock;
 
