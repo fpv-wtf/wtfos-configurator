@@ -37,23 +37,26 @@ import {
   setTemperature,
 } from "./features/device/deviceSlice";
 
+import {
+  selectCheckedMaster,
+  selectIsMaster,
+} from "./features/tabGovernor/tabGovernorSlice";
+
 import { reset as resetPackages } from "./features/packages/packagesSlice";
 import { reset as resetHealthchecks } from "./features/healthcheck/healthcheckSlice";
-import TabGovernor from "./utils/TabGovernor";
 
 export default function AdbRouter() {
   const dispatch = useDispatch();
 
   const isChecked = useSelector(selectChecked);
 
+  const isMaster = useSelector(selectIsMaster);
+  const checkedMasterState = useSelector(selectCheckedMaster);
+
   const [adb, setAdb] = useState(null);
   const [device, setDevice] = useState(null);
   const [intervalId, setIntervalId] = useState(null);
   const [watcher, setWatcher] = useState(null);
-
-  const [master, setMaster] = useState(true);
-  const [tabGovernor, setTabGovernor] = useState(null);
-  const [checkedMasterState, setCheckedMasterState] = useState(false);
 
   const [canAutoConnect, setCanAutoConnect] = useState(false);
 
@@ -144,19 +147,8 @@ export default function AdbRouter() {
 
   // Check if we are able to auto connect to the device
   useEffect(() => {
-    setCanAutoConnect(!devicePromiseRef.current && checkedMasterState && master);
-  }, [checkedMasterState, devicePromiseRef, master]);
-
-  useEffect(() => {
-    if(!tabGovernor) {
-      const tabGovernor = new TabGovernor((isMaster) => {
-        setMaster(isMaster);
-        setCheckedMasterState(true);
-      });
-      tabGovernor.connect();
-      setTabGovernor(tabGovernor);
-    }
-  }, [tabGovernor, setMaster, setCheckedMasterState, setTabGovernor]);
+    setCanAutoConnect(!devicePromiseRef.current && checkedMasterState && isMaster);
+  }, [checkedMasterState, devicePromiseRef, isMaster]);
 
   // Set watcher to monitor WebUSB devices popping up or going away
   useEffect(() => {
@@ -248,7 +240,7 @@ export default function AdbRouter() {
           <App
             adb={adb}
             handleAdbConnectClick={handleDeviceConnect}
-            isMaster={master}
+            isMaster={isMaster}
           />
         }
         path="/*"
