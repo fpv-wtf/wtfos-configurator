@@ -120,7 +120,6 @@ export const deviceSlice = createSlice({
       }
     },
     setClaimed: (state, action) => {
-      console.log("Device slice", action.payload);
       state.claimed = action.payload;
     },
     contextReset: (state) => {
