@@ -20,6 +20,7 @@ const initialState = {
   device: null,
   productType:null,
   niceName: null,
+  claimed: false,
 };
 
 export const checkBinaries = createAsyncThunk(
@@ -118,6 +119,10 @@ export const deviceSlice = createSlice({
         }
       }
     },
+    setClaimed: (state, action) => {
+      console.log("Device slice", action.payload);
+      state.claimed = action.payload;
+    },
     contextReset: (state) => {
       state.checked = false;
       state.temperature = null;
@@ -145,6 +150,7 @@ export const {
   rebooting,
   reset,
   setAdb,
+  setClaimed,
   setLog,
   setProductInfo,
   setTemperature,
@@ -152,6 +158,7 @@ export const {
 
 export const selectHasAdb = (state) => state.device.hasAdb;
 export const selectChecked = (state) => state.device.checked;
+export const selectClaimed = (state) => state.device.claimed;
 export const selectConnected = (state) => state.device.connected;
 export const selectError = (state) => state.device.error;
 export const selectHasHttpProxy = (state) => state.device.hasHttpProxy;

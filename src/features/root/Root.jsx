@@ -28,6 +28,7 @@ import Webusb from "../disclaimer/Webusb";
 
 import {
   selectCheckedMaster,
+  selectCanClaim,
   selectIsMaster,
 } from "../tabGovernor/tabGovernorSlice";
 
@@ -60,7 +61,9 @@ import {
 
 import {
   appendToLog,
+  selectClaimed,
   selectHasAdb,
+  setClaimed,
 } from "../device/deviceSlice";
 
 import { selectDisclaimersStatus } from "../settings/settingsSlice";
@@ -99,8 +102,11 @@ export default function Root() {
 
   const disclaimersStatus = useSelector(selectDisclaimersStatus);
 
-  const isMaster = useSelector(selectIsMaster);
-  const checkedMasterState = useSelector(selectCheckedMaster);
+  const isClaimed = useSelector(selectClaimed);
+
+  const canClaim = useSelector(selectCanClaim);
+  //const isMaster = useSelector(selectIsMaster);
+  //const checkedMasterState = useSelector(selectCheckedMaster);
 
   let runUnlock;
 
@@ -276,6 +282,7 @@ export default function Root() {
 
                 try {
                   exploit.closePort();
+                  dispatch(setClaimed(false));
                 } catch(e) {
                   console.log("Failed closing port:", e);
                 }
@@ -439,6 +446,7 @@ export default function Root() {
     const filters = [{ usbVendorId: 0x2ca3 }];
     try {
       const port = await navigator.serial.requestPort({ filters });
+      dispatch(setClaimed(true));
       await exploit.openPort(port);
 
       runUnlock();
@@ -473,8 +481,8 @@ export default function Root() {
 
   // Check if we should autoconnect to the device
   useEffect(() => {
-    setAutoConnect(checkedMasterState && isMaster && rooting);
-  }, [checkedMasterState, isMaster, rooting, setAutoConnect]);
+    setAutoConnect(isClaimed && rooting);
+  }, [isClaimed, rooting, setAutoConnect]);
 
   return(
     <Container
@@ -529,7 +537,7 @@ export default function Root() {
         </>
       </Stack>
 
-      {!isMaster &&
+      {!canClaim &&
         <Claimed />}
     </Container>
   );

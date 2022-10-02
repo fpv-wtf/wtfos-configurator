@@ -10,7 +10,7 @@
  * that the current tab is the (new) master.
  */
 class TabGovernor {
-  constructor(callback, channel = "governor") {
+  constructor(callback, claimCallback, channel = "governor") {
     this.callback = callback;
     this.bc = new BroadcastChannel(channel);
 
@@ -18,12 +18,19 @@ class TabGovernor {
       this.isMaster = state;
       callback(state);
     };
+
+    this.setCanClaim = (state) => {
+      claimCallback(state);
+    };
+
+    this.claimed = false;
     this.isMaster = true;
     this.timeout = 200;
   }
 
   connect() {
     this.bc.onmessage = (event) => {
+      console.log(event.data);
       const type = event.data.type;
 
       switch(type) {
@@ -34,6 +41,7 @@ class TabGovernor {
           this.bc.postMessage({
             type: "pong",
             master: this.isMaster,
+            claimed: this.claimed,
           });
         } break;
 
@@ -45,6 +53,18 @@ class TabGovernor {
             clearTimeout(this.timeout);
             this.setMaster(false);
           }
+
+          if(event.data.claimed) {
+            this.setCanClaim(false);
+          }
+        } break;
+
+        case "claimed": {
+          this.setCanClaim(false);
+        } break;
+
+        case "unclaimed": {
+          this.setCanClaim(true);
         } break;
 
         default: {
@@ -76,6 +96,11 @@ class TabGovernor {
 
     // Ping other tabs and wait for response
     this.bc.postMessage({ type: "ping" });
+  }
+
+  deviceClaimed(claimed) {
+    this.claimed = claimed;
+    this.bc.postMessage({ type: this.claimed ? "claimed" : "unclaimed" });
   }
 
   disconnect() {
