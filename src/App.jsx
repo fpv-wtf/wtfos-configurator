@@ -9,8 +9,11 @@ import {
   Route,
 } from "react-router-dom";
 
+import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
+import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
+import { Typography } from "@mui/material";
 
 import "./App.css";
 
@@ -45,6 +48,7 @@ import { selectPassed } from "./features/healthcheck/healthcheckSlice";
 function App({
   adb,
   handleAdbConnectClick,
+  isMaster,
 }) {
   const dispatch = useDispatch();
 
@@ -130,6 +134,31 @@ function App({
           path="/*"
         />
       </Routes>
+
+
+      {!isMaster &&
+        <Box
+          sx={{
+            background: "rgba(0, 0, 0, 0.85)",
+            position: "fixed",
+            left: "0px",
+            top: "0px",
+            width: "100%",
+            height: "100%",
+            zIndex: "100",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Paper
+            sx={{ padding: 2 }}
+          >
+            <Typography spacing={2}>
+              The app is already open in another tab or window!
+            </Typography>
+          </Paper>
+        </Box>}
     </Container>
   );
 }
@@ -139,6 +168,7 @@ App.defaultProps = { adb: null };
 App.propTypes = {
   adb: PropTypes.shape(),
   handleAdbConnectClick: PropTypes.func.isRequired,
+  isMaster: PropTypes.bool.isRequired,
 };
 
 export default App;

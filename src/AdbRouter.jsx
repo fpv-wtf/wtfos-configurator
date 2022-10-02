@@ -39,6 +39,7 @@ import {
 
 import { reset as resetPackages } from "./features/packages/packagesSlice";
 import { reset as resetHealthchecks } from "./features/healthcheck/healthcheckSlice";
+import TabGovernor from "./utils/TabGovernor";
 
 export default function AdbRouter() {
   const dispatch = useDispatch();
@@ -49,6 +50,12 @@ export default function AdbRouter() {
   const [device, setDevice] = useState(null);
   const [intervalId, setIntervalId] = useState(null);
   const [watcher, setWatcher] = useState(null);
+
+  const [master, setMaster] = useState(true);
+  const [tabGovernor, setTabGovernor] = useState(null);
+  const [checkedMasterState, setCheckedMasterState] = useState(false);
+
+  const [canAutoConnect, setCanAutoConnect] = useState(false);
 
   const adbRef = useRef();
   const deviceRef = useRef();
@@ -107,37 +114,51 @@ export default function AdbRouter() {
   }, [dispatch]);
 
   /**
-   * Attempt auto-connecting only if the user does not have the device
-   * selection opened. Otherwise it might lead to brower-crashes.
+   * Auto connect to ADB device if all criteria are matched.
    *
    * Assumes the first matching device to be the device we want to
    * connect to.
    */
   const autoConnect = useCallback(async() => {
-    if(!devicePromiseRef.current) {
+    if(canAutoConnect) {
       const devices = await AdbWebUsbBackend.getDevices();
       if(devices.length > 0) {
         await connectToDevice(devices[0]);
       }
     }
-  }, [connectToDevice, devicePromiseRef]);
+  }, [canAutoConnect, connectToDevice]);
+
+  // Handle button press for device connection
+  const handleDeviceConnect = useCallback(async() => {
+    dispatch(connecting());
+
+    try {
+      devicePromiseRef.current = AdbWebUsbBackend.requestDevice();
+      const device = await devicePromiseRef.current;
+      await connectToDevice(device);
+      devicePromiseRef.current = null;
+    } catch(e) {
+      dispatch(connectionFailed());
+    }
+  }, [connectToDevice, devicePromiseRef, dispatch]);
+
+  // Check if we are able to auto connect to the device
+  useEffect(() => {
+    setCanAutoConnect(!devicePromiseRef.current && checkedMasterState && master);
+  }, [checkedMasterState, devicePromiseRef, master]);
 
   useEffect(() => {
-    adbRef.current = adb;
-  }, [adb]);
+    if(!tabGovernor) {
+      const tabGovernor = new TabGovernor((isMaster) => {
+        setMaster(isMaster);
+        setCheckedMasterState(true);
+      });
+      tabGovernor.connect();
+      setTabGovernor(tabGovernor);
+    }
+  }, [tabGovernor, setMaster, setCheckedMasterState, setTabGovernor]);
 
-  useEffect(() => {
-    deviceRef.current = device;
-  }, [device]);
-
-  useEffect(() => {
-    intervalRef.current = intervalId;
-  }, [intervalId]);
-
-  useEffect(() => {
-    watcherRef.current = watcher;
-  }, [watcher]);
-
+  // Set watcher to monitor WebUSB devices popping up or going away
   useEffect(() => {
     if(!watcher && window.navigator.usb) {
       const watcher = new AdbWebUsbBackendWatcher(async (id) => {
@@ -155,31 +176,18 @@ export default function AdbRouter() {
     }
   }, [autoConnect, connectToDevice, dispatch, watcher]);
 
+  // Automatically try to connect to device when application starts up
   useEffect(() => {
-    // Automatically try to connect to device when application starts up
     if(!isChecked && !adb && window.navigator.usb) {
       dispatch(checked(true));
       autoConnect();
     }
   }, [adb, autoConnect, dispatch, isChecked]);
 
-  const handleDeviceConnect = useCallback(async() => {
-    dispatch(connecting());
-
-    try {
-      devicePromiseRef.current = AdbWebUsbBackend.requestDevice();
-      const device = await devicePromiseRef.current;
-      await connectToDevice(device);
-      devicePromiseRef.current = null;
-    } catch(e) {
-      dispatch(connectionFailed());
-    }
-  }, [connectToDevice, devicePromiseRef, dispatch]);
-
+  // Clean up when switching context (onUnmount)
   useEffect(() => {
     dispatch(contextReset());
 
-    // Clean up when switching context (onUnmount)
     return async() => {
       dispatch(contextReset());
 
@@ -206,6 +214,23 @@ export default function AdbRouter() {
     };
   }, [dispatch]);
 
+  // Update references when they change
+  useEffect(() => {
+    adbRef.current = adb;
+  }, [adb]);
+
+  useEffect(() => {
+    deviceRef.current = device;
+  }, [device]);
+
+  useEffect(() => {
+    intervalRef.current = intervalId;
+  }, [intervalId]);
+
+  useEffect(() => {
+    watcherRef.current = watcher;
+  }, [watcher]);
+
   return(
     <Routes>
       <Route
@@ -223,6 +248,7 @@ export default function AdbRouter() {
           <App
             adb={adb}
             handleAdbConnectClick={handleDeviceConnect}
+            isMaster={master}
           />
         }
         path="/*"
