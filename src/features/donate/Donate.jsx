@@ -38,8 +38,6 @@ export default function Donate() {
   const [subscription, setSubscription] = useState(false);
   const [donationText, setDonationText] = useState(t("donate") + " " + marks[2].label);
 
-
-
   const setReminderNever = useCallback(() => {
     const nextReminder = new Date();
     nextReminder.setFullYear(nextReminder.getFullYear() + 10);

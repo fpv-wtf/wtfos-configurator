@@ -2,6 +2,7 @@ import React, {
   useCallback,
   useEffect,
   useRef,
+  useState,
 } from "react";
 import {
   useDispatch,
@@ -18,11 +19,14 @@ import Typography from "@mui/material/Typography";
 import * as Sentry from "@sentry/react";
 import ReactGA from "react-ga4";
 
+import Claimed from "../overlays/Claimed";
 import Disclaimer from "../disclaimer/Disclaimer";
+import Donate from "../donate/Donate";
 import Header from "../navigation/Header";
 import Log from "../log/Log";
 import Webusb from "../disclaimer/Webusb";
-import Donate from "../donate/Donate";
+
+import { selectCanClaim } from "../tabGovernor/tabGovernorSlice";
 
 import {
   PatchFailed,
@@ -53,7 +57,9 @@ import {
 
 import {
   appendToLog,
+  selectClaimed,
   selectHasAdb,
+  setClaimed,
 } from "../device/deviceSlice";
 
 import { selectDisclaimersStatus } from "../settings/settingsSlice";
@@ -67,6 +73,8 @@ const rebootTimeMaxSeconds = 60;
 export default function Root() {
   const { t } = useTranslation("root");
   const dispatch = useDispatch();
+
+  const [autoConnect, setAutoConnect] = useState(false);
 
   const unlockStep = useRef(1);
   const unlockStepLast = useRef(1);
@@ -89,6 +97,9 @@ export default function Root() {
   const donationState = useSelector(selectDonationState);
 
   const disclaimersStatus = useSelector(selectDisclaimersStatus);
+
+  const isClaimed = useSelector(selectClaimed);
+  const canClaim = useSelector(selectCanClaim);
 
   let runUnlock;
 
@@ -264,6 +275,7 @@ export default function Root() {
 
                 try {
                   exploit.closePort();
+                  dispatch(setClaimed(false));
                 } catch(e) {
                   console.log("Failed closing port:", e);
                 }
@@ -373,7 +385,7 @@ export default function Root() {
   }, [dispatch, initiateReboot, log, runUnlock, t, waitForReboot]);
 
   const reConnectListener = useCallback(async () => {
-    if(rooting) {
+    if(autoConnect) {
       clearTimeout(rebootTimeoutRef.current);
       rebootTimeoutRef.current = null;
 
@@ -407,10 +419,10 @@ export default function Root() {
         console.log("No serial ports found");
       }
     }
-  }, [initiateReboot, log, rooting, runUnlock, t]);
+  }, [autoConnect, initiateReboot, log, runUnlock, t]);
 
   const disconnectListener = useCallback(() => {
-    if(rooting) {
+    if(autoConnect) {
       disconnected.current = true;
 
       if(!rebooting.current && unlockStep.current > 0) {
@@ -421,12 +433,13 @@ export default function Root() {
         dispatch(reset());
       }
     }
-  }, [attempted, dispatch, log, rooting, t]);
+  }, [attempted, autoConnect, dispatch, log, rooting, t]);
 
   const triggerUnlock = useCallback(async() => {
     const filters = [{ usbVendorId: 0x2ca3 }];
     try {
       const port = await navigator.serial.requestPort({ filters });
+      dispatch(setClaimed(true));
       await exploit.openPort(port);
 
       runUnlock();
@@ -434,6 +447,14 @@ export default function Root() {
       dispatch(reset());
     }
   }, [dispatch, runUnlock]);
+
+  const handleClick = useCallback(async() => {
+    ReactGA.gtag("event", "rootClicked");
+    timeStarted.current = new Date();
+
+    dispatch(root());
+    triggerUnlock();
+  }, [dispatch, triggerUnlock]);
 
   useEffect(() => {
     if(navigator.serial) {
@@ -451,13 +472,10 @@ export default function Root() {
     }
   }, [disconnectListener]);
 
-  const handleClick = useCallback(async() => {
-    ReactGA.gtag("event", "rootClicked");
-    timeStarted.current = new Date();
-
-    dispatch(root());
-    triggerUnlock();
-  }, [dispatch, triggerUnlock]);
+  // Check if we should autoconnect to the device
+  useEffect(() => {
+    setAutoConnect(isClaimed && rooting);
+  }, [isClaimed, rooting, setAutoConnect]);
 
   return(
     <Container
@@ -511,6 +529,9 @@ export default function Root() {
           <Log />
         </>
       </Stack>
+
+      {!canClaim &&
+        <Claimed />}
     </Container>
   );
 }
