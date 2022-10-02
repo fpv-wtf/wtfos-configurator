@@ -8,6 +8,7 @@ import packagesReducer from "../features/packages/packagesSlice";
 import rootReducer from "../features/root/rootSlice";
 import settingsReducer from "../features/settings/settingsSlice";
 import startupReducer from "../features/startup/startupSlice";
+import tabGovernor from "../features/tabGovernor/tabGovernorSlice";
 
 export const store = configureStore({
   reducer: {
@@ -19,5 +20,6 @@ export const store = configureStore({
     root: rootReducer,
     settings: settingsReducer,
     startup: startupReducer,
+    tabGovernor: tabGovernor,
   },
 });
