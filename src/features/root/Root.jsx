@@ -419,7 +419,7 @@ export default function Root() {
         console.log("No serial ports found");
       }
     }
-  }, [initiateReboot, log, runUnlock, t]);
+  }, [autoConnect, initiateReboot, log, runUnlock, t]);
 
   const disconnectListener = useCallback(() => {
     if(autoConnect) {
