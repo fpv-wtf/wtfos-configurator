@@ -14,21 +14,20 @@ import Stack from "@mui/material/Stack";
 
 import "./App.css";
 
-import Device from "./features/device/Device";
-import Header from "./features/navigation/Header";
-
+import Claimed from "./features/overlays/Claimed";
 import Cli from "./features/cli/Cli";
+import Device from "./features/device/Device";
+import Error404 from "./features/404/404";
+import Header from "./features/navigation/Header";
+import Healthcheck from "./features/healthcheck/Healthcheck";
 import Home from "./features/home/Main";
 import Packages from "./features/packages/Packages";
 import Startup from "./features/startup/Startup";
 
-import Error404 from "./features/404/404";
 import Setup from "./features/setup/Setup";
 import Install from "./features/setup/Install";
 import Remove from "./features/setup/Remove";
 import Update from "./features/setup/Update";
-
-import Healthcheck from "./features/healthcheck/Healthcheck";
 
 import {
   selectConnected,
@@ -42,6 +41,8 @@ import {
 
 import { selectPassed } from "./features/healthcheck/healthcheckSlice";
 
+import { selectCanClaim } from "./features/tabGovernor/tabGovernorSlice";
+
 function App({
   adb,
   handleAdbConnectClick,
@@ -52,6 +53,8 @@ function App({
   const isConnected = useSelector(selectConnected);
   const healthchecksPassed = useSelector(selectPassed);
   const fetchedUpgradable = useSelector(selectFetchedUpgradable);
+
+  const canClaim = useSelector(selectCanClaim);
 
   useEffect(() => {
     if(!fetchedUpgradable) {
@@ -130,6 +133,9 @@ function App({
           path="/*"
         />
       </Routes>
+
+      {!canClaim &&
+        <Claimed />}
     </Container>
   );
 }
