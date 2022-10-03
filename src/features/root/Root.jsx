@@ -33,6 +33,7 @@ import {
   PortLost,
   UnlockFailed,
   UnsupportedFirmwareVersion,
+  SigningServerUnreachable,
 } from "../../utils/obfuscated-exploit/Errors";
 import Exploit from "../../utils/obfuscated-exploit/Exploit";
 
@@ -42,6 +43,7 @@ import {
   PortLost,
   UnlockFailed,
   UnsupportedFirmwareVersion,
+  SigningServerUnreachable,
 } from "../../utils/exploit/Errors";
 import Exploit from "../../utils/exploit/Exploit.js";
 */
@@ -309,7 +311,12 @@ export default function Root() {
             }
           }
         } catch(e) {
-          if(e instanceof UnsupportedFirmwareVersion) {
+          if(e instanceof SigningServerUnreachable) {
+            log(t("signingServerUnreachable"));
+
+            shouldRunUnlock = false;
+            done = true;
+          } else if(e instanceof UnsupportedFirmwareVersion) {
             log(t("unsupportedFirmware"));
 
             shouldRunUnlock = false;
