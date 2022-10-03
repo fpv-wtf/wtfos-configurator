@@ -29,5 +29,6 @@
   "rebootTimeout": "Εγκατάλειψη! Η συσκευή δεν επανεκκίνησε εγκαίρως, παρακαλώ απενεργοποιήστε και ενεργοποιήστε και προσπαθήστε ξανά.",
   "rebootTimeShort": "Ο χρόνος επανεκκίνησης είναι ύποπτα σύντομος - επανεκκίνηση ακόμη μια φορά για καλό μέτρο...",
   "unlockFailed": "Το ξεκλείδωμα απέτυχε, παρακαλώ απενεργοποιήστε και ενεργοποιήστε τη συσκευή σας και προσπαθήστε ξανά.",
-  "unsupportedFirmware": "Το firmware στη συσκευή σας είναι πολύ νέο. Μπορεί να μπορείτε να υποβαθμίσετε την συσκευή σας σε V01.01.0606 σε λειτουργία DIY με DJI FPV Assistant 2 ανάλογα με την ακριβή έκδοση που έχει εγκατασταθεί. Παρακαλώ <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>δείτε το wiki</a> για περισσότερες λεπτομέρειες."
+  "unsupportedFirmware": "Το firmware στη συσκευή σας είναι πολύ νέο. Μπορεί να μπορείτε να υποβαθμίσετε την συσκευή σας σε V01.01.0606 σε λειτουργία DIY με DJI FPV Assistant 2 ανάλογα με την ακριβή έκδοση που έχει εγκατασταθεί. Παρακαλώ <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>δείτε το wiki</a> για περισσότερες λεπτομέρειες.",
+  "signingServerUnreachable": "The singing server could not be reached. It might be down or your ISP might be blocking it."
 }
