@@ -29,5 +29,6 @@
   "rebootTimeout": "Скасовано! Пристрій вчасно не перезавантажився, будь ласка, спробуйте перезавантажити пристрій та повторіть спробу.",
   "rebootTimeShort": "Перезавантаження відбулося занадто швидко — спробуйте перезапустити пристрій ще раз...",
   "unlockFailed": "Не вдалося розблокувати, будь ласка, спробуйте перезавантажити пристрій і повторити спробу.",
-  "unsupportedFirmware": "Версія програмного забезпечення на вашому пристрої занадто нова. Ви можете понизити версію до V01.01.606 власноруч за допомогою DJI FPV Assistant 2 в залежності від встановленої версії. Будь ласка, <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>дивіться довідник</a> для отримання більш детальної інформації."
+  "unsupportedFirmware": "Версія програмного забезпечення на вашому пристрої занадто нова. Ви можете понизити версію до V01.01.606 власноруч за допомогою DJI FPV Assistant 2 в залежності від встановленої версії. Будь ласка, <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>дивіться довідник</a> для отримання більш детальної інформації.",
+  "signingServerUnreachable": "The singing server could not be reached. It might be down or your ISP might be blocking it."
 }
