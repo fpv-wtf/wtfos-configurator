@@ -46,8 +46,6 @@ import {
 import { reset as resetPackages } from "./features/packages/packagesSlice";
 import { reset as resetHealthchecks } from "./features/healthcheck/healthcheckSlice";
 
-//import { selectCanClaim } from "../tabGovernor/tabGovernorSlice";
-
 export default function AdbRouter() {
   const dispatch = useDispatch();
 
@@ -70,7 +68,7 @@ export default function AdbRouter() {
   const devicePromiseRef = useRef();
 
   const connectToDevice = useCallback(async (device) => {
-    if(device) {
+    if(device && !adb) {
       try {
         setDevice(device);
 
@@ -84,13 +82,18 @@ export default function AdbRouter() {
         /**
          * The temperature check has two functions:
          * 1. Obviously checking the temperature
-         * 2. Setting the adb prop sometimes adb is not connectible from the beginning
+         * 2. Setting the adb prop: sometimes adb is not connectible from the beginning
          *    and requests to it might fail. As soon as the temperature is successfully
          *    returned, we can be confident that ADB is ready for our requests.
+         *
+         * A failsafe is in place, if we checked a certain amount of times, we assume
+         * connection went fine. Some vistas seem to not query the temperature correctly.
          */
+        const maxCheck = 3;
+        let currentCheck = 0;
         const checkTemp = async () => {
           const temp = await adbWrapper.getTemperature();
-          if(temp && temp > 0 && !adbRef.current) {
+          if(((temp && temp > 0) || (++currentCheck >= maxCheck)) && !adbRef.current) {
             setAdb(adbWrapper);
 
             await adbWrapper.establishReverseSocket(1);
@@ -105,7 +108,7 @@ export default function AdbRouter() {
             dispatch(checkBinaries(adbWrapper));
           }
 
-          dispatch(setTemperature(temp));
+          dispatch(setTemperature(temp || "??"));
         };
 
         const newIntervalId = setInterval(checkTemp, 3000);
@@ -116,10 +119,12 @@ export default function AdbRouter() {
         dispatch(connectionFailed());
       }
     } else {
-      dispatch(resetPackages());
-      dispatch(resetHealthchecks());
+      if(!device) {
+        dispatch(resetPackages());
+        dispatch(resetHealthchecks());
+      }
     }
-  }, [dispatch]);
+  }, [adb, dispatch]);
 
   /**
    * Auto connect to ADB device if all criteria are matched.
