@@ -11,7 +11,7 @@
   "tileWtfosTitle": "WTFOS",
   "tileWtfosDescription": "Встановлення, конфігурація або видалення wtfos - операційної системи для підтримки функціоналу створеного спільнотою.",
   "tileRootTitle": "Рут права",
-  "tileSettingsDescription": "Змініть поведінку цього веб-додатку.",
+  "tileSettingsDescription": "Змініть налаштування цього веб-додатку.",
   "tileSettingsTitle": "Налаштування",
   "tileRootDescription": "Перед встановленням wtfos, Вам доведеться надати рут-права до свого пристрою. Звільніть свій пристрій від кайданів!",
   "tileSupportTitle": "Підтримка",
