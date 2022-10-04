@@ -30,5 +30,5 @@
   "rebootTimeShort": "Le temps de redémarrage est trop court - redémarrez une fois de plus au cas ou...",
   "unlockFailed": "Le déverrouillage a échoué, veuillez redémarrer votre appareil et réessayez.",
   "unsupportedFirmware": "Le firmware de votre appareil est trop récent. Vous pouvez peut-être downgrader vers V01.01. 606 en mode DIY avec DJI FPV Assistant 2 selon la version exacte installée. Veuillez <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>consulter le wiki</a> pour plus de détails.",
-  "signingServerUnreachable": "The singing server could not be reached. It might be down or your ISP might be blocking it."
+  "signingServerUnreachable": "The signing server could not be reached. It might be down or your ISP might be blocking it."
 }
