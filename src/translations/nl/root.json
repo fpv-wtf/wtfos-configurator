@@ -30,5 +30,5 @@
   "rebootTimeShort": "De herstart tijd is verdacht kort - nogmaals herstarten voor een betrouwbare meting...",
   "unlockFailed": "Ontgrendelen mislukt, herstart alsjeblieft je apparaat en probeer het opnieuw.",
   "unsupportedFirmware": "De firmware op je apparaat is te nieuw. Misschien kunt je downgraden naar versie V01.01.0606 in DIY modus met DJI FPV Assistant 2 afhankelijk van de huidige geïnstalleerde versie. Kijk op <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>de wiki</a> voor meer details.",
-  "signingServerUnreachable": "The singing server could not be reached. It might be down or your ISP might be blocking it."
+  "signingServerUnreachable": "The signing server could not be reached. It might be down or your ISP might be blocking it."
 }
