@@ -30,5 +30,5 @@
   "rebootTimeShort": "重启用时过短 - 为保证正确计数请再次重启设备",
   "unlockFailed": "解锁失败，请给设备重新上电并重试",
   "unsupportedFirmware": "设备固件太新。您可以将眼镜切换到DIY (非DJI FPV模式)，并使用DJI FPV Assistant 2 降级到V01.01.0606版本，具体是否可以降级取决于眼镜现在的固件版本。更多信息请<a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>查看wiki</a>",
-  "signingServerUnreachable": "The singing server could not be reached. It might be down or your ISP might be blocking it."
+  "signingServerUnreachable": "The signing server could not be reached. It might be down or your ISP might be blocking it."
 }
