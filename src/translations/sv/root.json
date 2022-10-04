@@ -30,5 +30,5 @@
   "rebootTimeShort": "Omstartstiden misstänksamt kort - startar om en gång till för säkerhets skull...",
   "unlockFailed": "Upplåsning misslyckades, vänligen starta om din enhet och försök igen.",
   "unsupportedFirmware": "Den inbyggda programvaran på din enhet är för ny. Du kanske kan nedgradera till V01.01. 606 i gör-det-själv-läge med DJI FPV Assistant 2 beroende på installerad version. Vänligen <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>se wikin</a> för mer information.",
-  "signingServerUnreachable": "The singing server could not be reached. It might be down or your ISP might be blocking it."
+  "signingServerUnreachable": "The signing server could not be reached. It might be down or your ISP might be blocking it."
 }
