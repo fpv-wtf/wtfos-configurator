@@ -30,5 +30,5 @@
   "rebootTimeShort": "Podejrzanie krótki czas restartu urządzenia - kolejne ponowne uruchomienie w celu upewnienia się...",
   "unlockFailed": "Odblokowanie nie powiodło się, proszę zrestartować urządzenie podłączając ponownie zasilanie i spróbować ponownie.",
   "unsupportedFirmware": "Firmware na Twoim urządzeniu jest zbyt nowy. Może być możliwe obniżenie do V01.01. 606 w trybie DIY z oprogramowaniem DJI FPV Assistant 2 w zależności od zainstalowanej wersji. Aby uzyskać więcej szczegółów, zobacz <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>wiki</a>.",
-  "signingServerUnreachable": "The signing server could not be reached. It might be down or your ISP might be blocking it."
+  "signingServerUnreachable": "Nie udało się połączyć z serwerem. Może być niedostępny lub Twój dostawca usług internetowych może go blokować."
 }
