@@ -2,5 +2,5 @@
   "running": "In esecuzione (PID: {{pid}})",
   "started": "avviato",
   "stopped": "fermato",
-  "hint": "I servizi abilitati vengono avviati durante il processo di avvio del dispositivo."
+  "hint": "I servizi abilitati partono durante il processo di avvio del dispositivo."
 }
