@@ -2,6 +2,6 @@
   "error404Title": "404 - Non Trovato",
   "error404Text": "Non sono sicuro di quello che stai cercando, ma questa pagina non esiste. Dovresti controllare la",
   "error404Link": "Pagina iniziale",
-  "errorConnection": "Impossibile connettersi al dispositivo. Assicurati che il server ADB non sia in esecuzione sul computer (adb kill-server) e di non essere connessi su un'altra scheda/finestra.",
+  "errorConnection": "Impossibile connettersi al dispositivo. Assicurati che il server adb non sia in esecuzione sul computer (adb kill-server) e di non essere connessi su di un'altra scheda/finestra.",
   "warningConnection": "Collega i tuoi Occhiali o la Air-Unit/Vista, già rootati, tramite la porta USB, assicurati che siano alimentati e premi il pulsante di connessione."
 }
