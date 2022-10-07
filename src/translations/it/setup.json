@@ -13,7 +13,7 @@
   "tileUpdateTitle": "Aggiornamento",
   "tileUpdateDescription": "Aggiorna WTFOS e i relativi pacchetti installati per avere l'ultima versione disponibile.",
   "tileRemoveTitle": "Rimuovi",
-  "tileRemoveDescription": "Rimuovere WTFOS dal tuo dispositivo. Questo ripristinerà tutte le modifiche tranne lo sblocco della root.",
+  "tileRemoveDescription": "Rimuovere WTFOS dal tuo dispositivo. Questo ripristinerà tutte le modifiche tranne lo sblocco dei privilegi di Root.",
   "upToDate": "Non ci sono aggiornamenti disponibili!",
   "checking": "Controllo i pacchetti...",
   "name": "Nome del pacchetto",
