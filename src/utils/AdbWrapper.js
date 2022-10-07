@@ -428,7 +428,8 @@ export default class AdbWrapper {
   }
 
   async writePackageConfig(packageName, stringContent) {
-    const filename = `/opt/etc/package-config/${packageName}/config.json`;
+    // config 2 is just for testing....
+    const filename = `/opt/etc/package-config/${packageName}/config2.json`;
 
     const output = await this.executeCommand([
       `echo "${stringContent}" > ${filename}`,

@@ -21,7 +21,7 @@ import {
   packageRepo,
   selectFetched,
   selectConfig,
-  selectConfigSchema,
+  selectConfigSchema, writeConfig,
 } from "./packageSlice";
 import TableCell from "@mui/material/TableCell";
 
@@ -30,6 +30,7 @@ import SetupHint from "../setup/SetupHint";
 
 import validator from "@rjsf/validator-ajv6";
 import Form from "@rjsf/core";
+import { repo } from "../packages/packagesSlice";
 
 export default function Package({ adb }) {
   let {
@@ -79,6 +80,14 @@ export default function Package({ adb }) {
     // }
   }, [adb, dispatch, fetched]);
 
+  const saveConfig = useCallback(({ formData }) => {
+    console.log(formData);
+    dispatch(writeConfig({
+      adb,
+      config: formData,
+    }));
+  }, [adb.dispatch]);
+
   return (
     <>
 
@@ -96,6 +105,7 @@ export default function Package({ adb }) {
       {configSchema.title &&
       <Form
         formData={config}
+        onSubmit={saveConfig}
         schema={JSON.parse(JSON.stringify(configSchema))}
         validator={validator}
       /> }

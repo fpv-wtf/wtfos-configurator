@@ -55,6 +55,17 @@ export const fetchConfigSchema = createAsyncThunk(
   }
 );
 
+export const writeConfig = createAsyncThunk(
+  "package/writeConfig",
+  async ({
+    adb, config,
+  }, thunk) => {
+    const out = await adb.writePackageConfig(thunk.getState().package.package, JSON.stringify(config, null, " "));
+    console.log("wrote...", out);
+    return out;
+  }
+);
+
 export const packageSlice = createSlice({
   name: "package",
   initialState,
@@ -77,7 +88,6 @@ export const packageSlice = createSlice({
       }).addCase(fetchConfig.fulfilled, (state, action) => {
         state.config = action.payload;
       }).addCase(fetchConfigSchema.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.configSchema = action.payload;
       });
   },
