@@ -393,6 +393,50 @@ export default class AdbWrapper {
     return output.stdout;
   }
 
+  async readPackageConfigSchema(packageName) {
+    const filename = `/opt/etc/package-config/${packageName}/schema-configurator.json`;
+
+    const exists = await this.fileExists(filename);
+
+    if (!exists) {
+      return false;
+    }
+
+    // newline because we pop the last line from stdout for exitcode....
+    const output = await this.executeCommand([
+      `cat ${filename}; echo '\n'`,
+    ]);
+
+    return output.stdout;
+  }
+
+  async readPackageConfig(packageName) {
+    const filename = `/opt/etc/package-config/${packageName}/config.json`;
+
+    const exists = await this.fileExists(filename);
+
+    if (!exists) {
+      return false;
+    }
+
+    // newline because we pop the last line from stdout for exitcode....
+    const output = await this.executeCommand([
+      `cat ${filename}; echo '\n'`,
+    ]);
+
+    return output.stdout;
+  }
+
+  async writePackageConfig(packageName, stringContent) {
+    const filename = `/opt/etc/package-config/${packageName}/config.json`;
+
+    const output = await this.executeCommand([
+      `echo "${stringContent}" > ${filename}`,
+    ]);
+
+    return output.exitCode;
+  }
+
   async getProductInfo() {
     let output = await this.executeCommand([
       "unrd product_type",

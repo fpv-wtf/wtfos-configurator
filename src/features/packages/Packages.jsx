@@ -176,7 +176,16 @@ export default function Packages({ adb }) {
     return (
       <TableRow key={item.name}>
         <TableCell sx={{ width: 250 }}>
-          {item.name}
+          <Link
+            href={`/package/${item.repo}/${item.name}`}
+            sx={{
+              whiteSpace: "nowrap",
+              textDecoration: "none",
+            }}
+
+          >
+            {item.name}
+          </Link>
         </TableCell>
 
         <TableCell sx={{
@@ -290,6 +299,7 @@ export default function Packages({ adb }) {
   });
 
   const packageString = t("matchCount", { count: filtered.length } );
+
   return (
     <>
       {!hasOpkgBinary &&
