@@ -36,9 +36,9 @@ export const fetchConfig = createAsyncThunk(
   "package/fetchConfig",
   async (adb, thunk) => {
     const confString = await adb.readPackageConfig(thunk.getState().package.package);
-    console.log(confString);
+
     const conf = JSON.parse(confString);
-    console.log(conf);
+
     return conf;
   }
 );
@@ -48,9 +48,9 @@ export const fetchConfigSchema = createAsyncThunk(
   "package/fetchConfigSchema",
   async (adb, thunk) => {
     const confString = await adb.readPackageConfigSchema(thunk.getState().package.package);
-    console.log(confString);
+
     const conf = JSON.parse(confString);
-    console.log(conf);
+
     return conf;
   }
 );
@@ -77,6 +77,7 @@ export const packageSlice = createSlice({
       }).addCase(fetchConfig.fulfilled, (state, action) => {
         state.config = action.payload;
       }).addCase(fetchConfigSchema.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.configSchema = action.payload;
       });
   },
@@ -89,5 +90,7 @@ export const selectPackage = (state) => state.package.package;
 export const selectRepo = (state) => state.package.repo;
 export const selectDetails = (state) => state.package.details;
 export const selectFetched = (state) => state.package.fetched;
+export const selectConfig = (state) => state.package.config;
+export const selectConfigSchema = (state) => state.package.configSchema;
 
 export default packageSlice.reducer;

@@ -12,12 +12,24 @@ import {
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import {
-  fetchPackage, fetchConfig, fetchConfigSchema, selectPackage, selectRepo, selectDetails, packageRepo, selectFetched,
+  fetchPackage,
+  fetchConfig,
+  fetchConfigSchema,
+  selectPackage,
+  selectRepo,
+  selectDetails,
+  packageRepo,
+  selectFetched,
+  selectConfig,
+  selectConfigSchema,
 } from "./packageSlice";
 import TableCell from "@mui/material/TableCell";
 
 import { selectHasOpkgBinary } from "../device/deviceSlice";
 import SetupHint from "../setup/SetupHint";
+
+import validator from "@rjsf/validator-ajv6";
+import Form from "@rjsf/core";
 
 export default function Package({ adb }) {
   let {
@@ -33,6 +45,8 @@ export default function Package({ adb }) {
   const details = useSelector(selectDetails);
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const fetched = useSelector(selectFetched);
+  const config = useSelector(selectConfig);
+  const configSchema = useSelector(selectConfigSchema);
 
   useEffect(() => {
     dispatch(packageRepo({
@@ -78,6 +92,13 @@ export default function Package({ adb }) {
       <p>
         {details && details.description}
       </p>
+
+      {configSchema.title &&
+      <Form
+        schema={JSON.parse(JSON.stringify(configSchema))}
+        validator={validator}
+
+      /> }
 
     </>
   );
