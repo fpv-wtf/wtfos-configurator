@@ -95,9 +95,9 @@ export default function Package({ adb }) {
 
       {configSchema.title &&
       <Form
+        formData={config}
         schema={JSON.parse(JSON.stringify(configSchema))}
         validator={validator}
-
       /> }
 
     </>
