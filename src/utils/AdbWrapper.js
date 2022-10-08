@@ -406,8 +406,6 @@ export default class AdbWrapper {
     const configPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigFile}`;
     const schemaPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigSchema}`;
 
-    console.log(configPath, schemaPath);
-
     try {
       const config = await this.pullJsonFile(configPath);
       const schema = await this.pullJsonFile(schemaPath);
@@ -465,7 +463,7 @@ export default class AdbWrapper {
   }
 
   async writePackageConfig(packageName, content) {
-    const path = `${this.wtfos.packageConfigPath}/${packageName}/${this.wtfos.packageConfigFile}.bak`;
+    const path = `${this.wtfos.packageConfigPath}/${packageName}/${this.wtfos.packageConfigFile}`;
     const blob = new Blob([content]);
     await this.pushFile(path, blob);
   }
