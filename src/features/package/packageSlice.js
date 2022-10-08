@@ -3,79 +3,57 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 
-
 const initialState = {
   loading: true,
   fetched: false,
-  repo: "fpv-wtf",
-  package: null,
-  details: [],
-  configSchema: [],
-  config: [],
-  updates: false,
-};
 
+  name: null,
+  description: null,
+  installed: false,
+
+  schema: null,
+  config: null,
+
+  writing: false,
+  error: null,
+};
 
 export const fetchPackage = createAsyncThunk(
   "package/fetchPackage",
   async ({
-    adb, packageSlug, repo,
+    adb,
+    name,
   }) => {
-    let packages = {};
-
-    try {
-      packages = await adb.getPackages();
-    } catch(e) {
-      console.log(e);
-    }
-    return packages.find((p) => p.name === packageSlug && p.repo === repo);
+    return adb.getPackageDetails(name);
   }
 );
 
 export const fetchConfig = createAsyncThunk(
   "package/fetchConfig",
   async (adb, thunk) => {
-    const confString = await adb.readPackageConfig(thunk.getState().package.package);
-
-    const conf = JSON.parse(confString);
-
-    return conf;
-  }
-);
-
-
-export const fetchConfigSchema = createAsyncThunk(
-  "package/fetchConfigSchema",
-  async (adb, thunk) => {
-    const confString = await adb.readPackageConfigSchema(thunk.getState().package.package);
-
-    const conf = JSON.parse(confString);
-
-    return conf;
+    const name = thunk.getState().package.name;
+    return adb.getPackageConfig(name);
   }
 );
 
 export const writeConfig = createAsyncThunk(
   "package/writeConfig",
   async ({
-    adb, config,
+    adb,
+    config,
   }, thunk) => {
-    const out = await adb.writePackageConfig(thunk.getState().package.package, JSON.stringify(config, null, " "));
-    console.log("wrote...", out);
-    return out;
+    const name = thunk.getState().package.name;
+    const stringified = JSON.stringify(config, null, "  ");
+    await adb.writePackageConfig(name, stringified);
+
+    return config;
   }
 );
 
 export const packageSlice = createSlice({
   name: "package",
   initialState,
-  reducers: {
-    packageRepo: (state, action) => {
-      state.repo = action.payload.repo;
-      state.package = action.payload.packageSlug;
-    },
-
-  },
+  reducers: { reset: () => initialState },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPackage.pending, (state) => {
@@ -84,23 +62,41 @@ export const packageSlice = createSlice({
       .addCase(fetchPackage.fulfilled, (state, action) => {
         state.loading = false;
         state.fetched = true;
-        state.details = action.payload;
+
+        state.name = action.payload.name;
+        state.description = action.payload.description;
+        state.installed = action.payload.installed;
+      }).addCase(fetchConfig.pending, (state, action) => {
+        state.config = null;
+        state.schema = null;
       }).addCase(fetchConfig.fulfilled, (state, action) => {
+        state.config = action.payload.config;
+        state.schema = action.payload.schema;
+      }).addCase(writeConfig.pending, (state, action) => {
+        state.writing = true;
+      }).addCase(writeConfig.fulfilled, (state, action) => {
         state.config = action.payload;
-      }).addCase(fetchConfigSchema.fulfilled, (state, action) => {
-        state.configSchema = action.payload;
+        state.writing = false;
+      }).addCase(writeConfig.rejected, (state, action) => {
+        state.error = action.error.message;
       });
   },
 
 });
 
-export const { packageRepo } = packageSlice.actions;
+export const { reset } = packageSlice.actions;
 
-export const selectPackage = (state) => state.package.package;
-export const selectRepo = (state) => state.package.repo;
-export const selectDetails = (state) => state.package.details;
 export const selectFetched = (state) => state.package.fetched;
+
+export const selectName = (state) => state.package.name;
+export const selectDescription = (state) => state.package.description;
+export const selectInstalled = (state) => state.package.installed;
+
+export const selectWriting = (state) => state.package.writing;
+export const selectError = (state) => state.package.error;
+export const selectLoading = (state) => state.package.loading;
+
 export const selectConfig = (state) => state.package.config;
-export const selectConfigSchema = (state) => state.package.configSchema;
+export const selectSchema = (state) => state.package.schema;
 
 export default packageSlice.reducer;

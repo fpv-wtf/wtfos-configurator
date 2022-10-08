@@ -1,4 +1,5 @@
 {
   "detailsFor": "Details for {{name}}",
-  "submit": "Save settings"
+  "submit": "Save settings",
+  "loading": "Loading package details..."
 }

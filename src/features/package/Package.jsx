@@ -2,8 +2,6 @@ import PropTypes from "prop-types";
 import React, {
   useCallback,
   useEffect,
-  useRef,
-  useState,
 } from "react";
 import {
   useDispatch,
@@ -11,108 +9,128 @@ import {
 } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
+
+import validator from "@rjsf/validator-ajv6";
+import Form from "@rjsf/mui";
+
+import Alert from "@mui/material/Alert";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+
 import {
   fetchPackage,
   fetchConfig,
-  fetchConfigSchema,
-  selectPackage,
-  selectRepo,
-  selectDetails,
-  packageRepo,
-  selectFetched,
+  reset,
   selectConfig,
-  selectConfigSchema, writeConfig,
+  selectDescription,
+  selectError,
+  selectFetched,
+  selectInstalled,
+  selectLoading,
+  selectName,
+  selectSchema,
+  selectWriting,
+  writeConfig,
 } from "./packageSlice";
-import TableCell from "@mui/material/TableCell";
 
-import { selectHasOpkgBinary } from "../device/deviceSlice";
-import SetupHint from "../setup/SetupHint";
-
-import validator from "@rjsf/validator-ajv6";
-import Form from "@rjsf/core";
-import { repo } from "../packages/packagesSlice";
+import { selectPassed } from "../healthcheck/healthcheckSlice";
+import Spinner from "../loading/Spinner";
 
 export default function Package({ adb }) {
-  let {
-    repo, packageSlug,
-  } = useParams();
-
-
+  const { t } = useTranslation("package");
   const dispatch = useDispatch();
 
-  const { t } = useTranslation("package");
-  const packageName = useSelector(selectPackage);
-  const repoName = useSelector(selectRepo);
-  const details = useSelector(selectDetails);
-  const hasOpkgBinary = useSelector(selectHasOpkgBinary);
+  let { packageSlug } = useParams();
+
+  const healthchecksPassed = useSelector(selectPassed);
+
+  const packageName = useSelector(selectName);
+  const description = useSelector(selectDescription);
+  const installed = useSelector(selectInstalled);
+
   const fetched = useSelector(selectFetched);
   const config = useSelector(selectConfig);
-  const configSchema = useSelector(selectConfigSchema);
+  const schema = useSelector(selectSchema);
 
-  useEffect(() => {
-    dispatch(packageRepo({
-      repo,
-      packageSlug,
-    }));
-  }, [dispatch, repo, packageSlug]);
+  const loading = useSelector(selectLoading);
+  const writing = useSelector(selectWriting);
+  const error = useSelector(selectError);
 
+  /**
+   * Fetch package details if healthchecks passed and dtails are not yet
+   * set for the selected package.
+   */
   useEffect(() => {
-    if (!fetched) {
+    if (!fetched && healthchecksPassed) {
       dispatch(fetchPackage({
         adb,
-        packageSlug,
-        repo,
+        name: packageSlug,
       }));
     }
-  }, [adb, dispatch, fetched]);
-
-
-  useEffect(() => {
-    // if (!fetched) {
-    dispatch(fetchConfig(adb));
-    // }
-  }, [adb, dispatch, fetched]);
-
+  }, [adb, dispatch, fetched, healthchecksPassed, packageSlug]);
 
   useEffect(() => {
-    // if (!fetched) {
-    dispatch(fetchConfigSchema(adb));
-    // }
-  }, [adb, dispatch, fetched]);
+    if(packageName !== packageSlug) {
+      dispatch(reset());
+    }
+  }, [dispatch, packageName, packageSlug]);
+
+  // Fetch config and schema if package is installed
+  useEffect(() => {
+    if(installed) {
+      dispatch(fetchConfig(adb));
+    }
+  }, [adb, dispatch, installed]);
 
   const saveConfig = useCallback(({ formData }) => {
-    console.log(formData);
     dispatch(writeConfig({
       adb,
       config: formData,
     }));
-  }, [adb.dispatch]);
+  }, [adb, dispatch]);
 
   return (
-    <>
+    <Paper>
+      <Box p={2}>
+        <Stack spacing={2}>
+          <Typography variant="h4">
+            {t("detailsFor", { name: packageSlug })}
+          </Typography>
 
-      {!hasOpkgBinary &&
-      <SetupHint />}
+          {loading &&
+            <Spinner text={t("loading")} />}
 
-      <h1>
-        {`${repoName}-${packageName}`}
-      </h1>
+          <Typography variant="body1">
+            {description}
+          </Typography>
 
-      <p>
-        {details && details.description}
-      </p>
+          {schema &&
+            <Form
+              formData={config}
+              onSubmit={saveConfig}
+              schema={JSON.parse(JSON.stringify(schema))}
+              validator={validator}
+            >
+              <Button
+                disabled={writing}
+                type="submit"
+                variant="contained"
+              >
+                {t("submit")}
+              </Button>
+            </Form>}
 
-      {configSchema.title &&
-      <Form
-        formData={config}
-        onSubmit={saveConfig}
-        schema={JSON.parse(JSON.stringify(configSchema))}
-        validator={validator}
-      /> }
-
-    </>
+          {error &&
+            <Alert severity="error">
+              {error}
+            </Alert>}
+        </Stack>
+      </Box>
+    </Paper>
   );
 }
 
 Package.propTypes = { adb: PropTypes.shape().isRequired };
-
