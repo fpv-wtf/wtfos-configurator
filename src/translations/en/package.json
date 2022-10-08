@@ -1,3 +1,4 @@
 {
-  "detailsFor": "Details for: {{name}}"
+  "detailsFor": "Details for {{name}}",
+  "submit": "Save settings"
 }

@@ -63,6 +63,7 @@ for(const lang of languageKeys) {
     healthcheck: require(`./translations/${lang}/healthcheck.json`),
     home: require(`./translations/${lang}/home.json`),
     navigation: require(`./translations/${lang}/navigation.json`),
+    package: require(`./translations/${lang}/package.json`),
     packages: require(`./translations/${lang}/packages.json`),
     root: require(`./translations/${lang}/root.json`),
     settings: require(`./translations/${lang}/settings.json`),
