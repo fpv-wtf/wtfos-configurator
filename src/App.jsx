@@ -22,6 +22,7 @@ import Header from "./features/navigation/Header";
 import Healthcheck from "./features/healthcheck/Healthcheck";
 import Home from "./features/home/Main";
 import Packages from "./features/packages/Packages";
+import Package from "./features/package/Package";
 import Startup from "./features/startup/Startup";
 
 import Setup from "./features/setup/Setup";
@@ -42,6 +43,7 @@ import {
 import { selectPassed } from "./features/healthcheck/healthcheckSlice";
 
 import { selectCanClaim } from "./features/tabGovernor/tabGovernorSlice";
+
 
 function App({
   adb,
@@ -119,6 +121,12 @@ function App({
         <Route
           element={(isConnected && adb) ? <Packages adb={adb} /> : null}
           path="packages"
+          render={isConnected && adb}
+        />
+
+        <Route
+          element={(isConnected && adb) ? <Package adb={adb} /> : null}
+          path="package/:repo/:packageSlug"
           render={isConnected && adb}
         />
 
