@@ -36,6 +36,9 @@ export default class AdbWrapper {
       opkgConfigUrl: "http://repo.fpv.wtf/pigeon/wtfos-opkg-config_armv7-3.2.ipk",
       healthchecksUrl: "https://github.com/fpv-wtf/wtfos-healthchecks/releases/latest/download/healthchecks.tar.gz",
       healthchesksPath: "/tmp/healthchecks",
+      packageConfigPath: "/opt/etc/package-config",
+      packageConfigFile: "config.json",
+      packageConfigSchema: "schema-configurator.json",
     };
   }
 
@@ -393,11 +396,20 @@ export default class AdbWrapper {
     return output.stdout;
   }
 
+  async pullFile(path) {
+
+  }
+
+  async pushFile(path, blob) {
+    const stream = new WrapReadableStream(blob.stream());
+    const sync = await this.adb.sync();
+    await stream.pipeTo(sync.write(path));
+  }
+
   async readPackageConfigSchema(packageName) {
-    const filename = `/opt/etc/package-config/${packageName}/schema-configurator.json`;
+    const filename = `${this.wtfos.packageConfigPath}/${packageName}/${this.wtfos.packageConfigSchema}`;
 
     const exists = await this.fileExists(filename);
-
     if (!exists) {
       return false;
     }
@@ -411,7 +423,7 @@ export default class AdbWrapper {
   }
 
   async readPackageConfig(packageName) {
-    const filename = `/opt/etc/package-config/${packageName}/config.json`;
+    const filename = `${this.wtfos.packageConfigPath}/${packageName}/${this.wtfos.packageConfigFile}`;
 
     const exists = await this.fileExists(filename);
 
@@ -428,14 +440,9 @@ export default class AdbWrapper {
   }
 
   async writePackageConfig(packageName, stringContent) {
-    // config 2 is just for testing....
-    const filename = `/opt/etc/package-config/${packageName}/config2.json`;
-
-    const output = await this.executeCommand([
-      `echo "${stringContent}" > ${filename}`,
-    ]);
-
-    return output.exitCode;
+    const path = `${this.wtfos.packageConfigPath}/${packageName}/${this.wtfos.packageConfigFile}.bak`;
+    const blob = new Blob([stringContent]);
+    await this.pushFile(path, blob);
   }
 
   async getProductInfo() {
@@ -633,11 +640,7 @@ export default class AdbWrapper {
         const buffer = Buffer.from(`GET ${this.wtfos.healthchecksUrl}?cachebust=${Math.random()}`);
         const response = await proxy.proxyRequest(buffer);
         const blob = await response.blob();
-        const file = new File([blob], "healthchecks.tar.gz");
-
-        const stream = new WrapReadableStream(file.stream());
-        const sync = await this.adb.sync();
-        await stream.pipeTo(sync.write("/tmp/healthchecks.tar.gz"));
+        await this.pushFile("/tmp/healthchecks.tar.gz", blob);
       } catch(e) {
         statusCallback("ERROR: Failed fetching Healthchecks");
         return;
