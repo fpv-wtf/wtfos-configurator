@@ -36,6 +36,9 @@ export default class AdbWrapper {
       opkgConfigUrl: "http://repo.fpv.wtf/pigeon/wtfos-opkg-config_armv7-3.2.ipk",
       healthchecksUrl: "https://github.com/fpv-wtf/wtfos-healthchecks/releases/latest/download/healthchecks.tar.gz",
       healthchesksPath: "/tmp/healthchecks",
+      packageConfigPath: "/opt/etc/package-config",
+      packageConfigFile: "config.json",
+      packageConfigSchema: "schema.json",
     };
   }
 
@@ -223,8 +226,14 @@ export default class AdbWrapper {
     return packages;
   }
 
-  async getPackages() {
+  async getPackageDetails(name) {
+    const packages = await this.getPackages();
+    const pkg = packages.find((pkg) => pkg.name === name);
 
+    return pkg;
+  }
+
+  async getPackages() {
     let output = await this.executeCommand([
       this.wtfos.bin.opkg,
       "list-installed",
@@ -391,6 +400,72 @@ export default class AdbWrapper {
     ]);
 
     return output.stdout;
+  }
+
+  async getPackageConfig(name) {
+    const configPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigFile}`;
+    const schemaPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigSchema}`;
+
+    try {
+      const config = await this.pullJsonFile(configPath);
+      const schema = await this.pullJsonFile(schemaPath);
+
+      return {
+        config,
+        schema,
+      };
+    } catch(e) {
+      console.log("Failed fetching package config", e);
+    }
+
+    return {
+      config: null,
+      schema: null,
+    };
+  }
+
+  // Returns a JSON object from the contents of a file at the given path
+  async pullJsonFile(path) {
+    const data = await this.pullFile(path);
+    const string = new TextDecoder().decode(data);
+    const json = JSON.parse(string);
+
+    return json;
+  }
+
+  async pullFile(path) {
+    const sync = await this.adb.sync();
+    const stream = await sync.read(path);
+    const reader = stream.getReader();
+
+    let data = new Buffer.from([]);
+    let notDone = true;
+    while(notDone) {
+      let {
+        done,
+        value,
+      } = await reader.read();
+
+      if(value) {
+        data = Buffer.concat([data, value]);
+      }
+
+      notDone = !done;
+    }
+
+    return data;
+  }
+
+  async pushFile(path, blob) {
+    const stream = new WrapReadableStream(blob.stream());
+    const sync = await this.adb.sync();
+    await stream.pipeTo(sync.write(path));
+  }
+
+  async writePackageConfig(packageName, content) {
+    const path = `${this.wtfos.packageConfigPath}/${packageName}/${this.wtfos.packageConfigFile}`;
+    const blob = new Blob([content]);
+    await this.pushFile(path, blob);
   }
 
   async getProductInfo() {
@@ -588,11 +663,7 @@ export default class AdbWrapper {
         const buffer = Buffer.from(`GET ${this.wtfos.healthchecksUrl}?cachebust=${Math.random()}`);
         const response = await proxy.proxyRequest(buffer);
         const blob = await response.blob();
-        const file = new File([blob], "healthchecks.tar.gz");
-
-        const stream = new WrapReadableStream(file.stream());
-        const sync = await this.adb.sync();
-        await stream.pipeTo(sync.write("/tmp/healthchecks.tar.gz"));
+        await this.pushFile("/tmp/healthchecks.tar.gz", blob);
       } catch(e) {
         statusCallback("ERROR: Failed fetching Healthchecks");
         return;
