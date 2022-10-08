@@ -33,6 +33,7 @@ import TableRow from "@mui/material/TableRow";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material/styles";
 
 import ReactGA from "react-ga4";
 
@@ -67,6 +68,16 @@ export default function Packages({ adb }) {
   const { t } = useTranslation("packages");
   const tableEl = useRef();
   const scrollListenerId = useRef();
+
+  const StyledRouterLink = styled(RouterLink)(() => ({
+    "&": {
+      whiteSpace: "nowrap",
+      color: "#1676c7",
+      textDecoration: "underline",
+      textDecorationColor: "rgba(22, 118, 199, 0.4)",
+    },
+    "&:hover": { textDecorationColor: "inherit" },
+  }));
 
   const dispatch = useDispatch();
 
@@ -174,19 +185,14 @@ export default function Packages({ adb }) {
   }, [dispatch]);
 
   const rows = renderRows.map((item) => {
-    console.log(item.details.homepage);
     return (
       <TableRow key={item.name}>
         <TableCell sx={{ width: 250 }}>
-          <RouterLink
-            sx={{
-              whiteSpace: "nowrap",
-              textDecoration: "none",
-            }}
-            to={`/package/${item.repo}/${item.name}`}
-          >
-            {item.name}
-          </RouterLink>
+          <Typography variant="body2">
+            <StyledRouterLink to={`/package/${item.repo}/${item.name}`}>
+              {item.name}
+            </StyledRouterLink>
+          </Typography>
         </TableCell>
 
         <TableCell sx={{
