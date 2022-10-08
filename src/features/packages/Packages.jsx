@@ -11,6 +11,8 @@ import {
 } from "react-redux";
 import { useTranslation } from "react-i18next";
 
+import { Link as RouterLink } from "react-router-dom";
+
 import Box from "@mui/material/Box";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DownloadIcon from "@mui/icons-material/Download";
@@ -176,16 +178,15 @@ export default function Packages({ adb }) {
     return (
       <TableRow key={item.name}>
         <TableCell sx={{ width: 250 }}>
-          <Link
-            href={`/package/${item.repo}/${item.name}`}
+          <RouterLink
             sx={{
               whiteSpace: "nowrap",
               textDecoration: "none",
             }}
-
+            to={`/package/${item.repo}/${item.name}`}
           >
             {item.name}
-          </Link>
+          </RouterLink>
         </TableCell>
 
         <TableCell sx={{
