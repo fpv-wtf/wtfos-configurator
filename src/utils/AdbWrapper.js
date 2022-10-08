@@ -38,7 +38,7 @@ export default class AdbWrapper {
       healthchesksPath: "/tmp/healthchecks",
       packageConfigPath: "/opt/etc/package-config",
       packageConfigFile: "config.json",
-      packageConfigSchema: "schema-configurator.json",
+      packageConfigSchema: "schema.json",
     };
   }
 
@@ -226,8 +226,14 @@ export default class AdbWrapper {
     return packages;
   }
 
-  async getPackages() {
+  async getPackageDetails(name) {
+    const packages = await this.getPackages();
+    const pkg = packages.find((pkg) => pkg.name === name);
 
+    return pkg;
+  }
+
+  async getPackages() {
     let output = await this.executeCommand([
       this.wtfos.bin.opkg,
       "list-installed",
@@ -396,8 +402,60 @@ export default class AdbWrapper {
     return output.stdout;
   }
 
-  async pullFile(path) {
+  async getPackageConfig(name) {
+    const configPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigFile}`;
+    const schemaPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigSchema}`;
 
+    console.log(configPath, schemaPath);
+
+    try {
+      const config = await this.pullJsonFile(configPath);
+      const schema = await this.pullJsonFile(schemaPath);
+
+      return {
+        config,
+        schema,
+      };
+    } catch(e) {
+      console.log("Failed fetching package config", e);
+    }
+
+    return {
+      config: null,
+      schema: null,
+    };
+  }
+
+  // Returns a JSON object from the contents of a file at the given path
+  async pullJsonFile(path) {
+    const data = await this.pullFile(path);
+    const string = new TextDecoder().decode(data);
+    const json = JSON.parse(string);
+
+    return json;
+  }
+
+  async pullFile(path) {
+    const sync = await this.adb.sync();
+    const stream = await sync.read(path);
+    const reader = stream.getReader();
+
+    let data = new Buffer.from([]);
+    let notDone = true;
+    while(notDone) {
+      let {
+        done,
+        value,
+      } = await reader.read();
+
+      if(value) {
+        data = Buffer.concat([data, value]);
+      }
+
+      notDone = !done;
+    }
+
+    return data;
   }
 
   async pushFile(path, blob) {
@@ -406,42 +464,9 @@ export default class AdbWrapper {
     await stream.pipeTo(sync.write(path));
   }
 
-  async readPackageConfigSchema(packageName) {
-    const filename = `${this.wtfos.packageConfigPath}/${packageName}/${this.wtfos.packageConfigSchema}`;
-
-    const exists = await this.fileExists(filename);
-    if (!exists) {
-      return false;
-    }
-
-    // newline because we pop the last line from stdout for exitcode....
-    const output = await this.executeCommand([
-      `cat ${filename}; echo '\n'`,
-    ]);
-
-    return output.stdout;
-  }
-
-  async readPackageConfig(packageName) {
-    const filename = `${this.wtfos.packageConfigPath}/${packageName}/${this.wtfos.packageConfigFile}`;
-
-    const exists = await this.fileExists(filename);
-
-    if (!exists) {
-      return false;
-    }
-
-    // newline because we pop the last line from stdout for exitcode....
-    const output = await this.executeCommand([
-      `cat ${filename}; echo '\n'`,
-    ]);
-
-    return output.stdout;
-  }
-
-  async writePackageConfig(packageName, stringContent) {
+  async writePackageConfig(packageName, content) {
     const path = `${this.wtfos.packageConfigPath}/${packageName}/${this.wtfos.packageConfigFile}.bak`;
-    const blob = new Blob([stringContent]);
+    const blob = new Blob([content]);
     await this.pushFile(path, blob);
   }
 
