@@ -155,7 +155,7 @@ export default function Packages({ adb }) {
   }, [scrollListener]);
 
   const removeHandler = useCallback((event) => {
-    const name = event.target.dataset["key"];
+    const name = event.currentTarget.dataset["key"];
     ReactGA.gtag("event", "removePackage", {
       name,
       deviceName,
@@ -168,7 +168,7 @@ export default function Packages({ adb }) {
   }, [adb, deviceName, dispatch]);
 
   const installHandler = useCallback((event) => {
-    const name = event.target.dataset["key"];
+    const name = event.currentTarget.dataset["key"];
     ReactGA.gtag("event", "installPackage", {
       name,
       deviceName,
@@ -240,6 +240,7 @@ export default function Packages({ adb }) {
           {item.installed &&
             <IconButton
               aria-label={t("remove")}
+              data-key={item.name}
               disabled={processing}
               onClick={removeHandler}
               sx={{
@@ -250,10 +251,7 @@ export default function Packages({ adb }) {
               }}
               title={t("remove")}
             >
-              <DeleteIcon
-                color="error"
-                data-key={item.name}
-              />
+              <DeleteIcon color="error" />
 
               <Typography
                 color="success"
@@ -266,6 +264,7 @@ export default function Packages({ adb }) {
           {!item.installed &&
             <IconButton
               aria-label={t("install")}
+              data-key={item.name}
               disabled={processing}
               onClick={installHandler}
               sx={{
@@ -278,7 +277,6 @@ export default function Packages({ adb }) {
             >
               <DownloadIcon
                 color="success"
-                data-key={item.name}
                 disabled={processing}
               />
 
