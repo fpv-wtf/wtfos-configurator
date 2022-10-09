@@ -155,7 +155,7 @@ export default function Packages({ adb }) {
   }, [scrollListener]);
 
   const removeHandler = useCallback((event) => {
-    const name = event.target.dataset["key"];
+    const name = event.currentTarget.dataset["key"];
     ReactGA.gtag("event", "removePackage", {
       name,
       deviceName,
@@ -168,7 +168,7 @@ export default function Packages({ adb }) {
   }, [adb, deviceName, dispatch]);
 
   const installHandler = useCallback((event) => {
-    const name = event.target.dataset["key"];
+    const name = event.currentTarget.dataset["key"];
     ReactGA.gtag("event", "installPackage", {
       name,
       deviceName,
@@ -240,6 +240,7 @@ export default function Packages({ adb }) {
           {item.installed &&
             <IconButton
               aria-label={t("remove")}
+              data-key={item.name}
               disabled={processing}
               onClick={removeHandler}
               sx={{
@@ -250,10 +251,7 @@ export default function Packages({ adb }) {
               }}
               title={t("remove")}
             >
-              <DeleteIcon
-                color="error"
-                data-key={item.name}
-              />
+              <DeleteIcon color="error" />
 
               <Typography
                 color="success"
@@ -266,6 +264,7 @@ export default function Packages({ adb }) {
           {!item.installed &&
             <IconButton
               aria-label={t("install")}
+              data-key={item.name}
               disabled={processing}
               onClick={installHandler}
               sx={{
@@ -278,7 +277,6 @@ export default function Packages({ adb }) {
             >
               <DownloadIcon
                 color="success"
-                data-key={item.name}
                 disabled={processing}
               />
 
@@ -308,7 +306,7 @@ export default function Packages({ adb }) {
   const packageString = t("matchCount", { count: filtered.length } );
 
   return (
-    <>
+    <Paper>
       {!hasOpkgBinary &&
         <SetupHint />}
 
@@ -318,14 +316,13 @@ export default function Packages({ adb }) {
       {fetched && upgradable.length > 0 && <UpdatesBanner updatePluralized={upgradable.length > 1} />}
 
       {fetched && hasOpkgBinary &&
-        <Stack
-          spacing={2}
-        >
+        <Stack>
           <ErrorLog title={t("installationFailed")} />
 
           <Box
             component="form"
             noValidate
+            p={1}
             sx={{ "& > :not(style)": { m: 1 } }}
           >
             <FormControl sx={{ width: 120 }}>
@@ -380,14 +377,13 @@ export default function Packages({ adb }) {
             </FormControl>
           </Box>
 
-          <Typography>
-            {packageString}
-          </Typography>
+          <Box p={2}>
+            <Typography>
+              {packageString}
+            </Typography>
+          </Box>
 
-          <TableContainer
-            component={Paper}
-            ref={tableEl}
-          >
+          <TableContainer ref={tableEl}>
             <Table>
               <TableHead>
                 <TableRow>
@@ -415,7 +411,7 @@ export default function Packages({ adb }) {
             </Table>
           </TableContainer>
         </Stack>}
-    </>
+    </Paper>
   );
 }
 

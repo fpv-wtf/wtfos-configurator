@@ -229,7 +229,10 @@ export default class AdbWrapper {
     const installed = lines.map((item) => {
       const fields = this.splitPackageString(item);
 
-      return fields.name;
+      return  {
+        name: fields.name,
+        version: fields.version,
+      };
     });
 
     await this.updataPackages();
@@ -259,12 +262,15 @@ export default class AdbWrapper {
         return false;
       });
 
+      const installedDetails = installed.find((item) => item.name === fields.name);
+
       return {
         name: fields.name,
         repo: repo,
         version: fields.version,
         description: fields.description,
-        installed: installed.includes(fields.name),
+        installed: installedDetails ? true : false,
+        installedVersion: installedDetails ? installedDetails.version : null,
         details: details[fields.name] || {},
       };
     }).filter(this.filterInvalidPackages);
