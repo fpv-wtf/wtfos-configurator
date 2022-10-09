@@ -38,7 +38,7 @@ export default class AdbWrapper {
       healthchesksPath: "/tmp/healthchecks",
       packageConfigPath: "/opt/etc/package-config",
       packageConfigFile: "config.json",
-      packageConfigSchema: "schema.json",
+      packageConfigSchema: "schemaV2.json",
     };
   }
 
