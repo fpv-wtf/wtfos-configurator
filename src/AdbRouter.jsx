@@ -39,7 +39,7 @@ import {
 } from "./features/device/deviceSlice";
 
 import {
-  selectCheckedMaster,
+  selectChecked as selectCheckedMaster,
   selectIsMaster,
 } from "./features/tabGovernor/tabGovernorSlice";
 
@@ -57,15 +57,12 @@ export default function AdbRouter() {
   const [adb, setAdb] = useState(null);
   const [device, setDevice] = useState(null);
   const [intervalId, setIntervalId] = useState(null);
-  const [watcher, setWatcher] = useState(null);
-
-  const [canAutoConnect, setCanAutoConnect] = useState(false);
 
   const adbRef = useRef();
   const deviceRef = useRef();
+  const devicePromiseRef = useRef();
   const intervalRef = useRef();
   const watcherRef = useRef();
-  const devicePromiseRef = useRef();
 
   const connectToDevice = useCallback(async (device) => {
     if(device && !adb) {
@@ -133,13 +130,14 @@ export default function AdbRouter() {
    * connect to.
    */
   const autoConnect = useCallback(async() => {
+    const canAutoConnect = (!devicePromiseRef.current && checkedMasterState && isMaster);
     if(canAutoConnect) {
       const devices = await AdbWebUsbBackend.getDevices();
       if(devices.length > 0) {
         await connectToDevice(devices[0]);
       }
     }
-  }, [canAutoConnect, connectToDevice]);
+  }, [connectToDevice, checkedMasterState, devicePromiseRef, isMaster]);
 
   // Handle button press for device connection
   const handleDeviceConnect = useCallback(async() => {
@@ -155,15 +153,14 @@ export default function AdbRouter() {
     }
   }, [connectToDevice, devicePromiseRef, dispatch]);
 
-  // Check if we are able to auto connect to the device
-  useEffect(() => {
-    setCanAutoConnect(!devicePromiseRef.current && checkedMasterState && isMaster);
-  }, [checkedMasterState, devicePromiseRef, isMaster]);
-
   // Set watcher to monitor WebUSB devices popping up or going away
   useEffect(() => {
-    if(!watcher && window.navigator.usb) {
-      const watcher = new AdbWebUsbBackendWatcher(async (id) => {
+    if(window.navigator.usb) {
+      if(watcherRef.current) {
+        watcherRef.current.dispose();
+      }
+
+      watcherRef.current = new AdbWebUsbBackendWatcher(async (id) => {
         if(!id) {
           setAdb(null);
           dispatch(resetDevice());
@@ -173,10 +170,8 @@ export default function AdbRouter() {
           await autoConnect();
         }
       });
-
-      setWatcher(watcher);
     }
-  }, [autoConnect, connectToDevice, dispatch, watcher]);
+  }, [autoConnect, dispatch, watcherRef]);
 
   // Automatically try to connect to device when application starts up
   useEffect(() => {
@@ -212,7 +207,6 @@ export default function AdbRouter() {
       setAdb(null);
       setDevice(null);
       setIntervalId(null);
-      setWatcher(null);
     };
   }, [dispatch]);
 
@@ -228,10 +222,6 @@ export default function AdbRouter() {
   useEffect(() => {
     intervalRef.current = intervalId;
   }, [intervalId]);
-
-  useEffect(() => {
-    watcherRef.current = watcher;
-  }, [watcher]);
 
   return(
     <Routes>

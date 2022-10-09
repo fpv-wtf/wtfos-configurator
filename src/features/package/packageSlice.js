@@ -10,6 +10,7 @@ const initialState = {
   name: null,
   description: null,
   installed: false,
+  details: { homePage: null },
 
   schema: null,
   config: null,
@@ -66,6 +67,11 @@ export const packageSlice = createSlice({
         state.name = action.payload.name;
         state.description = action.payload.description;
         state.installed = action.payload.installed;
+
+        state.details = {
+          ...state.details,
+          ...action.payload.details,
+        };
       }).addCase(fetchConfig.pending, (state, action) => {
         state.config = null;
         state.schema = null;
@@ -91,6 +97,7 @@ export const selectFetched = (state) => state.package.fetched;
 export const selectName = (state) => state.package.name;
 export const selectDescription = (state) => state.package.description;
 export const selectInstalled = (state) => state.package.installed;
+export const selectDetails = (state) => state.package.details;
 
 export const selectWriting = (state) => state.package.writing;
 export const selectError = (state) => state.package.error;

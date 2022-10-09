@@ -20,14 +20,13 @@ import Device from "./features/device/Device";
 import Error404 from "./features/404/404";
 import Header from "./features/navigation/Header";
 import Healthcheck from "./features/healthcheck/Healthcheck";
-import Home from "./features/home/Main";
-import Packages from "./features/packages/Packages";
-import Package from "./features/package/Package";
-import Startup from "./features/startup/Startup";
-
-import Setup from "./features/setup/Setup";
 import Install from "./features/setup/Install";
+import Home from "./features/home/Main";
+import Package from "./features/package/Package";
+import Packages from "./features/packages/Packages";
 import Remove from "./features/setup/Remove";
+import Setup from "./features/setup/Setup";
+import Startup from "./features/startup/Startup";
 import Update from "./features/setup/Update";
 
 import {
@@ -43,7 +42,6 @@ import {
 import { selectPassed } from "./features/healthcheck/healthcheckSlice";
 
 import { selectCanClaim } from "./features/tabGovernor/tabGovernorSlice";
-
 
 function App({
   adb,
