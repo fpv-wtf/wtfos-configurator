@@ -1,0 +1,28 @@
+name: Bug Report
+description: File a bug report to help solve an issue with the configurator
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to fill out this bug report! Be aware that this is for the configurator only. If you have problems with specific modules, please open an issue in the coresponding repository.
+  - type: dropdown
+    id: device
+    attributes:
+      label: Device
+      options: ['Goggles V1', 'Goggles V1', 'Air Unit', 'Caddx Vista']
+    validations:
+      required: true
+  - type: input
+    id: trace_id
+    attributes:
+      label: Trace ID (bototm left)
+      placeholder: Trace ID
+    validations:
+      required: false
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the issue
+      description: Also tell us, what did you expect to happen?
+      placeholder: A description of the issue.
+    validations:
+      required: true
