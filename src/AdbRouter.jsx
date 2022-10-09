@@ -57,13 +57,12 @@ export default function AdbRouter() {
   const [adb, setAdb] = useState(null);
   const [device, setDevice] = useState(null);
   const [intervalId, setIntervalId] = useState(null);
-  const [watcher, setWatcher] = useState(null);
 
   const adbRef = useRef();
   const deviceRef = useRef();
+  const devicePromiseRef = useRef();
   const intervalRef = useRef();
   const watcherRef = useRef();
-  const devicePromiseRef = useRef();
 
   const connectToDevice = useCallback(async (device) => {
     if(device && !adb) {
@@ -157,11 +156,11 @@ export default function AdbRouter() {
   // Set watcher to monitor WebUSB devices popping up or going away
   useEffect(() => {
     if(window.navigator.usb) {
-      if(watcher) {
-        watcher.dispose();
+      if(watcherRef.current) {
+        watcherRef.current.dispose();
       }
 
-      const newWatcher = new AdbWebUsbBackendWatcher(async (id) => {
+      watcherRef.current = new AdbWebUsbBackendWatcher(async (id) => {
         if(!id) {
           setAdb(null);
           dispatch(resetDevice());
@@ -171,10 +170,8 @@ export default function AdbRouter() {
           await autoConnect();
         }
       });
-
-      setWatcher(newWatcher);
     }
-  }, [autoConnect, dispatch, watcher]);
+  }, [autoConnect, dispatch, watcherRef]);
 
   // Automatically try to connect to device when application starts up
   useEffect(() => {
@@ -210,7 +207,6 @@ export default function AdbRouter() {
       setAdb(null);
       setDevice(null);
       setIntervalId(null);
-      setWatcher(null);
     };
   }, [dispatch]);
 
@@ -226,10 +222,6 @@ export default function AdbRouter() {
   useEffect(() => {
     intervalRef.current = intervalId;
   }, [intervalId]);
-
-  useEffect(() => {
-    watcherRef.current = watcher;
-  }, [watcher]);
 
   return(
     <Routes>
