@@ -68,7 +68,8 @@ import { selectDisclaimersStatus } from "../settings/settingsSlice";
 
 import { selectDonationState } from "../donate/donateSlice";
 
-const exploit = new Exploit("https://cors.bubblesort.me/?");
+const corsProxy = process.env.REACT_APP_EXPLOIT_CORS_PROXY || "";
+const exploit = new Exploit(corsProxy);
 const rebootTimeMinSeconds = 7;
 const rebootTimeMaxSeconds = 60;
 
