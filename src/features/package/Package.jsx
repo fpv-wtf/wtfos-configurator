@@ -61,9 +61,6 @@ export default function Package({ adb }) {
 
   let { packageSlug } = useParams();
 
-  const [installing, setInstalling] = useState(false);
-  const [removing, setRemoving] = useState(false);
-
   const healthchecksPassed = useSelector(selectPassed);
 
   const packageName = useSelector(selectName);
@@ -82,6 +79,10 @@ export default function Package({ adb }) {
 
   const isProcessing = useSelector(selectProcessing);
   const installationError = useSelector(selectInstallationError);
+
+  const [installing, setInstalling] = useState(false);
+  const [removing, setRemoving] = useState(false);
+  const [currentConfig, setCurrentConfig] = useState(config);
 
   /**
    * Fetch package details if healthchecks passed and dtails are not yet
@@ -122,12 +123,13 @@ export default function Package({ adb }) {
   }, [adb, dispatch, installed]);
 
   const saveConfig = useCallback(({ formData }) => {
+    setCurrentConfig(formData);
     dispatch(writeConfig({
       adb,
       config: formData,
       units: schema.units,
     }));
-  }, [adb, dispatch, schema]);
+  }, [adb, dispatch, schema, setCurrentConfig]);
 
   const removeHandler = useCallback(() => {
     setRemoving(true);
@@ -293,7 +295,7 @@ export default function Package({ adb }) {
 
             {schema &&
               <Form
-                formData={config}
+                formData={currentConfig}
                 onSubmit={saveConfig}
                 schema={JSON.parse(JSON.stringify(schema))}
                 validator={validator}
