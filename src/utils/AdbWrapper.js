@@ -359,7 +359,7 @@ export default class AdbWrapper {
       escapeArg(name),
     ]);
 
-    return output.exitcode;
+    return output.exitCode;
   }
 
   async disableService(name) {
@@ -369,7 +369,17 @@ export default class AdbWrapper {
       escapeArg(name),
     ]);
 
-    return output.exitcode;
+    return output.exitCode;
+  }
+
+  async restartService(name) {
+    const output = await this.executeCommand([
+      this.wtfos.bin.dinitctl,
+      "-u restart",
+      escapeArg(name),
+    ]);
+
+    return output.exitCode;
   }
 
   async getShellSocket() {
@@ -444,10 +454,20 @@ export default class AdbWrapper {
     await stream.pipeTo(sync.write(path));
   }
 
-  async writePackageConfig(packageName, content) {
+  async writePackageConfig(packageName, content, units = []) {
     const path = `${this.wtfos.packageConfigPath}/${packageName}/${this.wtfos.packageConfigFile}`;
     const blob = new Blob([content]);
     await this.pushFile(path, blob);
+
+    if(units) {
+      for(let i = 0; i < units.length; i += 1) {
+        const unit = units[i];
+        const result = await this.restartService(unit);
+        if(result !== 0) {
+          throw new Error(`Failed restarting ${unit}`);
+        }
+      }
+    }
   }
 
   async getProductInfo() {

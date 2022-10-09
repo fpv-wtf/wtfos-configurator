@@ -42,10 +42,11 @@ export const writeConfig = createAsyncThunk(
   async ({
     adb,
     config,
+    units,
   }, thunk) => {
     const name = thunk.getState().package.name;
     const stringified = JSON.stringify(config, null, "  ");
-    await adb.writePackageConfig(name, stringified);
+    await adb.writePackageConfig(name, stringified, units);
 
     return config;
   }
