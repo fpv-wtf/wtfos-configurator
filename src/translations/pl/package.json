@@ -1,5 +1,5 @@
 {
-  "detailsFor": "Details for {{name}}",
-  "submit": "Save settings",
-  "loading": "Loading package details..."
+  "detailsFor": "Szczegóły dotyczące {0}",
+  "submit": "Zapisz ustawienia",
+  "loading": "Ładowanie szczegółów pakietu..."
 }
