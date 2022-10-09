@@ -123,8 +123,9 @@ export default function Package({ adb }) {
     dispatch(writeConfig({
       adb,
       config: formData,
+      units: schema.units,
     }));
-  }, [adb, dispatch]);
+  }, [adb, dispatch, schema]);
 
   const removeHandler = useCallback(() => {
     setRemoving(true);
