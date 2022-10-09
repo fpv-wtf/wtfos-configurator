@@ -7,6 +7,7 @@ import React, {
 import {
   Routes,
   Route,
+  useNavigate,
 } from "react-router-dom";
 import {
   useDispatch,
@@ -48,6 +49,7 @@ import { reset as resetHealthchecks } from "./features/healthcheck/healthcheckSl
 
 export default function AdbRouter() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const isChecked = useSelector(selectChecked);
 
@@ -124,6 +126,20 @@ export default function AdbRouter() {
   }, [adb, dispatch]);
 
   /**
+   * If an ADB interface could be found, attempt to connect, otherwise
+   * redirect to rooting page.
+   */
+  const connectOrRedirect = useCallback(async (device) => {
+    if (hasAdb(device)) {
+      const backendDevice = new AdbWebUsbBackend(device);
+      await connectToDevice(backendDevice);
+      devicePromiseRef.current = null;
+    } else {
+      navigate("/root");
+    }
+  }, [connectToDevice, navigate]);
+
+  /**
    * Auto connect to ADB device if all criteria are matched.
    *
    * Assumes the first matching device to be the device we want to
@@ -132,26 +148,54 @@ export default function AdbRouter() {
   const autoConnect = useCallback(async() => {
     const canAutoConnect = (!devicePromiseRef.current && checkedMasterState && isMaster);
     if(canAutoConnect) {
-      const devices = await AdbWebUsbBackend.getDevices();
+      const devices = await navigator.usb.getDevices();
       if(devices.length > 0) {
-        await connectToDevice(devices[0]);
+        connectOrRedirect(devices[0]);
       }
     }
-  }, [connectToDevice, checkedMasterState, devicePromiseRef, isMaster]);
+  }, [connectOrRedirect, checkedMasterState, devicePromiseRef, isMaster]);
 
-  // Handle button press for device connection
+  /**
+   * Check if USB device has ADB interface.
+   */
+  const hasAdb = (device) => {
+    for(let i = 0; i < device.configurations.length; i += 1) {
+      const configuration = device.configurations[i];
+      const interfaces = configuration.interfaces;
+
+      for(let j = 0; j < interfaces.length; j += 1) {
+        const currentInterface = interfaces[j].alternate;
+        if (currentInterface.interfaceClass === 0xFF) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  };
+
+  /**
+   * A general usb device is invoked and the selected device is then used
+   * to creat an ADB Backend, if this does not work, then we know that the
+   * device is not rooted yet and we can redirect the user accordingly.
+   *
+   * This has the benefit that the user paired the device once and we will
+   * be able to automatically connect after successful root without any
+   * more user interaction.
+   */
   const handleDeviceConnect = useCallback(async() => {
     dispatch(connecting());
 
     try {
-      devicePromiseRef.current = AdbWebUsbBackend.requestDevice();
+      const filters = [{ vendorId: 0x2ca3 }];
+      devicePromiseRef.current = navigator.usb.requestDevice({ filters });
       const device = await devicePromiseRef.current;
-      await connectToDevice(device);
-      devicePromiseRef.current = null;
+
+      connectOrRedirect(device);
     } catch(e) {
       dispatch(connectionFailed());
     }
-  }, [connectToDevice, devicePromiseRef, dispatch]);
+  }, [connectOrRedirect, devicePromiseRef, dispatch]);
 
   // Set watcher to monitor WebUSB devices popping up or going away
   useEffect(() => {
