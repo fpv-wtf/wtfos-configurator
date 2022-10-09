@@ -306,7 +306,7 @@ export default function Packages({ adb }) {
   const packageString = t("matchCount", { count: filtered.length } );
 
   return (
-    <>
+    <Paper>
       {!hasOpkgBinary &&
         <SetupHint />}
 
@@ -316,14 +316,13 @@ export default function Packages({ adb }) {
       {fetched && upgradable.length > 0 && <UpdatesBanner updatePluralized={upgradable.length > 1} />}
 
       {fetched && hasOpkgBinary &&
-        <Stack
-          spacing={2}
-        >
+        <Stack>
           <ErrorLog title={t("installationFailed")} />
 
           <Box
             component="form"
             noValidate
+            p={1}
             sx={{ "& > :not(style)": { m: 1 } }}
           >
             <FormControl sx={{ width: 120 }}>
@@ -378,14 +377,13 @@ export default function Packages({ adb }) {
             </FormControl>
           </Box>
 
-          <Typography>
-            {packageString}
-          </Typography>
+          <Box p={2}>
+            <Typography>
+              {packageString}
+            </Typography>
+          </Box>
 
-          <TableContainer
-            component={Paper}
-            ref={tableEl}
-          >
+          <TableContainer ref={tableEl}>
             <Table>
               <TableHead>
                 <TableRow>
@@ -413,7 +411,7 @@ export default function Packages({ adb }) {
             </Table>
           </TableContainer>
         </Stack>}
-    </>
+    </Paper>
   );
 }
 
