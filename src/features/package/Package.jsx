@@ -37,6 +37,7 @@ import {
   selectError,
   selectFetched,
   selectInstalled,
+  selectInstalledVersion,
   selectLoading,
   selectName,
   selectSchema,
@@ -60,14 +61,12 @@ export default function Package({ adb }) {
 
   let { packageSlug } = useParams();
 
-  const [installing, setInstalling] = useState(false);
-  const [removing, setRemoving] = useState(false);
-
   const healthchecksPassed = useSelector(selectPassed);
 
   const packageName = useSelector(selectName);
   const description = useSelector(selectDescription);
   const installed = useSelector(selectInstalled);
+  const installedVersion = useSelector(selectInstalledVersion);
   const details = useSelector(selectDetails);
 
   const fetched = useSelector(selectFetched);
@@ -80,6 +79,10 @@ export default function Package({ adb }) {
 
   const isProcessing = useSelector(selectProcessing);
   const installationError = useSelector(selectInstallationError);
+
+  const [installing, setInstalling] = useState(false);
+  const [removing, setRemoving] = useState(false);
+  const [currentConfig, setCurrentConfig] = useState(config);
 
   /**
    * Fetch package details if healthchecks passed and dtails are not yet
@@ -120,12 +123,13 @@ export default function Package({ adb }) {
   }, [adb, dispatch, installed]);
 
   const saveConfig = useCallback(({ formData }) => {
+    setCurrentConfig(formData);
     dispatch(writeConfig({
       adb,
       config: formData,
       units: schema.units,
     }));
-  }, [adb, dispatch, schema]);
+  }, [adb, dispatch, schema, setCurrentConfig]);
 
   const removeHandler = useCallback(() => {
     setRemoving(true);
@@ -159,6 +163,8 @@ export default function Package({ adb }) {
     );
   });
 
+  const versionText = installed ? ` ${installedVersion}` : "";
+
   return (
     <>
       {installationError.length > 0 &&
@@ -182,6 +188,8 @@ export default function Package({ adb }) {
               >
                 <Typography variant="h4">
                   {t("detailsFor", { name: packageSlug })}
+
+                  {versionText}
                 </Typography>
 
                 {details.maintainer &&
@@ -219,7 +227,7 @@ export default function Package({ adb }) {
                       >
                         <InfoIcon
                           color="success"
-                          data-key={details.name}
+                          data-key={packageName}
                           sx={{ fontSize: 40 }}
                         />
                       </IconButton>
@@ -287,7 +295,7 @@ export default function Package({ adb }) {
 
             {schema &&
               <Form
-                formData={config}
+                formData={currentConfig}
                 onSubmit={saveConfig}
                 schema={JSON.parse(JSON.stringify(schema))}
                 validator={validator}

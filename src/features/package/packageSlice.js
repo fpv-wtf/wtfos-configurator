@@ -10,7 +10,11 @@ const initialState = {
   name: null,
   description: null,
   installed: false,
-  details: { homePage: null },
+  installedVersion: null,
+  details: {
+    homepage: null,
+    maintainer: null,
+  },
 
   schema: null,
   config: null,
@@ -68,6 +72,7 @@ export const packageSlice = createSlice({
         state.name = action.payload.name;
         state.description = action.payload.description;
         state.installed = action.payload.installed;
+        state.installedVersion = action.payload.installedVersion;
 
         state.details = {
           ...state.details,
@@ -98,6 +103,7 @@ export const selectFetched = (state) => state.package.fetched;
 export const selectName = (state) => state.package.name;
 export const selectDescription = (state) => state.package.description;
 export const selectInstalled = (state) => state.package.installed;
+export const selectInstalledVersion = (state) => state.package.installedVersion;
 export const selectDetails = (state) => state.package.details;
 
 export const selectWriting = (state) => state.package.writing;
