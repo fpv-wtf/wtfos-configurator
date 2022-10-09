@@ -9,6 +9,7 @@ import busybox from "./busybox";
 
 import Proxy from "./Proxy";
 import ReverseShellSocket from "./ReverseShellSocket";
+import { parsePackageIndex } from "./OpkgHelpers";
 
 const proxy = new Proxy("https://cors.bubblesort.me/?");
 
@@ -203,27 +204,8 @@ export default class AdbWrapper {
       "gunzip -c",
       `${this.wtfos.opkgLists}/${repo}`,
     ]);
-    const lines = output.stdout.split("\n");
 
-    let currentPackage = null;
-    const packages = {};
-    for(let i = 0; i < lines.length; i += 1) {
-      const line = lines[i];
-      const fields = line.split(": ");
-      let key = fields.shift();
-      const value = fields.join(": ");
-
-      if(key === "Package") {
-        packages[value] = {};
-        currentPackage = value;
-      } else {
-        key = key.toLowerCase();
-
-        packages[currentPackage][key] = value;
-      }
-    }
-
-    return packages;
+    return parsePackageIndex(output.stdout);
   }
 
   async getPackageDetails(name) {
