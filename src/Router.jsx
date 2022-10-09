@@ -18,8 +18,8 @@ import AdbRouter from "./AdbRouter";
 import TabGovernor from "./utils/TabGovernor";
 
 import {
-  checkedMaster,
   setCanClaim,
+  setChecked,
   setMaster,
 } from "./features/tabGovernor/tabGovernorSlice";
 
@@ -39,7 +39,7 @@ export default function Router() {
     if(!tabGovernor) {
       const tabGovernor = new TabGovernor((isMaster) => {
         dispatch(setMaster(isMaster));
-        dispatch(checkedMaster(true));
+        dispatch(setChecked());
       }, (canClaim) => {
         dispatch(setCanClaim(canClaim));
       });

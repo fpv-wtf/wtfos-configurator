@@ -24,7 +24,8 @@ export const removePackage = createAsyncThunk(
   async ({
     adb,
     name,
-  }) => {
+  }, { rejectWithValue }) => {
+    let output = ["Unknown error during removal."];
     try {
       const output = await adb.removePackage(name);
 
@@ -34,6 +35,12 @@ export const removePackage = createAsyncThunk(
     } catch(e) {
       console.log(e);
     }
+
+    if(output.stdout) {
+      output = output.stdout.split("\n");
+    }
+
+    return rejectWithValue(output);
   }
 );
 
@@ -43,7 +50,7 @@ export const installPackage = createAsyncThunk(
     adb,
     name,
   }, { rejectWithValue }) => {
-    let output = ["ERROR: Unknown error during installation."];
+    let output = ["Unknown error during installation."];
     try {
       output = await adb.installPackage(name);
 
@@ -203,6 +210,11 @@ export const packagesSlice = createSlice({
       .addCase(removePackage.fulfilled, (state, action) => {
         state.fetched = false;
         state.processing = false;
+      })
+      .addCase(removePackage.rejected, (state, action) => {
+        state.error = action.payload;
+        state.processing = false;
+        state.fetched = false;
       })
       .addCase(installPackage.pending, (state, action) => {
         state.processing = true;

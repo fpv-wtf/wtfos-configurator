@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   canClaim: true,
   claimed: false,
-  checkedMaster: false,
+  checked: false,
   isMaster: true,
 };
 
@@ -20,14 +20,14 @@ export const tabGovernorSlice = createSlice({
     setClaimed: (state, action) => {
       state.claimed = action.payload;
     },
-    checkedMaster: (state, action) => {
-      state.checkedMaster = true;
+    setChecked: (state, action) => {
+      state.checked = true;
     },
   },
 });
 
 export const {
-  checkedMaster,
+  setChecked,
   setCanClaim,
   setClaimed,
   setMaster,
@@ -35,7 +35,7 @@ export const {
 
 export const selectIsMaster = (state) => state.tabGovernor.isMaster;
 export const selectCanClaim = (state) => state.tabGovernor.canClaim;
-export const selectCheckedMaster = (state) => state.tabGovernor.checkedMaster;
+export const selectChecked = (state) => state.tabGovernor.checked;
 export const selectClaimed = (state) => state.tabGovernor.claimed;
 
 export default tabGovernorSlice.reducer;
