@@ -39,7 +39,7 @@ import {
 } from "./features/device/deviceSlice";
 
 import {
-  selectCheckedMaster,
+  selectChecked as selectCheckedMaster,
   selectIsMaster,
 } from "./features/tabGovernor/tabGovernorSlice";
 
@@ -58,8 +58,6 @@ export default function AdbRouter() {
   const [device, setDevice] = useState(null);
   const [intervalId, setIntervalId] = useState(null);
   const [watcher, setWatcher] = useState(null);
-
-  const [canAutoConnect, setCanAutoConnect] = useState(false);
 
   const adbRef = useRef();
   const deviceRef = useRef();
@@ -133,13 +131,14 @@ export default function AdbRouter() {
    * connect to.
    */
   const autoConnect = useCallback(async() => {
+    const canAutoConnect = (!devicePromiseRef.current && checkedMasterState && isMaster);
     if(canAutoConnect) {
       const devices = await AdbWebUsbBackend.getDevices();
       if(devices.length > 0) {
         await connectToDevice(devices[0]);
       }
     }
-  }, [canAutoConnect, connectToDevice]);
+  }, [connectToDevice, checkedMasterState, devicePromiseRef, isMaster]);
 
   // Handle button press for device connection
   const handleDeviceConnect = useCallback(async() => {
@@ -155,15 +154,14 @@ export default function AdbRouter() {
     }
   }, [connectToDevice, devicePromiseRef, dispatch]);
 
-  // Check if we are able to auto connect to the device
-  useEffect(() => {
-    setCanAutoConnect(!devicePromiseRef.current && checkedMasterState && isMaster);
-  }, [checkedMasterState, devicePromiseRef, isMaster]);
-
   // Set watcher to monitor WebUSB devices popping up or going away
   useEffect(() => {
-    if(!watcher && window.navigator.usb) {
-      const watcher = new AdbWebUsbBackendWatcher(async (id) => {
+    if(window.navigator.usb) {
+      if(watcher) {
+        watcher.dispose();
+      }
+
+      const newWatcher = new AdbWebUsbBackendWatcher(async (id) => {
         if(!id) {
           setAdb(null);
           dispatch(resetDevice());
@@ -174,9 +172,9 @@ export default function AdbRouter() {
         }
       });
 
-      setWatcher(watcher);
+      setWatcher(newWatcher);
     }
-  }, [autoConnect, connectToDevice, dispatch, watcher]);
+  }, [autoConnect, dispatch, watcher]);
 
   // Automatically try to connect to device when application starts up
   useEffect(() => {
