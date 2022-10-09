@@ -37,6 +37,7 @@ import {
   selectError,
   selectFetched,
   selectInstalled,
+  selectInstalledVersion,
   selectLoading,
   selectName,
   selectSchema,
@@ -68,6 +69,7 @@ export default function Package({ adb }) {
   const packageName = useSelector(selectName);
   const description = useSelector(selectDescription);
   const installed = useSelector(selectInstalled);
+  const installedVersion = useSelector(selectInstalledVersion);
   const details = useSelector(selectDetails);
 
   const fetched = useSelector(selectFetched);
@@ -159,6 +161,8 @@ export default function Package({ adb }) {
     );
   });
 
+  const versionText = installed ? ` ${installedVersion}` : "";
+
   return (
     <>
       {installationError.length > 0 &&
@@ -182,6 +186,8 @@ export default function Package({ adb }) {
               >
                 <Typography variant="h4">
                   {t("detailsFor", { name: packageSlug })}
+
+                  {versionText}
                 </Typography>
 
                 {details.maintainer &&
@@ -219,7 +225,7 @@ export default function Package({ adb }) {
                       >
                         <InfoIcon
                           color="success"
-                          data-key={details.name}
+                          data-key={packageName}
                           sx={{ fontSize: 40 }}
                         />
                       </IconButton>
