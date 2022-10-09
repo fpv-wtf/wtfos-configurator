@@ -59,6 +59,7 @@ import {
 
 import {
   appendToLog,
+  clearLog,
   selectClaimed,
   selectHasAdb,
   setClaimed,
@@ -484,6 +485,13 @@ export default function Root() {
   useEffect(() => {
     setAutoConnect(isClaimed && rooting);
   }, [isClaimed, rooting, setAutoConnect]);
+
+  // Clean up when switching context (onUnmount)
+  useEffect(() => {
+    return async() => {
+      dispatch(clearLog());
+    };
+  }, [dispatch]);
 
   return(
     <Container

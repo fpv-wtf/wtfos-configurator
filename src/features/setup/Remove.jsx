@@ -1,5 +1,8 @@
 import PropTypes from "prop-types";
-import React, { useCallback } from "react";
+import React, {
+  useCallback,
+  useEffect,
+} from "react";
 import {
   useDispatch,
   useSelector,
@@ -53,6 +56,13 @@ export default function Remove({ adb }) {
 
     dispatch(checkBinaries(adb));
   }, [adb, deviceName, dispatch]);
+
+  // Clean up when switching context (onUnmount)
+  useEffect(() => {
+    return async() => {
+      dispatch(clearLog());
+    };
+  }, [dispatch]);
 
   return(
     <Stack spacing={2}>

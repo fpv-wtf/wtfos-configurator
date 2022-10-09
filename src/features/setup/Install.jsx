@@ -63,6 +63,13 @@ export default function Install({ adb }) {
     dispatch(checkBinaries(adb));
   }, [adb, dispatch, isProcessing]);
 
+  // Clean up when switching context (onUnmount)
+  useEffect(() => {
+    return async() => {
+      dispatch(clearLog());
+    };
+  }, [dispatch]);
+
   return(
     <Stack spacing={2}>
       <Disclaimer
