@@ -4,8 +4,8 @@
   "loading": "Завантаження даних пакета...",
   "visitProjectPage": "Visit project page",
   "maintainer": "Maintainer: {{name}}",
-  "remove": "Remove",
-  "install": "Install",
-  "installing": "Installing package...",
-  "removing": "Removing package..."
+  "remove": "Видалити",
+  "install": "Встановити",
+  "installing": "Встановлення пакета...",
+  "removing": "Видалення пакета..."
 }
