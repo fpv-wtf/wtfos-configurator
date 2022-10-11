@@ -22,6 +22,7 @@ import AdbWrapper from "../../utils/AdbWrapper";
 
 import About from "../about/About";
 import App from "./App";
+import OsdOverlay from "../osd-overlay/OsdOverlay";
 import Settings from "../settings/Settings";
 
 import { hasAdb } from "../../utils/WebusbHelpers";
@@ -266,6 +267,11 @@ export default function AdbRouter() {
       <Route
         element={<About />}
         path="/about"
+      />
+
+      <Route
+        element={<OsdOverlay />}
+        path="/osd-overlay"
       />
 
       <Route

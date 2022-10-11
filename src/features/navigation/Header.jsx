@@ -83,6 +83,7 @@ export default function Header() {
     case "/wtfos/update": title = t("titleWtfosUpdate"); break;
     case "/wtfos/install": title = t("titleWtfosInstall"); break;
     case "/wtfos/remove": title = t("titleWtfosRemove"); break;
+    case "/osd-overlay": title = t("titleOsdOverlay"); break;
     default: title = t("titleHome");
   }
 
@@ -191,6 +192,14 @@ export default function Header() {
               to="/root"
             >
               {t("menuRoot")}
+            </MenuItem>
+
+            <MenuItem
+              component={Link}
+              onClick={handleClose}
+              to="/osd-overlay"
+            >
+              {t("menuOsdOverlay")}
             </MenuItem>
 
             <MenuItem
