@@ -1,7 +1,7 @@
 {
-  "updateAvailable": "Update to already installed package is available. For more information hit the update button.",
-  "updatesAvailable": "Updates to already installed packages are available. For more information hit the update button.",
-  "update": "Update",
+  "updateAvailable": "Update für bereits installiertes Paket ist verfügbar. Für weitere Informationen klicken Sie auf \"Aktualisieren\".",
+  "updatesAvailable": "Updates für bereits installierte Pakete sind verfügbar. Für weitere Informationen klicken Sie auf \"Aktualisieren\".",
+  "update": "Aktualisieren",
   "remove": "Entfernen",
   "install": "Installieren",
   "fetching": "Pakete werden abgerufen...",
