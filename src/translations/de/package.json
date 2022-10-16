@@ -3,7 +3,7 @@
   "submit": "Einstellungen speichern",
   "loading": "Lade Paketdetails...",
   "visitProjectPage": "Projektseite besuchen",
-  "maintainer": "Maintainer: {{name}}",
+  "maintainer": "Verantwortlicher: {{name}}",
   "remove": "Entfernen",
   "install": "Installieren",
   "installing": "Paket wird installiert...",
