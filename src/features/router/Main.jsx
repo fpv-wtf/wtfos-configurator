@@ -11,21 +11,21 @@ import {
   useSelector,
 } from "react-redux";
 
-import Footer from "./features/navigation/Footer";
-import Root from "./features/root/Root";
+import Footer from "../navigation/Footer";
+import Root from "../root/Root";
 
-import AdbRouter from "./AdbRouter";
-import TabGovernor from "./utils/TabGovernor";
+import AdbRouter from "./Adb";
+import TabGovernor from "../../utils/TabGovernor";
 
 import {
   setCanClaim,
   setChecked,
   setMaster,
-} from "./features/tabGovernor/tabGovernorSlice";
+} from "../tabGovernor/tabGovernorSlice";
 
-import { selectClaimed } from "./features/device/deviceSlice";
+import { selectClaimed } from "../device/deviceSlice";
 
-export default function Router() {
+export default function MainRouter() {
   const dispatch = useDispatch();
 
   const deviceClaimed = useSelector(selectClaimed);
