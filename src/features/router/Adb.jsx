@@ -18,47 +18,44 @@ import AdbWebCredentialStore from "@yume-chan/adb-credential-web";
 import AdbWebUsbBackend, { AdbWebUsbBackendWatcher } from "@yume-chan/adb-backend-webusb";
 import { Adb } from "@yume-chan/adb";
 
-import AdbWrapper from "./utils/AdbWrapper";
+import AdbWrapper from "../../utils/AdbWrapper";
 
-import About from "./features/about/About";
+import About from "../about/About";
 import App from "./App";
-import Settings from "./features/settings/Settings";
+import Settings from "../settings/Settings";
+
+import { hasAdb } from "../../utils/WebusbHelpers";
 
 import {
   checkBinaries,
-  checked,
   connected,
   connecting,
   connectionFailed,
   contextReset,
   reset as resetDevice,
-  selectChecked,
   setAdb as deviceSetAdb,
   setProductInfo,
   setTemperature,
   setClaimed,
-} from "./features/device/deviceSlice";
+} from "../device/deviceSlice";
 
 import {
   selectChecked as selectCheckedMaster,
   selectIsMaster,
-} from "./features/tabGovernor/tabGovernorSlice";
+} from "../tabGovernor/tabGovernorSlice";
 
-import { reset as resetPackages } from "./features/packages/packagesSlice";
-import { reset as resetHealthchecks } from "./features/healthcheck/healthcheckSlice";
+import { reset as resetPackages } from "../packages/packagesSlice";
+import { reset as resetHealthchecks } from "../healthcheck/healthcheckSlice";
 
 export default function AdbRouter() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const isChecked = useSelector(selectChecked);
-
   const isMaster = useSelector(selectIsMaster);
   const checkedMasterState = useSelector(selectCheckedMaster);
 
+  const [startupCheck, setStartupCheck] = useState(false);
   const [adb, setAdb] = useState(null);
-  const [device, setDevice] = useState(null);
-  const [intervalId, setIntervalId] = useState(null);
 
   const adbRef = useRef();
   const deviceRef = useRef();
@@ -69,10 +66,10 @@ export default function AdbRouter() {
   const connectToDevice = useCallback(async (device) => {
     if(device && !adb) {
       try {
-        setDevice(device);
+        deviceRef.current = device;
 
         const credentialStore = new AdbWebCredentialStore();
-        const streams = await device.connect();
+        const streams = await deviceRef.current.connect();
         const adbLocal = await Adb.authenticate(streams, credentialStore, undefined);
         const adbWrapper = new AdbWrapper(adbLocal);
 
@@ -110,8 +107,7 @@ export default function AdbRouter() {
           dispatch(setTemperature(temp || "??"));
         };
 
-        const newIntervalId = setInterval(checkTemp, 3000);
-        setIntervalId(newIntervalId);
+        intervalRef.current = setInterval(checkTemp, 3000);
         await checkTemp();
       } catch(e) {
         console.log("Failed connecting to device:", e);
@@ -123,7 +119,7 @@ export default function AdbRouter() {
         dispatch(resetHealthchecks());
       }
     }
-  }, [adb, dispatch]);
+  }, [adb, dispatch, setAdb]);
 
   /**
    * If an ADB interface could be found, attempt to connect, otherwise
@@ -131,8 +127,11 @@ export default function AdbRouter() {
    */
   const connectOrRedirect = useCallback(async (device) => {
     if (hasAdb(device)) {
+      console.log("connectOrRedirect");
       const backendDevice = new AdbWebUsbBackend(device);
       await connectToDevice(backendDevice);
+
+      // Device connection promised resolved
       devicePromiseRef.current = null;
     } else {
       navigate("/root");
@@ -146,8 +145,9 @@ export default function AdbRouter() {
    * connect to.
    */
   const autoConnect = useCallback(async() => {
-    const canAutoConnect = (!devicePromiseRef.current && checkedMasterState && isMaster);
-    if(canAutoConnect) {
+    const canConnect = (!devicePromiseRef.current && checkedMasterState && isMaster);
+    console.log("connect", !devicePromiseRef.current, checkedMasterState, isMaster);
+    if(canConnect) {
       const devices = await navigator.usb.getDevices();
       if(devices.length > 0) {
         connectOrRedirect(devices[0]);
@@ -156,76 +156,76 @@ export default function AdbRouter() {
   }, [connectOrRedirect, checkedMasterState, devicePromiseRef, isMaster]);
 
   /**
-   * Check if USB device has ADB interface.
-   */
-  const hasAdb = (device) => {
-    for(let i = 0; i < device.configurations.length; i += 1) {
-      const configuration = device.configurations[i];
-      const interfaces = configuration.interfaces;
-
-      for(let j = 0; j < interfaces.length; j += 1) {
-        const currentInterface = interfaces[j].alternate;
-        if (currentInterface.interfaceClass === 0xFF) {
-          return true;
-        }
-      }
-    }
-
-    return false;
-  };
-
-  /**
-   * A general usb device is invoked and the selected device is then used
-   * to creat an ADB Backend, if this does not work, then we know that the
-   * device is not rooted yet and we can redirect the user accordingly.
+   * When the connect button is pressed, a general usb device is invoked and
+   * the selected device is then used to creat an ADB Backend, if this does
+   * not work, then we know that the device is not rooted yet and we can redirect
+   * the user accordingly.
    *
    * This has the benefit that the user paired the device once and we will
    * be able to automatically connect after successful root without any
    * more user interaction.
    */
   const handleDeviceConnect = useCallback(async() => {
-    dispatch(connecting());
+    if(!devicePromiseRef.current) {
+      console.log("handleDeviceConnect...");
+      dispatch(connecting());
 
-    try {
-      const filters = [{ vendorId: 0x2ca3 }];
-      devicePromiseRef.current = navigator.usb.requestDevice({ filters });
-      const device = await devicePromiseRef.current;
+      try {
+        const filters = [{ vendorId: 0x2ca3 }];
+        devicePromiseRef.current = navigator.usb.requestDevice({ filters });
+        const device = await devicePromiseRef.current;
 
-      connectOrRedirect(device);
-    } catch(e) {
-      dispatch(connectionFailed());
+        connectOrRedirect(device);
+      } catch(e) {
+        devicePromiseRef.current = null;
+        dispatch(connectionFailed());
+      }
     }
   }, [connectOrRedirect, devicePromiseRef, dispatch]);
 
-  // Set watcher to monitor WebUSB devices popping up or going away
+  /**
+   * Automatically try to connect to device when application starts up.
+   *
+   * The only pre-requisits that must be met are:
+   * - webusb is present
+   * - master state has been checked
+   */
   useEffect(() => {
-    if(window.navigator.usb) {
+    if(window.navigator.usb && checkedMasterState) {
       if(watcherRef.current) {
+        console.log("Disposing old watcher...");
         watcherRef.current.dispose();
       }
 
       watcherRef.current = new AdbWebUsbBackendWatcher(async (id) => {
         if(!id) {
+          console.log("Device went away...");
+
           setAdb(null);
+
           dispatch(resetDevice());
           clearInterval(intervalRef.current);
-          setIntervalId(null);
         } else {
+          console.log("in adb watcher");
           await autoConnect();
         }
       });
-    }
-  }, [autoConnect, dispatch, watcherRef]);
+      console.log("Created new watcher...");
 
-  // Automatically try to connect to device when application starts up
-  useEffect(() => {
-    if(!isChecked && !adb && window.navigator.usb) {
-      dispatch(checked(true));
-      autoConnect();
+      if(!startupCheck) {
+        console.log("Startup check");
+        setStartupCheck(true);
+        autoConnect();
+      }
     }
-  }, [adb, autoConnect, dispatch, isChecked]);
+  }, [autoConnect, checkedMasterState, dispatch, setAdb, startupCheck]);
 
-  // Clean up when switching context (onUnmount)
+  /**
+   * Clean up when switching context (onUnmount)
+   *
+   * This basically will only happen if moving to rooting tab, since all other routes
+   * are within this context.
+   */
   useEffect(() => {
     dispatch(contextReset());
 
@@ -243,29 +243,18 @@ export default function AdbRouter() {
       if(deviceRef.current) {
         try {
           await deviceRef.current._device.close();
+          deviceRef.current = null;
         } catch(e) {
           console.log("Failed closing device:", e);
         }
       }
-
-      setAdb(null);
-      setDevice(null);
-      setIntervalId(null);
     };
   }, [dispatch]);
 
-  // Update references when they change
+  // Update Refs when state changes. Useful if refs are used in callbacks (intervals, timeouts)
   useEffect(() => {
     adbRef.current = adb;
   }, [adb]);
-
-  useEffect(() => {
-    deviceRef.current = device;
-  }, [device]);
-
-  useEffect(() => {
-    intervalRef.current = intervalId;
-  }, [intervalId]);
 
   return(
     <Routes>

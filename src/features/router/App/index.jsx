@@ -14,34 +14,34 @@ import Stack from "@mui/material/Stack";
 
 import "./App.css";
 
-import Claimed from "./features/overlays/Claimed";
-import Cli from "./features/cli/Cli";
-import Device from "./features/device/Device";
-import Error404 from "./features/404/404";
-import Header from "./features/navigation/Header";
-import Healthcheck from "./features/healthcheck/Healthcheck";
-import Install from "./features/setup/Install";
-import Home from "./features/home/Main";
-import Package from "./features/package/Package";
-import Packages from "./features/packages/Packages";
-import Remove from "./features/setup/Remove";
-import Setup from "./features/setup/Setup";
-import Startup from "./features/startup/Startup";
-import Update from "./features/setup/Update";
+import Claimed from "../../overlays/Claimed";
+import Cli from "../../cli/Cli";
+import Device from "../../device/Device";
+import Error404 from "../../404/404";
+import Header from "../../navigation/Header";
+import Healthcheck from "../../healthcheck/Healthcheck";
+import Install from "../../setup/Install";
+import Home from "../../home/Main";
+import Package from "../../package/Package";
+import Packages from "../../packages/Packages";
+import Remove from "../../setup/Remove";
+import Setup from "../../setup/Setup";
+import Startup from "../../startup/Startup";
+import Update from "../../setup/Update";
 
 import {
   selectConnected,
   selectError,
-} from "./features/device/deviceSlice";
+} from "../../device/deviceSlice";
 
 import {
   fetchUpgradable,
   selectFetchedUpgradable,
-} from "../src/features/packages/packagesSlice";
+} from "../../packages/packagesSlice";
 
-import { selectPassed } from "./features/healthcheck/healthcheckSlice";
+import { selectPassed } from "../../healthcheck/healthcheckSlice";
 
-import { selectCanClaim } from "./features/tabGovernor/tabGovernorSlice";
+import { selectCanClaim } from "../../tabGovernor/tabGovernorSlice";
 
 function App({
   adb,
@@ -57,7 +57,7 @@ function App({
   const canClaim = useSelector(selectCanClaim);
 
   useEffect(() => {
-    if(!fetchedUpgradable) {
+    if(adb && !fetchedUpgradable) {
       dispatch(fetchUpgradable(adb));
     }
   }, [adb, dispatch, fetchedUpgradable]);
