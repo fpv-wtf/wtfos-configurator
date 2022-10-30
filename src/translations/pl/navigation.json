@@ -1,6 +1,8 @@
 {
-  "footerIssue": "Jeśli napotkasz jakiekolwiek problemy, prosimy",
-  "footerIssueLink": "zgłoś je na Githubie",
+  "footerIssue": " If you run into bugs, please",
+  "footerIssueLink": "report them",
+  "footerDiscord": " If you need support,",
+  "footerDiscordLink": "join us on Discord",
   "menuHome": "Strona główna",
   "menuPackageManager": "Menedżer pakietów",
   "menuStartup": "Uruchamianie",
