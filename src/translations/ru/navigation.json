@@ -1,6 +1,8 @@
 {
-  "footerIssue": "Если вы столкнулись с кими-либо проблемами, пожалуйста",
-  "footerIssueLink": "сообщите о них на github",
+  "footerIssue": " If you run into bugs, please",
+  "footerIssueLink": "report them",
+  "footerDiscord": " If you need support,",
+  "footerDiscordLink": "join us on Discord",
   "menuHome": "Главная",
   "menuPackageManager": "Менеджер пакетов",
   "menuStartup": "Загрузка системы",
