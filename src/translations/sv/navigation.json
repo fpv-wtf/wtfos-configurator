@@ -1,6 +1,8 @@
 {
-  "footerIssue": "Om du stöter på några problem, vänligen",
-  "footerIssueLink": "rapportera dem på github",
+  "footerIssue": " If you run into bugs, please",
+  "footerIssueLink": "report them",
+  "footerDiscord": " If you need support,",
+  "footerDiscordLink": "join us on Discord",
   "menuHome": "Hem",
   "menuPackageManager": "Pakethanterare",
   "menuStartup": "Uppstart",
