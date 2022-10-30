@@ -1,6 +1,8 @@
 {
-  "footerIssue": "Se tiver problemas, por favor",
-  "footerIssueLink": "reporte-os no github",
+  "footerIssue": " If you run into bugs, please",
+  "footerIssueLink": "report them",
+  "footerDiscord": " If you need support,",
+  "footerDiscordLink": "join us on Discord",
   "menuHome": "Menu Inicial",
   "menuPackageManager": "Gestor de Pacotes",
   "menuStartup": "Arranque",
