@@ -15,5 +15,8 @@
   "version": "Version",
   "description": "Beskrivning",
   "matchCount": "Hittade {{count}} paket",
-  "visitProjectPage": "Visit project page"
+  "visitProjectPage": "Visit project page",
+  "labelCategory": "Category",
+  "labelCategoryAllExceptSystem": "All (except system)",
+  "labelCategoryAll": "All"
 }
