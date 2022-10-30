@@ -29,5 +29,6 @@
   "rebootTimeout": "İptal edildi! Cihaz zamanında yeniden başlamadı, lütfen kapatıp tekrar deneyin.",
   "rebootTimeShort": "Yeniden başlatma süresi şüpheli bir şekilde kısaydı - önlem için bir kez daha yeniden başlatılıyor...",
   "unlockFailed": "Kilit açma başarısız oldu, lütfen cihazınızı kapatıp-açıp tekrar deneyin.",
-  "unsupportedFirmware": "Cihazınızdaki yazılım çok yeni. Yüklenen sürüme bağlı olarak DJI FPV Assistant 2 ile DIY modunda V01.01.0606'ya geri dönebilirsiniz. Lütfen <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>wiki</a> 'ye daha fazla detay için bakınız."
+  "unsupportedFirmware": "Cihazınızdaki yazılım çok yeni. Yüklenen sürüme bağlı olarak DJI FPV Assistant 2 ile DIY modunda V01.01.0606'ya geri dönebilirsiniz. Lütfen <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>wiki</a> 'ye daha fazla detay için bakınız.",
+  "signingServerUnreachable": "The signing server could not be reached. It might be down or your ISP might be blocking it."
 }

@@ -1,0 +1,8 @@
+{
+  "message": "Niepowodzenie sprawdzenia stanu",
+  "fix": "Próba naprawienia",
+  "warningTitle": "Automatyczna poprawka:",
+  "warningDescription": "Nie martw się, to jest normalne i może się zdarzyć z różnych powodów, w tym z powodu błędów w systemie operacyjnym. Konfigurator może pomóc Ci rozwiązać te problemy. Podczas próby zautomatyzowanego naprawiania urządzenie może uruchomić się ponownie w trakcie procesu. W niektórych szczególnych przypadkach konieczne może być ponowne zrootowanie urządzenia po ponownym uruchomieniu, zanim będzie można kontynuować sprawdzenie stanu.",
+  "failed": "Nie można przeprowadzić sprawdzenia stanu.",
+  "loading": "Proszę czekać..."
+}

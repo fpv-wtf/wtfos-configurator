@@ -1,4 +1,7 @@
 {
+  "updateAvailable": "Update to already installed package is available. For more information hit the update button.",
+  "updatesAvailable": "Updates to already installed packages are available. For more information hit the update button.",
+  "update": "Update",
   "remove": "Odstrániť",
   "install": "Inštalovať",
   "fetching": "Sťahujem balíčky...",
@@ -11,5 +14,6 @@
   "name": "Názov",
   "version": "Verzia",
   "description": "Popis",
-  "matchCount": "Nájdených {{count}} balíčkov"
+  "matchCount": "Nájdených {{count}} balíčkov",
+  "visitProjectPage": "Visit project page"
 }

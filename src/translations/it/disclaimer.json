@@ -1,11 +1,11 @@
 {
   "title": "Misure di sicurezza/suggerimenti per il ripristino:",
   "line1": "Quando wtfos viene avviato, la partizione /system viene sovrascritta con una copia della partizione contenuta su /blacbkox/wtfos/system.img",
-  "line2": "Se tieni premuto il pulsante di bind durante l'avvio, nella fase di boot, wtfos non verrà eseguito con adb abilitato ciò serve a consentire la rimozione di wtfos e/o per la diagnosi",
-  "line3": "Se wtfos rileva eventuali problemi gravi, cercherà di avviarsi senza alcuna modifica e con adb abilitato",
+  "line2": "Se durante l'avvio, nella fase di boot tieni premuto il pulsante di bind, wtfos non verrà eseguito con adb abilitato, ciò serve a consentire la rimozione di wtfos e/o per la diagnostica",
+  "line3": "Se wtfos rilevasse problemi gravi, cercherà probabilmente di avviarsi normalmente e con adb abilitato",
   "browserNotSupported": "Browser non supportato!",
-  "browserNotSupportedText": "Il tuo browser non supporta la web-usb. Prova ad utilizzare un",
-  "browserNotSupportedLink": "browser che offre questa funzionalità.",
+  "browserNotSupportedText": "Il tuo browser non supporta la funzione webusb. Prova ad utilizzare un",
+  "browserNotSupportedLink": "browser che offra questa funzione.",
   "browserSupported": "I browser supportati (e testati) sono:",
   "browserSupportedAndroid": "Alcuni telefoni Android",
   "browserSupportedOther": "Altri browser basati su Chromium"
