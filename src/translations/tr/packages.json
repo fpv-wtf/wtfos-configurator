@@ -15,5 +15,8 @@
   "version": "Sürüm",
   "description": "Açıklama",
   "matchCount": "{{count}} adet paket bulundu",
-  "visitProjectPage": "Visit project page"
+  "visitProjectPage": "Visit project page",
+  "labelCategory": "Category",
+  "labelCategoryAllExceptSystem": "All (except system)",
+  "labelCategoryAll": "All"
 }
