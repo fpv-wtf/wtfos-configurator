@@ -10,8 +10,9 @@ const initialState = {
   upgradable: [],
   filter: {
     installed: false,
-    search: null,
     repo: "fpv-wtf",
+    search: null,
+    system: false,
   },
   fetched: false,
   fetchedUpgradable: false,
@@ -135,6 +136,13 @@ function filterPackages(packages, filter) {
     (filter.repo === item.repo && !filter.search)
   ));
 
+  // Remove system packages
+  if(!filter.system) {
+    filtered = filtered.filter((item) => (
+      !(item.details.section && item.details.section.includes("system"))
+    ));
+  }
+
   filtered = filtered.filter((item) => {
     if(filter.installed) {
       return item.installed;
@@ -180,6 +188,14 @@ export const packagesSlice = createSlice({
       state.filter = {
         ...state.filter,
         repo: event.payload,
+      };
+
+      state.filtered = filterPackages(state.packages, state.filter);
+    },
+    systemFilter: (state, event) => {
+      state.filter = {
+        ...state.filter,
+        system: event.payload,
       };
 
       state.filtered = filterPackages(state.packages, state.filter);
@@ -265,6 +281,7 @@ export const {
   repo,
   reset,
   search,
+  systemFilter,
 } = packagesSlice.actions;
 
 export const selectRepos = (state) => state.packages.repos;

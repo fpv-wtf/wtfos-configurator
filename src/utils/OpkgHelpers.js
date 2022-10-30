@@ -1,5 +1,6 @@
 const parsePackageIndex = (content) => {
   const lines = content.split("\n");
+  const arrays = ["section"];
 
   let currentPackage = null;
   const packages = {};
@@ -16,6 +17,9 @@ const parsePackageIndex = (content) => {
       key = key.toLowerCase();
 
       packages[currentPackage][key] = value;
+      if(arrays.includes(key)) {
+        packages[currentPackage][key] = value.split(",").map((item) => item.trim());
+      }
     }
   }
 
