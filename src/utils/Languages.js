@@ -24,6 +24,7 @@ const initializeLanguages = () => {
     "settings",
     "setup",
     "startup",
+    "udev",
   ];
 
   const resources = {};
