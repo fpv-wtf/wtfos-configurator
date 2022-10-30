@@ -15,5 +15,8 @@
   "version": "Версия",
   "description": "Описание",
   "matchCount": "Найдено {{count}} пакетов",
-  "visitProjectPage": "Visit project page"
+  "visitProjectPage": "Visit project page",
+  "labelCategory": "Category",
+  "labelCategoryAllExceptSystem": "All (except system)",
+  "labelCategoryAll": "All"
 }
