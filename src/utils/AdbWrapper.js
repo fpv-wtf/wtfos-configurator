@@ -25,6 +25,7 @@ export default class AdbWrapper {
         dinit: "/opt/sbin/dinit",
         dinitctl: "/opt/sbin/dinitctl",
         opkg: "/opt/bin/opkg",
+        adbRemoval: "/system/bin/wtfos-remove-adb",
       },
       config: {
         dinit: "/opt/etc/dinit.d",
@@ -772,6 +773,19 @@ export default class AdbWrapper {
       statusCallback("ERROR: Failed cleaning up");
       output.stdout.split("\n").forEach((line) => statusCallback(line));
       return;
+    }
+
+    const hasAdbRemoval = await this.fileExists(this.wtfos.bin.adbRemoval);
+    if(hasAdbRemoval) {
+      statusCallback("Removing ADB...");
+      output = await this.executeCommand([
+        this.wtfos.bin.adbRemoval,
+        "-q",
+      ]);
+      if(output.exitCode !== 0) {
+        statusCallback("ERROR: Failed removing ADB");
+        return;
+      }
     }
 
     statusCallback("Rebooting...");
