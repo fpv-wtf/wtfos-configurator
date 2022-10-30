@@ -15,5 +15,8 @@
   "version": "Έκδοση",
   "description": "Περιγραφή",
   "matchCount": "Βρέθηκαν {{count}} πακέτα",
-  "visitProjectPage": "Visit project page"
+  "visitProjectPage": "Visit project page",
+  "labelCategory": "Category",
+  "labelCategoryAllExceptSystem": "All (except system)",
+  "labelCategoryAll": "All"
 }
