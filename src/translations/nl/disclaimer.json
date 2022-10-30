@@ -1,8 +1,6 @@
 {
-  "title": "Veiligheidsmaatregelen/herstel tips:",
-  "line1": "Wanneer wtfos is gestart, wordt de /system partitie overschreven met een beschrijfbare kopie van de partitie bewaard in /blackbox/wtfos/system.img",
-  "line2": "Wanneer je de bindknop ingedrukt houdt tijdens het opstarten, wordt de start van wtfos overgeslagen en is adb ingeschakeld om wtfos te wissen of diagnoses te doen",
-  "line3": "Wanneer wtfos fatale problemen detecteerd, dan zal het trachten opnieuw te starten met adb ingeschakeld en zonder overige modificaties uitgeschakeld",
+  "recoveryTitle": "Safety measures/recovery hints:",
+  "recoveryText": "If you encounter any problems with wtfOS, try booting into safe mode by holding down the bind button on your device for 30 seconds while powering up. You should then be able to uninstall and re-install wtfOS or seek further help.",
   "browserNotSupported": "Browser niet ondersteund!",
   "browserNotSupportedText": "Uw browser ondersteunt geen webusb functionaliteit. Gebruik een",
   "browserNotSupportedLink": "browser die deze functionaliteit wél biedt.",
