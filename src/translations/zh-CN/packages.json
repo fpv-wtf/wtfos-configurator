@@ -15,5 +15,8 @@
   "version": "版本",
   "description": "说明",
   "matchCount": "找到{{count}} 个包",
-  "visitProjectPage": "访问项目主页"
+  "visitProjectPage": "访问项目主页",
+  "labelCategory": "Category",
+  "labelCategoryAllExceptSystem": "All (except system)",
+  "labelCategoryAll": "All"
 }
