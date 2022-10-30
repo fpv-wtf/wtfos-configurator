@@ -20,7 +20,7 @@ export default function Udev() {
       </Typography>
 
       <CodeBlock
-        content={`SUBSYSTEM=="usb", ATTR{idVendor}=="2ca3", ATTR{idProduct}=="001f", MODE="0660", GROUP="plugdev"`}
+        content={"SUBSYSTEM==\"usb\", ATTR{idVendor}==\"2ca3\", ATTR{idProduct}==\"001f\", MODE=\"0660\", GROUP=\"plugdev\""}
       />
 
       <Typography>
@@ -28,7 +28,7 @@ export default function Udev() {
       </Typography>
 
       <CodeBlock
-        content={`sudo printf "## rules for DJI device \\nSUBSYSTEM==\"usb\", ATTR{idVendor}==\"2ca3\", ATTR{idProduct}==\"001f\", MODE=\"0660\", GROUP=\"plugdev\"" > /etc/udev/rules.d/51-dji-adb.rules`}
+        content={"sudo printf \"## rules for DJI device \\nSUBSYSTEM==\\\"usb\\\", ATTR{idVendor}==\\\"2ca3\\\", ATTR{idProduct}==\\\"001f\\\", MODE=\\\"0660\\\", GROUP=\\\"plugdev\\\"\" > /etc/udev/rules.d/51-dji-adb.rules"}
       />
 
       <Typography>
