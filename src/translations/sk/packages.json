@@ -15,5 +15,8 @@
   "version": "Verzia",
   "description": "Popis",
   "matchCount": "Nájdených {{count}} balíčkov",
-  "visitProjectPage": "Visit project page"
+  "visitProjectPage": "Visit project page",
+  "labelCategory": "Category",
+  "labelCategoryAllExceptSystem": "All (except system)",
+  "labelCategoryAll": "All"
 }
