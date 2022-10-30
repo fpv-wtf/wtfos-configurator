@@ -54,6 +54,7 @@ import {
   selectProcessing,
   selectRepos,
   selectUpgradable,
+  systemFilter,
 } from "./packagesSlice";
 
 import { selectNiceName } from "../device/deviceSlice";
@@ -118,6 +119,11 @@ export default function Packages({ adb }) {
   const handleRepoChange = useCallback((event) => {
     const value = event.target.value;
     dispatch(repo(value));
+  }, [dispatch]);
+
+  const handleCategoryStateChange = useCallback((event) => {
+    const value = event.target.value;
+    dispatch(systemFilter(value === "all"));
   }, [dispatch]);
 
   useEffect(() => {
@@ -362,6 +368,27 @@ export default function Packages({ adb }) {
 
                 <MenuItem value="installed">
                   {t("installed")}
+                </MenuItem>
+              </Select>
+            </FormControl>
+
+            <FormControl sx={{ width: 120 }}>
+              <InputLabel id="package-state-select-label">
+                {t("labelCategory")}
+              </InputLabel>
+
+              <Select
+                id="package-state-select"
+                label={t("labelCategory")}
+                onChange={handleCategoryStateChange}
+                value={filter.system ? "all" : "all-except-system"}
+              >
+                <MenuItem value="all-except-system">
+                  {t("labelCategoryAllExceptSystem")}
+                </MenuItem>
+
+                <MenuItem value="all">
+                  {t("labelCategoryAll")}
                 </MenuItem>
               </Select>
             </FormControl>
