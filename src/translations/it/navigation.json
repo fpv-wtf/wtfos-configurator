@@ -1,6 +1,8 @@
 {
-  "footerIssue": "Se si verifica un problema, ti preghiamo di",
-  "footerIssueLink": "segnalarlo su GitHub",
+  "footerIssue": " If you run into bugs, please",
+  "footerIssueLink": "report them",
+  "footerDiscord": " If you need support,",
+  "footerDiscordLink": "join us on Discord",
   "menuHome": "Home",
   "menuPackageManager": "Gestore dei pacchetti",
   "menuStartup": "Avvio",
