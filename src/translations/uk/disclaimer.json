@@ -1,8 +1,6 @@
 {
-  "title": "Заходи безпеки/поради щодо відновлення:",
-  "line1": "При запуску wtfos розділ /system перезаписується копією розділу, з файлу /blackbox/wtfos/system.img",
-  "line2": "Під час завантаження, утримуючи кнопку bind натиснутою, запуск wtfos буде пропущено з увімкненим adb, щоб дозволити видалити wtfos або провести діагностику",
-  "line3": "Якщо wtfos виявить будь-які критичні проблеми, система спробує завантажитися без будь-яких змін і з увімкненим adb",
+  "recoveryTitle": "Safety measures/recovery hints:",
+  "recoveryText": "If you encounter any problems with wtfOS, try booting into safe mode by holding down the bind button on your device for 30 seconds while powering up. You should then be able to uninstall and re-install wtfOS or seek further help.",
   "browserNotSupported": "Браузер не підтримується!",
   "browserNotSupportedText": "Ваш браузер не підтримує функцію webusb. Будь ласка, використовуйте",
   "browserNotSupportedLink": "браузер, який підтримає цю функцію.",
