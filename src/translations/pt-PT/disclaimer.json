@@ -1,8 +1,6 @@
 {
-  "title": "Medidas de segurança/dicas de recuperação:",
-  "line1": "Quando o wtfos é iniciado, a partição /system é substituída por uma cópia gravável da partição mantida em /blackbox/wtfos/system.img",
-  "line2": "Se mantiver pressionado o botão bind durante o arranque, saltará a inicialização do wtfos com o adb habilitado, para permitir a limpeza do wtfos ou para diagnóstico",
-  "line3": "Se o wtfos detetar quaisquer problemas fatais, também tentará reiniciar sem quaisquer modificações e com o adb ativado",
+  "recoveryTitle": "Safety measures/recovery hints:",
+  "recoveryText": "If you encounter any problems with wtfOS, try booting into safe mode by holding down the bind button on your device for 30 seconds while powering up. You should then be able to uninstall and re-install wtfOS or seek further help.",
   "browserNotSupported": "Navegador não suportado!",
   "browserNotSupportedText": "O seu navegador não suporta a funcionalidade webusb. Por favor, use um",
   "browserNotSupportedLink": "navegador que ofereça esta funcionalidade.",
