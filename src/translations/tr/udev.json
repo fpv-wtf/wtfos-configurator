@@ -1,0 +1,4 @@
+{
+  "udevTitle": "UDEV rule might be needed",
+  "udevText": "If you are having issues connecting to the device, you might need to add the following UDEV rule:"
+}
