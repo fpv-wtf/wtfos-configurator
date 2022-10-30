@@ -1,8 +1,8 @@
 {
-  "message": "Controlli di congruenza falliti",
+  "message": "Sono falliti i controlli di congruenza",
   "fix": "Tentativo di riparazione",
   "warningTitle": "Correzioni automatiche:",
-  "warningDescription": "Non ti preoccupare, questo è normale e può capitare per vari motivi, tra cui bug nel sistema operativo. Il configuratore dovrebbe aiutarti a risolvere questi problemi. Quando si tenta una correzione automatica, il dispositivo potrebbe riavviare il sistema. In rari casi specifici potrebbe essere necessario dover nuovamente eseguire il root del dispositivo dopo il riavvio, prima che i controlli di congruenza possano continuare.",
-  "failed": "Test di congruenza falliti.",
+  "warningDescription": "Non ti preoccupare, questo è normale e può capitare per vari motivi, tra cui possibili bug nel sistema operativo. Il configuratore cercherà di aiutarti a risolvere alcuni problemi. Quando si tenta una correzione automatica, il dispositivo potrebbe dover riavviare il sistema. In rari e particolari casi, affinchè i controlli di congruenza possano continuare, potrebbe dover essere necessario eseguire nuovamente la procedura di ottenimento dei permessi di root del dispositivo.",
+  "failed": "La verifica della congruenza non è andata a buon fine.",
   "loading": "Si prega di attendere..."
 }

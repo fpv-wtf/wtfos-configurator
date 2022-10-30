@@ -1,0 +1,6 @@
+{
+  "running": "uruchomiony (PID: {{pid}})",
+  "started": "rozpoczęto",
+  "stopped": "zatrzymano",
+  "hint": "Włączone usługi są uruchamiane podczas procesu uruchamiania urządzenia."
+}

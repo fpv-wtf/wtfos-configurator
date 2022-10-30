@@ -1,4 +1,7 @@
 {
+  "updateAvailable": "Update für bereits installiertes Paket ist verfügbar. Für weitere Informationen klicken Sie auf \"Aktualisieren\".",
+  "updatesAvailable": "Updates für bereits installierte Pakete sind verfügbar. Für weitere Informationen klicken Sie auf \"Aktualisieren\".",
+  "update": "Aktualisieren",
   "remove": "Entfernen",
   "install": "Installieren",
   "fetching": "Pakete werden abgerufen...",
@@ -11,5 +14,6 @@
   "name": "Name",
   "version": "Version",
   "description": "Beschreibung",
-  "matchCount": "{{count}} Pakete gefunden"
+  "matchCount": "{{count}} Pakete gefunden",
+  "visitProjectPage": "Projektseite aufrufen"
 }

@@ -13,7 +13,7 @@
   "tileUpdateTitle": "Оновити",
   "tileUpdateDescription": "Оновіть WTFOS та встановлені пакети до актуальних версій.",
   "tileRemoveTitle": "Видалити",
-  "tileRemoveDescription": "Видалити WTFOS з вашого пристрою і повернути всі зміни, окрім рут-прав.",
+  "tileRemoveDescription": "Видалити WTFOS з вашого пристрою і повернути всі зміни, окрім рут прав.",
   "upToDate": "Усе має найновішу версію!",
   "checking": "Перевірка пакетів...",
   "name": "Назва пакету",
