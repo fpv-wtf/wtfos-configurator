@@ -1,16 +1,22 @@
-import React from "react";
+import React, {
+  useRef, useEffect,
+} from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import Grid from "@mui/material/Grid";
+import autoAnimate from "@formkit/auto-animate";
 
+import Grid from "@mui/material/Grid";
 import DownloadIcon from "@mui/icons-material/Download";
 import HelpIcon from "@mui/icons-material/Help";
 import InfoIcon from "@mui/icons-material/Info";
 import RocketLaunchIcon from "@mui/icons-material/RocketLaunch";
 import StartIcon from "@mui/icons-material/Start";
+import UpdateIcon from "@mui/icons-material/Update";
 import TerminalIcon from "@mui/icons-material/Terminal";
+import Badge from "@mui/material/Badge";
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 import SvgIcon from "@mui/material/SvgIcon";
 import { ReactComponent as AlienSvg } from "../../assets/icons/alien-white.svg";
@@ -24,18 +30,29 @@ import {
   selectHasOpkgBinary,
 } from "../device/deviceSlice";
 
+import { selectUpgradable } from "../packages/packagesSlice";
+
 export default function Tiles() {
   const { t } = useTranslation("home");
+
+  const gridParent = useRef(null);
 
   const hasAdb = useSelector(selectHasAdb);
   const hasDinitBinary = useSelector(selectHasDinitBinary);
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const isConnected = useSelector(selectConnected);
 
+  const upgradable = useSelector(selectUpgradable);
+
+  useEffect(() => {
+    gridParent.current && autoAnimate(gridParent.current);
+  }, [gridParent]);
+
   return(
     <Grid
       alignItems="stretch"
       container
+      ref={gridParent}
       spacing={2}
     >
       <Grid
@@ -53,6 +70,32 @@ export default function Tiles() {
           <DownloadIcon fontSize="large" />
         </Tile>
       </Grid>
+
+      {hasAdb && upgradable.length > 0 && (
+        <Grid
+          item
+          md={3}
+          sm={6}
+          xs={12}
+        >
+          <Tile
+            description={t("tileUpdateDescription")}
+            disabled={!hasDinitBinary}
+            linkTo="/wtfos/update"
+            title={
+              <Badge
+                badgeContent={upgradable.length}
+                color="secondary"
+              >
+                {t("tileUpdateTitle")}
+              </Badge>
+            }
+          >
+
+            <UpdateIcon fontSize="large" />
+          </Tile>
+        </Grid>
+      )}
 
       <Grid
         item
@@ -117,6 +160,21 @@ export default function Tiles() {
           title={t("tileRootTitle")}
         >
           <AccessibilityNewIcon fontSize="large" />
+        </Tile>
+      </Grid>
+
+      <Grid
+        item
+        md={3}
+        sm={6}
+        xs={12}
+      >
+        <Tile
+          description={t("tileSettingsDescription")}
+          linkTo="settings"
+          title={t("tileSettingsTitle")}
+        >
+          <SettingsIcon fontSize="large" />
         </Tile>
       </Grid>
 

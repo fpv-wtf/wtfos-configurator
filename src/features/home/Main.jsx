@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-
 import { useSelector } from "react-redux";
 
 import Alert from "@mui/material/Alert";
@@ -15,12 +14,14 @@ import {
   selectConnected,
   selectHasOpkgBinary,
 } from "../device/deviceSlice";
+import { selectDisclaimersStatus } from "../settings/settingsSlice";
 
 export default function Main() {
   const { t } = useTranslation("home");
 
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const isConnected = useSelector(selectConnected);
+  const disclaimersStatus = useSelector(selectDisclaimersStatus);
 
   return(
     <Stack
@@ -41,7 +42,8 @@ export default function Main() {
       {!hasOpkgBinary && isConnected &&
         <SetupHint />}
 
-      <Recovery />
+      {!disclaimersStatus &&
+        <Recovery />}
     </Stack>
   );
 }
