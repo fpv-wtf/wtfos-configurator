@@ -1,6 +1,8 @@
 {
-  "footerIssue": "Ak narazíte na nejaké problémy, prosím",
-  "footerIssueLink": "nahláste ich na github",
+  "footerIssue": " If you run into bugs, please",
+  "footerIssueLink": "report them",
+  "footerDiscord": " If you need support,",
+  "footerDiscordLink": "join us on Discord",
   "menuHome": "Domov",
   "menuPackageManager": "Správca balíčkov",
   "menuStartup": "Štart",
