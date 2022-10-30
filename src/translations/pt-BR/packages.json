@@ -15,5 +15,8 @@
   "version": "Versão",
   "description": "Descrição",
   "matchCount": "{{count}} pacotes encontrados",
-  "visitProjectPage": "Visite a página do projeto"
+  "visitProjectPage": "Visite a página do projeto",
+  "labelCategory": "Category",
+  "labelCategoryAllExceptSystem": "All (except system)",
+  "labelCategoryAll": "All"
 }
