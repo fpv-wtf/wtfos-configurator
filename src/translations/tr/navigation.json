@@ -1,6 +1,8 @@
 {
-  "footerIssue": "Eğer herhangi bir sorunla karşılaşırsanız, lütfen",
-  "footerIssueLink": "github üzerinden raporlayın",
+  "footerIssue": " If you run into bugs, please",
+  "footerIssueLink": "report them",
+  "footerDiscord": " If you need support,",
+  "footerDiscordLink": "join us on Discord",
   "menuHome": "Ana sayfa",
   "menuPackageManager": "Paket Yöneticisi",
   "menuStartup": "Başlangıç",
