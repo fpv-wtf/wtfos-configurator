@@ -1,3 +1,11 @@
 {
-  "detailsFor": "Details for: {{name}}"
+  "detailsFor": "Подробиці для {{name}}",
+  "submit": "Зберегти налаштування",
+  "loading": "Завантаження даних пакета...",
+  "visitProjectPage": "Перейти на сторінку проекту",
+  "maintainer": "Розробник: {{name}}",
+  "remove": "Видалити",
+  "install": "Встановити",
+  "installing": "Встановлення пакета...",
+  "removing": "Видалення пакета..."
 }

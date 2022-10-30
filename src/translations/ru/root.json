@@ -29,5 +29,6 @@
   "rebootTimeout": "Отмена! Устройство не перезагрузилось вовремя, отключите/подключите питание и повторите попытку.",
   "rebootTimeShort": "Перезагрузка произошла слишком быстро - попробуйте перезапустить устройство еще раз...",
   "unlockFailed": "Разблокировака не удалась, попробуйте перазапустить устройство и повторить попытку.",
-  "unsupportedFirmware": "На вашем устройстве слишком новая прошивка. Возможно, вы сможете понизить прошивку до V01.01.0606 в DIY режиме с DJI FPV Assistant 2, но это зависит от установленной в данный момент версии прошивки. Пожалуйста, <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>посмотрите wiki</a> для получения более подробной информации."
+  "unsupportedFirmware": "На вашем устройстве слишком новая прошивка. Возможно, вы сможете понизить прошивку до V01.01.0606 в DIY режиме с DJI FPV Assistant 2, но это зависит от установленной в данный момент версии прошивки. Пожалуйста, <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>посмотрите wiki</a> для получения более подробной информации.",
+  "signingServerUnreachable": "The signing server could not be reached. It might be down or your ISP might be blocking it."
 }
