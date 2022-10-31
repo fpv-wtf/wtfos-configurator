@@ -1,8 +1,8 @@
 {
-  "footerIssue": " If you run into bugs, please",
-  "footerIssueLink": "report them",
-  "footerDiscord": " If you need support,",
-  "footerDiscordLink": "join us on Discord",
+  "footerIssue": " Якщо у вас виникають будь-які проблеми, будь ласка",
+  "footerIssueLink": "повідомте про них",
+  "footerDiscord": " Якщо потрібна підтримка,",
+  "footerDiscordLink": "приєднуйтесь до нас в Discord",
   "menuHome": "Головна",
   "menuPackageManager": "Система керування пакетами",
   "menuStartup": "Запуск",
