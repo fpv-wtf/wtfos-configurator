@@ -1,7 +1,7 @@
 {
-  "updateAvailable": "Update to already installed package is available. For more information hit the update button.",
-  "updatesAvailable": "Updates to already installed packages are available. For more information hit the update button.",
-  "update": "Update",
+  "updateAvailable": "È disponibile l'aggiornamento di un pacchetto installato. Premi il pulsante aggiorna per maggiori informazioni.",
+  "updatesAvailable": "Sono disponibili gli aggiornamenti di pacchetti installati. Premi il pulsante aggiorna per maggiori informazioni.",
+  "update": "Aggiorna",
   "remove": "Rimuovi",
   "install": "Installa",
   "fetching": "Scarico i pacchetti...",
@@ -16,7 +16,7 @@
   "description": "Descrizione",
   "matchCount": "Trovati {{count}} pacchetti",
   "visitProjectPage": "Visita la pagina del progetto",
-  "labelCategory": "Category",
-  "labelCategoryAllExceptSystem": "All (except system)",
-  "labelCategoryAll": "All"
+  "labelCategory": "Categoria",
+  "labelCategoryAllExceptSystem": "Tutto (escluso sistema)",
+  "labelCategoryAll": "Tutto"
 }
