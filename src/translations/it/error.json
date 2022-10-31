@@ -1,7 +1,7 @@
 {
   "error404Title": "404 - Non Trovato",
-  "error404Text": "Non sono sicuro di quello che stai cercando, ma questa pagina non esiste. Dovresti controllare la",
+  "error404Text": "Non so cosa stai cercando, ma questa pagina non esiste. Puoi controllare la",
   "error404Link": "Pagina iniziale",
-  "errorConnection": "Impossibile connettersi al dispositivo. Assicurati che il server adb non sia in esecuzione sul computer (adb kill-server) e di non essere connessi su di un'altra scheda/finestra.",
-  "warningConnection": "Collega alla porta USB i tuoi Occhiali o la Air-Unit/Vista con i privilegi di Root, assicurati che siano sempre ben alimentati e premi il pulsante di connessione."
+  "errorConnection": "Impossibile connettersi al dispositivo. Assicurati che il server adb non sia in esecuzione sul computer (adb kill-server) e di non essere connesso su di un'altra scheda/finestra.",
+  "warningConnection": "Connetti tramite USB i tuoi Occhiali o la Air Unit modificati, assicurati che siano alimentati e premi il pulsante di connessione."
 }
