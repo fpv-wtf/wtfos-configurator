@@ -1,11 +1,11 @@
 {
   "connected": "Connesso correttamente al tuo dispositivo.",
-  "tilePackageManagerTitle": "Gestore dei pacchetti",
-  "tilePackageManagerDescription": "Espandi le funzionalità del tuo dispositivo, installando i pacchetti aggiuntivi sviluppati dalla comunità.",
+  "tilePackageManagerTitle": "Gestione Pacchetti",
+  "tilePackageManagerDescription": "Espandi le funzionalità del tuo dispositivo, installando pacchetti aggiuntivi sviluppati dalla comunità.",
   "tileUpdateTitle": "Aggiorna",
   "tileUpdateDescription": "Aggiorna WTFOS e i pacchetti installati per rimanere aggiornato.",
   "tileStartupTitle": "Avvio",
-  "tileStartupDescription": "Gestisci i servizi che devono essere avviati automaticamente una volta che il dispositivo è acceso.",
+  "tileStartupDescription": "Gestisci i servizi da avviare automaticamente quando il dispositivo è acceso.",
   "tileCliTitle": "CLI",
   "tileCliDescription": "Sessione Shell interattiva. Esegui i comandi che desideri, devi sapere ciò che stai facendo.",
   "tileWtfosTitle": "WTFOS",
@@ -19,5 +19,5 @@
   "tileAboutTitle": "Informazioni su fpv.wtf",
   "tileAboutDescription": "fpv.wtf è un gruppo di appassionati che lavora per migliorare l'esperienza FPV digitale.",
   "tileWikiTitle": "Wiki",
-  "tileWikiDescription": "Stai avendo problemi? Probabilmente troverai risposte utili alla soluzione consultando la nostra comunità Wiki."
+  "tileWikiDescription": "Hai problemi? Puoi trovare risposte utili alla soluzione nella nostra comunità Wiki."
 }
