@@ -1,8 +1,8 @@
 {
-  "footerIssue": " If you run into bugs, please",
-  "footerIssueLink": "report them",
-  "footerDiscord": " If you need support,",
-  "footerDiscordLink": "join us on Discord",
+  "footerIssue": "Wenn du auf Fehler stößt,",
+  "footerIssueLink": "melde sie bitte.",
+  "footerDiscord": "Wenn du Hilfe benötigst,",
+  "footerDiscordLink": "tritt unserem Discord - Server bei.",
   "menuHome": "Startseite",
   "menuPackageManager": "Paket-Manager",
   "menuStartup": "Systemstart",
