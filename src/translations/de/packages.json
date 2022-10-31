@@ -1,6 +1,6 @@
 {
-  "updateAvailable": "Update für bereits installiertes Paket ist verfügbar. Für weitere Informationen klicken Sie auf \"Aktualisieren\".",
-  "updatesAvailable": "Updates für bereits installierte Pakete sind verfügbar. Für weitere Informationen klicken Sie auf \"Aktualisieren\".",
+  "updateAvailable": "Ein Update für das bereits installierte Paket ist verfügbar. Für weitere Informationen klicke auf \"Aktualisieren\".",
+  "updatesAvailable": "Mehrere Updates für bereits installierte Pakete sind verfügbar. Für weitere Informationen klicke auf \"Aktualisieren\".",
   "update": "Aktualisieren",
   "remove": "Entfernen",
   "install": "Installieren",
@@ -16,7 +16,7 @@
   "description": "Beschreibung",
   "matchCount": "{{count}} Pakete gefunden",
   "visitProjectPage": "Projektseite aufrufen",
-  "labelCategory": "Category",
-  "labelCategoryAllExceptSystem": "All (except system)",
-  "labelCategoryAll": "All"
+  "labelCategory": "Kategorie",
+  "labelCategoryAllExceptSystem": "Alle (mit Ausnahme des Systems)",
+  "labelCategoryAll": "Alle"
 }
