@@ -1,6 +1,6 @@
 {
-  "updateAvailable": "È disponibile l'aggiornamento di un pacchetto installato. Premi il pulsante aggiorna per maggiori informazioni.",
-  "updatesAvailable": "Sono disponibili gli aggiornamenti di pacchetti installati. Premi il pulsante aggiorna per maggiori informazioni.",
+  "updateAvailable": "È disponibile l'aggiornamento di un pacchetto installato. Per maggiori informazioni premi sul tasto aggiorna.",
+  "updatesAvailable": "Sono disponibili degli aggiornamenti per i pacchetti installati. Per maggiori informazioni premi sul tasto aggiorna.",
   "update": "Aggiorna",
   "remove": "Rimuovi",
   "install": "Installa",
