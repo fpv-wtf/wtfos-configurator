@@ -16,7 +16,7 @@
   "description": "Descrição",
   "matchCount": "Encontrados {{count}} pacotes",
   "visitProjectPage": "Visitar página do projeto",
-  "labelCategory": "Category",
-  "labelCategoryAllExceptSystem": "All (except system)",
-  "labelCategoryAll": "All"
+  "labelCategory": "Categoria",
+  "labelCategoryAllExceptSystem": "Todos (exceto sistema)",
+  "labelCategoryAll": "Todos"
 }
