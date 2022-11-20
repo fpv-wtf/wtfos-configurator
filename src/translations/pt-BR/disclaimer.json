@@ -1,6 +1,6 @@
 {
-  "recoveryTitle": "Safety measures/recovery hints:",
-  "recoveryText": "If you encounter any problems with wtfOS, try booting into safe mode by holding down the bind button on your device for 30 seconds while powering up. You should then be able to uninstall and re-install wtfOS or seek further help.",
+  "recoveryTitle": "Dicas de segurança/recuperação:",
+  "recoveryText": "Se você encontrar algum problema com wtfOS, tente iniciar o modo de segurança segurando o botão bind (sincronização) no seu dispositivo por 30 segundos ao ligar. Feito isso você conseguirá desinstalar e reinstalar o wtfOS ou procurar mais ajuda.",
   "browserNotSupported": "Navegador não suportado!",
   "browserNotSupportedText": "Seu navegador não oferece suporte a funcionalidade do webusb. Por favor, use um",
   "browserNotSupportedLink": "navegador que possua esta funcionalidade.",
