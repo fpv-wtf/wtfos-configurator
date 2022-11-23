@@ -17,6 +17,6 @@
   "matchCount": "Знайдено {{count}} пакетів",
   "visitProjectPage": "Перейти на сторінку проекту",
   "labelCategory": "Категорія",
-  "labelCategoryAllExceptSystem": "Всі (крім системних)",
+  "labelCategoryAllExceptSystem": "Всі (окрім системних)",
   "labelCategoryAll": "Усі"
 }
