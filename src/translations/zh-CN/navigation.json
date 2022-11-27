@@ -1,8 +1,8 @@
 {
-  "footerIssue": " If you run into bugs, please",
-  "footerIssueLink": "report them",
-  "footerDiscord": " If you need support,",
-  "footerDiscordLink": "join us on Discord",
+  "footerIssue": " 如果您遇到任何问题，请",
+  "footerIssueLink": "报告这些问题",
+  "footerDiscord": " 如果您需要帮助，",
+  "footerDiscordLink": "加入我们的 Discord",
   "menuHome": "首页",
   "menuPackageManager": "软件包管理器",
   "menuStartup": "启动",
