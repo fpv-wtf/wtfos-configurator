@@ -16,7 +16,7 @@
   "description": "说明",
   "matchCount": "找到{{count}} 个包",
   "visitProjectPage": "访问项目主页",
-  "labelCategory": "Category",
-  "labelCategoryAllExceptSystem": "All (except system)",
-  "labelCategoryAll": "All"
+  "labelCategory": "类别",
+  "labelCategoryAllExceptSystem": "全部(系统除外)",
+  "labelCategoryAll": "全部"
 }
