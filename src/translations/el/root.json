@@ -14,6 +14,7 @@
   "step5Reboot": "Βήμα 5 - Επιτυχία! Επανεκκίνηση...",
   "done": "Όλα έγιναν - η συσκευή σας έχει γίνει rooted με επιτυχία!",
   "manualReboot": "Απέτυχε! Παρακαλώ απενεργοποιήστε και ενεργοποιήστε τη συσκευή σας τώρα...",
+  "tryButter": "Failed! Your firmware might not be rootable, please try downgrading with <a href=\"https://github.com/fpv-wtf/butter\">Butter</a>.",
   "failed": "Απέτυχε μετά από {{maxTry}} προσπάθειες.",
   "deviceLost": "Η συσκευή απομακρύνθηκε...",
   "deviceBack": "Η συσκευή επέστρεψε...",
