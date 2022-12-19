@@ -198,6 +198,10 @@ export default class AdbWrapper {
       const log = output.stdout.split("\n").filter((line) => line);
       callback(log);
     }
+
+    if(output.exitCode !== 0) {
+      throw new Error("Failed upgrading packages");
+    }
   }
 
   async getDetailedPackageInfo(repo) {
