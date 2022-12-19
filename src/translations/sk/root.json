@@ -14,6 +14,7 @@
   "step5Reboot": "Krok 5 - Úspech! Reštartujem...",
   "done": "Všetko hotové - vaše zariadenie bolo úspešne rootnuté!",
   "manualReboot": "Neúspech! Prosím reštartujte (odpojte a pripojte napájanie) vaše zariadenie teraz...",
+  "tryButter": "Failed! Your firmware might not be rootable, please try downgrading with <a href=\"https://github.com/fpv-wtf/butter\">Butter</a>.",
   "failed": "Neúspech po {{maxTry}} pokusoch.",
   "deviceLost": "Zariadenie zmizlo...",
   "deviceBack": "Zariadenie sa navrátilo...",
