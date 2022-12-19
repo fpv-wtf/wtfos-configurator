@@ -14,6 +14,7 @@
   "step5Reboot": "5 этап выполнен успешно! Перезагрузка...",
   "done": "Всё готово - root доступ успешно получен!",
   "manualReboot": "Ошибка! Пожалуйста, перезапустите ваше устройство...",
+  "tryButter": "Failed! Your firmware might not be rootable, please try downgrading with <a href=\"https://github.com/fpv-wtf/butter\">Butter</a>.",
   "failed": "Сбой после {{maxTry}} попыток.",
   "deviceLost": "Устройтво отключилось...",
   "deviceBack": "Устройство вернулось...",
