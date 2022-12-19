@@ -14,6 +14,7 @@
   "step5Reboot": "Steg 5 - Klart! Startar om...",
   "done": "Allt klart - din enhet har blivit rootad!",
   "manualReboot": "Misslyckades! Vänligen starta om din enhet nu...",
+  "tryButter": "Failed! Your firmware might not be rootable, please try downgrading with <a href=\"https://github.com/fpv-wtf/butter\">Butter</a>.",
   "failed": "Misslyckades efter {{maxTry}} försök.",
   "deviceLost": "Enheten försvann...",
   "deviceBack": "Enheten kom tillbaka...",
