@@ -32,7 +32,7 @@ export default class AdbWrapper {
       proxy: "http://127.0.0.1:8089",
       linkFunctions: ["wget"],
       opkgLists: "/opt/var/opkg-lists",
-      entwareInstallerUrl: "http://bin.entware.net/armv7sf-k3.2/installer/alternative.sh",
+      entwareInstallerUrl: "http://repo.fpv.wtf/entware-armv7sf-k3.2/installer/alternative.sh",
       opkgConfigUrl: "http://repo.fpv.wtf/pigeon/wtfos-opkg-config_armv7-3.2.ipk",
       healthchecksUrl: "https://github.com/fpv-wtf/wtfos-healthchecks/releases/latest/download/healthchecks.tar.gz",
       healthchesksPath: "/tmp/healthchecks",

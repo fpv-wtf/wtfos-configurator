@@ -34,17 +34,23 @@ export default class Proxy {
   async getResponseBuffer(response) {
     const header = `HTTP/1.1 ${response.status} ${response.statusText}`;
     const lines = [header];
+
+    let responseContentBuffer = await response.arrayBuffer();
+    responseContentBuffer = new Uint8Array(responseContentBuffer);
+
     for(let entry of response.headers.entries()) {
-      lines.push(entry.join(": "));
+      if(entry[0].toLowerCase() === "content-length") {
+        lines.push(entry[0] + ": " + responseContentBuffer.length);
+      }
+      else {
+        lines.push(entry.join(": "));
+      }
     }
     lines.push("\n");
     const headerString =  lines.join("\n");
 
     const encoder = new TextEncoder();
     const headerBuffer = encoder.encode(headerString);
-
-    let responseContentBuffer = await response.arrayBuffer();
-    responseContentBuffer = new Uint8Array(responseContentBuffer);
 
     const responseBuffer = new Uint8Array([...headerBuffer, ...responseContentBuffer]);
     return responseBuffer;
