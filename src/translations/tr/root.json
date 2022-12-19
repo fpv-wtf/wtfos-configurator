@@ -14,6 +14,7 @@
   "step5Reboot": "5. Adım - Başarılı! Yeniden başlatılıyor...",
   "done": "Hepsi tamam - cihazınız başarıyla rootlandı!",
   "manualReboot": "Başarısız oldu! Lüfen cihazınızı kapatıp açın...",
+  "tryButter": "Failed! Your firmware might not be rootable, please try downgrading with <a href=\"https://github.com/fpv-wtf/butter\">Butter</a>.",
   "failed": "{{maxTry}} denemeden sonra başarısız oldu.",
   "deviceLost": "Cihaz ayrıldı...",
   "deviceBack": "Cihaz geri geldi...",
