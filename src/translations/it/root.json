@@ -14,7 +14,7 @@
   "step5Reboot": "Fase 5 eseguita con successo! Riavvio in corso...",
   "done": "Ottimo! Operazioni concluse, il tuo dispositivo ha ottenuto con successo i privilegi di Root!",
   "manualReboot": "Operazione non riuscita! Si prega di spegnere e riaccendere il dispositivo adesso...",
-  "tryButter": "Failed! Your firmware might not be rootable, please try downgrading with <a href=\"https://github.com/fpv-wtf/butter\">Butter</a>.",
+  "tryButter": "Operazione non riuscita! Il tuo firmware potrebbe non essere compatibile con il root, prova a downgradare il sistema con <a href=\"https://github.com/fpv-wtf/butter\">Butter</a>.",
   "failed": "Operazione Fallita dopo {{maxTry}} tentativi.",
   "deviceLost": "Il dispositivo non è più connesso...",
   "deviceBack": "Il dispositivo è nuovamente connesso...",
