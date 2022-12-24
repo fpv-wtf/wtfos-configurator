@@ -14,7 +14,7 @@
   "step5Reboot": "Krok 5 - Powodzenie! Ponowne uruchamianie...",
   "done": "Wszystko gotowe - Twoje urządzenie zostało pomyślnie zrootowane!",
   "manualReboot": "Niepowodzenie! Proszę zrestartować swoje urządzenie przez ponowne podłączenie zasilania...",
-  "tryButter": "Failed! Your firmware might not be rootable, please try downgrading with <a href=\"https://github.com/fpv-wtf/butter\">Butter</a>.",
+  "tryButter": "Nie powiodło się! Twoje oprogramowanie może nie być rootowalne, spróbuj cofnąć wersję z <a href=\"https://github.com/fpv-wtf/butter\">Butter</a>.",
   "failed": "Nie udało się po {{maxTry}} ponownych próbach.",
   "deviceLost": "Urządzenie zniknęło...",
   "deviceBack": "Urządzenie wróciło...",
