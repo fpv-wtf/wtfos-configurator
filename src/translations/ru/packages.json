@@ -1,7 +1,7 @@
 {
-  "updateAvailable": "Update to already installed package is available. For more information hit the update button.",
-  "updatesAvailable": "Updates to already installed packages are available. For more information hit the update button.",
-  "update": "Update",
+  "updateAvailable": "Доступно обновление для уже установленного пакета. Дополнительная информация доступна по нажатию кнопки Обновление.",
+  "updatesAvailable": "Доступно обновление для уже установленных пакетов. Дополнительная информация доступна по нажатию кнопки Обновление.",
+  "update": "Обновление",
   "remove": "Удалить",
   "install": "Установить",
   "fetching": "Проверка пакетов...",
@@ -15,8 +15,8 @@
   "version": "Версия",
   "description": "Описание",
   "matchCount": "Найдено {{count}} пакетов",
-  "visitProjectPage": "Visit project page",
-  "labelCategory": "Category",
-  "labelCategoryAllExceptSystem": "All (except system)",
-  "labelCategoryAll": "All"
+  "visitProjectPage": "Перейти на страницу проекта",
+  "labelCategory": "Категория",
+  "labelCategoryAllExceptSystem": "Все (кроме системы)",
+  "labelCategoryAll": "Все"
 }
