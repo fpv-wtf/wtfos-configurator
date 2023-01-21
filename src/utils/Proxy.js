@@ -40,12 +40,20 @@ export default class Proxy {
 
     for(let entry of response.headers.entries()) {
       if(entry[0].toLowerCase() === "content-length") {
-        lines.push(entry[0] + ": " + responseContentBuffer.length);
+        continue;
       }
-      else {
-        lines.push(entry.join(": "));
-      }
+
+      lines.push(entry.join(": "));
     }
+
+    /**
+     * Manually append content-length.
+     *
+     * Sometimes this header might be missing for some reason. We also skip this
+     * header when transfering the headers above, since it will not be the
+     * correct size if the initial response was gzip encoded.
+     */
+    lines.push(`content-length: ${responseContentBuffer.length}`);
     lines.push("\n");
     const headerString =  lines.join("\n");
 
