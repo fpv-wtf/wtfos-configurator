@@ -154,12 +154,13 @@ export class Processor {
         bitrate = Math.ceil(bitrate / 5_000_000) * 5_000_000;
 
         this.encoder!.configure({
-          codec: "avc1.42003d",
-          width: options.width,
-          height: options.height,
           bitrate: bitrate,
+          codec: "avc1.42003d",
           framerate: 60,
+          height: options.height,
           latencyMode: "quality",
+          scalabilityMode: "L1T2",
+          width: options.width,
         });
       } catch (e: any) {
         throw new VideoWorkerShared.EncoderConfigureError(e);
