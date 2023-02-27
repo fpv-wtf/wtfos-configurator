@@ -17,6 +17,7 @@ import TerminalIcon from "@mui/icons-material/Terminal";
 import Badge from "@mui/material/Badge";
 import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import SettingsIcon from "@mui/icons-material/Settings";
+import DvrIcon from "@mui/icons-material/Dvr";
 
 import SvgIcon from "@mui/material/SvgIcon";
 import { ReactComponent as AlienSvg } from "../../assets/icons/alien-white.svg";
@@ -175,6 +176,21 @@ export default function Tiles() {
           title={t("tileSettingsTitle")}
         >
           <SettingsIcon fontSize="large" />
+        </Tile>
+      </Grid>
+
+      <Grid
+        item
+        md={3}
+        sm={6}
+        xs={12}
+      >
+        <Tile
+          description={t("tileOsdOverlayDescription")}
+          linkTo="osd-overlay"
+          title={t("tileOsdOverlayTitle")}
+        >
+          <DvrIcon fontSize="large" />
         </Tile>
       </Grid>
 
