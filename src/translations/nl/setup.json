@@ -18,5 +18,7 @@
   "checking": "Pakketten controleren...",
   "name": "Pakketnaam",
   "current": "Geïnstalleerde Versie",
-  "latest": "Laatste Versie"
+  "latest": "Laatste Versie",
+  "updateSuccess": "Updates installed successfully!",
+  "updateFailed": "Failed installing updates!"
 }
