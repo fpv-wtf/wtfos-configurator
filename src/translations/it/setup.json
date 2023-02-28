@@ -18,5 +18,7 @@
   "checking": "Controllo i pacchetti...",
   "name": "Nome Pacchetto",
   "current": "Versione Installata",
-  "latest": "Ultima versione"
+  "latest": "Ultima versione",
+  "updateSuccess": "Updates installed successfully!",
+  "updateFailed": "Failed installing updates!"
 }
