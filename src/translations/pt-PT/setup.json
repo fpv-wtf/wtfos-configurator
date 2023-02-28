@@ -18,5 +18,7 @@
   "checking": "Verificando os pacotes...",
   "name": "Nome do Pacote",
   "current": "Versão Instalada",
-  "latest": "Versão mais Recente"
+  "latest": "Versão mais Recente",
+  "updateSuccess": "Updates installed successfully!",
+  "updateFailed": "Failed installing updates!"
 }
