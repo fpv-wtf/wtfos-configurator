@@ -18,5 +18,7 @@
   "checking": "Pakete werden abgerufen...",
   "name": "Paket-Name",
   "current": "Installierte Version",
-  "latest": "Neueste Version"
+  "latest": "Neueste Version",
+  "updateSuccess": "Updates installed successfully!",
+  "updateFailed": "Failed installing updates!"
 }
