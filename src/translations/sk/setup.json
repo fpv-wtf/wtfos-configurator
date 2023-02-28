@@ -18,5 +18,7 @@
   "checking": "Kontrolujem balíčky...",
   "name": "Názov balíka",
   "current": "Nainštalovaná verzia",
-  "latest": "Aktuálna verzia"
+  "latest": "Aktuálna verzia",
+  "updateSuccess": "Updates installed successfully!",
+  "updateFailed": "Failed installing updates!"
 }
