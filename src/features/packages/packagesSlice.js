@@ -253,7 +253,6 @@ export const packagesSlice = createSlice({
         state.fetchedUpgradable = false;
       })
       .addCase(fetchUpgradable.fulfilled, (state, action) => {
-        console.log("fullfilled", action.payload);
         state.upgradable = action.payload;
         state.processing = false;
         state.fetchedUpgradable = true;
