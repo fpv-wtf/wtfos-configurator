@@ -1,7 +1,7 @@
 {
-  "debugStatsExpectedFrames": "Expected Frames",
-  "debugStatsFramesDecoded": "Frames Decoded",
-  "debugStatsFramesDecodedMissing": "Frames Decoded (Missing)",
+  "debugStatsExpectedFrames": "Fotogrammi Previsti",
+  "debugStatsFramesDecoded": "Fotogrammi Decodificati",
+  "debugStatsFramesDecodedMissing": "Fotogrammi Decodificati (Mancanti)",
   "debugStatsFramesEncoded": "Frames Encoded",
   "debugStatsInDecoderQueue": "In Decoder Queue",
   "debugStatsInEncoderQueue": "In Encoder Queue",
