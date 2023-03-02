@@ -17,8 +17,8 @@
   "fileDropOsd": "OSD",
   "fileDropVideo": "Vídeo",
   "noteConfigLink": "Configure isto no Gerenciador de Pacotes.",
-  "noteHeader": "OSD recording is an opt-in feature on the goggle side.",
-  "noteWarning": "Any video files used must come directly from the goggles, with no modifications.",
-  "processing": "Processing...",
-  "start": "Start"
+  "noteHeader": "A gravação OSD é uma funcionalidade opt-in no lado dos óculos.",
+  "noteWarning": "Quaisquer ficheiros de vídeo devem vir diretamente dos óculos, sem modificações.",
+  "processing": "A processar...",
+  "start": "Iniciar"
 }
