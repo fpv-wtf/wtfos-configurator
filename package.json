@@ -1,6 +1,6 @@
 {
   "name": "wtfos-configurator",
-  "version": "1.0.0",
+  "version": "2.0.0-dev",
   "homepage": "https://develop.fpv.wtf",
   "private": true,
   "dependencies": {
@@ -19,13 +19,16 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
     "@testing-library/user-event": "^14.1.1",
-    "@yume-chan/adb": "^0.0.15",
+    "@types/dom-webcodecs": "^0.1.4",
+    "@types/node": "^18.8.4",
+    "@types/offscreencanvas": "^2019.7.0",
+    "@types/wicg-file-system-access": "^2020.9.5",
     "@yume-chan/adb-backend-webusb": "^0.0.15",
     "@yume-chan/adb-credential-web": "^0.0.15",
+    "@yume-chan/adb": "^0.0.15",
     "buffer": "^6.0.3",
     "i18next": "^21.8.10",
     "pre-commit": "^1.2.2",
-    "react": "^18.0.0",
     "react-cookie": "^4.1.1",
     "react-dom": "^18.0.0",
     "react-ga4": "^1.4.1",
@@ -33,6 +36,9 @@
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react": "^18.0.0",
+    "stream-data-view": "^1.7.2",
+    "typescript": "<4.7.0",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4",
     "with-staged": "^1.0.2",
@@ -40,22 +46,16 @@
     "xterm-for-react": "^1.0.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "ESLINT_NO_DEV_ERRORS=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ./src --ext .jsx,.js",
-    "lint-commit": "with-staged '**/*.{js,jsx}' -- yarn eslint",
+    "lint": "eslint ./src --ext .jsx,.js,.ts,.tsx",
+    "lint-commit": "with-staged '**/*.{js,jsx,ts,tsx}' -- yarn eslint",
     "remove-console": "babel --plugins transform-remove-console ./src/utils/exploit --out-dir ./src/utils/exploit-no-console",
     "js-obfuscate": "javascript-obfuscator ./src/utils/exploit-no-console --output src/utils/obfuscated-exploit --split-strings=true --string-array-encoding base64,rc4",
     "obfuscate": "yarn run remove-console && yarn run js-obfuscate",
     "device-shell": "wtfos-configurator-reverse-shell-server"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [

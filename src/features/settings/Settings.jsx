@@ -30,6 +30,7 @@ export default function Settings() {
   return (
     <Container
       fixed
+      sx={{ mb: 8 }}
     >
       <Header />
 

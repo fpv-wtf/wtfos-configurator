@@ -18,6 +18,10 @@ const initialState = {
   fetchedUpgradable: false,
   processing: false,
   error: [],
+  update: {
+    ran: false,
+    success: false,
+  },
 };
 
 export const removePackage = createAsyncThunk(
@@ -224,6 +228,7 @@ export const packagesSlice = createSlice({
         state.processing = true;
       })
       .addCase(removePackage.fulfilled, (state, action) => {
+        state.error = initialState.error;
         state.fetched = false;
         state.processing = false;
       })
@@ -236,6 +241,7 @@ export const packagesSlice = createSlice({
         state.processing = true;
       })
       .addCase(installPackage.fulfilled, (state, action) => {
+        state.error = initialState.error;
         state.fetched = false;
         state.processing = false;
       })
@@ -246,18 +252,27 @@ export const packagesSlice = createSlice({
       })
       .addCase(fetchUpgradable.pending, (state, action) => {
         state.processing = true;
+        state.fetchedUpgradable = false;
       })
       .addCase(fetchUpgradable.fulfilled, (state, action) => {
-        state.fetchedUpgradable = true;
         state.upgradable = action.payload;
         state.processing = false;
+        state.fetchedUpgradable = true;
       })
       .addCase(upgrade.pending, (state, action) => {
         state.processing = true;
         state.fetchedUpgradable = false;
+        state.update.ran = false;
+      })
+      .addCase(upgrade.rejected, (state, action) => {
+        state.processing = false;
+        state.update.ran = true;
+        state.update.success = false;
       })
       .addCase(upgrade.fulfilled, (state, action) => {
         state.processing = false;
+        state.update.ran = true;
+        state.update.success = true;
       })
       .addCase(installWTFOS.pending, (state, action) => {
         state.processing = true;
@@ -292,5 +307,6 @@ export const selectFilter = (state) => state.packages.filter;
 export const selectFiltered = (state) => state.packages.filtered;
 export const selectProcessing = (state) => state.packages.processing;
 export const selectUpgradable = (state) => state.packages.upgradable;
+export const selectUpdate = (state) => state.packages.update;
 
 export default packagesSlice.reducer;

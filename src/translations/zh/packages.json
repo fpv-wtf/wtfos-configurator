@@ -11,5 +11,7 @@
   "name": "名称",
   "version": "版本",
   "description": "说明",
-  "matchCount": "找到{{count}} 个包"
+  "matchCount": "找到{{count}} 个包",
+  "installing": "Installing package...",
+  "removing": "Removing package..."
 }

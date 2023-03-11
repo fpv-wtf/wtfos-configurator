@@ -22,6 +22,7 @@ import AdbWrapper from "../../utils/AdbWrapper";
 
 import About from "../about/About";
 import App from "./App";
+import OsdOverlay from "../osd-overlay/OsdOverlay";
 import Settings from "../settings/Settings";
 
 import { hasAdb } from "../../utils/WebusbHelpers";
@@ -127,7 +128,6 @@ export default function AdbRouter() {
    */
   const connectOrRedirect = useCallback(async (device) => {
     if (hasAdb(device)) {
-      console.log("connectOrRedirect");
       const backendDevice = new AdbWebUsbBackend(device);
       await connectToDevice(backendDevice);
 
@@ -146,7 +146,6 @@ export default function AdbRouter() {
    */
   const autoConnect = useCallback(async() => {
     const canConnect = (!devicePromiseRef.current && checkedMasterState && isMaster);
-    console.log("connect", !devicePromiseRef.current, checkedMasterState, isMaster);
     if(canConnect) {
       const devices = await navigator.usb.getDevices();
       if(devices.length > 0) {
@@ -167,7 +166,6 @@ export default function AdbRouter() {
    */
   const handleDeviceConnect = useCallback(async() => {
     if(!devicePromiseRef.current) {
-      console.log("handleDeviceConnect...");
       dispatch(connecting());
 
       try {
@@ -193,27 +191,21 @@ export default function AdbRouter() {
   useEffect(() => {
     if(window.navigator.usb && checkedMasterState) {
       if(watcherRef.current) {
-        console.log("Disposing old watcher...");
         watcherRef.current.dispose();
       }
 
       watcherRef.current = new AdbWebUsbBackendWatcher(async (id) => {
         if(!id) {
-          console.log("Device went away...");
-
           setAdb(null);
 
           dispatch(resetDevice());
           clearInterval(intervalRef.current);
         } else {
-          console.log("in adb watcher");
           await autoConnect();
         }
       });
-      console.log("Created new watcher...");
 
       if(!startupCheck) {
-        console.log("Startup check");
         setStartupCheck(true);
         autoConnect();
       }
@@ -266,6 +258,11 @@ export default function AdbRouter() {
       <Route
         element={<About />}
         path="/about"
+      />
+
+      <Route
+        element={<OsdOverlay />}
+        path="/osd-overlay"
       />
 
       <Route

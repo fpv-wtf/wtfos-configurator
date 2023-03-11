@@ -332,7 +332,7 @@ export default function Root() {
             disconnected.current = true;
             break;
           } else if(e instanceof PatchFailed) {
-            log(t("manualReboot"));
+            log(t("tryButter"));
 
             ReactGA.gtag("event", "patchFailed", {
               device,

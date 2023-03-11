@@ -11,7 +11,7 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/all",
-    "react-app",
+    "react-app"
   ],
   "rules": {
     "react/jsx-indent": ["warn", 2],

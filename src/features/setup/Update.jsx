@@ -33,9 +33,11 @@ import {
   fetchUpgradable,
   selectFetchedUpgradable,
   selectProcessing,
+  selectUpdate,
   selectUpgradable,
   upgrade,
 } from "../packages/packagesSlice";
+import { selectPassed } from "../healthcheck/healthcheckSlice";
 
 export default function Update({ adb }) {
   const { t } = useTranslation("setup");
@@ -43,15 +45,18 @@ export default function Update({ adb }) {
 
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const status = useSelector(selectStatus);
+  const update = useSelector(selectUpdate);
   const upgradable = useSelector(selectUpgradable);
   const fetchedUpgradable = useSelector(selectFetchedUpgradable);
   const isProcessing = useSelector(selectProcessing);
 
+  const healthchecksPassed = useSelector(selectPassed);
+
   useEffect(() => {
-    if(!isProcessing && !fetchedUpgradable) {
+    if(!isProcessing && !fetchedUpgradable && healthchecksPassed) {
       dispatch(fetchUpgradable(adb));
     }
-  }, [adb, dispatch, fetchedUpgradable, isProcessing]);
+  }, [adb, dispatch, fetchedUpgradable, isProcessing, healthchecksPassed]);
 
   const handleWTFOSUpdate = useCallback(() => {
     dispatch(upgrade({
@@ -82,11 +87,20 @@ export default function Update({ adb }) {
 
   return(
     <Stack spacing={2}>
-      {isProcessing && !fetchedUpgradable &&
-        <Spinner text={t("checking")} />}
 
-      {!isProcessing &&
-        <Log />}
+      {update.ran && update.success &&
+        <Alert severity="success">
+          {t("updateSuccess")}
+        </Alert>}
+
+      {update.ran && !update.success &&
+        <>
+          <Alert severity="error">
+            {t("updateFailed")}
+          </Alert>
+
+          <Log />
+        </>}
 
       {upgradable.length > 0 &&
         <Button
@@ -102,10 +116,13 @@ export default function Update({ adb }) {
           {t("update")}
         </Button>}
 
-      {upgradable.length === 0 && !isProcessing &&
+      {upgradable.length === 0 && fetchedUpgradable &&
         <Alert severity="success">
           {t("upToDate")}
         </Alert>}
+
+      {(!healthchecksPassed || isProcessing) && !fetchedUpgradable &&
+        <Spinner text={t("checking")} />}
 
       {upgradable.length > 0 &&
         <TableContainer
