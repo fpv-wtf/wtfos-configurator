@@ -47,6 +47,7 @@ import {
   removePackage,
   repo,
   search,
+  selectError,
   selectFetched,
   selectFetchedUpgradable,
   selectFilter,
@@ -62,11 +63,12 @@ import { selectNiceName } from "../device/deviceSlice";
 import { selectHasOpkgBinary } from "../device/deviceSlice";
 
 import SetupHint from "../setup/SetupHint";
-import Spinner from "../loading/Spinner";
 import UpdatesBanner from "./UpdatesBanner";
+import Spinner from "../overlays/Spinner";
 
 export default function Packages({ adb }) {
   const { t } = useTranslation("packages");
+
   const tableEl = useRef();
   const scrollListenerId = useRef();
 
@@ -82,6 +84,7 @@ export default function Packages({ adb }) {
 
   const dispatch = useDispatch();
 
+  const error = useSelector(selectError);
   const fetched = useSelector(selectFetched);
   const filter = useSelector(selectFilter);
   const filtered = useSelector(selectFiltered);
@@ -99,6 +102,10 @@ export default function Packages({ adb }) {
   const [renderOffset, setRenderOffset] = useState(50);
   const [renderRows, setRenderRows] = useState(filtered.slice(0, step));
   const [loading, setLoading] = useState(false);
+
+  const [fetching, setFetching] = useState(false);
+  const [installing, setInstalling] = useState(false);
+  const [removing, setRemoving] = useState(false);
 
   const handleInstallStateChange = useCallback((event) => {
     const installed = event.target.value === "installed";
@@ -127,15 +134,26 @@ export default function Packages({ adb }) {
   }, [dispatch]);
 
   useEffect(() => {
+    setInstalling(false);
+    setRemoving(false);
+    setFetching(false);
+
     if(!fetched && fetchedUpgradable) {
+      setFetching(true);
       dispatch(fetchPackages(adb));
     }
-  }, [adb, dispatch, fetched, fetchedUpgradable]);
+  }, [adb, dispatch, fetched, fetchedUpgradable, setFetching, setInstalling, setRemoving]);
 
   useEffect(() => {
     setRenderRows(filtered.slice(0, step));
     setRenderOffset(step);
   }, [filtered]);
+
+  useEffect(() => {
+    if(error.length > 0) {
+      window.scrollTo(0, 0);
+    }
+  }, [error]);
 
   const scrollListener = useCallback(() => {
     let bottom = window.pageYOffset;
@@ -167,6 +185,7 @@ export default function Packages({ adb }) {
       deviceName,
     });
 
+    setRemoving(true);
     dispatch(removePackage({
       adb,
       name,
@@ -180,6 +199,7 @@ export default function Packages({ adb }) {
       deviceName,
     });
 
+    setInstalling(true);
     dispatch(installPackage({
       adb,
       name,
@@ -190,8 +210,18 @@ export default function Packages({ adb }) {
     dispatch(clearError());
   }, [dispatch]);
 
+  let loadingText = t("fetching");
+  if(installing) {
+    loadingText = t("installing");
+  } else if(removing) {
+    loadingText = t("removing");
+  }
+
+  const isLoading = fetching || installing || removing;
+
+  const packageString = t("matchCount", { count: filtered.length } );
+
   const rows = renderRows.map((item) => {
-    console.log(item.details.homepage);
     return (
       <TableRow key={item.name}>
         <TableCell sx={{ width: 250 }}>
@@ -310,21 +340,16 @@ export default function Packages({ adb }) {
     );
   });
 
-  const packageString = t("matchCount", { count: filtered.length } );
-
   return (
-    <Paper>
+    <Paper sx={{ position: "relative" }} >
       {!hasOpkgBinary &&
         <SetupHint />}
 
-      {!fetched && hasOpkgBinary &&
-        <Spinner text={t("fetching")} />}
-
       {fetched && upgradable.length > 0 && <UpdatesBanner updatePluralized={upgradable.length > 1} />}
 
-      {fetched && hasOpkgBinary &&
+      {hasOpkgBinary &&
         <Stack>
-          <ErrorLog title={t("installationFailed")} />
+          <ErrorLog title={t("packageManagemendFailed")} />
 
           <Box
             component="form"
@@ -439,6 +464,9 @@ export default function Packages({ adb }) {
             </Table>
           </TableContainer>
         </Stack>}
+
+      {isLoading &&
+        <Spinner text={loadingText} />}
     </Paper>
   );
 }
