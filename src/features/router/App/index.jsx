@@ -65,7 +65,7 @@ function App({
   return (
     <Container
       fixed
-      sx={{ paddingBottom: 3 }}
+      sx={{ mb: 8 }}
     >
       <Header />
 
