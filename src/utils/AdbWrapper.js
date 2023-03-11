@@ -204,13 +204,6 @@ export default class AdbWrapper {
     }
   }
 
-  async getPackageDetails(name) {
-    const packages = await this.getPackages();
-    const pkg = packages.find((pkg) => pkg.name === name);
-
-    return pkg;
-  }
-
   async getDetailedPackageInfo(repo) {
     const output = await this.executeCommand([
       "gunzip -c",
