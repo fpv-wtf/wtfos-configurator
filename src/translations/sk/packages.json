@@ -15,5 +15,7 @@
   "version": "Verzia",
   "description": "Popis",
   "matchCount": "Nájdených {{count}} balíčkov",
-  "visitProjectPage": "Visit project page"
+  "visitProjectPage": "Visit project page",
+  "installing": "Installing package...",
+  "removing": "Removing package..."
 }

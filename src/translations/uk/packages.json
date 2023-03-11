@@ -15,5 +15,7 @@
   "version": "Версія",
   "description": "Опис",
   "matchCount": "Знайдено {{count}} пакетів",
-  "visitProjectPage": "Перейти на сторінку проекту"
+  "visitProjectPage": "Перейти на сторінку проекту",
+  "installing": "Installing package...",
+  "removing": "Removing package..."
 }

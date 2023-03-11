@@ -15,5 +15,7 @@
   "version": "Version",
   "description": "Description",
   "matchCount": "{{count}} extensions ont été trouvées",
-  "visitProjectPage": "Visit project page"
+  "visitProjectPage": "Visit project page",
+  "installing": "Installing package...",
+  "removing": "Removing package..."
 }

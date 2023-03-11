@@ -15,5 +15,7 @@
   "version": "Versione",
   "description": "Descrizione",
   "matchCount": "Trovati {{count}} pacchetti",
-  "visitProjectPage": "Visita la pagina del progetto"
+  "visitProjectPage": "Visita la pagina del progetto",
+  "installing": "Installing package...",
+  "removing": "Removing package..."
 }

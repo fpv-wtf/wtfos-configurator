@@ -15,5 +15,7 @@
   "version": "Sürüm",
   "description": "Açıklama",
   "matchCount": "{{count}} adet paket bulundu",
-  "visitProjectPage": "Visit project page"
+  "visitProjectPage": "Visit project page",
+  "installing": "Installing package...",
+  "removing": "Removing package..."
 }
