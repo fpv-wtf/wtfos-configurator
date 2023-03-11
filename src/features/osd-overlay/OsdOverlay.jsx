@@ -5,13 +5,12 @@ import {
   Container,
   Grid,
   LinearProgress,
-  Link,
   Stack,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
-
 import Header from "../navigation/Header";
+import DefaultTextLink from "../styledLink/Default";
 
 import DebugStats from "./DebugStats";
 import FileDrop, { useFileDropState } from "./FileDrop";
@@ -189,12 +188,10 @@ export default function OsdOverlay() {
 
           {" "}
 
-          <Link
-            color="primary"
-            href="/package/fpv-wtf/msp-osd"
-          >
-            {t("noteConfigLink")}
-          </Link>
+          <DefaultTextLink
+            text={t("noteConfigLink")}
+            to="/package/fpv-wtf/msp-osd"
+          />
 
           <br />
 
