@@ -14,6 +14,7 @@
   "step5Reboot": "Étape 5 - Réussie ! Redémarrage...",
   "done": "Terminé - votre appareil a été rooté avec succès !",
   "manualReboot": "Échec! Veuillez redémarrer votre appareil ...",
+  "tryButter": "Failed! Your firmware might not be rootable, please try downgrading with <a href=\"https://github.com/fpv-wtf/butter\">Butter</a>.",
   "failed": "Échoué après {{maxTry}} tentatives",
   "deviceLost": "L'appareil est déconnecté...",
   "deviceBack": "L'appareil est reconnecté...",

@@ -6,6 +6,7 @@
   "install": "Installeren",
   "fetching": "Pakketten ophalen...",
   "installationFailed": "Fout tijdens installatie van een pakket:",
+  "packageManagemendFailed": "Package management error:",
   "labelRepo": "Repo",
   "labelPackages": "Pakketten",
   "labelAll": "Alles",
@@ -16,6 +17,9 @@
   "description": "Beschrijving",
   "matchCount": "{{count}} pakketten gevonden",
   "visitProjectPage": "Visit project page",
+  "labelCategory": "Category",
+  "labelCategoryAllExceptSystem": "All (except system)",
+  "labelCategoryAll": "All",
   "installing": "Installing package...",
   "removing": "Removing package..."
 }

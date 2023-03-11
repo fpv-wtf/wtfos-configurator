@@ -18,5 +18,7 @@
   "checking": "Kontrollerar paket...",
   "name": "Paketnamn",
   "current": "Installerad version",
-  "latest": "Senaste Version"
+  "latest": "Senaste Version",
+  "updateSuccess": "Updates installed successfully!",
+  "updateFailed": "Failed installing updates!"
 }

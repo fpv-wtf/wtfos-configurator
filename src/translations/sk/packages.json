@@ -6,6 +6,7 @@
   "install": "Inštalovať",
   "fetching": "Sťahujem balíčky...",
   "installationFailed": "Chyba počas inštalácie balíčku:",
+  "packageManagemendFailed": "Package management error:",
   "labelRepo": "Repozitár",
   "labelPackages": "Balíčky",
   "labelAll": "Všetky",
@@ -16,6 +17,9 @@
   "description": "Popis",
   "matchCount": "Nájdených {{count}} balíčkov",
   "visitProjectPage": "Visit project page",
+  "labelCategory": "Category",
+  "labelCategoryAllExceptSystem": "All (except system)",
+  "labelCategoryAll": "All",
   "installing": "Installing package...",
   "removing": "Removing package..."
 }

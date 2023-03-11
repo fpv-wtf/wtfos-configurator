@@ -18,5 +18,7 @@
   "checking": "Έλεγχος πακέτων...",
   "name": "Όνομα Πακέτου",
   "current": "Εγκατεστημένη Έκδοση",
-  "latest": "Τελευταία Έκδοση"
+  "latest": "Τελευταία Έκδοση",
+  "updateSuccess": "Updates installed successfully!",
+  "updateFailed": "Failed installing updates!"
 }

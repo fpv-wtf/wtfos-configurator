@@ -14,6 +14,7 @@
   "step5Reboot": "步骤 5 - 成功！重启中...",
   "done": "全部完成 - 您的设备已成功root!",
   "manualReboot": "失败！请立即重新为您的设备上电...",
+  "tryButter": "失败！您的固件可能无法Root，请尝试使用 <a href=\"https://github.com/fpv-wtf/butter\">Buter</a> 降级。",
   "failed": "尝试{{maxTry}} 次后失败",
   "deviceLost": "设备断开...",
   "deviceBack": "设备再次连接...",

@@ -18,5 +18,7 @@
   "checking": "Перевірка пакетів...",
   "name": "Назва пакету",
   "current": "Встановлена версія",
-  "latest": "Остання версія"
+  "latest": "Остання версія",
+  "updateSuccess": "Updates installed successfully!",
+  "updateFailed": "Failed installing updates!"
 }

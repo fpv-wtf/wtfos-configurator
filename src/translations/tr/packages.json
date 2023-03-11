@@ -6,6 +6,7 @@
   "install": "Yükle",
   "fetching": "Paketler getiriliyor...",
   "installationFailed": "Paket kurulumu sırasında hata oluştu:",
+  "packageManagemendFailed": "Package management error:",
   "labelRepo": "Kaynak",
   "labelPackages": "Paketler",
   "labelAll": "Tümü",
@@ -16,6 +17,9 @@
   "description": "Açıklama",
   "matchCount": "{{count}} adet paket bulundu",
   "visitProjectPage": "Visit project page",
+  "labelCategory": "Category",
+  "labelCategoryAllExceptSystem": "All (except system)",
+  "labelCategoryAll": "All",
   "installing": "Installing package...",
   "removing": "Removing package..."
 }

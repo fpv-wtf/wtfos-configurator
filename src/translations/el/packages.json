@@ -6,6 +6,7 @@
   "install": "Εγκατάσταση",
   "fetching": "Έλεγχος πακέτων...",
   "installationFailed": "Σφάλμα κατά την εγκατάσταση πακέτου:",
+  "packageManagemendFailed": "Package management error:",
   "labelRepo": "Repo",
   "labelPackages": "Πακέτα",
   "labelAll": "Όλα",
@@ -16,6 +17,9 @@
   "description": "Περιγραφή",
   "matchCount": "Βρέθηκαν {{count}} πακέτα",
   "visitProjectPage": "Visit project page",
+  "labelCategory": "Category",
+  "labelCategoryAllExceptSystem": "All (except system)",
+  "labelCategoryAll": "All",
   "installing": "Installing package...",
   "removing": "Removing package..."
 }

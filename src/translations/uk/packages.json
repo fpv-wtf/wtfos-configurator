@@ -6,6 +6,7 @@
   "install": "Встановити",
   "fetching": "Отримання пакетів...",
   "installationFailed": "Помилка при встановленні пакета:",
+  "packageManagemendFailed": "Package management error:",
   "labelRepo": "Репозиторії",
   "labelPackages": "Пакети",
   "labelAll": "Усі",
@@ -16,6 +17,9 @@
   "description": "Опис",
   "matchCount": "Знайдено {{count}} пакетів",
   "visitProjectPage": "Перейти на сторінку проекту",
+  "labelCategory": "Категорія",
+  "labelCategoryAllExceptSystem": "Всі (окрім системних)",
+  "labelCategoryAll": "Усі",
   "installing": "Installing package...",
   "removing": "Removing package..."
 }

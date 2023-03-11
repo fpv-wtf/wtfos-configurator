@@ -3,7 +3,7 @@
   "submit": "Guardar definições",
   "loading": "A carregar detalhes do pacote...",
   "visitProjectPage": "Visitar página do projeto",
-  "maintainer": "Mantenedor: {{name}}",
+  "maintainer": "Responsável: {{name}}",
   "remove": "Remover",
   "install": "Instalar",
   "installing": "A instalar pacote...",

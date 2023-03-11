@@ -1,11 +1,11 @@
 {
-  "detailsFor": "Details for {{name}}",
-  "submit": "Save settings",
-  "loading": "Loading package details...",
-  "visitProjectPage": "Visit project page",
-  "maintainer": "Maintainer: {{name}}",
-  "remove": "Remove",
-  "install": "Install",
-  "installing": "Installing package...",
-  "removing": "Removing package..."
+  "detailsFor": "Подробнее о {{name}}",
+  "submit": "Сохранить настройки",
+  "loading": "Загрузка информации о пакете...",
+  "visitProjectPage": "Перейти на страницу проекта",
+  "maintainer": "Разработчик: {{name}}",
+  "remove": "Удалить",
+  "install": "Установить",
+  "installing": "Установка пакетов...",
+  "removing": "Удаление пакетов..."
 }

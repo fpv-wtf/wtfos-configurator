@@ -6,6 +6,7 @@
   "install": "Installer",
   "fetching": "Récupération des extensions...",
   "installationFailed": "Erreur lors de l'installation de l'extension :",
+  "packageManagemendFailed": "Package management error:",
   "labelRepo": "Repo",
   "labelPackages": "Extensions",
   "labelAll": "Tous",
@@ -16,6 +17,9 @@
   "description": "Description",
   "matchCount": "{{count}} extensions ont été trouvées",
   "visitProjectPage": "Visit project page",
+  "labelCategory": "Category",
+  "labelCategoryAllExceptSystem": "All (except system)",
+  "labelCategoryAll": "All",
   "installing": "Installing package...",
   "removing": "Removing package..."
 }

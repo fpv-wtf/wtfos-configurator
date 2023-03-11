@@ -1,11 +1,12 @@
 {
-  "updateAvailable": "Update für bereits installiertes Paket ist verfügbar. Für weitere Informationen klicken Sie auf \"Aktualisieren\".",
-  "updatesAvailable": "Updates für bereits installierte Pakete sind verfügbar. Für weitere Informationen klicken Sie auf \"Aktualisieren\".",
+  "updateAvailable": "Ein Update für das bereits installierte Paket ist verfügbar. Für weitere Informationen klicke auf \"Aktualisieren\".",
+  "updatesAvailable": "Mehrere Updates für bereits installierte Pakete sind verfügbar. Für weitere Informationen klicke auf \"Aktualisieren\".",
   "update": "Aktualisieren",
   "remove": "Entfernen",
   "install": "Installieren",
   "fetching": "Pakete werden abgerufen...",
   "installationFailed": "Fehler während Paket Installation:",
+  "packageManagemendFailed": "Package management error:",
   "labelRepo": "Quelle",
   "labelPackages": "Pakete",
   "labelAll": "Alle",
@@ -16,6 +17,9 @@
   "description": "Beschreibung",
   "matchCount": "{{count}} Pakete gefunden",
   "visitProjectPage": "Projektseite aufrufen",
+  "labelCategory": "Kategorie",
+  "labelCategoryAllExceptSystem": "Alle (mit Ausnahme des Systems)",
+  "labelCategoryAll": "Alle",
   "installing": "Installing package...",
   "removing": "Removing package..."
 }
