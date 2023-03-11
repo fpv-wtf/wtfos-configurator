@@ -6,6 +6,7 @@
   "install": "Installera",
   "fetching": "Hämtar paket...",
   "installationFailed": "Fel vid paketinstallation:",
+  "packageManagemendFailed": "Package management error:",
   "labelRepo": "Källa",
   "labelPackages": "Paket",
   "labelAll": "Alla",
@@ -18,5 +19,7 @@
   "visitProjectPage": "Visit project page",
   "labelCategory": "Category",
   "labelCategoryAllExceptSystem": "All (except system)",
-  "labelCategoryAll": "All"
+  "labelCategoryAll": "All",
+  "installing": "Installing package...",
+  "removing": "Removing package..."
 }
