@@ -15,7 +15,7 @@ export default function About() {
   return(
     <Container
       fixed
-      sx={{ paddingBottom: 3 }}
+      sx={{ mb: 8 }}
     >
       <Header />
 
