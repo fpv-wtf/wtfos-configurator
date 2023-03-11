@@ -47,6 +47,7 @@ import {
   removePackage,
   repo,
   search,
+  selectError,
   selectFetched,
   selectFetchedUpgradable,
   selectFilter,
@@ -83,6 +84,7 @@ export default function Packages({ adb }) {
 
   const dispatch = useDispatch();
 
+  const error = useSelector(selectError);
   const fetched = useSelector(selectFetched);
   const filter = useSelector(selectFilter);
   const filtered = useSelector(selectFiltered);
@@ -147,6 +149,12 @@ export default function Packages({ adb }) {
     setRenderOffset(step);
   }, [filtered]);
 
+  useEffect(() => {
+    if(error.length > 0) {
+      window.scrollTo(0, 0);
+    }
+  }, [error]);
+
   const scrollListener = useCallback(() => {
     let bottom = window.pageYOffset;
     let innerHeight = window.innerHeight;
@@ -210,6 +218,8 @@ export default function Packages({ adb }) {
   }
 
   const isLoading = fetching || installing || removing;
+
+  const packageString = t("matchCount", { count: filtered.length } );
 
   const rows = renderRows.map((item) => {
     return (
@@ -330,8 +340,6 @@ export default function Packages({ adb }) {
     );
   });
 
-  const packageString = t("matchCount", { count: filtered.length } );
-
   return (
     <Paper sx={{ position: "relative" }} >
       {!hasOpkgBinary &&
@@ -341,7 +349,7 @@ export default function Packages({ adb }) {
 
       {hasOpkgBinary &&
         <Stack>
-          <ErrorLog title={t("installationFailed")} />
+          <ErrorLog title={t("packageManagemendFailed")} />
 
           <Box
             component="form"

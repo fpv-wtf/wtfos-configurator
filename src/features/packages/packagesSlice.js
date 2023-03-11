@@ -228,6 +228,7 @@ export const packagesSlice = createSlice({
         state.processing = true;
       })
       .addCase(removePackage.fulfilled, (state, action) => {
+        state.error = initialState.error;
         state.fetched = false;
         state.processing = false;
       })
@@ -240,6 +241,7 @@ export const packagesSlice = createSlice({
         state.processing = true;
       })
       .addCase(installPackage.fulfilled, (state, action) => {
+        state.error = initialState.error;
         state.fetched = false;
         state.processing = false;
       })
