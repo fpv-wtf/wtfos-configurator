@@ -6,6 +6,7 @@
   "install": "Zainstaluj",
   "fetching": "Pobieranie pakietów...",
   "installationFailed": "Błąd podczas instalacji pakietu:",
+  "packageManagemendFailed": "Package management error:",
   "labelRepo": "Repozytorium",
   "labelPackages": "Pakiety",
   "labelAll": "Wszystkie",
@@ -18,5 +19,7 @@
   "visitProjectPage": "Otwórz stronę projektu",
   "labelCategory": "Kategoria",
   "labelCategoryAllExceptSystem": "Wszystkie (z wyjątkiem systemowych)",
-  "labelCategoryAll": "Wszystkie"
+  "labelCategoryAll": "Wszystkie",
+  "installing": "Installing package...",
+  "removing": "Removing package..."
 }
