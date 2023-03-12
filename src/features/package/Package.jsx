@@ -89,7 +89,7 @@ export default function Package({ adb }) {
   }, [config]);
 
   /**
-   * Fetch package details if healthchecks passed and dtails are not yet
+   * Fetch package details if healthchecks passed and details are not yet
    * set for the selected package.
    */
   useEffect(() => {
@@ -297,7 +297,7 @@ export default function Package({ adb }) {
               {description}
             </Typography>
 
-            {schema &&
+            {schema && installed &&
               <Form
                 formData={currentConfig}
                 onSubmit={saveConfig}
