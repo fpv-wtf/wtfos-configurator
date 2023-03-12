@@ -20,6 +20,6 @@
   "labelCategory": "Categoria",
   "labelCategoryAllExceptSystem": "Tutto (escluso sistema)",
   "labelCategoryAll": "Tutto",
-  "installing": "Installing package...",
-  "removing": "Removing package..."
+  "installing": "Installazione del pacchetto...",
+  "removing": "Rimozione del pacchetto..."
 }
