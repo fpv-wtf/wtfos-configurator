@@ -82,7 +82,11 @@ export default function Package({ adb }) {
 
   const [installing, setInstalling] = useState(false);
   const [removing, setRemoving] = useState(false);
-  const [currentConfig, setCurrentConfig] = useState(config);
+  const [currentConfig, setCurrentConfig] = useState(null);
+
+  useEffect(() => {
+    setCurrentConfig(config);
+  }, [config]);
 
   /**
    * Fetch package details if healthchecks passed and dtails are not yet
