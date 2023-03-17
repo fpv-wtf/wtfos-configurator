@@ -1,0 +1,10 @@
+{
+  "recoveryTitle": "Środki bezpieczeństwa/wskazówki dotyczące odzyskiwania:",
+  "recoveryText": "Jeśli wystąpią jakiekolwiek problemy z wtfOS, spróbuj uruchomić tryb bezpieczny przytrzymując przycisk bind na urządzeniu przez 30 sekund podczas włączania. Powinna pojawić się możliwość odinstalowania i ponownego zainstalowania wtfOS lub szukaj dalszej pomocy.",
+  "browserNotSupported": "Przeglądarka nie jest obsługiwana!",
+  "browserNotSupportedText": "Twoja przeglądarka nie obsługuje funkcji webusb. Proszę użyj",
+  "browserNotSupportedLink": "przeglądarki, która zapewnia tę funkcję.",
+  "browserSupported": "Wspierane (i przetestowane) przeglądarki to:",
+  "browserSupportedAndroid": "Niektóre telefony z systemem Android",
+  "browserSupportedOther": "Inne przeglądarki na bazie Chromium"
+}

@@ -59,6 +59,13 @@ export default function Footer() {
                   {t("footerIssueLink")}
                 </Link>
                 .
+
+                {t("footerDiscord")}
+                &nbsp;
+                <Link href="https://discord.com/invite/3rpnBBJKtU">
+                  {t("footerDiscordLink")}
+                </Link>
+                .
               </Typography>
             </Grid>
           </Grid>

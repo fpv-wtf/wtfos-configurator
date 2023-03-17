@@ -1,0 +1,11 @@
+{
+  "detailsFor": "{{name}} için ayrıntılar",
+  "submit": "Ayarları kaydet",
+  "loading": "Paket detayları yükleniyor...",
+  "visitProjectPage": "Proje sayfasını ziyaret et",
+  "maintainer": "Geliştirici: {{name}}",
+  "remove": "Kaldır",
+  "install": "Yükle",
+  "installing": "Paketler Yükleniyor...",
+  "removing": "Paketler Kaldırılıyor..."
+}

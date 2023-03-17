@@ -14,6 +14,7 @@
   "step5Reboot": "Étape 5 - Réussie ! Redémarrage...",
   "done": "Terminé - votre appareil a été rooté avec succès !",
   "manualReboot": "Échec! Veuillez redémarrer votre appareil ...",
+  "tryButter": "Échec ! Votre firmware n'est peut-être pas rootable, veuillez essayer de revenir à la version précédente avec <a href=\"https://github.com/fpv-wtf/butter\">Butter</a>.",
   "failed": "Échoué après {{maxTry}} tentatives",
   "deviceLost": "L'appareil est déconnecté...",
   "deviceBack": "L'appareil est reconnecté...",
@@ -29,5 +30,6 @@
   "rebootTimeout": "Abandonné ! L'appareil n'a pas redémarré à temps, redémarrez-le et réessayez.",
   "rebootTimeShort": "Le temps de redémarrage est trop court - redémarrez une fois de plus au cas ou...",
   "unlockFailed": "Le déverrouillage a échoué, veuillez redémarrer votre appareil et réessayez.",
-  "unsupportedFirmware": "Le firmware de votre appareil est trop récent. Vous pouvez peut-être downgrader vers V01.01. 606 en mode DIY avec DJI FPV Assistant 2 selon la version exacte installée. Veuillez <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>consulter le wiki</a> pour plus de détails."
+  "unsupportedFirmware": "Le firmware de votre appareil est trop récent. Vous pouvez peut-être downgrader vers V01.01. 606 en mode DIY avec DJI FPV Assistant 2 selon la version exacte installée. Veuillez <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>consulter le wiki</a> pour plus de détails.",
+  "signingServerUnreachable": "Le serveur de signature n'a pas pu être atteint. Il est peut-être hors service ou votre fournisseur d'accès Internet le bloque peut-être."
 }

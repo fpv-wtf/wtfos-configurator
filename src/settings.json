@@ -1,16 +1,20 @@
 {
   "availableLanguages": {
     "de": "Deutsch",
+    "el": "Ελληνικά",
     "en": "English",
     "es": "Español",
     "fr": "Français",
     "it": "Italiano",
     "nl": "Nederlands",
+    "pl": "Polski",
     "pt-PT": "Português (Portugal)",
     "pt-BR": "Português (Brasil)",
     "ru": "Русский",
+    "sk": "Slovenský",
     "sv": "Svenska",
     "tr": "Türkçe",
+    "uk": "Українська",
     "zh-CN": "简体中文"
   },
   "defaultLanguage": "en"

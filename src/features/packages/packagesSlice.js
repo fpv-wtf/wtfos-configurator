@@ -10,13 +10,18 @@ const initialState = {
   upgradable: [],
   filter: {
     installed: false,
-    search: null,
     repo: "fpv-wtf",
+    search: null,
+    system: false,
   },
   fetched: false,
   fetchedUpgradable: false,
   processing: false,
   error: [],
+  update: {
+    ran: false,
+    success: false,
+  },
 };
 
 export const removePackage = createAsyncThunk(
@@ -24,7 +29,8 @@ export const removePackage = createAsyncThunk(
   async ({
     adb,
     name,
-  }) => {
+  }, { rejectWithValue }) => {
+    let output = ["Unknown error during removal."];
     try {
       const output = await adb.removePackage(name);
 
@@ -34,6 +40,12 @@ export const removePackage = createAsyncThunk(
     } catch(e) {
       console.log(e);
     }
+
+    if(output.stdout) {
+      output = output.stdout.split("\n");
+    }
+
+    return rejectWithValue(output);
   }
 );
 
@@ -43,7 +55,7 @@ export const installPackage = createAsyncThunk(
     adb,
     name,
   }, { rejectWithValue }) => {
-    let output = ["ERROR: Unknown error during installation."];
+    let output = ["Unknown error during installation."];
     try {
       output = await adb.installPackage(name);
 
@@ -128,6 +140,13 @@ function filterPackages(packages, filter) {
     (filter.repo === item.repo && !filter.search)
   ));
 
+  // Remove system packages
+  if(!filter.system) {
+    filtered = filtered.filter((item) => (
+      !(item.details.section && item.details.section.includes("system"))
+    ));
+  }
+
   filtered = filtered.filter((item) => {
     if(filter.installed) {
       return item.installed;
@@ -177,6 +196,14 @@ export const packagesSlice = createSlice({
 
       state.filtered = filterPackages(state.packages, state.filter);
     },
+    systemFilter: (state, event) => {
+      state.filter = {
+        ...state.filter,
+        system: event.payload,
+      };
+
+      state.filtered = filterPackages(state.packages, state.filter);
+    },
     processing: (state, event) => {
       state.processing = event.payload;
     },
@@ -201,13 +228,20 @@ export const packagesSlice = createSlice({
         state.processing = true;
       })
       .addCase(removePackage.fulfilled, (state, action) => {
+        state.error = initialState.error;
         state.fetched = false;
         state.processing = false;
+      })
+      .addCase(removePackage.rejected, (state, action) => {
+        state.error = action.payload;
+        state.processing = false;
+        state.fetched = false;
       })
       .addCase(installPackage.pending, (state, action) => {
         state.processing = true;
       })
       .addCase(installPackage.fulfilled, (state, action) => {
+        state.error = initialState.error;
         state.fetched = false;
         state.processing = false;
       })
@@ -218,18 +252,27 @@ export const packagesSlice = createSlice({
       })
       .addCase(fetchUpgradable.pending, (state, action) => {
         state.processing = true;
+        state.fetchedUpgradable = false;
       })
       .addCase(fetchUpgradable.fulfilled, (state, action) => {
-        state.fetchedUpgradable = true;
         state.upgradable = action.payload;
         state.processing = false;
+        state.fetchedUpgradable = true;
       })
       .addCase(upgrade.pending, (state, action) => {
         state.processing = true;
         state.fetchedUpgradable = false;
+        state.update.ran = false;
+      })
+      .addCase(upgrade.rejected, (state, action) => {
+        state.processing = false;
+        state.update.ran = true;
+        state.update.success = false;
       })
       .addCase(upgrade.fulfilled, (state, action) => {
         state.processing = false;
+        state.update.ran = true;
+        state.update.success = true;
       })
       .addCase(installWTFOS.pending, (state, action) => {
         state.processing = true;
@@ -253,6 +296,7 @@ export const {
   repo,
   reset,
   search,
+  systemFilter,
 } = packagesSlice.actions;
 
 export const selectRepos = (state) => state.packages.repos;
@@ -263,5 +307,6 @@ export const selectFilter = (state) => state.packages.filter;
 export const selectFiltered = (state) => state.packages.filtered;
 export const selectProcessing = (state) => state.packages.processing;
 export const selectUpgradable = (state) => state.packages.upgradable;
+export const selectUpdate = (state) => state.packages.update;
 
 export default packagesSlice.reducer;

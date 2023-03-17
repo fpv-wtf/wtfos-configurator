@@ -1,0 +1,7 @@
+{
+  "error404Title": "Błąd 404 - Nie Znaleziono",
+  "error404Text": "Nie mam pewności czego szukasz, ale ta strona nie istnieje. Spróbuj sprawdźić",
+  "error404Link": "strona główna",
+  "errorConnection": "Nie udało się połączyć z urządzeniem, upewnij się, że serwer adb nie działa na Twoim komputerze (adb kill-server) i że nie jesteś połączony w innej karcie/oknie.",
+  "warningConnection": "Połącz swoje zrootowane Goggle lub Air Unit za pomocą USB, upewnij się, że są one włączone i naciśnij przycisk Połącz."
+}

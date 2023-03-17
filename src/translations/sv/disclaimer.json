@@ -1,8 +1,6 @@
 {
-  "title": "Säkerhetsåtgärder/tips för återhämtning:",
-  "line1": "När wtfos startas skrivs /system partitionen över med en skrivbar kopia av partitionen som hålls i /blackbox/wtfos/system.img",
-  "line2": "Om du håller ned bindeknappen under uppstart kommer wtfos uppstart hoppas över, med adb aktiverat för att möjliggöra borttagning av wtfos eller felsökning",
-  "line3": "Om wtfos upptäcker några kritiska problem kommer uppstart göras utan några ändringar och med adb aktiverat",
+  "recoveryTitle": "Safety measures/recovery hints:",
+  "recoveryText": "If you encounter any problems with wtfOS, try booting into safe mode by holding down the bind button on your device for 30 seconds while powering up. You should then be able to uninstall and re-install wtfOS or seek further help.",
   "browserNotSupported": "Webbläsaren stöds inte!",
   "browserNotSupportedText": "Din webbläsare stöder inte webusb-funktionalitet. Använd en",
   "browserNotSupportedLink": "webbläsare som tillhandahåller denna funktion.",

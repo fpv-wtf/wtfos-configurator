@@ -2,6 +2,7 @@ import React, {
   useCallback,
   useEffect,
   useRef,
+  useState,
 } from "react";
 import {
   useDispatch,
@@ -18,17 +19,21 @@ import Typography from "@mui/material/Typography";
 import * as Sentry from "@sentry/react";
 import ReactGA from "react-ga4";
 
+import Claimed from "../overlays/Claimed";
 import Disclaimer from "../disclaimer/Disclaimer";
+import Donate from "../donate/Donate";
 import Header from "../navigation/Header";
 import Log from "../log/Log";
 import Webusb from "../disclaimer/Webusb";
-import Donate from "../donate/Donate";
+
+import { selectCanClaim } from "../tabGovernor/tabGovernorSlice";
 
 import {
   PatchFailed,
   PortLost,
   UnlockFailed,
   UnsupportedFirmwareVersion,
+  SigningServerUnreachable,
 } from "../../utils/obfuscated-exploit/Errors";
 import Exploit from "../../utils/obfuscated-exploit/Exploit";
 
@@ -38,6 +43,7 @@ import {
   PortLost,
   UnlockFailed,
   UnsupportedFirmwareVersion,
+  SigningServerUnreachable,
 } from "../../utils/exploit/Errors";
 import Exploit from "../../utils/exploit/Exploit.js";
 */
@@ -53,18 +59,26 @@ import {
 
 import {
   appendToLog,
+  clearLog,
+  selectClaimed,
   selectHasAdb,
+  setClaimed,
 } from "../device/deviceSlice";
+
+import { selectDisclaimersStatus } from "../settings/settingsSlice";
 
 import { selectDonationState } from "../donate/donateSlice";
 
-const exploit = new Exploit("https://cors.bubblesort.me/?");
+const corsProxy = process.env.REACT_APP_EXPLOIT_CORS_PROXY || "";
+const exploit = new Exploit(corsProxy);
 const rebootTimeMinSeconds = 7;
 const rebootTimeMaxSeconds = 60;
 
 export default function Root() {
   const { t } = useTranslation("root");
   const dispatch = useDispatch();
+
+  const [autoConnect, setAutoConnect] = useState(false);
 
   const unlockStep = useRef(1);
   const unlockStepLast = useRef(1);
@@ -85,6 +99,11 @@ export default function Root() {
   const rooting = useSelector(selectRooting);
 
   const donationState = useSelector(selectDonationState);
+
+  const disclaimersStatus = useSelector(selectDisclaimersStatus);
+
+  const isClaimed = useSelector(selectClaimed);
+  const canClaim = useSelector(selectCanClaim);
 
   let runUnlock;
 
@@ -260,6 +279,7 @@ export default function Root() {
 
                 try {
                   exploit.closePort();
+                  dispatch(setClaimed(false));
                 } catch(e) {
                   console.log("Failed closing port:", e);
                 }
@@ -293,7 +313,12 @@ export default function Root() {
             }
           }
         } catch(e) {
-          if(e instanceof UnsupportedFirmwareVersion) {
+          if(e instanceof SigningServerUnreachable) {
+            log(t("signingServerUnreachable"));
+
+            shouldRunUnlock = false;
+            done = true;
+          } else if(e instanceof UnsupportedFirmwareVersion) {
             log(t("unsupportedFirmware"));
 
             shouldRunUnlock = false;
@@ -307,7 +332,7 @@ export default function Root() {
             disconnected.current = true;
             break;
           } else if(e instanceof PatchFailed) {
-            log(t("manualReboot"));
+            log(t("tryButter"));
 
             ReactGA.gtag("event", "patchFailed", {
               device,
@@ -369,7 +394,7 @@ export default function Root() {
   }, [dispatch, initiateReboot, log, runUnlock, t, waitForReboot]);
 
   const reConnectListener = useCallback(async () => {
-    if(rooting) {
+    if(autoConnect) {
       clearTimeout(rebootTimeoutRef.current);
       rebootTimeoutRef.current = null;
 
@@ -403,10 +428,10 @@ export default function Root() {
         console.log("No serial ports found");
       }
     }
-  }, [initiateReboot, log, rooting, runUnlock, t]);
+  }, [autoConnect, initiateReboot, log, runUnlock, t]);
 
   const disconnectListener = useCallback(() => {
-    if(rooting) {
+    if(autoConnect) {
       disconnected.current = true;
 
       if(!rebooting.current && unlockStep.current > 0) {
@@ -417,12 +442,13 @@ export default function Root() {
         dispatch(reset());
       }
     }
-  }, [attempted, dispatch, log, rooting, t]);
+  }, [attempted, autoConnect, dispatch, log, rooting, t]);
 
   const triggerUnlock = useCallback(async() => {
     const filters = [{ usbVendorId: 0x2ca3 }];
     try {
       const port = await navigator.serial.requestPort({ filters });
+      dispatch(setClaimed(true));
       await exploit.openPort(port);
 
       runUnlock();
@@ -430,6 +456,14 @@ export default function Root() {
       dispatch(reset());
     }
   }, [dispatch, runUnlock]);
+
+  const handleClick = useCallback(async() => {
+    ReactGA.gtag("event", "rootClicked");
+    timeStarted.current = new Date();
+
+    dispatch(root());
+    triggerUnlock();
+  }, [dispatch, triggerUnlock]);
 
   useEffect(() => {
     if(navigator.serial) {
@@ -447,13 +481,17 @@ export default function Root() {
     }
   }, [disconnectListener]);
 
-  const handleClick = useCallback(async() => {
-    ReactGA.gtag("event", "rootClicked");
-    timeStarted.current = new Date();
+  // Check if we should autoconnect to the device
+  useEffect(() => {
+    setAutoConnect(isClaimed && rooting);
+  }, [isClaimed, rooting, setAutoConnect]);
 
-    dispatch(root());
-    triggerUnlock();
-  }, [dispatch, triggerUnlock]);
+  // Clean up when switching context (onUnmount)
+  useEffect(() => {
+    return async() => {
+      dispatch(clearLog());
+    };
+  }, [dispatch]);
 
   return(
     <Container
@@ -467,21 +505,24 @@ export default function Root() {
           {!window.navigator.serial &&
             <Webusb />}
 
-          <Alert severity="error">
-            <Typography sx={{ fontWeight: "bold" }}>
-              {t("cooling")}
-            </Typography>
-          </Alert>
+          {!disclaimersStatus &&
+            <>
+              <Alert severity="error">
+                <Typography sx={{ fontWeight: "bold" }}>
+                  {t("cooling")}
+                </Typography>
+              </Alert>
 
-          <Disclaimer
-            lines={[
-              t("disclaimerLine1"),
-              t("disclaimerLine2"),
-              t("disclaimerLine3"),
-              t("disclaimerLine4"),
-            ]}
-            title={t("disclaimerTitle")}
-          />
+              <Disclaimer
+                lines={[
+                  t("disclaimerLine1"),
+                  t("disclaimerLine2"),
+                  t("disclaimerLine3"),
+                  t("disclaimerLine4"),
+                ]}
+                title={t("disclaimerTitle")}
+              />
+            </>}
 
           {!donationState &&
             <Donate />}
@@ -504,6 +545,9 @@ export default function Root() {
           <Log />
         </>
       </Stack>
+
+      {!canClaim &&
+        <Claimed />}
     </Container>
   );
 }

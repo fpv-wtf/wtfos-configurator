@@ -1,0 +1,10 @@
+{
+  "recoveryTitle": "Safety measures/recovery hints:",
+  "recoveryText": "If you encounter any problems with wtfOS, try booting into safe mode by holding down the bind button on your device for 30 seconds while powering up. You should then be able to uninstall and re-install wtfOS or seek further help.",
+  "browserNotSupported": "Το πρόγραμμα περιήγησης δεν υποστηρίζεται!",
+  "browserNotSupportedText": "Το πρόγραμμα περιήγησης σας δεν υποστηρίζει τη λειτουργία webusb. Παρακαλούμε χρησιμοποιήστε ένα",
+  "browserNotSupportedLink": "πρόγραμμα περιήγησης που παρέχει αυτή τη λειτουργία.",
+  "browserSupported": "Τα υποστηριζόμενα (και δοκιμασμένα) προγράμματα περιήγησης είναι:",
+  "browserSupportedAndroid": "Ορισμένα τηλέφωνα Android",
+  "browserSupportedOther": "Άλλοι περιηγητές με βάση Chromium"
+}

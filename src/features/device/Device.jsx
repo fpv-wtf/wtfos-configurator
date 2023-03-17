@@ -10,6 +10,9 @@ import Typography from "@mui/material/Typography";
 import ConnectButton from "./ConnectButton";
 import Spinner from "../loading/Spinner";
 import Webusb from "../disclaimer/Webusb";
+import Udev from "../disclaimer/Udev";
+
+import { isLinux } from "../../utils/Os";
 
 import { selectRebooting } from "./deviceSlice";
 
@@ -47,6 +50,9 @@ export default function Device({
             {t("errorConnection")}
           </Typography>
         </Alert>}
+
+      { isLinux() &&
+        <Udev />}
 
       <ConnectButton onClick={handleDeviceConnect} />
     </Stack>

@@ -1,0 +1,6 @@
+{
+  "udevTitle": "Reguła UDEV może być wymagana",
+  "udevText": "Jeśli masz problemy z połączeniem z urządzeniem, może być konieczne dodanie następującej reguły UDEV do '/etc/udev/rules.d/51-dji-adb.rules':",
+  "udevCreate": "Aby utworzyć plik automatycznie, wykonaj:",
+  "udevRestart": "Następnie uruchom ponownie podsystem udev:"
+}

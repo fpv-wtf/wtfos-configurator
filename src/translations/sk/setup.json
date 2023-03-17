@@ -9,14 +9,16 @@
   "hint2": "Inštalovať WTFOS teraz",
   "hint3": "Toto sa vyžaduje pre pridávanie nových balíčkov a riadenie služieb.",
   "tileInstallTitle": "Inštalovať",
-  "tileInstallDescription": "Install WTFOS to your device to install community contributed software.",
+  "tileInstallDescription": "Nainštalujte WTFOS do vašeho zariadenia aby ste mohli nainštalovať komunitou prispievaný softvér.",
   "tileUpdateTitle": "Aktualizovať",
-  "tileUpdateDescription": "Update WTFOS and installed packages to stay up to date.",
+  "tileUpdateDescription": "Aktualizujte WTFOS a nainštalované balíčky aby boli aktuálne.",
   "tileRemoveTitle": "Odstrániť",
-  "tileRemoveDescription": "Remove WTFOS from your device. This will revert all changes apart from the root unlock itself.",
+  "tileRemoveDescription": "Odstráňte WTFOS z vašeho zariadenia. Toto vráti všetky zmeny späť až na root.",
   "upToDate": "Všetko je aktuálne!",
-  "checking": "Checking packages...",
+  "checking": "Kontrolujem balíčky...",
   "name": "Názov balíka",
   "current": "Nainštalovaná verzia",
-  "latest": "Aktuálna verzia"
+  "latest": "Aktuálna verzia",
+  "updateSuccess": "Updates installed successfully!",
+  "updateFailed": "Failed installing updates!"
 }

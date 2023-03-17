@@ -1,8 +1,12 @@
 {
+  "updateAvailable": "La mise à jour d'un paquet déjà installé est disponible. Pour plus d'informations, appuyez sur le bouton de mise à jour.",
+  "updatesAvailable": "La mise à jour d'un paquet déjà installé est disponible. Pour plus d'informations, appuyez sur le bouton de mise à jour.",
+  "update": "Mettre à jour",
   "remove": "Supprimer",
   "install": "Installer",
   "fetching": "Récupération des extensions...",
   "installationFailed": "Erreur lors de l'installation de l'extension :",
+  "packageManagemendFailed": "Erreur de gestion des paquets:",
   "labelRepo": "Repo",
   "labelPackages": "Extensions",
   "labelAll": "Tous",
@@ -11,5 +15,11 @@
   "name": "Nom",
   "version": "Version",
   "description": "Description",
-  "matchCount": "{{count}} extensions ont été trouvées"
+  "matchCount": "{{count}} extensions ont été trouvées",
+  "visitProjectPage": "Voir la page du projet",
+  "labelCategory": "Catégorie",
+  "labelCategoryAllExceptSystem": "Tout (sauf le système)",
+  "labelCategoryAll": "Tout",
+  "installing": "Installation des Paquets...",
+  "removing": "Suppression des paquets..."
 }

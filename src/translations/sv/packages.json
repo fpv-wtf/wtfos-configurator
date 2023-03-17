@@ -1,8 +1,12 @@
 {
+  "updateAvailable": "Update to already installed package is available. For more information hit the update button.",
+  "updatesAvailable": "Updates to already installed packages are available. For more information hit the update button.",
+  "update": "Update",
   "remove": "Ta bort",
   "install": "Installera",
   "fetching": "Hämtar paket...",
   "installationFailed": "Fel vid paketinstallation:",
+  "packageManagemendFailed": "Package management error:",
   "labelRepo": "Källa",
   "labelPackages": "Paket",
   "labelAll": "Alla",
@@ -11,5 +15,11 @@
   "name": "Namn",
   "version": "Version",
   "description": "Beskrivning",
-  "matchCount": "Hittade {{count}} paket"
+  "matchCount": "Hittade {{count}} paket",
+  "visitProjectPage": "Visit project page",
+  "labelCategory": "Category",
+  "labelCategoryAllExceptSystem": "All (except system)",
+  "labelCategoryAll": "All",
+  "installing": "Installing package...",
+  "removing": "Removing package..."
 }

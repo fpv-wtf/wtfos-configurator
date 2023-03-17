@@ -7,13 +7,16 @@ import Button from "@mui/material/Button";
 
 import { selectConnected } from "./deviceSlice";
 
+import { selectClaimed } from "../device/deviceSlice";
+
 export default function ConnectButton({ onClick }) {
   const { t } = useTranslation("common");
   const connected = useSelector(selectConnected);
+  const claimed = useSelector(selectClaimed);
 
   return (
     <Button
-      disabled={connected || !window.navigator.usb}
+      disabled={claimed || connected || !window.navigator.usb}
       onClick={onClick}
       variant="contained"
     >

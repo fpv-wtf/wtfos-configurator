@@ -18,5 +18,7 @@
   "checking": "Paketler denetleniyor...",
   "name": "Paket Adı",
   "current": "Yüklü Sürüm",
-  "latest": "Son Sürüm"
+  "latest": "Son Sürüm",
+  "updateSuccess": "Güncellemeler başarı ile yüklendi!",
+  "updateFailed": "Güncellemeler yüklenirken bir hata oluştu!"
 }

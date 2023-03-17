@@ -1,8 +1,12 @@
 {
+  "updateAvailable": "È disponibile l'aggiornamento di un pacchetto installato. Per maggiori informazioni premi sul tasto aggiorna.",
+  "updatesAvailable": "Sono disponibili degli aggiornamenti per i pacchetti installati. Per maggiori informazioni premi sul tasto aggiorna.",
+  "update": "Aggiorna",
   "remove": "Rimuovi",
   "install": "Installa",
   "fetching": "Scarico i pacchetti...",
   "installationFailed": "Errore durante l'installazione del pacchetto:",
+  "packageManagemendFailed": "Errore di gestione del pacchetto:",
   "labelRepo": "Archivio",
   "labelPackages": "Pacchetti",
   "labelAll": "Tutti",
@@ -11,5 +15,11 @@
   "name": "Nome",
   "version": "Versione",
   "description": "Descrizione",
-  "matchCount": "Trovati {{count}} pacchetti"
+  "matchCount": "Trovati {{count}} pacchetti",
+  "visitProjectPage": "Visita la pagina del progetto",
+  "labelCategory": "Categoria",
+  "labelCategoryAllExceptSystem": "Tutto (escluso sistema)",
+  "labelCategoryAll": "Tutto",
+  "installing": "Installazione del pacchetto...",
+  "removing": "Rimozione del pacchetto..."
 }

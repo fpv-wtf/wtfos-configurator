@@ -1,8 +1,6 @@
 {
-  "title": "Güvenlik önlemleri/kurtarma ipuçları:",
-  "line1": "Wtfos başlatıldığında, /system bölümünün üzerine /blackbox/wtfos/system.img içinde tutulan bölümün bir kopyası yazılır",
-  "line2": "Açılış sırasında bağlama(bind) düğmesini basılı tutarsanız wtfos'un silinmesine veya tanılamaya izin vermek için adb devreye sokularak wtfos başlatması atlanır",
-  "line3": "Wtfos herhangi bir önemli sorun tespit ederse, adb etkin şekilde herhangi bir değişiklik yapmadan başlatmayı dener",
+  "recoveryTitle": "Güvenlik önlemleri/kurtarma ipuçları:",
+  "recoveryText": "wtfOS ile ilgili herhangi bir sorunla karşılaşırsanız, açarken cihazınızdaki bind düğmesini 30 saniye basılı tutarak güvenli moda geçmeyi deneyin. Daha sonra wtfOS'u kaldırıp yeniden yükleyebilir veya daha fazla yardım almayı deneyebilirsiniz.",
   "browserNotSupported": "Tarayıcı desteklenmiyor!",
   "browserNotSupportedText": "Tarayıcınız webusb özelliğini desteklememektedir. Lütfen",
   "browserNotSupportedLink": "bu özelliği destekleyen bir tarayıcı kullanın.",

@@ -25,6 +25,12 @@ const initialState = {
       description: "God of Configurators",
     },
     {
+      nick: "Knifa",
+      name: "Dan",
+      twitter: "Knifa",
+      description: "Head of VFX",
+    },
+    {
       honorary: true,
       nick: "tmbinc",
       name: "Felix Domke",

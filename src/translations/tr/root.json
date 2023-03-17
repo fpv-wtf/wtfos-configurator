@@ -14,6 +14,7 @@
   "step5Reboot": "5. Adım - Başarılı! Yeniden başlatılıyor...",
   "done": "Hepsi tamam - cihazınız başarıyla rootlandı!",
   "manualReboot": "Başarısız oldu! Lüfen cihazınızı kapatıp açın...",
+  "tryButter": "Başarısız! Donanım yazılımınız rootlanabilir olmayabilir, lütfen <a href=\"https://github.com/fpv-wtf/butter\">Butter</a> ile sürüm düşürmeyi deneyin.",
   "failed": "{{maxTry}} denemeden sonra başarısız oldu.",
   "deviceLost": "Cihaz ayrıldı...",
   "deviceBack": "Cihaz geri geldi...",
@@ -29,5 +30,6 @@
   "rebootTimeout": "İptal edildi! Cihaz zamanında yeniden başlamadı, lütfen kapatıp tekrar deneyin.",
   "rebootTimeShort": "Yeniden başlatma süresi şüpheli bir şekilde kısaydı - önlem için bir kez daha yeniden başlatılıyor...",
   "unlockFailed": "Kilit açma başarısız oldu, lütfen cihazınızı kapatıp-açıp tekrar deneyin.",
-  "unsupportedFirmware": "Cihazınızdaki yazılım çok yeni. Yüklenen sürüme bağlı olarak DJI FPV Assistant 2 ile DIY modunda V01.01.0606'ya geri dönebilirsiniz. Lütfen <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>wiki</a> 'ye daha fazla detay için bakınız."
+  "unsupportedFirmware": "Cihazınızdaki yazılım çok yeni. Yüklenen sürüme bağlı olarak DJI FPV Assistant 2 ile DIY modunda V01.01.0606'ya geri dönebilirsiniz. Lütfen <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>wiki</a> 'ye daha fazla detay için bakınız.",
+  "signingServerUnreachable": "İmzalama sunucusuna ulaşılamadı. Sunucu devre dışı olabilir veya ISS'niz engelliyor olabilir."
 }

@@ -18,5 +18,7 @@
   "checking": "Vérification des extensions...",
   "name": "Nom du Paquet",
   "current": "Version installée",
-  "latest": "Dernière version"
+  "latest": "Dernière version",
+  "updateSuccess": "Mises à jour installées avec succès!",
+  "updateFailed": "Échec de l'installation des mises à jour !"
 }

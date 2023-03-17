@@ -1,0 +1,6 @@
+{
+  "udevTitle": "可能需要 UDEV 规则。",
+  "udevText": "如果您在连接设备时遇到问题，您可能需要将下面的 UDEV 规则添加到 '/etc/udev/rules.d/51-dji-adb.rules'：",
+  "udevCreate": "若要自动创建文件，请运行：",
+  "udevRestart": "然后重启 udev 子系统："
+}

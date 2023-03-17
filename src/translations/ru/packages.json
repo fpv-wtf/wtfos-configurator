@@ -1,8 +1,12 @@
 {
+  "updateAvailable": "Доступно обновление для уже установленного пакета. Дополнительная информация доступна по нажатию кнопки Обновление.",
+  "updatesAvailable": "Доступно обновление для уже установленных пакетов. Дополнительная информация доступна по нажатию кнопки Обновление.",
+  "update": "Обновление",
   "remove": "Удалить",
   "install": "Установить",
   "fetching": "Проверка пакетов...",
   "installationFailed": "Ошибка установки пакета:",
+  "packageManagemendFailed": "Package management error:",
   "labelRepo": "Репозиторий",
   "labelPackages": "Пакеты",
   "labelAll": "Все",
@@ -11,5 +15,11 @@
   "name": "Название",
   "version": "Версия",
   "description": "Описание",
-  "matchCount": "Найдено {{count}} пакетов"
+  "matchCount": "Найдено {{count}} пакетов",
+  "visitProjectPage": "Перейти на страницу проекта",
+  "labelCategory": "Категория",
+  "labelCategoryAllExceptSystem": "Все (кроме системы)",
+  "labelCategoryAll": "Все",
+  "installing": "Installing package...",
+  "removing": "Removing package..."
 }
