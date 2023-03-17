@@ -19,6 +19,6 @@
   "name": "软件包名",
   "current": "已安装版本",
   "latest": "最新版本",
-  "updateSuccess": "Updates installed successfully!",
-  "updateFailed": "Failed installing updates!"
+  "updateSuccess": "更新已成功安装!",
+  "updateFailed": "安装更新失败!"
 }
