@@ -3,7 +3,7 @@
   "debugStatsFramesDecoded": "Kod çözülmüş Frameler",
   "debugStatsFramesDecodedMissing": "Kod çözülmüş Frameler (Kayıp)",
   "debugStatsFramesEncoded": "Kodlanmış Frameler",
-  "debugStatsInDecoderQueue": "Kod çözme Kuyruğunda",
+  "debugStatsInDecoderQueue": "Kod Çözme Kuyruğunda",
   "debugStatsInEncoderQueue": "Kodlama Kuyruğunda",
   "debugStatsQueuedForDecode": "Kod Çözme için Sırada",
   "debugStatsQueuedForEncode": "Kodlama için Sırada",
@@ -18,7 +18,7 @@
   "fileDropVideo": "Video",
   "noteConfigLink": "Bunu Paket Yöneticisinde yapılandırın.",
   "noteHeader": "OSD kaydı, gözlük tarafında isteğe bağlı bir özelliktir.",
-  "noteWarning": "Kullanılan herhangi bir video dosyası, herhangi bir değişiklik yapılmadan doğrudan gözlüklerden gelmelidir.",
-  "processing": "İşlem Yapılıyor...",
+  "noteWarning": "Kullanılan herhangi bir video dosyası, herhangi bir değişiklik yapılmadan doğrudan gözlükten gelmelidir.",
+  "processing": "İşleniyor...",
   "start": "Başla"
 }
