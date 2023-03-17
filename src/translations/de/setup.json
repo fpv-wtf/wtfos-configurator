@@ -19,6 +19,6 @@
   "name": "Paket-Name",
   "current": "Installierte Version",
   "latest": "Neueste Version",
-  "updateSuccess": "Update erfolgreich installiert!",
+  "updateSuccess": "Updates erfolgreich installiert!",
   "updateFailed": "Updates konnten nicht installiert werden!"
 }
