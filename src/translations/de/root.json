@@ -14,7 +14,7 @@
   "step5Reboot": "Schritt 2 - Erfolgreich! Neustart...",
   "done": "Alles erledigt - dein Gerät wurde erfolgreich gerootet!",
   "manualReboot": "Fehlgeschlagen! Bitte schalten Sie Ihr Gerät jetzt aus und wieder ein...",
-  "tryButter": "Fehlgeschlagen! Deine Firmware ist möglicherweise nicht rootbar, bitte versuche sie mit <a href=\"https://github.com/fpv-wtf/butter\">Butter</a> auf einen niedrigeren Stand zu bringen.",
+  "tryButter": "Fehlgeschlagen! Deine Firmware Version ist möglicherweise nicht mit dem Root-Vorgang kompatibel, bitte versuche sie mit <a href=\"https://github.com/fpv-wtf/butter\">Butter</a> auf einen niedrigeren Stand zu bringen.",
   "failed": "Fehlgeschlagen nach {{maxTry}} Versuchen.",
   "deviceLost": "Gerät ist weg...",
   "deviceBack": "Gerät ist wieder da...",
