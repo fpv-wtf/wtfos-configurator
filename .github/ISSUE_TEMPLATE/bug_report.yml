@@ -8,7 +8,7 @@ body:
     id: device
     attributes:
       label: Device
-      options: ['Goggles V1', 'Goggles V1', 'Air Unit', 'Caddx Vista']
+      options: ['Goggles V1', 'Goggles V2', 'Air Unit', 'Caddx Vista']
     validations:
       required: true
   - type: input
