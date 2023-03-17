@@ -1,12 +1,12 @@
 {
-  "updateAvailable": "Update to already installed package is available. For more information hit the update button.",
-  "updatesAvailable": "Updates to already installed packages are available. For more information hit the update button.",
-  "update": "Update",
+  "updateAvailable": "La mise à jour d'un paquet déjà installé est disponible. Pour plus d'informations, appuyez sur le bouton de mise à jour.",
+  "updatesAvailable": "La mise à jour d'un paquet déjà installé est disponible. Pour plus d'informations, appuyez sur le bouton de mise à jour.",
+  "update": "Mettre à jour",
   "remove": "Supprimer",
   "install": "Installer",
   "fetching": "Récupération des extensions...",
   "installationFailed": "Erreur lors de l'installation de l'extension :",
-  "packageManagemendFailed": "Package management error:",
+  "packageManagemendFailed": "Erreur de gestion des paquets:",
   "labelRepo": "Repo",
   "labelPackages": "Extensions",
   "labelAll": "Tous",
@@ -16,10 +16,10 @@
   "version": "Version",
   "description": "Description",
   "matchCount": "{{count}} extensions ont été trouvées",
-  "visitProjectPage": "Visit project page",
-  "labelCategory": "Category",
-  "labelCategoryAllExceptSystem": "All (except system)",
-  "labelCategoryAll": "All",
-  "installing": "Installing package...",
-  "removing": "Removing package..."
+  "visitProjectPage": "Voir la page du projet",
+  "labelCategory": "Catégorie",
+  "labelCategoryAllExceptSystem": "Tout (sauf le système)",
+  "labelCategoryAll": "Tout",
+  "installing": "Installation des Paquets...",
+  "removing": "Suppression des paquets..."
 }

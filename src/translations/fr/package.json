@@ -1,11 +1,11 @@
 {
-  "detailsFor": "Details for {{name}}",
-  "submit": "Save settings",
-  "loading": "Loading package details...",
-  "visitProjectPage": "Visit project page",
-  "maintainer": "Maintainer: {{name}}",
-  "remove": "Remove",
-  "install": "Install",
-  "installing": "Installing package...",
-  "removing": "Removing package..."
+  "detailsFor": "Détails pour {{name}}",
+  "submit": "Enregistrer les paramètres",
+  "loading": "Chargement des informations du paquet...",
+  "visitProjectPage": "Voir la page du projet",
+  "maintainer": "Mainteneur: {{name}}",
+  "remove": "Supprimer",
+  "install": "Installer",
+  "installing": "Installation des Paquets...",
+  "removing": "Suppression des paquets..."
 }

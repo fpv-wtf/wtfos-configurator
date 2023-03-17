@@ -19,6 +19,6 @@
   "name": "Paket Adı",
   "current": "Yüklü Sürüm",
   "latest": "Son Sürüm",
-  "updateSuccess": "Updates installed successfully!",
-  "updateFailed": "Failed installing updates!"
+  "updateSuccess": "Güncellemeler başarı ile yüklendi!",
+  "updateFailed": "Güncellemeler yüklenirken bir hata oluştu!"
 }

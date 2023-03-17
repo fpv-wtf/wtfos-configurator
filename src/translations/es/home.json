@@ -1,10 +1,10 @@
 {
-  "connected": "Conectado correctamente a tu dispositivo.",
+  "connected": "Conectado con éxito a tu dispositivo.",
   "tileAboutDescription": "fpv.wtf es un grupo de entusiastas que trabajan para mejorar la experiencia digital FPV.",
   "tileAboutTitle": "Acerca de fpv.wtf",
   "tileCliDescription": "Sesión Interactiva de Shell. Ejecute comandos a su antojo, deberás saber lo que estás haciendo.",
   "tileCliTitle": "CLI",
-  "tileOsdOverlayDescription": "Got some sweet DVR? Use this to overlay your recorded OSD on top of it!",
+  "tileOsdOverlayDescription": "¿Tienes algún DVR ? ¡Usa esto para superponer tu OSD sobre tu video!",
   "tileOsdOverlayTitle": "OSD Overlay",
   "tilePackageManagerDescription": "Expanda la funcionalidad de su dispositivo instalando paquetes adicionales desarrollados por la comunidad.",
   "tilePackageManagerTitle": "Gestor de paquetes",

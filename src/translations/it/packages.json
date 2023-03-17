@@ -6,7 +6,7 @@
   "install": "Installa",
   "fetching": "Scarico i pacchetti...",
   "installationFailed": "Errore durante l'installazione del pacchetto:",
-  "packageManagemendFailed": "Package management error:",
+  "packageManagemendFailed": "Errore di gestione del pacchetto:",
   "labelRepo": "Archivio",
   "labelPackages": "Pacchetti",
   "labelAll": "Tutti",
@@ -20,6 +20,6 @@
   "labelCategory": "Categoria",
   "labelCategoryAllExceptSystem": "Tutto (escluso sistema)",
   "labelCategoryAll": "Tutto",
-  "installing": "Installing package...",
-  "removing": "Removing package..."
+  "installing": "Installazione del pacchetto...",
+  "removing": "Rimozione del pacchetto..."
 }

@@ -1,6 +1,6 @@
 {
-  "recoveryTitle": "Safety measures/recovery hints:",
-  "recoveryText": "If you encounter any problems with wtfOS, try booting into safe mode by holding down the bind button on your device for 30 seconds while powering up. You should then be able to uninstall and re-install wtfOS or seek further help.",
+  "recoveryTitle": "Güvenlik önlemleri/kurtarma ipuçları:",
+  "recoveryText": "wtfOS ile ilgili herhangi bir sorunla karşılaşırsanız, açarken cihazınızdaki bind düğmesini 30 saniye basılı tutarak güvenli moda geçmeyi deneyin. Daha sonra wtfOS'u kaldırıp yeniden yükleyebilir veya daha fazla yardım almayı deneyebilirsiniz.",
   "browserNotSupported": "Tarayıcı desteklenmiyor!",
   "browserNotSupportedText": "Tarayıcınız webusb özelliğini desteklememektedir. Lütfen",
   "browserNotSupportedLink": "bu özelliği destekleyen bir tarayıcı kullanın.",
