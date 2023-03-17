@@ -3,7 +3,7 @@
   "submit": "Ayarları kaydet",
   "loading": "Paket detayları yükleniyor...",
   "visitProjectPage": "Proje sayfasını ziyaret et",
-  "maintainer": "Bakımcı: {{name}}",
+  "maintainer": "Geliştirici: {{name}}",
   "remove": "Kaldır",
   "install": "Yükle",
   "installing": "Paketler Yükleniyor...",
