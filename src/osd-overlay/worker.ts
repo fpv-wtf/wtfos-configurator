@@ -15,6 +15,8 @@ const MAX_DISPLAY_Y = 22;
 
 export class VideoWorker {
   readonly processor: Processor;
+
+  chromaKey: boolean = false;
   fontPack?: FontPack;
   osdReader?: OsdReader;
 
@@ -41,11 +43,14 @@ export class VideoWorker {
   }
 
   async start(options: {
+    chromaKey: boolean,
     fontFiles: FontPackFiles,
     osdFile: File,
-    videoFile: File,
     outHandle: FileSystemFileHandle,
+    videoFile: File,
   }) {
+    this.chromaKey = options.chromaKey;
+
     this.osdReader = await OsdReader.fromFile(options.osdFile);
     this.fontPack = await Font.fromFiles(options.fontFiles);
 
@@ -109,17 +114,20 @@ export class VideoWorker {
     const frameCanvas = this.frameCanvas!;
     const frameCtx = this.frameCtx!;
 
-    frameCtx.fillStyle = "black";
-    frameCtx.fillRect(0, 0, frameCanvas.width, frameCanvas.height);
     osdCtx.clearRect(0, 0, osdCanvas.width, osdCanvas.height);
 
-    let frameXOffset: number;
-    if (this.hd || this.wide) {
-      frameXOffset = (this.outWidth! - frame.width) / 2;
+    if (!this.chromaKey) {
+      let frameXOffset: number;
+      if (this.hd || this.wide) {
+        frameXOffset = (this.outWidth! - frame.width) / 2;
+      } else {
+        frameXOffset = 0;
+      }
+      frameCtx.drawImage(frame, frameXOffset, 0);
     } else {
-      frameXOffset = 0;
+      frameCtx.fillStyle = "#FF00FF";
+      frameCtx.fillRect(0, 0, frameCanvas.width, frameCanvas.height);
     }
-    frameCtx.drawImage(frame, frameXOffset, 0);
 
     if (this.lastOsdIndex < this.osdReader!.frames.length - 1) {
       const nextOsdIndex = this.lastOsdIndex + 1;
@@ -212,10 +220,11 @@ export class VideoWorker {
     switch (message.type) {
       case VideoWorkerShared.MessageType.START: {
         this.start({
+          chromaKey: message.chromaKey,
           fontFiles: message.fontFiles,
           osdFile: message.osdFile,
-          videoFile: message.videoFile,
           outHandle: message.outHandle,
+          videoFile: message.videoFile,
         });
         break;
       }

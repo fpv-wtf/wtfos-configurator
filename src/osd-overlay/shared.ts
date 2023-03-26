@@ -39,10 +39,12 @@ namespace VideoWorkerShared {
 
   export interface StartMessage {
     type: MessageType.START;
+
+    chromaKey: boolean;
     fontFiles: FontPackFiles,
     osdFile: File;
-    videoFile: File;
     outHandle: FileSystemFileHandle;
+    videoFile: File;
   }
 
   export type Message =

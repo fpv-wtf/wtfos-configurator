@@ -12,12 +12,11 @@ import { useTranslation } from "react-i18next";
 import Header from "../navigation/Header";
 import DefaultTextLink from "../styledLink/Default";
 
+import Config from "./Config";
 import DebugStats from "./DebugStats";
 import FileDrop, { useFileDropState } from "./FileDrop";
 
 import VideoWorkerManager from "../../osd-overlay/manager";
-import VideoWorkerShared from "../../osd-overlay/shared";
-
 
 const videoManager = new VideoWorkerManager();
 
@@ -49,6 +48,8 @@ export default function OsdOverlay() {
     queuedForDecode: null,
     queuedForEncode: null,
   });
+
+  const [config, setConfig] = React.useState({ chromaKey: false });
 
   const [inProgress, setInProgress] = React.useState(false);
   const [startedOnce, setStartedOnce] = React.useState(false);
@@ -155,13 +156,14 @@ export default function OsdOverlay() {
     setStartedOnce(true);
 
     videoManager.start({
-      type: VideoWorkerShared.MessageType.START,
+      chromaKey: config.chromaKey,
       fontFiles: fontFiles,
       osdFile: osdFile,
-      videoFile: videoFile,
       outHandle: handle,
+      videoFile: videoFile,
     });
   }, [
+    config,
     fontFiles,
     osdFile,
     setInProgress,
@@ -265,6 +267,11 @@ export default function OsdOverlay() {
                 variant={
                   inProgress && progressValue >= 99 ? "indeterminate" : "determinate"
                 }
+              />
+
+              <Config
+                config={config}
+                onChange={setConfig}
               />
 
               <DebugStats

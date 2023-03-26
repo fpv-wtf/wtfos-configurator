@@ -83,6 +83,7 @@ export default class VideoWorkerManager {
     osdFile: File,
     outHandle: FileSystemFileHandle
     videoFile: File,
+    chromaKey: boolean
   }) {
     this.postMessage({
       type: VideoWorkerShared.MessageType.START,
