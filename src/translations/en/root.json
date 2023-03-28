@@ -30,6 +30,7 @@
   "rebootTimeout": "Aborted! Device did not reboot in time, please power cycle and try again.",
   "rebootTimeShort": "Reboot time suspiciously short - rebooting one more time for good measure...",
   "unlockFailed": "Unlock failed, please power-cycle your device and try again.",
+  "patchFailed": "Patch failed, please power-cycle your device and try again.",
   "unsupportedFirmware": "The firmware on your device is too new. You may be able to downgrade to V01.01.0606 in DIY mode with DJI FPV Assistant 2 depending on the exact version installed. Please <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>see the wiki</a> for more details.",
   "signingServerUnreachable": "The signing server could not be reached. It might be down or your ISP might be blocking it."
 }
