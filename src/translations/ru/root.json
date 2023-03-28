@@ -19,6 +19,7 @@
   "deviceLost": "Устройтво отключилось...",
   "deviceBack": "Устройство вернулось...",
   "cooling": "Если вы взламываете Air Unit, особенно Lite (Caddx Vista) - убедитесь, что оно активно охлаждается (направьте на него вентилятор, например).",
+  "v2diy": "If you are rooting V2 googles, make sure they are in DIY mode - they will not root in DJI FPV mode.",
   "disclaimerTitle": "Отказ от ответственности:",
   "disclaimerLine1": "Убедитесь, что ваше устройство питается от надежного источника питания во время всего процесса",
   "disclaimerLine2": "Только одно устройство может быть подключено",
