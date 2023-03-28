@@ -19,6 +19,7 @@
   "deviceLost": "Urządzenie zniknęło...",
   "deviceBack": "Urządzenie wróciło...",
   "cooling": "Jeśli rootujesz Air Unit - zwłaszcza Air Unit Lite (Caddx Vista) - upewnij się, że jest on czynnie chłodzony, kierując na niego wentylator.",
+  "v2diy": "If you are rooting V2 googles, make sure they are in DIY mode - they will not root in DJI FPV mode.",
   "disclaimerTitle": "Wyłączenie odpowiedzialności:",
   "disclaimerLine1": "Upewnij się, że urządzenie do zrootowania jest zasilane z niezawodnego źródła zasilania",
   "disclaimerLine2": "Masz tylko jedno urządzenie podłączone/sparowane",
