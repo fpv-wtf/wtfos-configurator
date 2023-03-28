@@ -1,5 +1,8 @@
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
+import React, {
+  useCallback,
+  useEffect,
+} from "react";
 
 import {
   encodeUtf8,
@@ -18,6 +21,37 @@ const fitAddon = new FitAddon();
 
 export default function Cli({ adb }) {
   const xtermRef = React.useRef(null);
+
+  /**
+   * The handler can not be async, return false if you do not want xterm.js
+   * to continue processing the inputs
+   */
+  const customKeyEventHandler = useCallback((arg) =>  {
+    const terminal = xtermRef.current.terminal;
+
+    /**
+     * Ignore CTRL-V - will default to OS implementation of CTRL-V, which in
+     * most cases is pasting from the clipboard.
+     */
+    if (arg.ctrlKey && arg.code === "KeyV" && arg.type === "keydown") {
+      return false;
+    }
+
+    /**
+     * Copy text when text is highlighted - otherwise normal operation for
+     * CTRL-C.
+     */
+    if (arg.ctrlKey && arg.code === "KeyC" && arg.type === "keydown") {
+      const selection = terminal.getSelection();
+      if (selection) {
+        navigator.clipboard.writeText(selection);
+
+        return false;
+      }
+    }
+
+    return true;
+  }, [xtermRef]);
 
   useEffect(() => {
     const terminal = xtermRef.current.terminal;
@@ -55,6 +89,7 @@ export default function Cli({ adb }) {
       >
         <XTerm
           addons={[fitAddon]}
+          customKeyEventHandler={customKeyEventHandler}
           options={{
             letterSpacing: 1,
             cursorBlink: true,
