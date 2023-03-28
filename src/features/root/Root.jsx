@@ -34,19 +34,8 @@ import {
   UnlockFailed,
   UnsupportedFirmwareVersion,
   SigningServerUnreachable,
-} from "../../utils/obfuscated-exploit/Errors";
-import Exploit from "../../utils/obfuscated-exploit/Exploit";
-
-/*
-import {
-  PatchFailed,
-  PortLost,
-  UnlockFailed,
-  UnsupportedFirmwareVersion,
-  SigningServerUnreachable,
 } from "../../utils/exploit/Errors";
 import Exploit from "../../utils/exploit/Exploit.js";
-*/
 
 import {
   fail,
