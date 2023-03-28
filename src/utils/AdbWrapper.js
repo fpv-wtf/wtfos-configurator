@@ -122,29 +122,6 @@ export default class AdbWrapper {
     ]);
   }
 
-  async getRepos() {
-    const output = await this.executeCommand(`ls ${this.wtfos.opkgLists}`);
-    const repos = output.stdout.split("\n");
-
-    return repos;
-  }
-
-  async getPackagesByRepo() {
-    const repos = await this.getRepos();
-    const packages = {};
-    for(let repo of repos) {
-      const output = await this.executeCommand([
-        "gunzip -c",
-        `${this.wtfos.opkgLists}/${repo}`,
-        "| grep 'Package:' | cut -d ' ' -f2",
-      ]);
-      const lines = output.stdout.split("\n");
-      packages[repo] = lines;
-    }
-
-    return packages;
-  }
-
   async updataPackages() {
     const output = await this.executeCommand([
       this.wtfos.bin.opkg,
@@ -204,24 +181,7 @@ export default class AdbWrapper {
     }
   }
 
-  async getDetailedPackageInfo(repo) {
-    const output = await this.executeCommand([
-      "gunzip -c",
-      `${this.wtfos.opkgLists}/${repo}`,
-    ]);
-
-    return parsePackageIndex(output.stdout);
-  }
-
-  async getPackageDetails(name) {
-    const packages = await this.getPackages();
-    const pkg = packages.find((pkg) => pkg.name === name);
-
-    return pkg;
-  }
-
   async getPackages() {
-
     let output = await this.executeCommand([
       this.wtfos.bin.opkg,
       "list-installed",
@@ -282,6 +242,45 @@ export default class AdbWrapper {
     }).filter(this.filterInvalidPackages);
 
     return packages;
+  }
+
+  async getRepos() {
+    const output = await this.executeCommand(`ls ${this.wtfos.opkgLists}`);
+    const repos = output.stdout.split("\n");
+
+    return repos;
+  }
+
+  async getPackagesByRepo() {
+    const repos = await this.getRepos();
+    const packages = {};
+    for(let repo of repos) {
+      const output = await this.executeCommand([
+        "gunzip -c",
+        `${this.wtfos.opkgLists}/${repo}`,
+        "| grep 'Package:' | cut -d ' ' -f2",
+      ]);
+      const lines = output.stdout.split("\n");
+      packages[repo] = lines;
+    }
+
+    return packages;
+  }
+
+  async getDetailedPackageInfo(repo) {
+    const output = await this.executeCommand([
+      "gunzip -c",
+      `${this.wtfos.opkgLists}/${repo}`,
+    ]);
+
+    return parsePackageIndex(output.stdout);
+  }
+
+  async getPackageDetails(name) {
+    const packages = await this.getPackages();
+    const pkg = packages.find((pkg) => pkg.name === name);
+
+    return pkg;
   }
 
   async getAvailableServices() {
@@ -348,6 +347,27 @@ export default class AdbWrapper {
     return pids;
   }
 
+  /**
+   * Get running servicses - those are enabled services that are not currently
+   * stopped.
+   *
+   * @returns {string[]} An array of running services by name
+   */
+  async getRunningServices() {
+    const runningServices = [];
+    const services = await this.getServiceInfo();
+    const serviceNames = Object.keys(services);
+    for(let i = 0; i < serviceNames.length; i += 1) {
+      const name = serviceNames[i];
+      const service = services[name];
+      if(service.status !== "stopped") {
+        runningServices.push(name);
+      }
+    }
+
+    return runningServices;
+  }
+
   async getServices() {
     const available = await this.getAvailableServices();
     const enabled = await this.getEnabledServices();
@@ -384,14 +404,30 @@ export default class AdbWrapper {
     return output.exitCode;
   }
 
-  async restartService(name) {
-    const output = await this.executeCommand([
-      this.wtfos.bin.dinitctl,
-      "-u restart",
-      escapeArg(name),
-    ]);
+  async isServiceRunning(name) {
+    const runningServices = await this.getRunningServices();
+    return runningServices.includes(name);
+  }
 
-    return output.exitCode;
+  /**
+   * Restart a service only if it is already running, otherwise return success
+   *
+   * @param {string} name   Name of the service to restart
+   * @returns {number}      0 on success
+   */
+  async restartService(name) {
+    const serviceRunning = await this.isServiceRunning(name);
+    if(serviceRunning) {
+      const output = await this.executeCommand([
+        this.wtfos.bin.dinitctl,
+        "-u restart",
+        escapeArg(name),
+      ]);
+
+      return output.exitCode;
+    }
+
+    return 0;
   }
 
   async getShellSocket() {
