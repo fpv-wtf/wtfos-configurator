@@ -510,6 +510,10 @@ export default function Root() {
               <Alert severity="error">
                 <Typography sx={{ fontWeight: "bold" }}>
                   {t("cooling")}
+
+                  <br />
+
+                  {t("v2diy")}
                 </Typography>
               </Alert>
 
