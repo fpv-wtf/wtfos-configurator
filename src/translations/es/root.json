@@ -19,6 +19,7 @@
   "deviceLost": "El dispositivo desapareció...",
   "deviceBack": "El dispositivo regresó...",
   "cooling": "Si está rooteando una Air Unit - especialmente la Caddx Vista - asegúrese de que esté siendo enfriada con algún ventilador.",
+  "v2diy": "If you are rooting V2 googles, make sure they are in DIY mode - they will not root in DJI FPV mode.",
   "disclaimerTitle": "Aviso Legal:",
   "disclaimerLine1": "Asegúrate de que el dispositivo a ser rooteado esté encendido desde una fuente de alimentación confiable",
   "disclaimerLine2": "Sólo tenga un dispositivo conectado/emparejado",
