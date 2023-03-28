@@ -41,6 +41,8 @@ namespace VideoWorkerShared {
     type: MessageType.START;
 
     chromaKey: boolean;
+    chromaKeyColor: string;
+
     fontFiles: FontPackFiles,
     osdFile: File;
     outHandle: FileSystemFileHandle;

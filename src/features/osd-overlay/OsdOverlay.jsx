@@ -49,7 +49,16 @@ export default function OsdOverlay() {
     queuedForEncode: null,
   });
 
-  const [config, setConfig] = React.useState({ chromaKey: false });
+  const [config, setConfig] = React.useState({
+    chromaKey: false,
+    chromaKeyColor: "#FF00FF",
+  });
+  const handleConfigOnUpdate = React.useCallback((newConfig) => {
+    setConfig((prevConfig) => ({
+      ...prevConfig,
+      ...newConfig,
+    }));
+  }, [setConfig]);
 
   const [inProgress, setInProgress] = React.useState(false);
   const [startedOnce, setStartedOnce] = React.useState(false);
@@ -157,6 +166,7 @@ export default function OsdOverlay() {
 
     videoManager.start({
       chromaKey: config.chromaKey,
+      chromaKeyColor: config.chromaKeyColor,
       fontFiles: fontFiles,
       osdFile: osdFile,
       outHandle: handle,
@@ -270,8 +280,9 @@ export default function OsdOverlay() {
               />
 
               <Config
-                config={config}
-                onChange={setConfig}
+                chromaKey={config.chromaKey}
+                chromaKeyColor={config.chromaKeyColor}
+                onChange={handleConfigOnUpdate}
               />
 
               <DebugStats

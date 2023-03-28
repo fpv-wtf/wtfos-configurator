@@ -79,11 +79,12 @@ export default class VideoWorkerManager {
   }
 
   start(options: {
+    chromaKey: boolean
+    chromaKeyColor: string
     fontFiles: FontPackFiles,
     osdFile: File,
     outHandle: FileSystemFileHandle
     videoFile: File,
-    chromaKey: boolean
   }) {
     this.postMessage({
       type: VideoWorkerShared.MessageType.START,

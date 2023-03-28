@@ -17,6 +17,8 @@ export class VideoWorker {
   readonly processor: Processor;
 
   chromaKey: boolean = false;
+  chromaKeyColor: string = "#ff00ff";
+
   fontPack?: FontPack;
   osdReader?: OsdReader;
 
@@ -44,12 +46,15 @@ export class VideoWorker {
 
   async start(options: {
     chromaKey: boolean,
+    chromaKeyColor: string,
+
     fontFiles: FontPackFiles,
     osdFile: File,
     outHandle: FileSystemFileHandle,
     videoFile: File,
   }) {
     this.chromaKey = options.chromaKey;
+    this.chromaKeyColor = options.chromaKeyColor;
 
     this.osdReader = await OsdReader.fromFile(options.osdFile);
     this.fontPack = await Font.fromFiles(options.fontFiles);
@@ -125,7 +130,7 @@ export class VideoWorker {
       }
       frameCtx.drawImage(frame, frameXOffset, 0);
     } else {
-      frameCtx.fillStyle = "#FF00FF";
+      frameCtx.fillStyle = this.chromaKeyColor;
       frameCtx.fillRect(0, 0, frameCanvas.width, frameCanvas.height);
     }
 
@@ -221,6 +226,7 @@ export class VideoWorker {
       case VideoWorkerShared.MessageType.START: {
         this.start({
           chromaKey: message.chromaKey,
+          chromaKeyColor: message.chromaKeyColor,
           fontFiles: message.fontFiles,
           osdFile: message.osdFile,
           outHandle: message.outHandle,

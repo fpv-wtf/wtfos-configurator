@@ -5,31 +5,53 @@ import {
 } from "react-i18next";
 
 import {
-  FormGroup,
-  FormControlLabel,
-  FormHelperText,
   Checkbox,
+  FormControlLabel,
+  FormGroup,
+  FormHelperText,
   Paper,
-  Typography,
   Stack,
+  TextField,
+  Typography,
 } from "@mui/material";
 
 import SettingsIcon from "@mui/icons-material/Settings";
 
 export default function Config(props) {
   const {
-    config,
+    chromaKey,
+    chromaKeyColor,
     onChange,
   } = props;
 
   const { t } = useTranslation("osdOverlay");
 
   const onChromaKeyChange = React.useCallback((event) => {
-    onChange({
-      ...config,
-      chromaKey: event.target.checked,
-    });
-  }, [config, onChange]);
+    onChange({ chromaKey: event.target.checked });
+  }, [onChange]);
+
+  const onChromaKeyColorChange = React.useCallback((event) => {
+    onChange({ chromaKeyColor: event.target.value });
+  }, [onChange]);
+
+  const chromaKeyColorPicker = React.useMemo(() => {
+    if (!chromaKey) {
+      return null;
+    }
+
+    const isError = !/^#[0-9A-F]{6}$/i.test(chromaKeyColor);
+
+    return (
+      <FormGroup sx={{ mt: 2 }}>
+        <TextField
+          error={isError}
+          label={t("configChromaKeyColor")}
+          onChange={onChromaKeyColorChange}
+          value={chromaKeyColor}
+        />
+      </FormGroup>
+    );
+  }, [chromaKey, chromaKeyColor, onChromaKeyColorChange, t]);
 
   return (
     <Paper
@@ -58,23 +80,26 @@ export default function Config(props) {
       >
         <FormGroup>
           <FormControlLabel
-            control={<Checkbox checked={config.chromaKey}  />}
+            control={<Checkbox checked={chromaKey}  />}
             label={t("configChromaKey")}
             onChange={onChromaKeyChange}
           />
 
           <FormHelperText>
             <Trans i18nKey="osdOverlay:configChromaKeyHelp">
-              <span style={{ color: "#FF00FF" }} />
+              <span style={{ color: chromaKeyColor }} />
             </Trans>
           </FormHelperText>
         </FormGroup>
+
+        {chromaKeyColorPicker}
       </Stack>
     </Paper>
   );
 }
 
 Config.propTypes = {
-  config: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  chromaKey: PropTypes.bool.isRequired,
+  chromaKeyColor: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
 };
