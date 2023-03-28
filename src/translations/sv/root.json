@@ -19,6 +19,7 @@
   "deviceLost": "Enheten försvann...",
   "deviceBack": "Enheten kom tillbaka...",
   "cooling": "Om du har en Air Unit - speciellt Air Unit Lite (Caddx Vista) - måste du se till att det kyls aktivt med en fläkt.",
+  "v2diy": "If you are rooting V2 googles, make sure they are in DIY mode - they will not root in DJI FPV mode.",
   "disclaimerTitle": "Varning:",
   "disclaimerLine1": "Se till att den enhet som ska rotas drivs från en tillförlitlig strömkälla",
   "disclaimerLine2": "Ha bara en enhet ansluten/parad",
