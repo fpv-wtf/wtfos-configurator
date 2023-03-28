@@ -19,6 +19,7 @@
   "deviceLost": "Il dispositivo non è più connesso...",
   "deviceBack": "Il dispositivo è nuovamente connesso...",
   "cooling": "Se cerchi di avere i permessi di root su una Air Unit, in particolare su una Air Unit Lite (Caddx Vista) - assicurarti che sia raffreddata da un ventilatore.",
+  "v2diy": "If you are rooting V2 googles, make sure they are in DIY mode - they will not root in DJI FPV mode.",
   "disclaimerTitle": "Esclusione di Responsabilità:",
   "disclaimerLine1": "In fase di ottenimento dei permessi di root assicurati che il dispositivo sia alimentato da una fonte di alimentazione affidabile",
   "disclaimerLine2": "Di avere solo un dispositivo collegato/accoppiato",
