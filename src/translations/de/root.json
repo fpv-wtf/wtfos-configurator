@@ -19,6 +19,7 @@
   "deviceLost": "Gerät ist weg...",
   "deviceBack": "Gerät ist wieder da...",
   "cooling": "Wenn du eine Air Unit – insbesondere Air Unit Light (Caddx Vista) – rootest, stelle sicher, dass sie aktiv gekühlt wird, indem du einen Lüfter darauf richtest.",
+  "v2diy": "If you are rooting V2 googles, make sure they are in DIY mode - they will not root in DJI FPV mode.",
   "disclaimerTitle": "Haftungsausschluss:",
   "disclaimerLine1": "Stelle sicher, dass das gerootete Gerät von einer zuverlässigen Stromquelle betrieben wird.",
   "disclaimerLine2": "Habe nur ein Gerät verbunden/gekoppelt.",
