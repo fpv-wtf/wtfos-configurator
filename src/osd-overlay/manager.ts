@@ -79,6 +79,8 @@ export default class VideoWorkerManager {
   }
 
   start(options: {
+    chromaKey: boolean
+    chromaKeyColor: string
     fontFiles: FontPackFiles,
     osdFile: File,
     outHandle: FileSystemFileHandle
