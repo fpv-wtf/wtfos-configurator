@@ -29,7 +29,13 @@ export const fetchPackage = createAsyncThunk(
     adb,
     name,
   }) => {
-    return adb.getPackageDetails(name);
+    const packageDetails = await adb.getPackageDetails(name);
+
+    if(!packageDetails) {
+      throw new Error("Could not find package details - please try reloading.");
+    }
+
+    return packageDetails;
   }
 );
 
@@ -64,6 +70,10 @@ export const packageSlice = createSlice({
     builder
       .addCase(fetchPackage.pending, (state) => {
         state.loading = true;
+      })
+      .addCase(fetchPackage.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.loading = false;
       })
       .addCase(fetchPackage.fulfilled, (state, action) => {
         state.loading = false;
