@@ -31,6 +31,7 @@
   "rebootTimeout": "Avbruten! Enheten startade inte om i tid, vänligen starta om enheten och försök igen.",
   "rebootTimeShort": "Omstartstiden misstänksamt kort - startar om en gång till för säkerhets skull...",
   "unlockFailed": "Upplåsning misslyckades, vänligen starta om din enhet och försök igen.",
+  "patchFailed": "Patch failed, please power-cycle your device and try again.",
   "unsupportedFirmware": "Den inbyggda programvaran på din enhet är för ny. Du kanske kan nedgradera till V01.01. 606 i gör-det-själv-läge med DJI FPV Assistant 2 beroende på installerad version. Vänligen <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>se wikin</a> för mer information.",
   "signingServerUnreachable": "The signing server could not be reached. It might be down or your ISP might be blocking it."
 }
