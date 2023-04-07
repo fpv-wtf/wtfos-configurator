@@ -31,6 +31,7 @@
   "rebootTimeout": "¡Abortado! El dispositivo no se reinició a tiempo, por favor apagar y encender y volver a intentarlo.",
   "rebootTimeShort": "Tiempo de reinicio sospechosamente corto - reiniciar una vez más puede ayudar...",
   "unlockFailed": "Desbloqueo fallido, por favor apaga y enciende tu dispositivo e inténtalo de nuevo.",
+  "patchFailed": "Patch failed, please power-cycle your device and try again.",
   "unsupportedFirmware": "El firmware en tu dispositivo es demasiado nuevo. Puede que pueda pasar a V01.01. 606 en modo DIY con DJI FPV Assistant 2 dependiendo de la versión exacta instalada. Por favor, <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>vea la wiki</a> para más detalles.",
   "signingServerUnreachable": "El servidor de firmas no pudo ser alcanzado. Puede estar caído o su ISP podría estar bloqueándolo."
 }
