@@ -31,6 +31,7 @@
   "rebootTimeout": "Prerušené! Zariadenie sa nereštartovalo včas, odpojte a pripojte napájanie a skúste to znova.",
   "rebootTimeShort": "Reštartovanie prebehlo podozrivo krátko - pre istotu reštartujte ešte raz...",
   "unlockFailed": "Odomknutie zlyhalo, odpojte a pripojte napájanie a skúste to znova.",
+  "patchFailed": "Patch failed, please power-cycle your device and try again.",
   "unsupportedFirmware": "Firmvér vo vašom zariadení je príliš nový. Možno budete môcť prejsť na nižšiu verziu V01.01.0606 v režime DIY s DJI FPV Assistant 2 v závislosti od presne nainštalovanej verzie. Viac podrobností nájdete na <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>wiki</a>.",
   "signingServerUnreachable": "The signing server could not be reached. It might be down or your ISP might be blocking it."
 }
