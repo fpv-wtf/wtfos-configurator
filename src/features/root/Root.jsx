@@ -34,19 +34,8 @@ import {
   UnlockFailed,
   UnsupportedFirmwareVersion,
   SigningServerUnreachable,
-} from "../../utils/obfuscated-exploit/Errors";
-import Exploit from "../../utils/obfuscated-exploit/Exploit";
-
-/*
-import {
-  PatchFailed,
-  PortLost,
-  UnlockFailed,
-  UnsupportedFirmwareVersion,
-  SigningServerUnreachable,
 } from "../../utils/exploit/Errors";
 import Exploit from "../../utils/exploit/Exploit.js";
-*/
 
 import {
   fail,
@@ -319,7 +308,7 @@ export default function Root() {
             shouldRunUnlock = false;
             done = true;
           } else if(e instanceof UnsupportedFirmwareVersion) {
-            log(t("unsupportedFirmware"));
+            log(t("tryButter"));
 
             shouldRunUnlock = false;
             done = true;
@@ -332,7 +321,7 @@ export default function Root() {
             disconnected.current = true;
             break;
           } else if(e instanceof PatchFailed) {
-            log(t("tryButter"));
+            log(t("patchFailed"));
 
             ReactGA.gtag("event", "patchFailed", {
               device,

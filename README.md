@@ -8,12 +8,6 @@ The app is automatically built and deployed to gh-pages. If forking this reposit
 
 ## Development
 
-Be aware that the exploit is only available in an obfuscated version. People with the correct permissions can pull in the exploit as a git submodule:
-
-```
-git submodule update --init
-```
-
 ### dotenv
 For ease of development a `.env.example` file is available, simply copy it to `.env` to enable it. This will set up a couple of env variables thata will be useful for local developent like for example the CORS proxy for rooting.
 
