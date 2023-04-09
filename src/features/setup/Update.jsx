@@ -31,6 +31,7 @@ import {
 
 import {
   fetchUpgradable,
+  selectErrors,
   selectFetchedUpgradable,
   selectProcessing,
   selectUpdate,
@@ -49,6 +50,7 @@ export default function Update({ adb }) {
   const upgradable = useSelector(selectUpgradable);
   const fetchedUpgradable = useSelector(selectFetchedUpgradable);
   const isProcessing = useSelector(selectProcessing);
+  const errors = useSelector(selectErrors);
 
   const healthchecksPassed = useSelector(selectPassed);
 
@@ -87,6 +89,10 @@ export default function Update({ adb }) {
 
   return(
     <Stack spacing={2}>
+      {errors.fetchUpgradable &&
+        <Alert severity="error">
+          {t("fetchUpgradableFailed")}
+        </Alert>}
 
       {update.ran && update.success &&
         <Alert severity="success">
@@ -117,6 +123,7 @@ export default function Update({ adb }) {
         </Button>}
 
       {upgradable.length === 0 && fetchedUpgradable &&
+      !errors.fetchUpgradable &&
         <Alert severity="success">
           {t("upToDate")}
         </Alert>}

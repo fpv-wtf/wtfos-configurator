@@ -11,6 +11,7 @@ import {
 } from "react-redux";
 import { useTranslation } from "react-i18next";
 
+import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DownloadIcon from "@mui/icons-material/Download";
@@ -45,6 +46,7 @@ import {
   repo,
   search,
   selectError,
+  selectErrors,
   selectFetched,
   selectFetchedUpgradable,
   selectFilter,
@@ -73,6 +75,7 @@ export default function Packages({ adb }) {
   const dispatch = useDispatch();
 
   const error = useSelector(selectError);
+  const errors = useSelector(selectErrors);
   const fetched = useSelector(selectFetched);
   const filter = useSelector(selectFilter);
   const filtered = useSelector(selectFiltered);
@@ -336,7 +339,12 @@ export default function Packages({ adb }) {
 
       {fetched && upgradable.length > 0 && <UpdatesBanner updatePluralized={upgradable.length > 1} />}
 
-      {hasOpkgBinary &&
+      {errors.fetchPackages &&
+        <Alert severity="error">
+          {t("fetchPackagesFailed")}
+        </Alert>}
+
+      {hasOpkgBinary && !errors.fetchPackages &&
         <Stack>
           <ErrorLog title={t("packageManagemendFailed")} />
 

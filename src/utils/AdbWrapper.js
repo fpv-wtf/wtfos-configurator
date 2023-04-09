@@ -188,31 +188,27 @@ export default class AdbWrapper {
     const delimiter = " - ";
 
     let upgradable = [];
-    try {
-      await this.updataPackages();
-      const output = await this.opkgQueue.add([
-        "list-upgradable",
-      ]);
+    await this.updataPackages();
+    const output = await this.opkgQueue.add([
+      "list-upgradable",
+    ]);
 
-      upgradable = output.stdout.split("\n").filter((line) => line);
-      upgradable = upgradable.filter((line) => {
-        const fields = line.split(delimiter);
+    upgradable = output.stdout.split("\n").filter((line) => line);
+    upgradable = upgradable.filter((line) => {
+      const fields = line.split(delimiter);
 
-        return fields.length === 3;
-      });
+      return fields.length === 3;
+    });
 
-      upgradable = upgradable.map((item) => {
-        const fields = item.split(delimiter);
+    upgradable = upgradable.map((item) => {
+      const fields = item.split(delimiter);
 
-        return {
-          name: fields[0],
-          current: fields[1],
-          latest: fields.slice(2).join(delimiter),
-        };
-      });
-    } catch(e) {
-      console.log(e);
-    }
+      return {
+        name: fields[0],
+        current: fields[1],
+        latest: fields.slice(2).join(delimiter),
+      };
+    });
 
     return upgradable;
   }

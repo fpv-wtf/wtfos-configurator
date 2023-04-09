@@ -18,6 +18,10 @@ const initialState = {
   fetchedUpgradable: false,
   processing: false,
   error: [],
+  errors: {
+    fetchPackages: false,
+    fetchUpgradable: false,
+  },
   update: {
     ran: false,
     success: false,
@@ -79,12 +83,9 @@ export const fetchPackages = createAsyncThunk(
   async (adb) => {
     let packages = [];
     let repos = [];
-    try {
-      packages = await adb.getPackages();
-      repos =  await adb.getRepos();
-    } catch(e) {
-      console.log(e);
-    }
+
+    packages = await adb.getPackages();
+    repos =  await adb.getRepos();
 
     return {
       packages,
@@ -215,7 +216,13 @@ export const packagesSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchPackages.pending, (state, action) => {
+        state.errors = initialState.errors;
         state.processing = true;
+      })
+      .addCase(fetchPackages.rejected, (state, action) => {
+        state.errors.fetchPackages = true;
+        state.fetched = true;
+        state.processing = false;
       })
       .addCase(fetchPackages.fulfilled, (state, action) => {
         state.packages = action.payload.packages;
@@ -251,8 +258,15 @@ export const packagesSlice = createSlice({
         state.fetched = false;
       })
       .addCase(fetchUpgradable.pending, (state, action) => {
+        state.errors = initialState.errors;
         state.processing = true;
         state.fetchedUpgradable = false;
+      })
+      .addCase(fetchUpgradable.rejected, (state, action) => {
+        state.error = action.payload;
+        state.errors.fetchUpgradable = true;
+        state.fetchedUpgradable = true;
+        state.processing = false;
       })
       .addCase(fetchUpgradable.fulfilled, (state, action) => {
         state.upgradable = action.payload;
@@ -301,6 +315,7 @@ export const {
 
 export const selectRepos = (state) => state.packages.repos;
 export const selectError = (state) => state.packages.error;
+export const selectErrors = (state) => state.packages.errors;
 export const selectFetched = (state) => state.packages.fetched;
 export const selectFetchedUpgradable = (state) => state.packages.fetchedUpgradable;
 export const selectFilter = (state) => state.packages.filter;
