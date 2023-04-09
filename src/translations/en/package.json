@@ -7,5 +7,6 @@
   "remove": "Remove",
   "install": "Install",
   "installing": "Installing package...",
-  "removing": "Removing package..."
+  "removing": "Removing package...",
+  "fetchPackageFailed": "Failed fetching package details!"
 }

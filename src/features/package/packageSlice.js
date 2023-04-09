@@ -21,6 +21,7 @@ const initialState = {
 
   writing: false,
   error: null,
+  errors: { fetchPackage: false },
 };
 
 export const fetchPackage = createAsyncThunk(
@@ -69,11 +70,14 @@ export const packageSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchPackage.pending, (state) => {
+        state.errors = initialState.errors;
         state.loading = true;
       })
       .addCase(fetchPackage.rejected, (state, action) => {
+        state.errors.fetchPackage = true;
         state.error = action.error.message;
         state.loading = false;
+        state.fetched = true;
       })
       .addCase(fetchPackage.fulfilled, (state, action) => {
         state.loading = false;
@@ -118,6 +122,7 @@ export const selectDetails = (state) => state.package.details;
 
 export const selectWriting = (state) => state.package.writing;
 export const selectError = (state) => state.package.error;
+export const selectErrors = (state) => state.package.errors;
 export const selectLoading = (state) => state.package.loading;
 
 export const selectConfig = (state) => state.package.config;
