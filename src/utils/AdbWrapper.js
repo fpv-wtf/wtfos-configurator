@@ -10,6 +10,7 @@ import busybox from "./busybox";
 import Proxy from "./Proxy";
 import ReverseShellSocket from "./ReverseShellSocket";
 import { parsePackageIndex } from "./OpkgHelpers";
+import TimeoutQueue from "./TimeoutQueue";
 
 const proxy = new Proxy("https://cors.bubblesort.me/?");
 
@@ -42,6 +43,65 @@ export default class AdbWrapper {
       packageConfigFile: "config.json",
       packageConfigSchema: "schemaV2.json",
     };
+
+    /**
+     * Process queue items by invoking opkg with parameters and resolving or
+     * rejecting based on the exit code.
+     *
+     * @param TimeoutQueueItem timeoutQueueItem
+     */
+    const opkgExecutor = async (timeoutQueueItem) => {
+      console.log("Opkg executing:", timeoutQueueItem);
+      const result =  await this.executeCommand([
+        this.wtfos.bin.opkg,
+        ...timeoutQueueItem.parameters,
+      ]);
+
+      if(result.exitCode === 0) {
+        timeoutQueueItem.resolve(result);
+        return;
+      }
+
+      timeoutQueueItem.reject(result);
+    };
+
+    /**
+     * Returns true if lock file does not exist, this means the next opkg
+     * command can be processed. Should the lock file still exist at this point
+     * chance is high that a reload happend while opkg is processing. In this
+     * case we wait 60 seconds in total, checking every 5 seconds if the lock
+     * exists before finally failing the check, which will reject all currently
+     * queued items.
+     *
+     * @returns bool
+     */
+    const opkgStartCondition = async () => {
+      const lockPath = "/opt/tmp/opkg.lock";
+      const timeout = (ms) => {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      };
+
+      const waitTimeMax = 60000;
+      const waitIncrease = 5000;
+      let waitedTime = 0;
+
+      do {
+        const lockFileExists = await this.fileExists(lockPath);
+        if(!lockFileExists) {
+          return true;
+        }
+
+        console.log("Waiting for lock to be freed");
+        waitedTime += waitIncrease;
+        await timeout(waitIncrease);
+      } while (waitedTime < waitTimeMax);
+
+      console.log("Lock not freed - reject.");
+
+      return false;
+    };
+
+    this.opkgQueue = new TimeoutQueue(opkgExecutor, opkgStartCondition);
   }
 
   sleep(ms) {
@@ -106,16 +166,14 @@ export default class AdbWrapper {
   }
 
   async installPackage(name) {
-    return await this.executeCommand([
-      this.wtfos.bin.opkg,
+    return await this.opkgQueue.add([
       "install",
       escapeArg(name),
     ]);
   }
 
   async removePackage(name) {
-    return await this.executeCommand([
-      this.wtfos.bin.opkg,
+    return await this.opkgQueue.add([
       "remove",
       escapeArg(name),
       "--force-removal-of-dependent-packages",
@@ -123,12 +181,7 @@ export default class AdbWrapper {
   }
 
   async updataPackages() {
-    const output = await this.executeCommand([
-      this.wtfos.bin.opkg,
-      "update",
-    ]);
-
-    return output;
+    return await this.opkgQueue.add(["update"]);
   }
 
   async getUpgradablePackages() {
@@ -137,8 +190,7 @@ export default class AdbWrapper {
     let upgradable = [];
     try {
       await this.updataPackages();
-      const output = await this.executeCommand([
-        this.wtfos.bin.opkg,
+      const output = await this.opkgQueue.add([
         "list-upgradable",
       ]);
 
@@ -166,8 +218,7 @@ export default class AdbWrapper {
   }
 
   async upgradePackages(callback) {
-    const output = await this.executeCommand([
-      this.wtfos.bin.opkg,
+    const output = await this.opkgQueue.add([
       "upgrade",
     ]);
 
@@ -182,8 +233,7 @@ export default class AdbWrapper {
   }
 
   async getPackages() {
-    let output = await this.executeCommand([
-      this.wtfos.bin.opkg,
+    let output = await this.opkgQueue.add([
       "list-installed",
     ]);
 
@@ -202,8 +252,7 @@ export default class AdbWrapper {
     });
 
     await this.updataPackages();
-    output = await this.adb.subprocess.spawnAndWait([
-      this.wtfos.bin.opkg,
+    output = await this.opkgQueue.add([
       "list",
     ]);
 
@@ -792,8 +841,7 @@ export default class AdbWrapper {
 
   async removeWTFOS(statusCallback, setRebooting) {
     statusCallback("Removing WTFOS packages...");
-    let output = await this.executeCommand([
-      this.wtfos.bin.opkg,
+    let output = await this.opkgQueue.add([
       "remove dinit wtfos wtfos-system",
       "--force-removal-of-dependent-packages",
     ]);
