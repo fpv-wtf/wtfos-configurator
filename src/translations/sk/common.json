@@ -2,5 +2,6 @@
   "disconnect": "Odpojiť",
   "connect": "Pripojiť",
   "connectDevice": "Pripojiť k zariadeniu",
-  "rebooting": "Reštartuje sa..."
+  "rebooting": "Reštartuje sa...",
+  "adbCheck": "Device found - checking for ADB, this can take a moment..."
 }
