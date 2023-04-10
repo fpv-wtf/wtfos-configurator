@@ -2,5 +2,6 @@
   "disconnect": "Bağlantıyı kes",
   "connect": "Bağlan",
   "connectDevice": "Cihaza bağlan",
-  "rebooting": "Yeniden başlatılıyor..."
+  "rebooting": "Yeniden başlatılıyor...",
+  "adbCheck": "Device found - checking for ADB, this can take a moment..."
 }
