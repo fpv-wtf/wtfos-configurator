@@ -10,7 +10,7 @@ import busybox from "./busybox";
 import Proxy from "./Proxy";
 import ReverseShellSocket from "./ReverseShellSocket";
 import { parsePackageIndex } from "./OpkgHelpers";
-import TimeoutQueue from "./TimeoutQueue";
+import Queue from "./Queue";
 
 const proxy = new Proxy("https://cors.bubblesort.me/?");
 
@@ -48,7 +48,7 @@ export default class AdbWrapper {
      * Process queue items by invoking opkg with parameters and resolving or
      * rejecting based on the exit code.
      *
-     * @param TimeoutQueueItem timeoutQueueItem
+     * @param QueueItem timeoutQueueItem
      */
     const opkgExecutor = async (timeoutQueueItem) => {
       console.log("Opkg executing:", timeoutQueueItem);
@@ -99,7 +99,7 @@ export default class AdbWrapper {
     };
 
     const rejectionReason = { stdout: "OPKG is locked - please wait a bit and reload.\nIf lock is not released after some time (5 minutes), please reboot your device.\n" };
-    this.opkgQueue = new TimeoutQueue(opkgExecutor, opkgStartCondition, rejectionReason);
+    this.opkgQueue = new Queue(opkgExecutor, opkgStartCondition, rejectionReason);
   }
 
   sleep(ms) {
