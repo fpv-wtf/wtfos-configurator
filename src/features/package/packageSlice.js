@@ -70,19 +70,15 @@ export const packageSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchPackage.pending, (state) => {
-        state.errors = initialState.errors;
         state.loading = true;
       })
       .addCase(fetchPackage.rejected, (state, action) => {
-        state.errors.fetchPackage = true;
         state.error = action.error.message;
+
+        state.errors.fetchPackage = true;
         state.loading = false;
-        state.fetched = true;
       })
       .addCase(fetchPackage.fulfilled, (state, action) => {
-        state.loading = false;
-        state.fetched = true;
-
         state.name = action.payload.name;
         state.description = action.payload.description;
         state.installed = action.payload.installed;
@@ -92,6 +88,10 @@ export const packageSlice = createSlice({
           ...state.details,
           ...action.payload.details,
         };
+
+        state.errors.fetchPackage = false;
+        state.loading = false;
+        state.fetched = true;
       }).addCase(fetchConfig.pending, (state, action) => {
         state.config = null;
         state.schema = null;

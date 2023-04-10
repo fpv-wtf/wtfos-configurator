@@ -35,6 +35,7 @@ import {
   selectDescription,
   selectDetails,
   selectError,
+  selectErrors,
   selectFetched,
   selectInstalled,
   selectInstalledVersion,
@@ -76,6 +77,7 @@ export default function Package({ adb }) {
   const loading = useSelector(selectLoading);
   const writing = useSelector(selectWriting);
   const error = useSelector(selectError);
+  const errors = useSelector(selectErrors);
   const isProcessing = useSelector(selectProcessing);
 
   const [installing, setInstalling] = useState(false);
@@ -162,6 +164,14 @@ export default function Package({ adb }) {
   return (
     <>
       <PackageManagementError />
+
+      {errors.fetchPackage &&
+        <Alert
+          severity="error"
+          sx={{ marginBottom: 2 }}
+        >
+          {t("fetchPackageFailed")}
+        </Alert>}
 
       <Paper sx={{ position: "relative" }} >
         <Box p={2}>

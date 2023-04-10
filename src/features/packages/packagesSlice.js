@@ -36,7 +36,7 @@ export const removePackage = createAsyncThunk(
     adb,
     name,
   }, { rejectWithValue }) => {
-    let errorMessage = [];
+    let errorMessage = ["Unknown error while removing package..."];
     try {
       const output = await adb.removePackage(name);
 
@@ -46,7 +46,9 @@ export const removePackage = createAsyncThunk(
 
       errorMessage = output.stdout.split("\n");
     } catch(e) {
-      errorMessage = e.stdout.split("\n");
+      if(e.stdout) {
+        errorMessage = e.stdout.split("\n");
+      }
     }
 
     return rejectWithValue(errorMessage);
@@ -59,7 +61,7 @@ export const installPackage = createAsyncThunk(
     adb,
     name,
   }, { rejectWithValue }) => {
-    let errorMessage = [];
+    let errorMessage = ["Unknown error while installing package"];
     try {
       const output = await adb.installPackage(name);
 
@@ -69,7 +71,9 @@ export const installPackage = createAsyncThunk(
 
       errorMessage = output.stdout.split("\n");
     } catch(e) {
-      errorMessage = e.stdout.split("\n");
+      if(e.stdout) {
+        errorMessage = e.stdout.split("\n");
+      }
     }
 
     return rejectWithValue(errorMessage);
@@ -78,17 +82,26 @@ export const installPackage = createAsyncThunk(
 
 export const fetchPackages = createAsyncThunk(
   "packages/fetchPackages",
-  async (adb) => {
+  async (adb, { rejectWithValue }) => {
+    let errorMessage = ["Unknown error while fetching packages..."];
     let packages = [];
     let repos = [];
 
-    packages = await adb.getPackages();
-    repos =  await adb.getRepos();
+    try {
+      packages = await adb.getPackages();
+      repos =  await adb.getRepos();
 
-    return {
-      packages,
-      repos,
-    };
+      return {
+        packages,
+        repos,
+      };
+    } catch(e) {
+      if(e.stdout) {
+        errorMessage = e.stdout.split("\n");
+      }
+    }
+
+    return rejectWithValue(errorMessage);
   }
 );
 
@@ -208,16 +221,19 @@ export const packagesSlice = createSlice({
     },
     clearError: (state, event) => {
       state.error = initialState.error;
+      state.errors = initialState.errors;
     },
     reset: () => initialState,
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPackages.pending, (state, action) => {
-        state.errors = initialState.errors;
         state.processing = true;
       })
       .addCase(fetchPackages.rejected, (state, action) => {
+        console.log("fetch package rejeced", action);
+        state.error = action.payload;
+
         state.errors.fetchPackages = true;
         state.fetched = true;
         state.processing = false;
@@ -225,54 +241,61 @@ export const packagesSlice = createSlice({
       .addCase(fetchPackages.fulfilled, (state, action) => {
         state.packages = action.payload.packages;
         state.repos = action.payload.repos;
+
+        state.errors.fetchPackages = false;
         state.filtered = filterPackages(state.packages, state.filter);
         state.fetched = true;
         state.processing = false;
       })
       .addCase(removePackage.pending, (state, action) => {
-        state.error = initialState.error;
-        state.errors = initialState.errors;
         state.processing = true;
       })
       .addCase(removePackage.rejected, (state, action) => {
         state.error = action.payload;
+
         state.errors.removePackage = true;
         state.processing = false;
         state.fetched = false;
       })
       .addCase(removePackage.fulfilled, (state, action) => {
         state.error = initialState.error;
+        state.errors = initialState.errors;
+
         state.fetched = false;
         state.processing = false;
       })
       .addCase(installPackage.pending, (state, action) => {
-        state.errors = initialState.errors;
         state.processing = true;
       })
       .addCase(installPackage.rejected, (state, action) => {
         state.error = action.payload;
+
         state.errors.installPackage = true;
         state.processing = false;
         state.fetched = false;
       })
       .addCase(installPackage.fulfilled, (state, action) => {
         state.error = initialState.error;
+        state.errors = initialState.errors;
+
         state.fetched = false;
         state.processing = false;
       })
       .addCase(fetchUpgradable.pending, (state, action) => {
-        state.errors = initialState.errors;
         state.processing = true;
         state.fetchedUpgradable = false;
       })
       .addCase(fetchUpgradable.rejected, (state, action) => {
         state.error = action.payload;
+
         state.errors.fetchUpgradable = true;
         state.fetchedUpgradable = true;
         state.processing = false;
       })
       .addCase(fetchUpgradable.fulfilled, (state, action) => {
         state.upgradable = action.payload;
+
+        state.errors.fetchUpgradable = false;
         state.processing = false;
         state.fetchedUpgradable = true;
       })

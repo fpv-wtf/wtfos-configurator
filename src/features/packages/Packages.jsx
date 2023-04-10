@@ -11,7 +11,6 @@ import {
 } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DownloadIcon from "@mui/icons-material/Download";
@@ -34,8 +33,6 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 
 import ReactGA from "react-ga4";
-
-import ErrorLog from "../log/Error";
 
 import {
   clearError,
@@ -65,6 +62,7 @@ import SetupHint from "../setup/SetupHint";
 import UpdatesBanner from "./UpdatesBanner";
 import Spinner from "../overlays/Spinner";
 import DefaultTextLink from "../styledLink/Default";
+import PackageManagementError from "../package/PackageManagementError";
 
 export default function Packages({ adb }) {
   const { t } = useTranslation("packages");
@@ -339,15 +337,10 @@ export default function Packages({ adb }) {
 
       {fetched && upgradable.length > 0 && <UpdatesBanner updatePluralized={upgradable.length > 1} />}
 
-      {errors.fetchPackages &&
-        <Alert severity="error">
-          {t("fetchPackagesFailed")}
-        </Alert>}
+      <PackageManagementError />
 
       {hasOpkgBinary && !errors.fetchPackages &&
         <Stack>
-          <ErrorLog title={t("packageManagemendFailed")} />
-
           <Box
             component="form"
             noValidate

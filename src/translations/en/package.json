@@ -10,5 +10,6 @@
   "removing": "Removing package...",
   "fetchPackageFailed": "Failed fetching package details!",
   "removePackageFailed": "Failed removing package:",
-  "installPackageFailed": "Failed installing package:"
+  "installPackageFailed": "Failed installing package:",
+  "fetchPackagesFailed": "Failed fetching package list:"
 }

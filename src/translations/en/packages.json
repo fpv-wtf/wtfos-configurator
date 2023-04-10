@@ -21,6 +21,5 @@
   "labelCategoryAllExceptSystem": "All (except system)",
   "labelCategoryAll": "All",
   "installing": "Installing package...",
-  "removing": "Removing package...",
-  "fetchPackagesFailed": "Failed fetching package list!"
+  "removing": "Removing package..."
 }

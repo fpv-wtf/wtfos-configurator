@@ -16,14 +16,6 @@ export default function PackageManagementError() {
   const error = useSelector(selectError);
   const errors = useSelector(selectErrors);
 
-  const errorText = error.map((line) => {
-    return (
-      <Typography key={line}>
-        {line}
-      </Typography>
-    );
-  });
-
   const hasInstallationError =
     errors.removePackage ||
     errors.installPackage ||
@@ -31,13 +23,21 @@ export default function PackageManagementError() {
   let errorHeadline = t("removePackageFailed");
   if(errors.installPackage) {
     errorHeadline = t("installPackageFailed");
-  } else if (errors.fetchPacakge) {
-    errorHeadline = t("fetchPackageFailed");
+  } else if(errors.fetchPackages) {
+    errorHeadline = t("fetchPackagesFailed");
   }
 
   if(!hasInstallationError) {
     return null;
   }
+
+  const errorText = error.map((line) => {
+    return (
+      <Typography key={line}>
+        {line}
+      </Typography>
+    );
+  });
 
   return (
     <Alert
