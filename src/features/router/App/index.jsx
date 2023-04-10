@@ -45,6 +45,7 @@ import { selectCanClaim } from "../../tabGovernor/tabGovernorSlice";
 
 function App({
   adb,
+  adbDetection,
   handleAdbConnectClick,
 }) {
   const dispatch = useDispatch();
@@ -69,9 +70,10 @@ function App({
     >
       <Header />
 
-      {!isConnected  &&
+      {!isConnected &&
         <Stack>
           <Device
+            adbDetection={adbDetection}
             error={error}
             handleDeviceConnect={handleAdbConnectClick}
           />
@@ -150,6 +152,7 @@ App.defaultProps = { adb: null };
 
 App.propTypes = {
   adb: PropTypes.shape(),
+  adbDetection: PropTypes.bool.isRequired,
   handleAdbConnectClick: PropTypes.func.isRequired,
 };
 
