@@ -2,5 +2,6 @@
   "disconnect": "断开连接",
   "connect": "连接",
   "connectDevice": "连接到设备",
-  "rebooting": "正在重启..."
+  "rebooting": "正在重启...",
+  "adbCheck": "Device found - checking for ADB, this can take a moment..."
 }
