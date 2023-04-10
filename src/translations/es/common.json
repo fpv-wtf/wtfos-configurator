@@ -2,5 +2,6 @@
   "disconnect": "Desconectar",
   "connect": "Conectar",
   "connectDevice": "Conectar a dispositivo",
-  "rebooting": "Reiniciando..."
+  "rebooting": "Reiniciando...",
+  "adbCheck": "Device found - checking for ADB, this can take a moment..."
 }
