@@ -17,6 +17,7 @@ import { isLinux } from "../../utils/Os";
 import { selectRebooting } from "./deviceSlice";
 
 export default function Device({
+  adbDetection,
   error,
   handleDeviceConnect,
 }) {
@@ -37,6 +38,13 @@ export default function Device({
       {!window.navigator.usb &&
         <Webusb />}
 
+      {adbDetection &&
+        <Alert severity="info" >
+          <Typography>
+            {tc("adbCheck")}
+          </Typography>
+        </Alert>}
+
       { !error && window.navigator.usb &&
         <Alert severity="warning">
           <Typography>
@@ -54,7 +62,8 @@ export default function Device({
       { isLinux() &&
         <Udev />}
 
-      <ConnectButton onClick={handleDeviceConnect} />
+      {!adbDetection &&
+        <ConnectButton onClick={handleDeviceConnect} />}
     </Stack>
   );
 
@@ -68,6 +77,7 @@ export default function Device({
 Device.defaultProps = { error: false };
 
 Device.propTypes = {
+  adbDetection: PropTypes.bool.isRequired,
   error: PropTypes.bool,
   handleDeviceConnect: PropTypes.func.isRequired,
 };

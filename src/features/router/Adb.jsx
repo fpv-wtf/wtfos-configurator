@@ -60,6 +60,7 @@ export default function AdbRouter() {
 
   const [startupCheck, setStartupCheck] = useState(false);
   const [adb, setAdb] = useState(null);
+  const [adbDetection, setAdbDetection] = useState(false);
 
   const adbRef = useRef();
   const deviceRef = useRef();
@@ -67,7 +68,6 @@ export default function AdbRouter() {
   const intervalRef = useRef();
   const watcherRef = useRef();
 
-  const detectionRunningRef = useRef();
   const detectionCountRef = useRef();
   const detectionDeviceRef = useRef();
 
@@ -140,11 +140,11 @@ export default function AdbRouter() {
     detectionDeviceRef.current = device;
     detectionCountRef.current = 0;
 
-    if (detectionRunningRef.current) {
+    if (adbDetection) {
       return;
     }
 
-    detectionRunningRef.current = true;
+    setAdbDetection(true);
 
     const maxIteration = 5;
     const interval = 5000;
@@ -155,7 +155,8 @@ export default function AdbRouter() {
 
         // Device connection promised resolved
         devicePromiseRef.current = null;
-        detectionRunningRef.current = false;
+        setAdbDetection(false);
+
         return;
       }
 
@@ -168,9 +169,9 @@ export default function AdbRouter() {
      * certain amountof time - this is needed for the VISTA where the correct
      * interface does not show up immediately.
      */
-    detectionRunningRef.current = false;
+    setAdbDetection(false);
     navigate("/root");
-  }, [connectToDevice, navigate]);
+  }, [adbDetection, connectToDevice, navigate, setAdbDetection]);
 
   /**
    * Auto connect to ADB device if all criteria are matched.
@@ -303,6 +304,7 @@ export default function AdbRouter() {
         element={
           <App
             adb={adb}
+            adbDetection={adbDetection}
             handleAdbConnectClick={handleDeviceConnect}
           />
         }
