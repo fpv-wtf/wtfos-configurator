@@ -2,5 +2,6 @@
   "disconnect": "Trennen",
   "connect": "Verbinden",
   "connectDevice": "Mit Gerät verbinden",
-  "rebooting": "Wird neu gestartet..."
+  "rebooting": "Wird neu gestartet...",
+  "adbCheck": "Device found - checking for ADB, this can take a moment..."
 }
