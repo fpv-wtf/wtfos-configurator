@@ -2,5 +2,6 @@
   "disconnect": "Koppla från",
   "connect": "Anslut",
   "connectDevice": "Anslut till enhet",
-  "rebooting": "Startar om..."
+  "rebooting": "Startar om...",
+  "adbCheck": "Device found - checking for ADB, this can take a moment..."
 }
