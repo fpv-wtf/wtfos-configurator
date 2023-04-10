@@ -51,6 +51,7 @@ import {
   removePackage,
   selectError as selectInstallationError,
   selectProcessing,
+  selectErrors as SelectInstallationErrors,
 } from "../packages/packagesSlice";
 
 import { selectPassed } from "../healthcheck/healthcheckSlice";
@@ -78,6 +79,7 @@ export default function Package({ adb }) {
   const writing = useSelector(selectWriting);
   const error = useSelector(selectError);
   const errors = useSelector(selectErrors);
+  const installationErrors = useSelector(SelectInstallationErrors);
 
   const isProcessing = useSelector(selectProcessing);
   const installationError = useSelector(selectInstallationError);
@@ -173,12 +175,16 @@ export default function Package({ adb }) {
 
   return (
     <>
-      {installationError.length > 0 &&
+      {installationErrors.removePackage &&
         <Alert
           severity="error"
           sx={{ marginBottom: 2 }}
         >
-          {errorText}
+          <Typography sx={{ marginBottom: 1 }}>
+            {t("removePackageFailed")}
+          </Typography>
+
+          {errorText }
         </Alert>}
 
       {errors.fetchPackage &&

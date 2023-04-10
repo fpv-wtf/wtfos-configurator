@@ -21,6 +21,7 @@ const initialState = {
   errors: {
     fetchPackages: false,
     fetchUpgradable: false,
+    removePackage: false,
   },
   update: {
     ran: false,
@@ -34,22 +35,20 @@ export const removePackage = createAsyncThunk(
     adb,
     name,
   }, { rejectWithValue }) => {
-    let output = ["Unknown error during removal."];
+    let errorMessage = [];
     try {
       const output = await adb.removePackage(name);
 
       if(output.exitCode === 0) {
         return name;
       }
+
+      errorMessage = output.stdout.split("\n");
     } catch(e) {
-      console.log(e);
+      errorMessage = e.stdout.split("\n");
     }
 
-    if(output.stdout) {
-      output = output.stdout.split("\n");
-    }
-
-    return rejectWithValue(output);
+    return rejectWithValue(errorMessage);
   }
 );
 
@@ -232,17 +231,20 @@ export const packagesSlice = createSlice({
         state.processing = false;
       })
       .addCase(removePackage.pending, (state, action) => {
+        state.error = initialState.error;
+        state.errors = initialState.errors;
         state.processing = true;
+      })
+      .addCase(removePackage.rejected, (state, action) => {
+        state.error = action.payload;
+        state.errors.removePackage = true;
+        state.processing = false;
+        state.fetched = false;
       })
       .addCase(removePackage.fulfilled, (state, action) => {
         state.error = initialState.error;
         state.fetched = false;
         state.processing = false;
-      })
-      .addCase(removePackage.rejected, (state, action) => {
-        state.error = action.payload;
-        state.processing = false;
-        state.fetched = false;
       })
       .addCase(installPackage.pending, (state, action) => {
         state.processing = true;
