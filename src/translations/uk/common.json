@@ -2,5 +2,6 @@
   "disconnect": "Від’єднати",
   "connect": "Під’єднатися",
   "connectDevice": "Під'єднатися до пристрою",
-  "rebooting": "Система перезавантажується..."
+  "rebooting": "Система перезавантажується...",
+  "adbCheck": "Device found - checking for ADB, this can take a moment..."
 }
