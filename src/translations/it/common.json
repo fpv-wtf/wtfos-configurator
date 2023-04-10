@@ -2,5 +2,6 @@
   "disconnect": "Disconnetti",
   "connect": "Connetti",
   "connectDevice": "Connetti al dispositivo",
-  "rebooting": "Riavvio..."
+  "rebooting": "Riavvio...",
+  "adbCheck": "Device found - checking for ADB, this can take a moment..."
 }
