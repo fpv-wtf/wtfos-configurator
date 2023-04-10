@@ -57,6 +57,11 @@ export default class AdbWrapper {
         ...timeoutQueueItem.parameters,
       ]);
 
+      if(timeoutQueueItem.parameters[0] === "install") {
+        timeoutQueueItem.reject(result);
+        return;
+      }
+
       if(result.exitCode === 0) {
         timeoutQueueItem.resolve(result);
         return;

@@ -35,7 +35,6 @@ import {
   selectDescription,
   selectDetails,
   selectError,
-  selectErrors,
   selectFetched,
   selectInstalled,
   selectInstalledVersion,
@@ -49,13 +48,12 @@ import {
 import {
   installPackage,
   removePackage,
-  selectError as selectInstallationError,
   selectProcessing,
-  selectErrors as SelectInstallationErrors,
 } from "../packages/packagesSlice";
 
 import { selectPassed } from "../healthcheck/healthcheckSlice";
 import Spinner from "../overlays/Spinner";
+import PackageManagementError from "./PackageManagementError";
 
 export default function Package({ adb }) {
   const { t } = useTranslation("package");
@@ -78,11 +76,7 @@ export default function Package({ adb }) {
   const loading = useSelector(selectLoading);
   const writing = useSelector(selectWriting);
   const error = useSelector(selectError);
-  const errors = useSelector(selectErrors);
-  const installationErrors = useSelector(SelectInstallationErrors);
-
   const isProcessing = useSelector(selectProcessing);
-  const installationError = useSelector(selectInstallationError);
 
   const [installing, setInstalling] = useState(false);
   const [removing, setRemoving] = useState(false);
@@ -163,37 +157,11 @@ export default function Package({ adb }) {
   }
 
   const isLoading = loading || installing || removing;
-  const errorText = installationError.map((line) => {
-    return (
-      <Typography key={line}>
-        {line}
-      </Typography>
-    );
-  });
-
   const versionText = installed ? ` ${installedVersion}` : "";
 
   return (
     <>
-      {installationErrors.removePackage &&
-        <Alert
-          severity="error"
-          sx={{ marginBottom: 2 }}
-        >
-          <Typography sx={{ marginBottom: 1 }}>
-            {t("removePackageFailed")}
-          </Typography>
-
-          {errorText }
-        </Alert>}
-
-      {errors.fetchPackage &&
-        <Alert
-          severity="error"
-          sx={{ marginBottom: 2 }}
-        >
-          {t("fetchPackageFailed")}
-        </Alert>}
+      <PackageManagementError />
 
       <Paper sx={{ position: "relative" }} >
         <Box p={2}>
