@@ -2,5 +2,6 @@
   "disconnect": "Отключить",
   "connect": "Подключить",
   "connectDevice": "Подключение к устройству",
-  "rebooting": "Перезагрузка..."
+  "rebooting": "Перезагрузка...",
+  "adbCheck": "Device found - checking for ADB, this can take a moment..."
 }
