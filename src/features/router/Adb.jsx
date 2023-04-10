@@ -25,7 +25,10 @@ import App from "./App";
 import OsdOverlay from "../osd-overlay/OsdOverlay";
 import Settings from "../settings/Settings";
 
-import { hasAdb } from "../../utils/WebusbHelpers";
+import {
+  hasAdb,
+  timeout,
+} from "../../utils/WebusbHelpers";
 
 import {
   checkBinaries,
@@ -63,6 +66,10 @@ export default function AdbRouter() {
   const devicePromiseRef = useRef();
   const intervalRef = useRef();
   const watcherRef = useRef();
+
+  const detectionRunningRef = useRef();
+  const detectionCountRef = useRef();
+  const detectionDeviceRef = useRef();
 
   const connectToDevice = useCallback(async (device) => {
     if(device && !adb) {
@@ -125,17 +132,44 @@ export default function AdbRouter() {
   /**
    * If an ADB interface could be found, attempt to connect, otherwise
    * redirect to rooting page.
+   *
+   * This can be triggered while it is still running, in this case we reset
+   * the iteration cound update the device reference and keep on going.
    */
   const connectOrRedirect = useCallback(async (device) => {
-    if (hasAdb(device)) {
-      const backendDevice = new AdbWebUsbBackend(device);
-      await connectToDevice(backendDevice);
+    detectionDeviceRef.current = device;
+    detectionCountRef.current = 0;
 
-      // Device connection promised resolved
-      devicePromiseRef.current = null;
-    } else {
-      navigate("/root");
+    if (detectionRunningRef.current) {
+      return;
     }
+
+    detectionRunningRef.current = true;
+
+    const maxIteration = 5;
+    const interval = 5000;
+    do {
+      if (hasAdb(detectionDeviceRef.current)) {
+        const backendDevice = new AdbWebUsbBackend(detectionDeviceRef.current);
+        await connectToDevice(backendDevice);
+
+        // Device connection promised resolved
+        devicePromiseRef.current = null;
+        detectionRunningRef.current = false;
+        return;
+      }
+
+      await timeout(interval);
+      detectionCountRef.current += 1;
+    } while(detectionCountRef.current < maxIteration);
+
+    /**
+     * Redirect to root after trying to verify that ADB device is there for a
+     * certain amountof time - this is needed for the VISTA where the correct
+     * interface does not show up immediately.
+     */
+    detectionRunningRef.current = false;
+    navigate("/root");
   }, [connectToDevice, navigate]);
 
   /**
