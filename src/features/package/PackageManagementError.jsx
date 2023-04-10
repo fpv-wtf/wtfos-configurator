@@ -19,12 +19,19 @@ export default function PackageManagementError() {
   const hasInstallationError =
     errors.removePackage ||
     errors.installPackage ||
-    errors.fetchPackages;
+    errors.fetchPackages ||
+    errors.fetchUpgradable ||
+    errors.upgrade;
+
   let errorHeadline = t("removePackageFailed");
   if(errors.installPackage) {
     errorHeadline = t("installPackageFailed");
   } else if(errors.fetchPackages) {
     errorHeadline = t("fetchPackagesFailed");
+  } else if(errors.upgrade) {
+    errorHeadline = t("upgradeFailed");
+  } else if(errors.fetchUpgradable) {
+    errorHeadline = t("fetchUpgradableFailed");
   }
 
   if(!hasInstallationError) {

@@ -91,17 +91,15 @@ export default class AdbWrapper {
           return true;
         }
 
-        console.log("Waiting for lock to be freed");
         waitedTime += waitIncrease;
         await timeout(waitIncrease);
       } while (waitedTime < waitTimeMax);
 
-      console.log("Lock not freed - reject.");
-
       return false;
     };
 
-    this.opkgQueue = new TimeoutQueue(opkgExecutor, opkgStartCondition);
+    const rejectionReason = { stdout: "OPKG is locked - please wait a bit and reload.\nIf lock is not released after some time (5 minutes), please reboot your device.\n" };
+    this.opkgQueue = new TimeoutQueue(opkgExecutor, opkgStartCondition, rejectionReason);
   }
 
   sleep(ms) {

@@ -15,9 +15,10 @@ class TimeoutQueueItem {
 }
 
 export default class TimeoutQueue {
-  constructor(executorFunction, startConditionFunction, timeoutMs = 60000) {
+  constructor(executorFunction, startConditionFunction, rejectionReason, timeoutMs = 60000) {
     this.executorFunction = executorFunction;
     this.startConditionFunction = startConditionFunction;
+    this.rejectionReason = rejectionReason;
     this.timeoutMs = timeoutMs;
 
     this.running = false;
@@ -45,7 +46,7 @@ export default class TimeoutQueue {
 
       const startConditionMet = await this.startConditionFunction();
       if(!startConditionMet) {
-        this.rejectAll("Start condition not met");
+        this.rejectAll(this.rejectionReason);
       } else {
         while(this.queue.length > 0) {
           this.timeoutFunction = setTimeout(() => {

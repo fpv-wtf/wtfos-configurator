@@ -21,7 +21,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 import Spinner from "../loading/Spinner";
-import Log from "../log/Log";
 
 import {
   setLog,
@@ -39,6 +38,7 @@ import {
   upgrade,
 } from "../packages/packagesSlice";
 import { selectPassed } from "../healthcheck/healthcheckSlice";
+import PackageManagementError from "../package/PackageManagementError";
 
 export default function Update({ adb }) {
   const { t } = useTranslation("setup");
@@ -89,24 +89,12 @@ export default function Update({ adb }) {
 
   return(
     <Stack spacing={2}>
-      {errors.fetchUpgradable &&
-        <Alert severity="error">
-          {t("fetchUpgradableFailed")}
-        </Alert>}
+      <PackageManagementError />
 
       {update.ran && update.success &&
         <Alert severity="success">
           {t("updateSuccess")}
         </Alert>}
-
-      {update.ran && !update.success &&
-        <>
-          <Alert severity="error">
-            {t("updateFailed")}
-          </Alert>
-
-          <Log />
-        </>}
 
       {upgradable.length > 0 &&
         <Button

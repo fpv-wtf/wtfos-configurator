@@ -23,6 +23,7 @@ const initialState = {
     fetchUpgradable: false,
     installPackage: false,
     removePackage: false,
+    upgrade: false,
   },
   update: {
     ran: false,
@@ -107,10 +108,19 @@ export const fetchPackages = createAsyncThunk(
 
 export const fetchUpgradable = createAsyncThunk(
   "packages/fetchUpgradable",
-  async (adb) => {
-    const upgradable = await adb.getUpgradablePackages();
+  async (adb, { rejectWithValue }) => {
+    let errorMessage = ["Unknown error while fetching packages..."];
+    try {
+      const upgradable = await adb.getUpgradablePackages();
 
-    return upgradable;
+      return upgradable;
+    } catch(e) {
+      if(e.stdout) {
+        errorMessage = e.stdout.split("\n");
+      }
+    }
+
+    return rejectWithValue(errorMessage);
   }
 );
 
@@ -119,8 +129,18 @@ export const upgrade = createAsyncThunk(
   async ({
     adb,
     callback,
-  }) => {
-    await adb.upgradePackages(callback);
+  }, { rejectWithValue }) => {
+    let errorMessage = ["Unknown error while upgrading packages..."];
+    try {
+      await adb.upgradePackages(callback);
+      return;
+    } catch(e) {
+      if(e.stdout) {
+        errorMessage = e.stdout.split("\n");
+      }
+    }
+
+    return rejectWithValue(errorMessage);
   }
 );
 
@@ -305,11 +325,15 @@ export const packagesSlice = createSlice({
         state.update.ran = false;
       })
       .addCase(upgrade.rejected, (state, action) => {
+        state.error = action.payload;
+
+        state.errors.upgrade = true;
         state.processing = false;
-        state.update.ran = true;
-        state.update.success = false;
       })
       .addCase(upgrade.fulfilled, (state, action) => {
+        state.error = initialState.error;
+        state.errors = initialState.errors;
+
         state.processing = false;
         state.update.ran = true;
         state.update.success = true;
