@@ -1,0 +1,11 @@
+{
+  "detailsFor": "Detalhes para {{name}}",
+  "submit": "Salvar configurações",
+  "loading": "Carregando detalhes do pacote...",
+  "visitProjectPage": "Visite a página do projeto",
+  "maintainer": "Responsável: {{name}}",
+  "remove": "Remover",
+  "install": "Instalar",
+  "installing": "Instalando pacote...",
+  "removing": "Removendo pacote..."
+}

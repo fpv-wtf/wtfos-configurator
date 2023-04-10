@@ -8,12 +8,8 @@ export default function Recovery() {
 
   return(
     <Disclaimer
-      lines={[
-        t("line1"),
-        t("line2"),
-        t("line3"),
-      ]}
-      title={t("title")}
+      lines={[t("recoveryText")]}
+      title={t("recoveryTitle")}
     />
   );
 }

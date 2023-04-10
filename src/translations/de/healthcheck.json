@@ -1,0 +1,8 @@
+{
+  "message": "Fehlgeschlagene Systemdiagnose",
+  "fix": "Versuch Fehler zu beheben",
+  "warningTitle": "Automatische Reparaturen:",
+  "warningDescription": "Keine Sorge, das ist normal und kann aus verschiedenen Gründen auftreten, unter anderem wegen Fehlern im zugrunde liegenden Betriebssystem. Der Konfigurator kann dir helfen, diese Probleme zu beheben. Wenn du versuchst, das Problem automatisch zu beheben, kann es sein, dass dein Gerät dabei neu startet. In bestimmten Fällen musst du dein Gerät nach einem Neustart neu rooten, bevor die Systemprüfungen fortgesetzt werden können.",
+  "failed": "Systemdiagnose fehlgeschlagen.",
+  "loading": "Bitte warten..."
+}

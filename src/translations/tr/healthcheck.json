@@ -1,0 +1,8 @@
+{
+  "message": "Başarısız sistem sağlık kontrolü",
+  "fix": "Düzeltmeyi dene",
+  "warningTitle": "Otomatik düzeltmeler:",
+  "warningDescription": "Endişelenmeyin, bu normal bir durum olup mevcut işletim sistemindeki hatalar gibi çeşitli nedenlerden ötürü olabilir. Konfigüratör bu sorunları çözmenize yardımcı olabilir. Otomatik düzeltme esnasında cihazınız kendini yeniden başlatabilir. Bazı özel durumlarda yeniden başlatma sonrası sistem sağlık kontrolleri devam edebilmesi için cihazınızı tekrar root etmeniz gerekebilir.",
+  "failed": "Sistem sağlık denetimleri gerçekleştirilemedi.",
+  "loading": "Lütfen bekleyin..."
+}

@@ -1,0 +1,6 @@
+{
+  "running": "çalışıyor (PID: {{pid}})",
+  "started": "başlatıldı",
+  "stopped": "durduruldu",
+  "hint": "Etkinleştirilen hizmetler, aygıtın önyükleme işlemi sırasında başlatılır."
+}

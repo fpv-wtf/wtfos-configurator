@@ -18,5 +18,7 @@
   "checking": "正在监测软件包...",
   "name": "软件包名",
   "current": "已安装版本",
-  "latest": "最新版本"
+  "latest": "最新版本",
+  "updateSuccess": "更新已成功安装!",
+  "updateFailed": "安装更新失败!"
 }

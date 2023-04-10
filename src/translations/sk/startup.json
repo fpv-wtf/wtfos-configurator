@@ -1,0 +1,6 @@
+{
+  "running": "bežiaci (PID: {{pid}})",
+  "started": "začaté",
+  "stopped": "stopnuté",
+  "hint": "Povolené služby sú začaté počas bootovacieho procesu zariadenia."
+}

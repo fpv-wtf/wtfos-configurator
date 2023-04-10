@@ -1,0 +1,6 @@
+{
+  "udevTitle": "UDEV kuralı gerekli olabilir",
+  "udevText": "Cihaza bağlanmada sorun yaşıyorsanız aşağıdaki dosyaya UDEV kuralını eklemeniz gerekebilir '/etc/udev/rules.d/51-dji-adb.rules':",
+  "udevCreate": "Dosyayı otomatik olarak oluşturmak için şunu çalıştırın:",
+  "udevRestart": "Ardından udev alt sistemini yeniden başlatın:"
+}

@@ -24,10 +24,12 @@ export default function Log() {
         key={key}
       >
         <Typography
-          sx={{ fontFamily: "Monospace" }}
-        >
-          {line}
-        </Typography>
+          dangerouslySetInnerHTML={{ __html: line }}
+          sx={{
+            fontFamily: "Monospace",
+            a: { color: "white" },
+          }}
+        />
       </ListItem>
     );
   });

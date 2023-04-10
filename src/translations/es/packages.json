@@ -1,8 +1,12 @@
 {
+  "updateAvailable": "Está disponible la actualización del paquete ya instalado. Para más información pulse el botón actualizar.",
+  "updatesAvailable": "Están disponibles las actualizaciones de los paquetes ya instalados. Para más información pulse el botón actualizar.",
+  "update": "Actualizar",
   "remove": "Eliminar",
   "install": "Instalar",
   "fetching": "Obteniendo paquetes...",
   "installationFailed": "Error durante la instalación del paquete:",
+  "packageManagemendFailed": "Error de gestión de paquetes:",
   "labelRepo": "Repositorio",
   "labelPackages": "Paquetes",
   "labelAll": "Todos",
@@ -11,5 +15,11 @@
   "name": "Nombre",
   "version": "Versión",
   "description": "Descripción",
-  "matchCount": "Se encontraron {{count}} paquetes"
+  "matchCount": "Se encontraron {{count}} paquetes",
+  "visitProjectPage": "Visita la página del proyecto",
+  "labelCategory": "Categoría",
+  "labelCategoryAllExceptSystem": "Todos (excepto sistema)",
+  "labelCategoryAll": "Todo",
+  "installing": "Instalando paquete...",
+  "removing": "Eliminando paquete..."
 }

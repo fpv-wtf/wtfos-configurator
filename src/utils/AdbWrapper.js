@@ -1,3 +1,5 @@
+import { Buffer } from "buffer";
+
 import {
   escapeArg,
   WrapReadableStream,
@@ -7,6 +9,7 @@ import busybox from "./busybox";
 
 import Proxy from "./Proxy";
 import ReverseShellSocket from "./ReverseShellSocket";
+import { parsePackageIndex } from "./OpkgHelpers";
 
 const proxy = new Proxy("https://cors.bubblesort.me/?");
 
@@ -22,6 +25,7 @@ export default class AdbWrapper {
         dinit: "/opt/sbin/dinit",
         dinitctl: "/opt/sbin/dinitctl",
         opkg: "/opt/bin/opkg",
+        adbRemoval: "/system/bin/wtfos-remove-adb",
       },
       config: {
         dinit: "/opt/etc/dinit.d",
@@ -30,8 +34,13 @@ export default class AdbWrapper {
       proxy: "http://127.0.0.1:8089",
       linkFunctions: ["wget"],
       opkgLists: "/opt/var/opkg-lists",
-      entwareInstallerUrl: "http://bin.entware.net/armv7sf-k3.2/installer/alternative.sh",
+      entwareInstallerUrl: "http://repo.fpv.wtf/entware-armv7sf-k3.2/installer/alternative.sh",
       opkgConfigUrl: "http://repo.fpv.wtf/pigeon/wtfos-opkg-config_armv7-3.2.ipk",
+      healthchecksUrl: "https://github.com/fpv-wtf/wtfos-healthchecks/releases/latest/download/healthchecks.tar.gz",
+      healthchesksPath: "/tmp/healthchecks",
+      packageConfigPath: "/opt/etc/package-config",
+      packageConfigFile: "config.json",
+      packageConfigSchema: "schemaV2.json",
     };
   }
 
@@ -47,8 +56,19 @@ export default class AdbWrapper {
     return this.reverseShellSocket;
   }
 
-  filterInvalidFn = (item) => {
+  filterInvalidPackages = (item) => {
     return item.installed || (!!item.version && !item.name?.includes(" "));
+  };
+
+  splitPackageString = (item) => {
+    const delimiter = " - ";
+    const fields = item.split(delimiter);
+
+    return {
+      name: fields[0],
+      version: fields[1],
+      description: fields[2] ? fields.slice(2).join(delimiter) : "",
+    };
   };
 
   /**
@@ -102,6 +122,128 @@ export default class AdbWrapper {
     ]);
   }
 
+  async updataPackages() {
+    const output = await this.executeCommand([
+      this.wtfos.bin.opkg,
+      "update",
+    ]);
+
+    return output;
+  }
+
+  async getUpgradablePackages() {
+    const delimiter = " - ";
+
+    let upgradable = [];
+    try {
+      await this.updataPackages();
+      const output = await this.executeCommand([
+        this.wtfos.bin.opkg,
+        "list-upgradable",
+      ]);
+
+      upgradable = output.stdout.split("\n").filter((line) => line);
+      upgradable = upgradable.filter((line) => {
+        const fields = line.split(delimiter);
+
+        return fields.length === 3;
+      });
+
+      upgradable = upgradable.map((item) => {
+        const fields = item.split(delimiter);
+
+        return {
+          name: fields[0],
+          current: fields[1],
+          latest: fields.slice(2).join(delimiter),
+        };
+      });
+    } catch(e) {
+      console.log(e);
+    }
+
+    return upgradable;
+  }
+
+  async upgradePackages(callback) {
+    const output = await this.executeCommand([
+      this.wtfos.bin.opkg,
+      "upgrade",
+    ]);
+
+    if(callback) {
+      const log = output.stdout.split("\n").filter((line) => line);
+      callback(log);
+    }
+
+    if(output.exitCode !== 0) {
+      throw new Error("Failed upgrading packages");
+    }
+  }
+
+  async getPackages() {
+    let output = await this.executeCommand([
+      this.wtfos.bin.opkg,
+      "list-installed",
+    ]);
+
+    if(output.exitCode !== 0) {
+      throw new Error("Failed fetching installed packages.");
+    }
+
+    let lines = output.stdout.split("\n").filter((element) => element);
+    const installed = lines.map((item) => {
+      const fields = this.splitPackageString(item);
+
+      return  {
+        name: fields.name,
+        version: fields.version,
+      };
+    });
+
+    await this.updataPackages();
+    output = await this.adb.subprocess.spawnAndWait([
+      this.wtfos.bin.opkg,
+      "list",
+    ]);
+
+    if(output.exitCode !== 0) {
+      throw new Error("Failed fetching packages.");
+    }
+
+    const repos = await this.getPackagesByRepo();
+    const repoKeys = Object.keys(repos);
+
+    const details = await this.getDetailedPackageInfo("fpv-wtf");
+
+    lines = output.stdout.split("\n").filter((element) => element);
+    const packages = lines.map((item) => {
+      const fields = this.splitPackageString(item);
+
+      const repo = repoKeys.find((key) => {
+        if(repos[key].includes(fields.name)) {
+          return key;
+        }
+
+        return false;
+      });
+
+      const installedDetails = installed.find((item) => item.name === fields.name);
+
+      return {
+        name: fields.name,
+        repo: repo,
+        version: fields.version,
+        description: fields.description,
+        installed: installedDetails ? true : false,
+        installedVersion: installedDetails ? installedDetails.version : null,
+        details: details[fields.name] || {},
+      };
+    }).filter(this.filterInvalidPackages);
+
+    return packages;
+  }
+
   async getRepos() {
     const output = await this.executeCommand(`ls ${this.wtfos.opkgLists}`);
     const repos = output.stdout.split("\n");
@@ -125,111 +267,20 @@ export default class AdbWrapper {
     return packages;
   }
 
-  async updataPackages() {
+  async getDetailedPackageInfo(repo) {
     const output = await this.executeCommand([
-      this.wtfos.bin.opkg,
-      "update",
+      "gunzip -c",
+      `${this.wtfos.opkgLists}/${repo}`,
     ]);
 
-    return output;
+    return parsePackageIndex(output.stdout);
   }
 
-  async getUpgradablePackages() {
-    let upgradable = [];
-    try {
-      await this.updataPackages();
-      const output = await this.executeCommand([
-        this.wtfos.bin.opkg,
-        "list-upgradable",
-      ]);
+  async getPackageDetails(name) {
+    const packages = await this.getPackages();
+    const pkg = packages.find((pkg) => pkg.name === name);
 
-      upgradable = output.stdout.split("\n").filter((line) => line);
-      upgradable = upgradable.filter((line) => {
-        const fields = line.split(" - ");
-
-        return fields.length === 3;
-      });
-
-      upgradable = upgradable.map((item) => {
-        const fields = item.split(" - ");
-
-        return {
-          name: fields[0],
-          current: fields[1],
-          latest: fields[2],
-        };
-      });
-    } catch(e) {
-      console.log(e);
-    }
-
-    return upgradable;
-  }
-
-  async upgradePackages(callback) {
-    const output = await this.executeCommand([
-      this.wtfos.bin.opkg,
-      "upgrade",
-    ]);
-
-    if(callback) {
-      const log = output.stdout.split("\n").filter((line) => line);
-      callback(log);
-    }
-  }
-
-  async getPackages() {
-    let output = await this.executeCommand([
-      this.wtfos.bin.opkg,
-      "list-installed",
-    ]);
-
-    if(output.exitCode !== 0) {
-      throw new Error("Failed fetching installed packages.");
-    }
-
-    let lines = output.stdout.split("\n").filter((element) => element);
-    const installed = lines.map((item) => {
-      const fields = item.split(" - ");
-
-      return fields[0];
-    });
-
-    await this.updataPackages();
-    output = await this.adb.subprocess.spawnAndWait([
-      this.wtfos.bin.opkg,
-      "list",
-    ]);
-
-    if(output.exitCode !== 0) {
-      throw new Error("Failed fetching packages.");
-    }
-
-    const repos = await this.getPackagesByRepo();
-    const repoKeys = Object.keys(repos);
-
-    lines = output.stdout.split("\n").filter((element) => element);
-    const packages = lines.map((item) => {
-      const fields = item.split(" - ");
-      const name = fields[0];
-      const repo = repoKeys.find((key) => {
-        if(repos[key].includes(name)) {
-          return key;
-        }
-
-        return false;
-      });
-
-      return {
-        name: name,
-        repo: repo,
-        version: fields[1],
-        description: fields[2] || "",
-        installed: installed.includes(fields[0]),
-      };
-    }).filter(this.filterInvalidFn);
-
-    return packages;
+    return pkg;
   }
 
   async getAvailableServices() {
@@ -296,6 +347,27 @@ export default class AdbWrapper {
     return pids;
   }
 
+  /**
+   * Get running servicses - those are enabled services that are not currently
+   * stopped.
+   *
+   * @returns {string[]} An array of running services by name
+   */
+  async getRunningServices() {
+    const runningServices = [];
+    const services = await this.getServiceInfo();
+    const serviceNames = Object.keys(services);
+    for(let i = 0; i < serviceNames.length; i += 1) {
+      const name = serviceNames[i];
+      const service = services[name];
+      if(service.status !== "stopped") {
+        runningServices.push(name);
+      }
+    }
+
+    return runningServices;
+  }
+
   async getServices() {
     const available = await this.getAvailableServices();
     const enabled = await this.getEnabledServices();
@@ -319,7 +391,7 @@ export default class AdbWrapper {
       escapeArg(name),
     ]);
 
-    return output.exitcode;
+    return output.exitCode;
   }
 
   async disableService(name) {
@@ -329,7 +401,33 @@ export default class AdbWrapper {
       escapeArg(name),
     ]);
 
-    return output.exitcode;
+    return output.exitCode;
+  }
+
+  async isServiceRunning(name) {
+    const runningServices = await this.getRunningServices();
+    return runningServices.includes(name);
+  }
+
+  /**
+   * Restart a service only if it is already running, otherwise return success
+   *
+   * @param {string} name   Name of the service to restart
+   * @returns {number}      0 on success
+   */
+  async restartService(name) {
+    const serviceRunning = await this.isServiceRunning(name);
+    if(serviceRunning) {
+      const output = await this.executeCommand([
+        this.wtfos.bin.dinitctl,
+        "-u restart",
+        escapeArg(name),
+      ]);
+
+      return output.exitCode;
+    }
+
+    return 0;
   }
 
   async getShellSocket() {
@@ -342,6 +440,82 @@ export default class AdbWrapper {
     ]);
 
     return output.stdout;
+  }
+
+  async getPackageConfig(name) {
+    const configPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigFile}`;
+    const schemaPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigSchema}`;
+
+    try {
+      const config = await this.pullJsonFile(configPath);
+      const schema = await this.pullJsonFile(schemaPath);
+
+      return {
+        config,
+        schema,
+      };
+    } catch(e) {
+      console.log("Failed fetching package config", e);
+    }
+
+    return {
+      config: null,
+      schema: null,
+    };
+  }
+
+  // Returns a JSON object from the contents of a file at the given path
+  async pullJsonFile(path) {
+    const data = await this.pullFile(path);
+    const string = new TextDecoder().decode(data);
+    const json = JSON.parse(string);
+
+    return json;
+  }
+
+  async pullFile(path) {
+    const sync = await this.adb.sync();
+    const stream = await sync.read(path);
+    const reader = stream.getReader();
+
+    let data = new Buffer.from([]);
+    let notDone = true;
+    while(notDone) {
+      let {
+        done,
+        value,
+      } = await reader.read();
+
+      if(value) {
+        data = Buffer.concat([data, value]);
+      }
+
+      notDone = !done;
+    }
+
+    return data;
+  }
+
+  async pushFile(path, blob) {
+    const stream = new WrapReadableStream(blob.stream());
+    const sync = await this.adb.sync();
+    await stream.pipeTo(sync.write(path));
+  }
+
+  async writePackageConfig(packageName, content, units = []) {
+    const path = `${this.wtfos.packageConfigPath}/${packageName}/${this.wtfos.packageConfigFile}`;
+    const blob = new Blob([content]);
+    await this.pushFile(path, blob);
+
+    if(units) {
+      for(let i = 0; i < units.length; i += 1) {
+        const unit = units[i];
+        const result = await this.restartService(unit);
+        if(result !== 0) {
+          throw new Error(`Failed restarting ${unit}`);
+        }
+      }
+    }
   }
 
   async getProductInfo() {
@@ -531,6 +705,91 @@ export default class AdbWrapper {
     setRebooting();
   }
 
+  async installHealthchecks(statusCallback, doneCallback) {
+    const healthcheksDirExists = await this.dirExists(this.wtfos.healthchesksPath);
+    if(!healthcheksDirExists) {
+      statusCallback("Fetching Healthcheck package...");
+      try {
+        const buffer = Buffer.from(`GET ${this.wtfos.healthchecksUrl}?cachebust=${Math.random()}`);
+        const response = await proxy.proxyRequest(buffer);
+        const blob = await response.blob();
+        await this.pushFile("/tmp/healthchecks.tar.gz", blob);
+      } catch(e) {
+        statusCallback("ERROR: Failed fetching Healthchecks");
+        return;
+      }
+
+      statusCallback("Extracting Healthcheck package...");
+      let output = await this.executeCommand([
+        "busybox gunzip -c /tmp/healthchecks.tar.gz | tar -x -C /tmp",
+      ]);
+      if(output.exitCode !== 0) {
+        statusCallback("ERROR: Failed extracting Healthchecks");
+        output.stdout.split("\n").forEach((line) => statusCallback(line));
+        return;
+      }
+    }
+
+    doneCallback();
+  }
+
+  async runHealthcheckFix(path, statusCallback, doneCallback) {
+    statusCallback(`Running: ${path} fix`);
+    let output = await this.executeCommand([
+      "sh",
+      path,
+      "fix",
+    ]);
+    if(output.exitCode !== 0) {
+      statusCallback("ERROR: Automated fix failed");
+      output.stdout.split("\n").forEach((line) => statusCallback(line));
+      return;
+    }
+
+    doneCallback();
+  }
+
+  async runHealthcheckUnits(statusCallback) {
+    statusCallback("Gathering available healthchecks...");
+    let output = null;
+    output = await this.executeCommand([
+      "ls /tmp/healthchecks/units",
+    ]);
+    if(output.exitCode !== 0) {
+      statusCallback("ERROR: Failed listing Healthchecks");
+      output.stdout.split("\n").forEach((line) => statusCallback(line));
+      return;
+    }
+
+    const units = output.stdout.split("\n").map((item) => {
+      return {
+        id: item.split("-")[0],
+        name: item.split("-").slice(1).join("-").split(".").slice(0, -1).join("."),
+        path: `/tmp/healthchecks/units/${item}`,
+        passed: false,
+        fixable: false,
+        output: [],
+      };
+    });
+
+    for(let i = 0; i < units.length; i += 1) {
+      const unit = units[i];
+      const path = unit.path;
+
+      statusCallback(`Running ${path}`);
+      output = await this.executeCommand([
+        "sh",
+        path,
+      ]);
+
+      unit.passed = output.exitCode === 0;
+      unit.fixable = output.exitCode === 2;
+      unit.output = output.stdout.split("\n");
+    }
+
+    return units;
+  }
+
   async removeWTFOS(statusCallback, setRebooting) {
     statusCallback("Removing WTFOS packages...");
     let output = await this.executeCommand([
@@ -555,6 +814,19 @@ export default class AdbWrapper {
       statusCallback("ERROR: Failed cleaning up");
       output.stdout.split("\n").forEach((line) => statusCallback(line));
       return;
+    }
+
+    const hasAdbRemoval = await this.fileExists(this.wtfos.bin.adbRemoval);
+    if(hasAdbRemoval) {
+      statusCallback("Removing ADB...");
+      output = await this.executeCommand([
+        this.wtfos.bin.adbRemoval,
+        "-q",
+      ]);
+      if(output.exitCode !== 0) {
+        statusCallback("ERROR: Failed removing ADB");
+        return;
+      }
     }
 
     statusCallback("Rebooting...");

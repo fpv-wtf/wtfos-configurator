@@ -1,6 +1,6 @@
 {
   "step1": "正在尝试步骤 1...",
-  "foundDevice": " - 找到设备:{{device}}",
+  "foundDevice": " - 找到设备: {{device}}, 版本: {{version}}",
   "step1Success": "步骤 1 - 成功！重启中...",
   "step2": "正在尝试步骤 2...",
   "step2Success": "步骤 2 - 成功！",
@@ -14,6 +14,7 @@
   "step5Reboot": "步骤 5 - 成功！重启中...",
   "done": "全部完成 - 您的设备已成功root!",
   "manualReboot": "失败！请立即重新为您的设备上电...",
+  "tryButter": "失败！您的固件可能无法Root，请尝试使用 <a href=\"https://github.com/fpv-wtf/butter\">Buter</a> 降级。",
   "failed": "尝试{{maxTry}} 次后失败",
   "deviceLost": "设备断开...",
   "deviceBack": "设备再次连接...",
@@ -23,9 +24,12 @@
   "disclaimerLine2": "每次只连接/配对一个设备",
   "disclaimerLine3": "Root 过程中请勿关闭电源",
   "disclaimerLine4": "风险自负",
-  "portOpenFailed": "Failed opening serial port after {{maxTries}} retries.",
+  "portOpenFailed": "打开串口失败，已经重试 了{{maxTries}} 次",
   "rooted": "设备已 root",
   "root": "Root 设备",
   "rebootTimeout": "中止！设备未能及时重启，请重新为设备上电",
-  "rebootTimeShort": "重启用时过短 - 为保证正确计数请再次重启设备"
+  "rebootTimeShort": "重启用时过短 - 为保证正确计数请再次重启设备",
+  "unlockFailed": "解锁失败，请给设备重新上电并重试",
+  "unsupportedFirmware": "设备固件太新。您可以将眼镜切换到DIY (非DJI FPV模式)，并使用DJI FPV Assistant 2 降级到V01.01.0606版本，具体是否可以降级取决于眼镜现在的固件版本。更多信息请<a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>查看wiki</a>",
+  "signingServerUnreachable": "无法访问签名服务器。可能是服务器挂了或者是您的 ISP拦截了访问 。"
 }

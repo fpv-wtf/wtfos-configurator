@@ -1,0 +1,10 @@
+{
+  "recoveryTitle": "Safety measures/recovery hints:",
+  "recoveryText": "If you encounter any problems with wtfOS, try booting into safe mode by holding down the bind button on your device for 30 seconds while powering up. You should then be able to uninstall and re-install wtfOS or seek further help.",
+  "browserNotSupported": "Prehliadač neni podporovaný!",
+  "browserNotSupportedText": "Váš prehliadač nepodporuje webusb funkcionalitu. Prosím použite",
+  "browserNotSupportedLink": "prehliadač ktorý poskytuje túto funkcionalitu.",
+  "browserSupported": "Podporované (a otestované) prehliadače sú:",
+  "browserSupportedAndroid": "Niektoré Android telefóny",
+  "browserSupportedOther": "Ďalšie Chromium prehliadače"
+}

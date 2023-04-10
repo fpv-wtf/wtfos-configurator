@@ -1,12 +1,12 @@
 import React from "react";
 
-import CoffeeIcon from "@mui/icons-material/Coffee";
 import CurrencyBitcoinIcon from "@mui/icons-material/CurrencyBitcoin";
 import Grid from "@mui/material/Grid";
 import SvgIcon from "@mui/material/SvgIcon";
 
 import Tile from "../tile/Tile";
 import { ReactComponent as EthereumSvg } from "../../assets/icons/ethereum.svg";
+import { ReactComponent as OpencollectiveSvg } from "../../assets/icons/oc.svg";
 
 export default function Support() {
   return(
@@ -22,10 +22,14 @@ export default function Support() {
         xs={12}
       >
         <Tile
-          description="buymeacoffee.com/fpv.wtf"
-          href="https://buymeacoffee.com/fpv.wtf"
+          description="opencollective.com/fpv-wtf"
+          href="https://opencollective.com/fpv-wtf/donate?amount=10"
         >
-          <CoffeeIcon fontSize="large" />
+          <SvgIcon
+            component={OpencollectiveSvg}
+            fontSize="large"
+            inheritViewBox
+          />
         </Tile>
       </Grid>
 

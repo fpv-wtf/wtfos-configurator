@@ -1,0 +1,8 @@
+{
+  "message": "Verificaciones de salud fallidas",
+  "fix": "Intentar arreglar",
+  "warningTitle": "Correcciones automatizadas:",
+  "warningDescription": "No se preocupe, esto es normal y puede ocurrir por varias razones, incluyendo errores en el sistema operativo subyacente. El configurador puede ayudarle a solucionar estos problemas. Al intentar una corrección automatizada, su dispositivo podría reiniciarse en el proceso. En algunos casos específicos puede que necesite rerootear su dispositivo después de reiniciar el sistema, antes de que puedan continuar las comprobaciones de salud.",
+  "failed": "Error al ejecutar los chequeos de salud.",
+  "loading": "Espere, por favor..."
+}

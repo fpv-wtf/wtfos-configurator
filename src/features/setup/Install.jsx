@@ -31,6 +31,8 @@ import {
   selectProcessing,
 } from "../packages/packagesSlice";
 
+import { selectPassed } from "../healthcheck/healthcheckSlice";
+
 export default function Install({ adb }) {
   const { t } = useTranslation("setup");
   const dispatch = useDispatch();
@@ -38,8 +40,9 @@ export default function Install({ adb }) {
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const isProcessing = useSelector(selectProcessing);
   const deviceName = useSelector(selectNiceName);
+  const healthchecksPassed = useSelector(selectPassed);
 
-  const onClick = useCallback(async (device) => {
+  const handleInstall = useCallback(async (device) => {
     ReactGA.gtag("event", "installWtfosTriggered", { deviceName });
 
     dispatch(clearLog());
@@ -60,6 +63,13 @@ export default function Install({ adb }) {
     dispatch(checkBinaries(adb));
   }, [adb, dispatch, isProcessing]);
 
+  // Clean up when switching context (onUnmount)
+  useEffect(() => {
+    return async() => {
+      dispatch(clearLog());
+    };
+  }, [dispatch]);
+
   return(
     <Stack spacing={2}>
       <Disclaimer
@@ -72,8 +82,8 @@ export default function Install({ adb }) {
       />
 
       <Button
-        disabled={hasOpkgBinary || isProcessing}
-        onClick={onClick}
+        disabled={hasOpkgBinary || isProcessing || !healthchecksPassed}
+        onClick={handleInstall}
         variant="contained"
       >
         {t("install")}

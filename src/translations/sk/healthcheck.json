@@ -1,0 +1,8 @@
+{
+  "message": "Kontrola stavu systému zlyhala",
+  "fix": "Pokus o opravu",
+  "warningTitle": "Automatické opravy:",
+  "warningDescription": "Nemajte obavy, tento stav je normálny a môže nastať z viacerých dôvodov vrátane bugov v operačnom systéme. Konfigurátor vám môže pomôcť opraviť tieto problémy. Keď sa pokúšate o automatickú opravu, vaše zariadenie sa môže reštartovať počas tohto procesu. V niektorých špecifických prípadoch budete potrebovať re-rootnuť vaše zariadenie po reštarte, predtým než kontrola stavu systému môže pokračovať.",
+  "failed": "Nepodarilo sa spustiť kontrolu stavu systému.",
+  "loading": "Prosím počkajte..."
+}

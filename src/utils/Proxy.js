@@ -34,17 +34,31 @@ export default class Proxy {
   async getResponseBuffer(response) {
     const header = `HTTP/1.1 ${response.status} ${response.statusText}`;
     const lines = [header];
+
+    let responseContentBuffer = await response.arrayBuffer();
+    responseContentBuffer = new Uint8Array(responseContentBuffer);
+
     for(let entry of response.headers.entries()) {
+      if(entry[0].toLowerCase() === "content-length") {
+        continue;
+      }
+
       lines.push(entry.join(": "));
     }
+
+    /**
+     * Manually append content-length.
+     *
+     * Sometimes this header might be missing for some reason. We also skip this
+     * header when transfering the headers above, since it will not be the
+     * correct size if the initial response was gzip encoded.
+     */
+    lines.push(`content-length: ${responseContentBuffer.length}`);
     lines.push("\n");
     const headerString =  lines.join("\n");
 
     const encoder = new TextEncoder();
     const headerBuffer = encoder.encode(headerString);
-
-    let responseContentBuffer = await response.arrayBuffer();
-    responseContentBuffer = new Uint8Array(responseContentBuffer);
 
     const responseBuffer = new Uint8Array([...headerBuffer, ...responseContentBuffer]);
     return responseBuffer;

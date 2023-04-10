@@ -1,8 +1,6 @@
 {
-  "title": "Sicherheitsmaßnahmen/Hinweise zur Wiederherstellung:",
-  "line1": "Beim Start von WTFOS wird /system mit einer schreibbaren Kopie der Partition in /blacbkox/wtfos/system.img überschrieben",
-  "line2": "Wenn du die \"Bind\" Taste während des Bootens gedrückt hältst, wird das Starten von WTFOS mit aktiviertem Adb übersprungen, um WTFOS löschen oder diagnostizieren zu können",
-  "line3": "Wenn die WTFOS-Skripte ein fatales Problem entdecken, werden sie versuchen, ohne Änderungen - mit aktivierter Abd - zu booten",
+  "recoveryTitle": "Sicherheitsmaßnahmen/Hinweise zur Wiederherstellung:",
+  "recoveryText": "Wenn du Probleme mit wtfOS hast, versuche, in den abgesicherten Modus zu booten, indem du die Bindungstaste deines Geräts beim Einschalten 30 Sekunden lang gedrückt hältst. Du solltest dann in der Lage sein, wtfOS zu deinstallieren und neu zu installieren oder suche dir weitere Hilfe.",
   "browserNotSupported": "Dieser Browser wird nicht unterstützt!",
   "browserNotSupportedText": "Dein Browser unterstützt keine Webusb-Funktionalität. Bitte verwende einen",
   "browserNotSupportedLink": "Browser, der diese Funktionalität bereitstellt.",

@@ -1,0 +1,10 @@
+{
+  "recoveryTitle": "Medidas de segurança/dicas de recuperação:",
+  "recoveryText": "Se encontrar quaisquer problemas com o wtfOS, tente iniciar no modo de segurança deixando pressionado o botão bind do seu dispositivo por 30 segundos ao ligar o dispositivo. Deve ser então capaz de desinstalar e reinstalar o wtfOS ou procurar mais ajuda.",
+  "browserNotSupported": "Navegador não suportado!",
+  "browserNotSupportedText": "O seu navegador não suporta a funcionalidade webusb. Por favor, use um",
+  "browserNotSupportedLink": "navegador que ofereça esta funcionalidade.",
+  "browserSupported": "Os navegadores suportados (e testados) são:",
+  "browserSupportedAndroid": "Alguns telefones Android",
+  "browserSupportedOther": "Outros navegadores baseados no Chromium"
+}

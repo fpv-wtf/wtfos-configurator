@@ -1,0 +1,11 @@
+{
+  "detailsFor": "Szczegóły dotyczące {0}",
+  "submit": "Zapisz ustawienia",
+  "loading": "Ładowanie szczegółów pakietu...",
+  "visitProjectPage": "Odwiedź stronę projektu",
+  "maintainer": "Opiekun: {{name}}",
+  "remove": "Usuń",
+  "install": "Zainstaluj",
+  "installing": "Instalowanie pakietu...",
+  "removing": "Usuwanie pakietu..."
+}

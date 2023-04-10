@@ -1,0 +1,11 @@
+{
+  "detailsFor": "Details for {{name}}",
+  "submit": "Save settings",
+  "loading": "Loading package details...",
+  "visitProjectPage": "Visit project page",
+  "maintainer": "Maintainer: {{name}}",
+  "remove": "Remove",
+  "install": "Install",
+  "installing": "Installing package...",
+  "removing": "Removing package..."
+}

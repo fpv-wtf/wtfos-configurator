@@ -1,8 +1,6 @@
 {
-  "title": "安全措施/回滚提示：",
-  "line1": "当wtfos 启动时，/system 分区的副本会被保存到 /blacbkox/wtfos/system.img 中的可写分区。",
-  "line2": "如果您在启动时按住对频按钮，将会跳过 adb 启用以擦除 wtfos 或诊断信息",
-  "line3": "如果wtfos 检测到任何致命问题，它也会尝试在没有任何修改的情况下启动，并启用adb功能",
+  "recoveryTitle": "安全措施/回滚提示：",
+  "recoveryText": "如果您遇到任何关于wtfOS问题 在上电时按住设备上的绑定按钮30秒，尝试启动到安全模式。 之后应该能够卸载和重新安装 wtfOS 或寻求更多帮助。",
   "browserNotSupported": "不支持此浏览器",
   "browserNotSupportedText": "您的浏览器不支持 webusb 功能。请使用一个",
   "browserNotSupportedLink": "提供此功能的浏览器。",

@@ -1,8 +1,12 @@
 {
+  "updateAvailable": "已安装的软件包有可用更新。欲了解更多信息，请按下更新按钮。",
+  "updatesAvailable": "已安装的软件包有可用更新。欲了解更多信息，请按下更新按钮。",
+  "update": "更新",
   "remove": "移除",
   "install": "安装",
   "fetching": "正在获取包...",
   "installationFailed": "安装包时发生错误",
+  "packageManagemendFailed": "软件包管理错误：",
   "labelRepo": "仓库",
   "labelPackages": "软件包",
   "labelAll": "所有的",
@@ -11,5 +15,11 @@
   "name": "名称",
   "version": "版本",
   "description": "说明",
-  "matchCount": "找到{{count}} 个包"
+  "matchCount": "找到{{count}} 个包",
+  "visitProjectPage": "访问项目主页",
+  "labelCategory": "类别",
+  "labelCategoryAllExceptSystem": "全部(系统除外)",
+  "labelCategoryAll": "全部",
+  "installing": "正在安装软件包……",
+  "removing": "正在移除软件包……"
 }

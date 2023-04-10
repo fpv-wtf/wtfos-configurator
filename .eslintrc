@@ -11,13 +11,13 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/all",
-    "react-app",
+    "react-app"
   ],
   "rules": {
     "react/jsx-indent": ["warn", 2],
     "react/jsx-indent-props": ["warn", 2],
     "react/jsx-no-literals": "off",
-    "react/jsx-max-depth": ["warn", { "max": 6 }],
+    "react/jsx-max-depth": ["warn", { "max": 8 }],
     "react/no-danger": "warn",
     "quotes": 1,
     "indent": ["warn", 2, { "SwitchCase": 1 }],

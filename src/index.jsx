@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
 import { I18nextProvider } from "react-i18next";
-import i18next from "i18next";
 
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
@@ -19,15 +18,16 @@ import {
 import Box from "@mui/material/Box";
 
 import { store } from "./app/store";
-import Router from "./Router";
+import Router from "./features/router/Main";
 import reportWebVitals from "./reportWebVitals";
 
 import "./index.css";
 import CookieBanner from "./features/banner/Cookie";
 
-import settings from "./settings.json";
+import { initializeLanguages } from "./utils/Languages";
+
 import {
-  loadLanguage,
+  loadDisclaimersState,
   loadTraceId,
 } from "./utils/LocalStorage";
 
@@ -43,34 +43,6 @@ const darkTheme = createTheme({
     success: { main: "#419ef9" },
     error: { main: "#e23860" },
   },
-});
-
-const languages = settings.availableLanguages;
-const languageKeys = Object.keys(languages);
-
-const resources = {};
-for(const lang of languageKeys) {
-  resources[lang] = {
-    about: require(`./translations/${lang}/about.json`),
-    cli: require(`./translations/${lang}/cli.json`),
-    common: require(`./translations/${lang}/common.json`),
-    disclaimer: require(`./translations/${lang}/disclaimer.json`),
-    cookie: require(`./translations/${lang}/cookie.json`),
-    error: require(`./translations/${lang}/error.json`),
-    home: require(`./translations/${lang}/home.json`),
-    navigation: require(`./translations/${lang}/navigation.json`),
-    packages: require(`./translations/${lang}/packages.json`),
-    root: require(`./translations/${lang}/root.json`),
-    setup: require(`./translations/${lang}/setup.json`),
-    startup: require(`./translations/${lang}/startup.json`),
-  };
-}
-
-i18next.init({
-  interpolation: { escapeValue: false },
-  lng: loadLanguage(),
-  fallbackLng: settings.defaultLanguage,
-  resources,
 });
 
 if(process.env.REACT_APP_GA_MEASUREMENT_ID) {
@@ -92,6 +64,9 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 Sentry.setUser({ id: loadTraceId() });
+
+const i18next = initializeLanguages();
+loadDisclaimersState();
 
 const container = document.getElementById("root");
 const root = createRoot(container);

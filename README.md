@@ -8,11 +8,8 @@ The app is automatically built and deployed to gh-pages. If forking this reposit
 
 ## Development
 
-Be aware that the exploit is only available in an obfuscated version. People with the correct permissions can pull in the exploit as a git submodule:
-
-```
-git submodule update --init
-```
+### dotenv
+For ease of development a `.env.example` file is available, simply copy it to `.env` to enable it. This will set up a couple of env variables thata will be useful for local developent like for example the CORS proxy for rooting.
 
 ### Translations
 If you want the configurator to be available in your language drop my on [discord](https://discord.com/invite/3rpnBBJKtU) and tell us which language you want to add, or contribute translations to available langues on [crowdin](https://crowdin.com/project/wtfos-configurator).
@@ -43,13 +40,13 @@ In the project directory, run:
 
 ### `yarn device-shell`
 
-This will spawn a reverse-shell-server on port `8000`.  
+This will spawn a reverse-shell-server on port `8000`.
 you can change the port by passing `-p PORT` or `--port PORT`
 
-After that, head over to the CLI-Tab, expand the "Reverse Shell"-card and connect.  
+After that, head over to the CLI-Tab, expand the "Reverse Shell"-card and connect.
 You will now have a shell on your device from your regular terminal.
 
-The shell is "persistent" when navigating the configurator as long as you don't refresh the page.  
+The shell is "persistent" when navigating the configurator as long as you don't refresh the page.
 The web-based shell and the reverse-shell are synced.
 
 Press Ctrl+D in the reverse-shell to disconnect and exit.

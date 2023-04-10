@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install NodeJS
         uses: actions/setup-node@v3
@@ -32,7 +32,7 @@ jobs:
         run: yarn run build
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4.3.0
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
           branch: gh-pages
           folder: build

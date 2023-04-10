@@ -13,10 +13,6 @@ const initialState = {
       description: "Busy flying most of the time",
     },
     {
-      nick: "funnel",
-      description: "Finds all the best shit",
-    },
-    {
       nick: "bri3d",
       name: "Brian Ledbetter",
       twitter: "bri3d",
@@ -27,6 +23,12 @@ const initialState = {
       name: "Chris L.",
       twitter: "stylesuxx",
       description: "God of Configurators",
+    },
+    {
+      nick: "Knifa",
+      name: "Dan",
+      twitter: "Knifa",
+      description: "Head of VFX",
     },
     {
       honorary: true,
