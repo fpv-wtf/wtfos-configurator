@@ -2,5 +2,6 @@
   "disconnect": "Verbinding verbreken",
   "connect": "Verbinding maken",
   "connectDevice": "Verbinding maken met apparaat",
-  "rebooting": "Herstarten..."
+  "rebooting": "Herstarten...",
+  "adbCheck": "Device found - checking for ADB, this can take a moment..."
 }
