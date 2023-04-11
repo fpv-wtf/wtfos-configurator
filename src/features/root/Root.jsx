@@ -25,6 +25,7 @@ import Donate from "../donate/Donate";
 import Header from "../navigation/Header";
 import Log from "../log/Log";
 import Webusb from "../disclaimer/Webusb";
+import AdbDetectionError from "../device/AdbDetectionError";
 
 import { selectCanClaim } from "../tabGovernor/tabGovernorSlice";
 
@@ -52,6 +53,7 @@ import {
   selectClaimed,
   selectHasAdb,
   setClaimed,
+  setAdbDetectionFailed,
 } from "../device/deviceSlice";
 
 import { selectDisclaimersStatus } from "../settings/settingsSlice";
@@ -269,6 +271,7 @@ export default function Root() {
                 try {
                   exploit.closePort();
                   dispatch(setClaimed(false));
+                  dispatch(setAdbDetectionFailed(false));
                 } catch(e) {
                   console.log("Failed closing port:", e);
                 }
@@ -493,6 +496,8 @@ export default function Root() {
         <>
           {!window.navigator.serial &&
             <Webusb />}
+
+          <AdbDetectionError />
 
           {!disclaimersStatus &&
             <>
