@@ -3,5 +3,6 @@
   "connect": "Anslut",
   "connectDevice": "Anslut till enhet",
   "rebooting": "Startar om...",
-  "adbCheck": "Device found - checking for ADB, this can take a moment..."
+  "adbCheck": "Device connected - checking for ADB, this can take up to 30 seconds...",
+  "adbDetectionFailed": "Failed detecting ADB, please (re-)root your device!"
 }
