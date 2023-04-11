@@ -3,5 +3,5 @@
   "connect": "Połącz",
   "connectDevice": "Połącz z urządzeniem",
   "rebooting": "Ponowne uruchomienie...",
-  "adbCheck": "Device found - checking for ADB, this can take a moment..."
+  "adbCheck": "Urządzenie znalezione - sprawdzanie ADB, może to chwilę potrwać..."
 }
