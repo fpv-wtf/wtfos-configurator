@@ -3,5 +3,5 @@
   "connect": "Connect",
   "connectDevice": "Connect to Device",
   "rebooting": "Rebooting...",
-  "adbCheck": "Device found - checking for ADB, this can take a moment..."
+  "adbCheck": "Device connected - checking for ADB, this can take up to 30 seconds..."
 }
