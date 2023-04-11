@@ -38,9 +38,11 @@ import {
   contextReset,
   reset as resetDevice,
   setAdb as deviceSetAdb,
+  setAdbDetectionFailed,
   setProductInfo,
   setTemperature,
   setClaimed,
+  selectAdbDetectionFailed,
 } from "../device/deviceSlice";
 
 import {
@@ -57,10 +59,12 @@ export default function AdbRouter() {
 
   const isMaster = useSelector(selectIsMaster);
   const checkedMasterState = useSelector(selectCheckedMaster);
+  const adbDetectionFailed = useSelector(selectAdbDetectionFailed);
 
   const [startupCheck, setStartupCheck] = useState(false);
   const [adb, setAdb] = useState(null);
   const [adbDetection, setAdbDetection] = useState(false);
+  const [showAdbDetection, setShowAdbDetection] = useState(false);
 
   const adbRef = useRef();
   const deviceRef = useRef();
@@ -140,7 +144,7 @@ export default function AdbRouter() {
     detectionDeviceRef.current = device;
     detectionCountRef.current = 0;
 
-    if (adbDetection) {
+    if (adbDetection || adbDetectionFailed) {
       return;
     }
 
@@ -156,10 +160,13 @@ export default function AdbRouter() {
         // Device connection promised resolved
         devicePromiseRef.current = null;
         setAdbDetection(false);
+        dispatch(setAdbDetectionFailed(false));
 
         return;
       }
 
+      // Show the ADB detection banner only if it did not recognize it immediately
+      setShowAdbDetection(true);
       await timeout(interval);
       detectionCountRef.current += 1;
     } while(detectionCountRef.current < maxIteration);
@@ -170,8 +177,9 @@ export default function AdbRouter() {
      * interface does not show up immediately.
      */
     setAdbDetection(false);
+    dispatch(setAdbDetectionFailed(true));
     navigate("/root");
-  }, [adbDetection, connectToDevice, navigate, setAdbDetection]);
+  }, [adbDetection, adbDetectionFailed, connectToDevice, dispatch, navigate, setAdbDetection]);
 
   /**
    * Auto connect to ADB device if all criteria are matched.
@@ -283,6 +291,13 @@ export default function AdbRouter() {
     adbRef.current = adb;
   }, [adb]);
 
+  // Disable ADB detection banner if ADB detection has finished
+  useEffect(() => {
+    if(!adbDetection) {
+      setShowAdbDetection(false);
+    }
+  }, [adbDetection, setShowAdbDetection]);
+
   return(
     <Routes>
       <Route
@@ -304,7 +319,7 @@ export default function AdbRouter() {
         element={
           <App
             adb={adb}
-            adbDetection={adbDetection}
+            adbDetection={showAdbDetection}
             handleAdbConnectClick={handleDeviceConnect}
           />
         }
