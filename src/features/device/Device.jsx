@@ -45,7 +45,7 @@ export default function Device({
           </Typography>
         </Alert>}
 
-      { !error && window.navigator.usb && !adbDetection &&
+      {!error && window.navigator.usb && !adbDetection &&
         <Alert severity="warning">
           <Typography>
             {t("warningConnection")}
