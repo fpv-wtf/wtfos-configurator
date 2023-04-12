@@ -20,5 +20,6 @@
   "current": "Yüklü Sürüm",
   "latest": "Son Sürüm",
   "updateSuccess": "Güncellemeler başarı ile yüklendi!",
-  "updateFailed": "Güncellemeler yüklenirken bir hata oluştu!"
+  "updateFailed": "Güncellemeler yüklenirken bir hata oluştu!",
+  "fetchUpgradableFailed": "Failed fetching upgradable packages!"
 }
