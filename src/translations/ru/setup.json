@@ -20,5 +20,6 @@
   "current": "Установленная версия",
   "latest": "Последняя версия",
   "updateSuccess": "Обновления успешно установлены!",
-  "updateFailed": "Ошибка обновления пакетов!"
+  "updateFailed": "Ошибка обновления пакетов!",
+  "fetchUpgradableFailed": "Failed fetching upgradable packages!"
 }
