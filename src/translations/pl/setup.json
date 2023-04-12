@@ -20,5 +20,6 @@
   "current": "Zainstalowana wersja",
   "latest": "Najnowsza wersja",
   "updateSuccess": "Aktualizacje pomyślnie zainstalowane!",
-  "updateFailed": "Instalacja aktualizacji nie powiodła się!"
+  "updateFailed": "Instalacja aktualizacji nie powiodła się!",
+  "fetchUpgradableFailed": "Failed fetching upgradable packages!"
 }
