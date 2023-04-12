@@ -21,6 +21,7 @@ const initialState = {
 
   writing: false,
   error: null,
+  errors: { fetchPackage: false },
 };
 
 export const fetchPackage = createAsyncThunk(
@@ -73,12 +74,11 @@ export const packageSlice = createSlice({
       })
       .addCase(fetchPackage.rejected, (state, action) => {
         state.error = action.error.message;
+
+        state.errors.fetchPackage = true;
         state.loading = false;
       })
       .addCase(fetchPackage.fulfilled, (state, action) => {
-        state.loading = false;
-        state.fetched = true;
-
         state.name = action.payload.name;
         state.description = action.payload.description;
         state.installed = action.payload.installed;
@@ -88,6 +88,10 @@ export const packageSlice = createSlice({
           ...state.details,
           ...action.payload.details,
         };
+
+        state.errors.fetchPackage = false;
+        state.loading = false;
+        state.fetched = true;
       }).addCase(fetchConfig.pending, (state, action) => {
         state.config = null;
         state.schema = null;
@@ -118,6 +122,7 @@ export const selectDetails = (state) => state.package.details;
 
 export const selectWriting = (state) => state.package.writing;
 export const selectError = (state) => state.package.error;
+export const selectErrors = (state) => state.package.errors;
 export const selectLoading = (state) => state.package.loading;
 
 export const selectConfig = (state) => state.package.config;

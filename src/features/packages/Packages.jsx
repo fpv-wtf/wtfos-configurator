@@ -34,8 +34,6 @@ import Paper from "@mui/material/Paper";
 
 import ReactGA from "react-ga4";
 
-import ErrorLog from "../log/Error";
-
 import {
   clearError,
   fetchPackages,
@@ -45,6 +43,7 @@ import {
   repo,
   search,
   selectError,
+  selectErrors,
   selectFetched,
   selectFetchedUpgradable,
   selectFilter,
@@ -63,6 +62,7 @@ import SetupHint from "../setup/SetupHint";
 import UpdatesBanner from "./UpdatesBanner";
 import Spinner from "../overlays/Spinner";
 import DefaultTextLink from "../styledLink/Default";
+import PackageManagementError from "../package/PackageManagementError";
 
 export default function Packages({ adb }) {
   const { t } = useTranslation("packages");
@@ -73,6 +73,7 @@ export default function Packages({ adb }) {
   const dispatch = useDispatch();
 
   const error = useSelector(selectError);
+  const errors = useSelector(selectErrors);
   const fetched = useSelector(selectFetched);
   const filter = useSelector(selectFilter);
   const filtered = useSelector(selectFiltered);
@@ -91,7 +92,7 @@ export default function Packages({ adb }) {
   const [renderRows, setRenderRows] = useState(filtered.slice(0, step));
   const [loading, setLoading] = useState(false);
 
-  const [fetching, setFetching] = useState(false);
+  const [fetching, setFetching] = useState(true);
   const [installing, setInstalling] = useState(false);
   const [removing, setRemoving] = useState(false);
 
@@ -124,11 +125,14 @@ export default function Packages({ adb }) {
   useEffect(() => {
     setInstalling(false);
     setRemoving(false);
-    setFetching(false);
 
     if(!fetched && fetchedUpgradable) {
       setFetching(true);
       dispatch(fetchPackages(adb));
+    }
+
+    if(fetched) {
+      setFetching(false);
     }
   }, [adb, dispatch, fetched, fetchedUpgradable, setFetching, setInstalling, setRemoving]);
 
@@ -336,126 +340,128 @@ export default function Packages({ adb }) {
 
       {fetched && upgradable.length > 0 && <UpdatesBanner updatePluralized={upgradable.length > 1} />}
 
-      {hasOpkgBinary &&
-        <Stack>
-          <ErrorLog title={t("packageManagemendFailed")} />
+      <PackageManagementError />
 
-          <Box
-            component="form"
-            noValidate
-            p={1}
-            sx={{ "& > :not(style)": { m: 1 } }}
-          >
-            <FormControl sx={{ width: 120 }}>
-              <InputLabel id="package-state-select-label">
-                {t("labelRepo")}
-              </InputLabel>
+      {hasOpkgBinary && !errors.fetchPackages &&
+        <Box sx={{ position: "relative" }}>
+          <Stack>
+            <Box
+              component="form"
+              noValidate
+              p={1}
+              sx={{ "& > :not(style)": { m: 1 } }}
+            >
+              <FormControl sx={{ width: 120 }}>
+                <InputLabel id="package-state-select-label">
+                  {t("labelRepo")}
+                </InputLabel>
 
-              <Select
-                disabled={filter.search}
-                id="package-state-select"
-                label={t("labelPackages")}
-                onChange={handleRepoChange}
-                value={filter.repo}
-              >
-                <MenuItem value="all">
-                  {t("labelAll")}
-                </MenuItem>
+                <Select
+                  disabled={filter.search}
+                  id="package-state-select"
+                  label={t("labelPackages")}
+                  onChange={handleRepoChange}
+                  value={filter.repo}
+                >
+                  <MenuItem value="all">
+                    {t("labelAll")}
+                  </MenuItem>
 
-                {renderedRepos}
-              </Select>
-            </FormControl>
+                  {renderedRepos}
+                </Select>
+              </FormControl>
 
-            <FormControl sx={{ width: 120 }}>
-              <InputLabel id="package-state-select-label">
-                {t("labelPackages")}
-              </InputLabel>
+              <FormControl sx={{ width: 120 }}>
+                <InputLabel id="package-state-select-label">
+                  {t("labelPackages")}
+                </InputLabel>
 
-              <Select
-                id="package-state-select"
-                label={t("labelPackages")}
-                onChange={handleInstallStateChange}
-                value={installed ? "installed" : "all"}
-              >
-                <MenuItem value="all">
-                  {t("labelAll")}
-                </MenuItem>
+                <Select
+                  id="package-state-select"
+                  label={t("labelPackages")}
+                  onChange={handleInstallStateChange}
+                  value={installed ? "installed" : "all"}
+                >
+                  <MenuItem value="all">
+                    {t("labelAll")}
+                  </MenuItem>
 
-                <MenuItem value="installed">
-                  {t("installed")}
-                </MenuItem>
-              </Select>
-            </FormControl>
+                  <MenuItem value="installed">
+                    {t("installed")}
+                  </MenuItem>
+                </Select>
+              </FormControl>
 
-            <FormControl sx={{ width: 120 }}>
-              <InputLabel id="package-state-select-label">
-                {t("labelCategory")}
-              </InputLabel>
+              <FormControl sx={{ width: 120 }}>
+                <InputLabel id="package-state-select-label">
+                  {t("labelCategory")}
+                </InputLabel>
 
-              <Select
-                id="package-state-select"
-                label={t("labelCategory")}
-                onChange={handleCategoryStateChange}
-                value={filter.system ? "all" : "all-except-system"}
-              >
-                <MenuItem value="all-except-system">
-                  {t("labelCategoryAllExceptSystem")}
-                </MenuItem>
+                <Select
+                  id="package-state-select"
+                  label={t("labelCategory")}
+                  onChange={handleCategoryStateChange}
+                  value={filter.system ? "all" : "all-except-system"}
+                >
+                  <MenuItem value="all-except-system">
+                    {t("labelCategoryAllExceptSystem")}
+                  </MenuItem>
 
-                <MenuItem value="all">
-                  {t("labelCategoryAll")}
-                </MenuItem>
-              </Select>
-            </FormControl>
+                  <MenuItem value="all">
+                    {t("labelCategoryAll")}
+                  </MenuItem>
+                </Select>
+              </FormControl>
 
-            <FormControl sx={{ width: 250 }}>
-              <TextField
-                defaultValue={filter.search}
-                id="outlined-basic"
-                label={t("labelSearch")}
-                onChange={handleSearchChange}
-                variant="outlined"
-              />
-            </FormControl>
-          </Box>
+              <FormControl sx={{ width: 250 }}>
+                <TextField
+                  defaultValue={filter.search}
+                  id="outlined-basic"
+                  label={t("labelSearch")}
+                  onChange={handleSearchChange}
+                  variant="outlined"
+                />
+              </FormControl>
+            </Box>
 
-          <Box p={2}>
-            <Typography>
-              {packageString}
-            </Typography>
-          </Box>
+            <Box p={2}>
+              <Typography>
+                {packageString}
+              </Typography>
+            </Box>
 
-          <TableContainer ref={tableEl}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell>
-                    {t("name")}
-                  </TableCell>
+            <TableContainer ref={tableEl}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>
+                      {t("name")}
+                    </TableCell>
 
-                  <TableCell>
-                    {t("version")}
-                  </TableCell>
+                    <TableCell>
+                      {t("version")}
+                    </TableCell>
 
-                  <TableCell>
-                    {t("description")}
-                  </TableCell>
+                    <TableCell>
+                      {t("description")}
+                    </TableCell>
 
-                  <TableCell />
+                    <TableCell />
 
-                  <TableCell />
-                </TableRow>
-              </TableHead>
+                    <TableCell />
+                  </TableRow>
+                </TableHead>
 
-              <TableBody>
-                {rows}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Stack>}
+                <TableBody>
+                  {rows}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Stack>
 
-      {isLoading &&
-        <Spinner text={loadingText} />}
+          {isLoading &&
+            <Spinner text={loadingText} />}
+        </Box>}
     </Paper>
   );
 }

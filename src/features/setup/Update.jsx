@@ -21,7 +21,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 import Spinner from "../loading/Spinner";
-import Log from "../log/Log";
 
 import {
   setLog,
@@ -31,6 +30,7 @@ import {
 
 import {
   fetchUpgradable,
+  selectErrors,
   selectFetchedUpgradable,
   selectProcessing,
   selectUpdate,
@@ -38,6 +38,7 @@ import {
   upgrade,
 } from "../packages/packagesSlice";
 import { selectPassed } from "../healthcheck/healthcheckSlice";
+import PackageManagementError from "../package/PackageManagementError";
 
 export default function Update({ adb }) {
   const { t } = useTranslation("setup");
@@ -49,6 +50,7 @@ export default function Update({ adb }) {
   const upgradable = useSelector(selectUpgradable);
   const fetchedUpgradable = useSelector(selectFetchedUpgradable);
   const isProcessing = useSelector(selectProcessing);
+  const errors = useSelector(selectErrors);
 
   const healthchecksPassed = useSelector(selectPassed);
 
@@ -87,20 +89,12 @@ export default function Update({ adb }) {
 
   return(
     <Stack spacing={2}>
+      <PackageManagementError />
 
       {update.ran && update.success &&
         <Alert severity="success">
           {t("updateSuccess")}
         </Alert>}
-
-      {update.ran && !update.success &&
-        <>
-          <Alert severity="error">
-            {t("updateFailed")}
-          </Alert>
-
-          <Log />
-        </>}
 
       {upgradable.length > 0 &&
         <Button
@@ -117,6 +111,7 @@ export default function Update({ adb }) {
         </Button>}
 
       {upgradable.length === 0 && fetchedUpgradable &&
+      !errors.fetchUpgradable &&
         <Alert severity="success">
           {t("upToDate")}
         </Alert>}

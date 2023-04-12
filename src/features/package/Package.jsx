@@ -35,6 +35,7 @@ import {
   selectDescription,
   selectDetails,
   selectError,
+  selectErrors,
   selectFetched,
   selectInstalled,
   selectInstalledVersion,
@@ -48,12 +49,12 @@ import {
 import {
   installPackage,
   removePackage,
-  selectError as selectInstallationError,
   selectProcessing,
 } from "../packages/packagesSlice";
 
 import { selectPassed } from "../healthcheck/healthcheckSlice";
 import Spinner from "../overlays/Spinner";
+import PackageManagementError from "./PackageManagementError";
 
 export default function Package({ adb }) {
   const { t } = useTranslation("package");
@@ -76,9 +77,8 @@ export default function Package({ adb }) {
   const loading = useSelector(selectLoading);
   const writing = useSelector(selectWriting);
   const error = useSelector(selectError);
-
+  const errors = useSelector(selectErrors);
   const isProcessing = useSelector(selectProcessing);
-  const installationError = useSelector(selectInstallationError);
 
   const [installing, setInstalling] = useState(false);
   const [removing, setRemoving] = useState(false);
@@ -159,24 +159,18 @@ export default function Package({ adb }) {
   }
 
   const isLoading = loading || installing || removing;
-  const errorText = installationError.map((line) => {
-    return (
-      <Typography key={line}>
-        {line}
-      </Typography>
-    );
-  });
-
   const versionText = installed ? ` ${installedVersion}` : "";
 
   return (
     <>
-      {installationError.length > 0 &&
+      <PackageManagementError />
+
+      {errors.fetchPackage &&
         <Alert
           severity="error"
           sx={{ marginBottom: 2 }}
         >
-          {errorText}
+          {t("fetchPackageFailed")}
         </Alert>}
 
       <Paper sx={{ position: "relative" }} >
