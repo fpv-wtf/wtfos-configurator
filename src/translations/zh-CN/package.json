@@ -7,5 +7,11 @@
   "remove": "移除",
   "install": "安装",
   "installing": "正在安装软件包……",
-  "removing": "正在移除软件包……"
+  "removing": "正在移除软件包……",
+  "fetchPackageFailed": "Failed fetching package details!",
+  "removePackageFailed": "Failed removing package:",
+  "installPackageFailed": "Failed installing package:",
+  "fetchPackagesFailed": "Failed fetching package list:",
+  "upgradeFailed": "Failed updating packages:",
+  "fetchUpgradableFailed": "Failed fetching upgradable packages:"
 }
