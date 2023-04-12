@@ -40,12 +40,14 @@ export default class Queue {
       this.running = true;
 
       while(this.queue.length > 0) {
+        this.currentItem = this.queue.pop();
         const startConditionMet = await this.startConditionFunction();
         if(!startConditionMet) {
-          this.rejectAll(this.rejectionReason);
+          this.running = false;
+
+          return this.rejectAll(this.rejectionReason);
         }
 
-        this.currentItem = this.queue.pop();
         await this.executorFunction(this.currentItem);
       }
 

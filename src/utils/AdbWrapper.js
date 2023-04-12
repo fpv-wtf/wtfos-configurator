@@ -51,7 +51,6 @@ export default class AdbWrapper {
      * @param QueueItem timeoutQueueItem
      */
     const opkgExecutor = async (timeoutQueueItem) => {
-      console.log("Opkg executing:", timeoutQueueItem);
       const result =  await this.executeCommand([
         this.wtfos.bin.opkg,
         ...timeoutQueueItem.parameters,
