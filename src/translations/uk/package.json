@@ -7,5 +7,11 @@
   "remove": "Видалити",
   "install": "Встановити",
   "installing": "Встановлення пакета...",
-  "removing": "Видалення пакета..."
+  "removing": "Видалення пакета...",
+  "fetchPackageFailed": "Failed fetching package details!",
+  "removePackageFailed": "Failed removing package:",
+  "installPackageFailed": "Failed installing package:",
+  "fetchPackagesFailed": "Failed fetching package list:",
+  "upgradeFailed": "Failed updating packages:",
+  "fetchUpgradableFailed": "Failed fetching upgradable packages:"
 }
