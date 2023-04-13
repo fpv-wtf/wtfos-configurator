@@ -19,12 +19,12 @@
   "tileExpandDescription": "Espandi facilmente il dispositivo, con tante funzionalità aggiuntive, attraverso dei pacchetti facilmente installabili.",
   "wtfosDescriptionParagraph1": "wtfOS è un framework comune, che serve a modificare il firmware degli occhiali DJI FPV, delle relative Air Units/Vista con i privilegi di root ottenuti tramite <a href=\"https://github.com/fpv-wtf/margerine\" target=\"_blank\">margerine</a>.",
   "wtfosDescriptionParagraph2": "wtfOS può essere facilmente ampliato installando i pacchetti scaricabili sulla nostra repository ufficiale. Puoi trovare un elenco di tutti i pacchetti attualmente disponibili sull' <a href=\"http://repo.fpv.wtf/pigeon/\" target=\"_blank\">indice della repository</a>.",
-  "wtfosDescriptionParagraph3": "We encourage everyone to contribute their ideas and features they want to see. If you have an idea, feel free to drop by on <a href=\"https://discord.com/invite/3rpnBBJKtU\" target=\"_blank\">Discord</a> to discuss it. If you have functionality ready to go, submit a PR to the <a href=\"https://github.com/fpv-wtf/opkg-repo\" target=\"_blank\">repository</a>. You will also find all needed information regarding packaging, versioning and automated builds for your feature.",
+  "wtfosDescriptionParagraph3": "Contribuisci con idee e funzioni che vorresti. Se hai un'idea, postala su <a href=\"https://discord.com/invite/3rpnBBJKtU\" target=\"_blank\">Discord</a> per discuterne. Se hai una funzione gia' pronta, posta un PR sul <a href=\"https://github.com/fpv-wtf/opkg-repo\" target=\"_blank\">repositorio</a>. Troverai anche informazioni sui pacchetti, versioni e build automatiche per la tua feature.",
   "tileSupportTitle": "Assistenza",
   "tileUpdateDescription": "Aggiorna WTFOS e i pacchetti installati per rimanere aggiornato.",
   "tileUpdateTitle": "Aggiorna",
   "tileWikiDescription": "Hai problemi? Puoi trovare risposte utili alla soluzione nella nostra comunità Wiki.",
   "tileWikiTitle": "Wiki",
-  "tileWtfosDescription": "Install, maintain or Remove wtfOS - the operating system for all community contributed functionality.",
+  "tileWtfosDescription": "Installa, mantieni o rimuovi wtfOs - il sistema operativo per tutte le funzionalità fornite dalla comunità.",
   "tileWtfosTitle": "WTFOS"
 }
