@@ -25,13 +25,13 @@
   "disclaimerLine2": "Di avere solo un dispositivo collegato/accoppiato",
   "disclaimerLine3": "Non scollegare mai e/o togliere alimentazione al device, durante la fase di acquisizione dei permessi di Root",
   "disclaimerLine4": "Procedi a tuo rischio e pericolo",
-  "portOpenFailed": "Apertura della porta seriale fallita dopo {{maxTries}} tentativi.",
+  "portOpenFailed": "Apertura della porta seriale non riuscita dopo {{maxTries}} tentativi.",
   "rooted": "Il dispositivo dispone già dei privilegi di Root",
   "root": "Ottieni i permessi di root del tuo dispositivo",
   "rebootTimeout": "Operazione Interrotta! Il dispositivo non si è riavviato in tempo, per favore spegni e riaccendi il dispositivo e riprova.",
-  "rebootTimeShort": "Riavvio stranamente breve - ulteriore riavvio per sicurezza...",
-  "unlockFailed": "Sblocco non riuscito, per favore spegni e riaccendi il dispositivo e riprova.",
+  "rebootTimeShort": "Tempo di riavvio troppo breve - riavvio ulteriormente per sicurezza...",
+  "unlockFailed": "Sblocco non riuscito, spegnere e riaccendere il dispositivo e riprovare.",
   "patchFailed": "Patch fallita, per favore spegni e riaccendi il dispositivo e riprova.",
-  "unsupportedFirmware": "Il firmware installato sul tuo dispositivo è troppo nuovo. In base alla versione installata, potresti effettuare il downgrade alla V01.01. 606 - utilizzando DJI FPV Assistant 2. Si prega di <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>consultare la Wiki</a> per maggiori dettagli.",
+  "unsupportedFirmware": "Il firmware installato sul tuo dispositivo è troppo recente. Dovresti essere in grado di effettuare il downgrade alla V01.01.606 - in modo autonomo - utilizzando DJI FPV Assistant 2. Si prega di <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>consultare la Wiki</a> per maggiori dettagli.",
   "signingServerUnreachable": "Impossibile raggiungere il server di autenticazione. Potrebbe essere inattivo o il tuo ISP potrebbe bloccarlo."
 }
