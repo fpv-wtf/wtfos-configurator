@@ -1,8 +1,8 @@
 {
-  "configTitle": "Settings",
-  "configChromaKey": "Chroma Key",
-  "configChromaKeyHelp": "Renders OSD above a <0>colored background</0> rather than the actual video. The DVR video is still used (currently) for timing purposes, though.",
-  "configChromaKeyColor": "Chroma Key Color",
+  "configTitle": "Impostazioni",
+  "configChromaKey": "Chiave cromatica",
+  "configChromaKeyHelp": "Renderizza OSD su <0>colored background</0> piuttosto che il video attuale. Il video DVR, comunque è ancora utilizzato per scopi di temporizzazione.",
+  "configChromaKeyColor": "Colore Chiave Cromatica",
   "debugStatsExpectedFrames": "Fotogrammi Previsti",
   "debugStatsFramesDecoded": "Fotogrammi Decodificati",
   "debugStatsFramesDecodedMissing": "Fotogrammi Decodificati (Mancanti)",
