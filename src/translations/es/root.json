@@ -19,6 +19,7 @@
   "deviceLost": "El dispositivo desapareció...",
   "deviceBack": "El dispositivo regresó...",
   "cooling": "Si está rooteando una Air Unit - especialmente la Caddx Vista - asegúrese de que esté siendo enfriada con algún ventilador.",
+  "v2diy": "Si estás rooteando las gafas Google V2, asegúrate de que están en modo DIY - ya que no se rootearán en modo DJI FPV.",
   "disclaimerTitle": "Aviso Legal:",
   "disclaimerLine1": "Asegúrate de que el dispositivo a ser rooteado esté encendido desde una fuente de alimentación confiable",
   "disclaimerLine2": "Sólo tenga un dispositivo conectado/emparejado",
@@ -30,6 +31,7 @@
   "rebootTimeout": "¡Abortado! El dispositivo no se reinició a tiempo, por favor apagar y encender y volver a intentarlo.",
   "rebootTimeShort": "Tiempo de reinicio sospechosamente corto - reiniciar una vez más puede ayudar...",
   "unlockFailed": "Desbloqueo fallido, por favor apaga y enciende tu dispositivo e inténtalo de nuevo.",
+  "patchFailed": "Parche fallido, por favor apague y encienda su dispositivo e inténtelo de nuevo.",
   "unsupportedFirmware": "El firmware en tu dispositivo es demasiado nuevo. Puede que pueda pasar a V01.01. 606 en modo DIY con DJI FPV Assistant 2 dependiendo de la versión exacta instalada. Por favor, <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>vea la wiki</a> para más detalles.",
   "signingServerUnreachable": "El servidor de firmas no pudo ser alcanzado. Puede estar caído o su ISP podría estar bloqueándolo."
 }

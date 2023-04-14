@@ -20,5 +20,6 @@
   "current": "已安装版本",
   "latest": "最新版本",
   "updateSuccess": "更新已成功安装!",
-  "updateFailed": "安装更新失败!"
+  "updateFailed": "安装更新失败!",
+  "fetchUpgradableFailed": "Failed fetching upgradable packages!"
 }

@@ -19,6 +19,7 @@
   "deviceLost": "Enheten försvann...",
   "deviceBack": "Enheten kom tillbaka...",
   "cooling": "Om du har en Air Unit - speciellt Air Unit Lite (Caddx Vista) - måste du se till att det kyls aktivt med en fläkt.",
+  "v2diy": "If you are rooting V2 googles, make sure they are in DIY mode - they will not root in DJI FPV mode.",
   "disclaimerTitle": "Varning:",
   "disclaimerLine1": "Se till att den enhet som ska rotas drivs från en tillförlitlig strömkälla",
   "disclaimerLine2": "Ha bara en enhet ansluten/parad",
@@ -30,6 +31,7 @@
   "rebootTimeout": "Avbruten! Enheten startade inte om i tid, vänligen starta om enheten och försök igen.",
   "rebootTimeShort": "Omstartstiden misstänksamt kort - startar om en gång till för säkerhets skull...",
   "unlockFailed": "Upplåsning misslyckades, vänligen starta om din enhet och försök igen.",
+  "patchFailed": "Patch failed, please power-cycle your device and try again.",
   "unsupportedFirmware": "Den inbyggda programvaran på din enhet är för ny. Du kanske kan nedgradera till V01.01. 606 i gör-det-själv-läge med DJI FPV Assistant 2 beroende på installerad version. Vänligen <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>se wikin</a> för mer information.",
   "signingServerUnreachable": "The signing server could not be reached. It might be down or your ISP might be blocking it."
 }

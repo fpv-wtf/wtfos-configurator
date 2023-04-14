@@ -6,7 +6,7 @@
   "install": "Установить",
   "fetching": "Проверка пакетов...",
   "installationFailed": "Ошибка установки пакета:",
-  "packageManagemendFailed": "Package management error:",
+  "packageManagemendFailed": "Ошибка менеджера пакетов:",
   "labelRepo": "Репозиторий",
   "labelPackages": "Пакеты",
   "labelAll": "Все",
@@ -20,6 +20,6 @@
   "labelCategory": "Категория",
   "labelCategoryAllExceptSystem": "Все (кроме системы)",
   "labelCategoryAll": "Все",
-  "installing": "Installing package...",
-  "removing": "Removing package..."
+  "installing": "Установка пакета...",
+  "removing": "Удаление пакета..."
 }

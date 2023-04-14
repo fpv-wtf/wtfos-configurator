@@ -1,4 +1,8 @@
 {
+  "configTitle": "Ustawienia",
+  "configChromaKey": "Kluczowanie koloru (chroma key)",
+  "configChromaKeyHelp": "Renderuje OSD na <0>kolorowym tle</0> zamiast na bieżącym filmie. Wideo DVR jest jednak nadal używane (obecnie) do celów czasowych.",
+  "configChromaKeyColor": "Kolor klucza Chroma",
   "debugStatsExpectedFrames": "Oczekiwane klatki",
   "debugStatsFramesDecoded": "Zdekodowane klatki",
   "debugStatsFramesDecodedMissing": "Zdekodowane klatki (Brakujące)",

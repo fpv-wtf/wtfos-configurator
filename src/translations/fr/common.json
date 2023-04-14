@@ -2,5 +2,7 @@
   "disconnect": "Déconnecter",
   "connect": "Connecter",
   "connectDevice": "Se connecter à l'appareil",
-  "rebooting": "Redémarrage..."
+  "rebooting": "Redémarrage...",
+  "adbCheck": "Device connected - checking for ADB, this can take up to 30 seconds...",
+  "adbDetectionFailed": "Failed detecting ADB, please (re-)root your device!"
 }

@@ -2,5 +2,7 @@
   "disconnect": "Від’єднати",
   "connect": "Під’єднатися",
   "connectDevice": "Під'єднатися до пристрою",
-  "rebooting": "Система перезавантажується..."
+  "rebooting": "Система перезавантажується...",
+  "adbCheck": "Device connected - checking for ADB, this can take up to 30 seconds...",
+  "adbDetectionFailed": "Failed detecting ADB, please (re-)root your device!"
 }

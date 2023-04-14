@@ -2,5 +2,7 @@
   "disconnect": "Trennen",
   "connect": "Verbinden",
   "connectDevice": "Mit Gerät verbinden",
-  "rebooting": "Wird neu gestartet..."
+  "rebooting": "Wird neu gestartet...",
+  "adbCheck": "Gerät verbunden - suche nach ADB, dies kann bis zu 30 Sekunden dauern...",
+  "adbDetectionFailed": "ADB konnte nicht gefunden werden, bitte roote dein Gerät!"
 }

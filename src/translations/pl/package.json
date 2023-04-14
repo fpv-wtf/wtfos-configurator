@@ -7,5 +7,11 @@
   "remove": "Usuń",
   "install": "Zainstaluj",
   "installing": "Instalowanie pakietu...",
-  "removing": "Usuwanie pakietu..."
+  "removing": "Usuwanie pakietu...",
+  "fetchPackageFailed": "Nie udało się pobrać szczegółów pakietu!",
+  "removePackageFailed": "Nie udało się usunąć pakietu:",
+  "installPackageFailed": "Nie udało się zainstalować pakietu:",
+  "fetchPackagesFailed": "Nie udało się pobrać listy pakietów:",
+  "upgradeFailed": "Nie udało się zaktualizować pakietów:",
+  "fetchUpgradableFailed": "Nie udało się pobrać aktualizowalnych pakietów:"
 }
