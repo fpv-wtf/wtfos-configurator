@@ -12,11 +12,17 @@ import Spinner from "../loading/Spinner";
 import Webusb from "../disclaimer/Webusb";
 import Udev from "../disclaimer/Udev";
 
+import AdbDetectionError from "./AdbDetectionError";
+
 import { isLinux } from "../../utils/Os";
 
-import { selectRebooting } from "./deviceSlice";
+import {
+  selectAdbDetectionFailed,
+  selectRebooting,
+} from "./deviceSlice";
 
 export default function Device({
+  adbDetection,
   error,
   handleDeviceConnect,
 }) {
@@ -26,6 +32,7 @@ export default function Device({
   const tc = translation.t;
 
   const isRebooting = useSelector(selectRebooting);
+  const adbConnectionFailed = useSelector(selectAdbDetectionFailed);
 
   let content = (
     <Stack
@@ -37,7 +44,16 @@ export default function Device({
       {!window.navigator.usb &&
         <Webusb />}
 
-      { !error && window.navigator.usb &&
+      <AdbDetectionError />
+
+      {adbDetection &&
+        <Alert severity="info">
+          <Typography>
+            {tc("adbCheck")}
+          </Typography>
+        </Alert>}
+
+      {!error && window.navigator.usb && !adbDetection && !adbConnectionFailed &&
         <Alert severity="warning">
           <Typography>
             {t("warningConnection")}
@@ -54,7 +70,8 @@ export default function Device({
       { isLinux() &&
         <Udev />}
 
-      <ConnectButton onClick={handleDeviceConnect} />
+      {!adbDetection && !adbConnectionFailed &&
+        <ConnectButton onClick={handleDeviceConnect} />}
     </Stack>
   );
 
@@ -68,6 +85,7 @@ export default function Device({
 Device.defaultProps = { error: false };
 
 Device.propTypes = {
+  adbDetection: PropTypes.bool.isRequired,
   error: PropTypes.bool,
   handleDeviceConnect: PropTypes.func.isRequired,
 };

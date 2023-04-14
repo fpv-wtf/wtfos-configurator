@@ -20,5 +20,6 @@
   "current": "Geïnstalleerde Versie",
   "latest": "Laatste Versie",
   "updateSuccess": "Updates installed successfully!",
-  "updateFailed": "Failed installing updates!"
+  "updateFailed": "Failed installing updates!",
+  "fetchUpgradableFailed": "Failed fetching upgradable packages!"
 }

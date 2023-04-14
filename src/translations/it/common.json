@@ -2,5 +2,7 @@
   "disconnect": "Disconnetti",
   "connect": "Connetti",
   "connectDevice": "Connetti al dispositivo",
-  "rebooting": "Riavvio..."
+  "rebooting": "Riavvio...",
+  "adbCheck": "Dispositivo connesso - verifica di ADB in corso, questa operazione può richiedere fino a 30 secondi...",
+  "adbDetectionFailed": "Rilevamento di ADB non riuscito, per favore eseguire nuovamente il Root al dispositivo!"
 }

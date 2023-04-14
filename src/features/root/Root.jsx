@@ -25,6 +25,7 @@ import Donate from "../donate/Donate";
 import Header from "../navigation/Header";
 import Log from "../log/Log";
 import Webusb from "../disclaimer/Webusb";
+import AdbDetectionError from "../device/AdbDetectionError";
 
 import { selectCanClaim } from "../tabGovernor/tabGovernorSlice";
 
@@ -34,19 +35,8 @@ import {
   UnlockFailed,
   UnsupportedFirmwareVersion,
   SigningServerUnreachable,
-} from "../../utils/obfuscated-exploit/Errors";
-import Exploit from "../../utils/obfuscated-exploit/Exploit";
-
-/*
-import {
-  PatchFailed,
-  PortLost,
-  UnlockFailed,
-  UnsupportedFirmwareVersion,
-  SigningServerUnreachable,
 } from "../../utils/exploit/Errors";
 import Exploit from "../../utils/exploit/Exploit.js";
-*/
 
 import {
   fail,
@@ -63,6 +53,7 @@ import {
   selectClaimed,
   selectHasAdb,
   setClaimed,
+  setAdbDetectionFailed,
 } from "../device/deviceSlice";
 
 import { selectDisclaimersStatus } from "../settings/settingsSlice";
@@ -280,6 +271,7 @@ export default function Root() {
                 try {
                   exploit.closePort();
                   dispatch(setClaimed(false));
+                  dispatch(setAdbDetectionFailed(false));
                 } catch(e) {
                   console.log("Failed closing port:", e);
                 }
@@ -319,7 +311,7 @@ export default function Root() {
             shouldRunUnlock = false;
             done = true;
           } else if(e instanceof UnsupportedFirmwareVersion) {
-            log(t("unsupportedFirmware"));
+            log(t("tryButter"));
 
             shouldRunUnlock = false;
             done = true;
@@ -332,7 +324,7 @@ export default function Root() {
             disconnected.current = true;
             break;
           } else if(e instanceof PatchFailed) {
-            log(t("tryButter"));
+            log(t("patchFailed"));
 
             ReactGA.gtag("event", "patchFailed", {
               device,
@@ -505,11 +497,17 @@ export default function Root() {
           {!window.navigator.serial &&
             <Webusb />}
 
+          <AdbDetectionError />
+
           {!disclaimersStatus &&
             <>
               <Alert severity="error">
                 <Typography sx={{ fontWeight: "bold" }}>
                   {t("cooling")}
+
+                  <br />
+
+                  {t("v2diy")}
                 </Typography>
               </Alert>
 

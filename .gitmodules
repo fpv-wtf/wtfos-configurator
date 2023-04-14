@@ -1,3 +1,0 @@
-[submodule "src/utils/exploit"]
-	path = src/utils/exploit
-	url = git@github.com:fpv-wtf/margerine-web.git

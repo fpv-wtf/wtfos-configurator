@@ -2,5 +2,7 @@
   "disconnect": "Odpojiť",
   "connect": "Pripojiť",
   "connectDevice": "Pripojiť k zariadeniu",
-  "rebooting": "Reštartuje sa..."
+  "rebooting": "Reštartuje sa...",
+  "adbCheck": "Device connected - checking for ADB, this can take up to 30 seconds...",
+  "adbDetectionFailed": "Failed detecting ADB, please (re-)root your device!"
 }

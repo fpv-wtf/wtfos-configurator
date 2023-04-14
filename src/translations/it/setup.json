@@ -16,9 +16,10 @@
   "tileRemoveDescription": "Rimuovi WTFOS dal tuo dispositivo. Questo ripristinerà tutte le modifiche tranne lo sblocco dei privilegi di Root.",
   "upToDate": "Non ci sono aggiornamenti disponibili!",
   "checking": "Controllo i pacchetti...",
-  "name": "Nome Pacchetto",
-  "current": "Versione Installata",
+  "name": "Nome del pacchetto",
+  "current": "Versione installata",
   "latest": "Ultima versione",
   "updateSuccess": "Aggiornamenti installati con successo!",
-  "updateFailed": "Installazione degli aggiornamenti non riuscita!"
+  "updateFailed": "Installazione degli aggiornamenti non riuscita!",
+  "fetchUpgradableFailed": "Impossibile scaricare i pacchetti aggiornabili!"
 }

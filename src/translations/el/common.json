@@ -2,5 +2,7 @@
   "disconnect": "Αποσύνδεση",
   "connect": "Σύνδεση",
   "connectDevice": "Σύνδεση με τη συσκευή",
-  "rebooting": "Επανεκκίνηση..."
+  "rebooting": "Επανεκκίνηση...",
+  "adbCheck": "Device connected - checking for ADB, this can take up to 30 seconds...",
+  "adbDetectionFailed": "Failed detecting ADB, please (re-)root your device!"
 }

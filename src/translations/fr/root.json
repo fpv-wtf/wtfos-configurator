@@ -19,6 +19,7 @@
   "deviceLost": "L'appareil est déconnecté...",
   "deviceBack": "L'appareil est reconnecté...",
   "cooling": "Si vous rootez un Air Unit, en particulier un Air Unit Lite (Caddx Vista), assurez-vous qu'il est refroidi avec un ventilateur.",
+  "v2diy": "If you are rooting V2 googles, make sure they are in DIY mode - they will not root in DJI FPV mode.",
   "disclaimerTitle": "Avertissement:",
   "disclaimerLine1": "Assurez-vous que l'appareil à rooter est alimenté à partir d'une source d'alimentation fiable",
   "disclaimerLine2": "Un seul appareil est connecté/appairé",
@@ -30,6 +31,7 @@
   "rebootTimeout": "Abandonné ! L'appareil n'a pas redémarré à temps, redémarrez-le et réessayez.",
   "rebootTimeShort": "Le temps de redémarrage est trop court - redémarrez une fois de plus au cas ou...",
   "unlockFailed": "Le déverrouillage a échoué, veuillez redémarrer votre appareil et réessayez.",
+  "patchFailed": "Patch failed, please power-cycle your device and try again.",
   "unsupportedFirmware": "Le firmware de votre appareil est trop récent. Vous pouvez peut-être downgrader vers V01.01. 606 en mode DIY avec DJI FPV Assistant 2 selon la version exacte installée. Veuillez <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>consulter le wiki</a> pour plus de détails.",
   "signingServerUnreachable": "Le serveur de signature n'a pas pu être atteint. Il est peut-être hors service ou votre fournisseur d'accès Internet le bloque peut-être."
 }

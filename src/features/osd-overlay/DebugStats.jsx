@@ -17,7 +17,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import SettingsIcon from "@mui/icons-material/Settings";
+import ScienceIcon from "@mui/icons-material/Science";
 
 export default function DebugStats(props) {
   const { t } = useTranslation("osdOverlay");
@@ -91,7 +91,7 @@ export default function DebugStats(props) {
                 spacing={0.5}
                 sx={{ p: 1 }}
               >
-                <SettingsIcon />
+                <ScienceIcon />
 
                 <Typography variant="body1">
                   {t("debugStatsTitle")}

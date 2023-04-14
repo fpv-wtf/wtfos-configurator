@@ -20,5 +20,6 @@
   "current": "Εγκατεστημένη Έκδοση",
   "latest": "Τελευταία Έκδοση",
   "updateSuccess": "Updates installed successfully!",
-  "updateFailed": "Failed installing updates!"
+  "updateFailed": "Failed installing updates!",
+  "fetchUpgradableFailed": "Failed fetching upgradable packages!"
 }

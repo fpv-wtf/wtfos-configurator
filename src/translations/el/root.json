@@ -19,6 +19,7 @@
   "deviceLost": "Η συσκευή απομακρύνθηκε...",
   "deviceBack": "Η συσκευή επέστρεψε...",
   "cooling": "Εάν κάνετε root ένα Air Unit - ειδικά Air Unit Lite (Caddx Vista) - βεβαιωθείτε ότι έχει ψύχεται ενεργά δείχνοντας έναν ανεμιστήρα σε αυτό.",
+  "v2diy": "If you are rooting V2 googles, make sure they are in DIY mode - they will not root in DJI FPV mode.",
   "disclaimerTitle": "Αποποίηση ευθυνών:",
   "disclaimerLine1": "Βεβαιωθείτε ότι η συσκευή που πρόκειται να γίνει rooted τροφοδοτείται από μια αξιόπιστη πηγή ενέργειας",
   "disclaimerLine2": "Να έχετε μόνο μία συσκευή συνδεδεμένη/συζευγμένη",
@@ -30,6 +31,7 @@
   "rebootTimeout": "Εγκατάλειψη! Η συσκευή δεν επανεκκίνησε εγκαίρως, παρακαλώ απενεργοποιήστε και ενεργοποιήστε και προσπαθήστε ξανά.",
   "rebootTimeShort": "Ο χρόνος επανεκκίνησης είναι ύποπτα σύντομος - επανεκκίνηση ακόμη μια φορά για καλό μέτρο...",
   "unlockFailed": "Το ξεκλείδωμα απέτυχε, παρακαλώ απενεργοποιήστε και ενεργοποιήστε τη συσκευή σας και προσπαθήστε ξανά.",
+  "patchFailed": "Patch failed, please power-cycle your device and try again.",
   "unsupportedFirmware": "Το firmware στη συσκευή σας είναι πολύ νέο. Μπορεί να μπορείτε να υποβαθμίσετε την συσκευή σας σε V01.01.0606 σε λειτουργία DIY με DJI FPV Assistant 2 ανάλογα με την ακριβή έκδοση που έχει εγκατασταθεί. Παρακαλώ <a href='https://github.com/fpv-wtf/wtfos/wiki/Supported-firmware-versions#fpv-goggles-v2'>δείτε το wiki</a> για περισσότερες λεπτομέρειες.",
   "signingServerUnreachable": "The signing server could not be reached. It might be down or your ISP might be blocking it."
 }
