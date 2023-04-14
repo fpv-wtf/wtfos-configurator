@@ -3,6 +3,6 @@
   "connect": "Verbinden",
   "connectDevice": "Mit Gerät verbinden",
   "rebooting": "Wird neu gestartet...",
-  "adbCheck": "Device connected - checking for ADB, this can take up to 30 seconds...",
-  "adbDetectionFailed": "Failed detecting ADB, please (re-)root your device!"
+  "adbCheck": "Gerät verbunden - suche nach ADB, dies kann bis zu 30 Sekunden dauern...",
+  "adbDetectionFailed": "ADB konnte nicht gefunden werden, bitte roote dein Gerät!"
 }
