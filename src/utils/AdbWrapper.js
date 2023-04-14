@@ -484,17 +484,20 @@ export default class AdbWrapper {
     return output.stdout;
   }
 
+
   async getPackageConfig(name) {
     const configPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigFile}`;
     const schemaPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigSchema}`;
 
     try {
       const config = await this.pullJsonFile(configPath);
-      const schema = await this.pullJsonFile(schemaPath);
+      const allSchema = await this.pullJsonFile(schemaPath);
+      const [schema, uiSchema] = this.stripUISchema(allSchema);
 
       return {
         config,
         schema,
+        uiSchema,
       };
     } catch(e) {
       console.log("Failed fetching package config", e);
@@ -504,6 +507,28 @@ export default class AdbWrapper {
       config: null,
       schema: null,
     };
+  }
+
+  stripUISchema(config, lastKey, uiSchema) {
+    const schema = {};
+    uiSchema = uiSchema || {};
+    Object.keys(config).forEach((key, value) => {
+      if (typeof config[key] === "object") {
+        if (config[key] instanceof Array) {
+          schema[key] = config[key];
+          this.stripUISchema(config[key], key, uiSchema);
+        } else {
+          [schema[key]] = this.stripUISchema(config[key], key, uiSchema);
+        }
+      } else if (key.startsWith("ui:")) {
+        uiSchema[lastKey] = uiSchema[lastKey] || {};
+        uiSchema[lastKey][key] = config[key];
+      } else {
+        schema[key] = config[key];
+      }
+    });
+
+    return [schema, uiSchema];
   }
 
   // Returns a JSON object from the contents of a file at the given path

@@ -42,6 +42,7 @@ import {
   selectLoading,
   selectName,
   selectSchema,
+  selectUiSchema,
   selectWriting,
   writeConfig,
 } from "./packageSlice";
@@ -73,6 +74,7 @@ export default function Package({ adb }) {
   const fetched = useSelector(selectFetched);
   const config = useSelector(selectConfig);
   const schema = useSelector(selectSchema);
+  const uiSchema = useSelector(selectUiSchema);
 
   const loading = useSelector(selectLoading);
   const writing = useSelector(selectWriting);
@@ -296,6 +298,7 @@ export default function Package({ adb }) {
                 formData={currentConfig}
                 onSubmit={saveConfig}
                 schema={JSON.parse(JSON.stringify(schema))}
+                uiSchema={JSON.parse(JSON.stringify(uiSchema))}
                 validator={validator}
               >
                 <Button
