@@ -21,5 +21,5 @@
   "latest": "Neueste Version",
   "updateSuccess": "Updates erfolgreich installiert!",
   "updateFailed": "Updates konnten nicht installiert werden!",
-  "fetchUpgradableFailed": "Fehler beim laden von aktualisierbaren Paketen!"
+  "fetchUpgradableFailed": "Fehler beim Laden von aktualisierbaren Paketen!"
 }
