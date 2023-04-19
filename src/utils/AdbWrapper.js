@@ -42,6 +42,7 @@ export default class AdbWrapper {
       packageConfigPath: "/opt/etc/package-config",
       packageConfigFile: "config.json",
       packageConfigSchema: "schemaV2.json",
+      packageConfigUiSchema: "uiSchemaV2.json",
     };
 
     /**
@@ -488,11 +489,20 @@ export default class AdbWrapper {
   async getPackageConfig(name) {
     const configPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigFile}`;
     const schemaPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigSchema}`;
+    const uiSchemaPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigUiSchema}`;
 
     try {
       const config = await this.pullJsonFile(configPath);
-      const allSchema = await this.pullJsonFile(schemaPath);
-      const [schema, uiSchema] = this.stripUISchema(allSchema);
+      const schema = await this.pullJsonFile(schemaPath);
+
+      // gets it's own try as we can tolerate no uiSchema here - we don't want to full fail as if we have no schema/config
+      const uiSchema = await (async() => {
+        try {
+          return await this.pullJsonFile(uiSchemaPath);
+        } catch (e) {
+          return "{}"; // empty uiSchema
+        }
+      })();
 
       return {
         config,
@@ -507,28 +517,6 @@ export default class AdbWrapper {
       config: null,
       schema: null,
     };
-  }
-
-  stripUISchema(config, lastKey, uiSchema) {
-    const schema = {};
-    uiSchema = uiSchema || {};
-    Object.keys(config).forEach((key, value) => {
-      if (typeof config[key] === "object") {
-        if (config[key] instanceof Array) {
-          schema[key] = config[key];
-          this.stripUISchema(config[key], key, uiSchema);
-        } else {
-          [schema[key]] = this.stripUISchema(config[key], key, uiSchema);
-        }
-      } else if (key.startsWith("ui:")) {
-        uiSchema[lastKey] = uiSchema[lastKey] || {};
-        uiSchema[lastKey][key] = config[key];
-      } else {
-        schema[key] = config[key];
-      }
-    });
-
-    return [schema, uiSchema];
   }
 
   // Returns a JSON object from the contents of a file at the given path
