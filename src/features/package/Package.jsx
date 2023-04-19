@@ -57,6 +57,8 @@ import { selectPassed } from "../healthcheck/healthcheckSlice";
 import Spinner from "../overlays/Spinner";
 import PackageManagementError from "./PackageManagementError";
 
+import { FieldHelpTemplate } from "./FieldHelpTemplate";
+
 export default function Package({ adb }) {
   const { t } = useTranslation("package");
   const dispatch = useDispatch();
@@ -298,6 +300,7 @@ export default function Package({ adb }) {
                 formData={currentConfig}
                 onSubmit={saveConfig}
                 schema={JSON.parse(JSON.stringify(schema))}
+                templates={{ FieldHelpTemplate }}
                 uiSchema={JSON.parse(JSON.stringify(uiSchema))}
                 validator={validator}
               >
