@@ -3,7 +3,7 @@ import Markdown from "marked-react";
 import React from "react";
 import PropTypes from "prop-types";
 
-export function FieldHelpTemplate({
+export default function FieldHelpTemplate({
   help, idSchema,
 }) {
   if (help === "") {
@@ -21,7 +21,7 @@ export function FieldHelpTemplate({
 
 FieldHelpTemplate.propTypes = {
   help: PropTypes.string,
-  idSchema: PropTypes.shape().isRequired,
+  idSchema: PropTypes.shape({ $id: PropTypes.string }).isRequired,
 };
 
 FieldHelpTemplate.defaultProps = { help: "" };

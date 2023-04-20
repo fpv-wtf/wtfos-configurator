@@ -57,7 +57,7 @@ import { selectPassed } from "../healthcheck/healthcheckSlice";
 import Spinner from "../overlays/Spinner";
 import PackageManagementError from "./PackageManagementError";
 
-import { FieldHelpTemplate } from "./FieldHelpTemplate";
+import FieldHelpTemplate from "./FieldHelpTemplate";
 
 export default function Package({ adb }) {
   const { t } = useTranslation("package");

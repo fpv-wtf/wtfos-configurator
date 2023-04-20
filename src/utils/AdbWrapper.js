@@ -485,7 +485,6 @@ export default class AdbWrapper {
     return output.stdout;
   }
 
-
   async getPackageConfig(name) {
     const configPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigFile}`;
     const schemaPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigSchema}`;
@@ -500,7 +499,7 @@ export default class AdbWrapper {
         try {
           return await this.pullJsonFile(uiSchemaPath);
         } catch (e) {
-          return "{}"; // empty uiSchema
+          return {}; // empty uiSchema
         }
       })();
 
