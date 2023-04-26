@@ -11,6 +11,8 @@ import {
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
+import Markdown from "marked-react";
+
 import validator from "@rjsf/validator-ajv6";
 import Form from "@rjsf/mui";
 
@@ -291,9 +293,9 @@ export default function Package({ adb }) {
               </Grid>
             </Grid>
 
-            <Typography variant="body1">
+            <Markdown>
               {description}
-            </Typography>
+            </Markdown>
 
             {schema && installed &&
               <Form
