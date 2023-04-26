@@ -82,15 +82,19 @@ export default class Proxy {
      * with the original url anyway.
      */
     const httpsUrl = url.replace(/^http:\/\//, "https://");
+    const requestOptions = {
+      method,
+      cache: "no-store",
+    };
 
     let response = null;
     try {
-      const request = new Request(httpsUrl, { method });
+      const request = new Request(httpsUrl, requestOptions);
       response = await fetch(request);
       return response;
     } catch(e) {
       const corsProxyUrl = this.corsProxy + url;
-      const corsRequest = new Request(corsProxyUrl, { method });
+      const corsRequest = new Request(corsProxyUrl, requestOptions);
       try {
         response = await fetch(corsRequest);
         return response;
