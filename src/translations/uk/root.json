@@ -19,7 +19,6 @@
   "deviceLost": "Пристрій від'єднався...",
   "deviceBack": "Пристрій під'єднався...",
   "cooling": "Якщо ви надаєте рут права до Air Unit - особливо Air Unit Lite (Caddx Vista) - переконайтеся, що він активно охолоджується, направивши на нього вентилятор.",
-  "v2diy": "If you are rooting V2 googles, make sure they are in DIY mode - they will not root in DJI FPV mode.",
   "disclaimerTitle": "Відмова від відповідальності:",
   "disclaimerLine1": "Переконайтеся, що пристрій, під час всього процесу надання рут-прав, живиться від надійного джерела живлення",
   "disclaimerLine2": "Тільки один пристрій може бути під'єднаний",
