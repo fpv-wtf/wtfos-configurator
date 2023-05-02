@@ -19,7 +19,6 @@
   "deviceLost": "Cihaz ayrıldı...",
   "deviceBack": "Cihaz geri geldi...",
   "cooling": "Eğer Air Unit ve özellikle Air Unit Lite (Caddx Vista-Runcam Link) rootlayacaksanız cihazların fan ile aktif olarak soğutulduğundan emin olun.",
-  "v2diy": "If you are rooting V2 googles, make sure they are in DIY mode - they will not root in DJI FPV mode.",
   "disclaimerTitle": "Uyarılar:",
   "disclaimerLine1": "Rootlanacak cihazın güvenilir bir güç kaynaği ile çalıştırıldığından emin olun",
   "disclaimerLine2": "Aynı anda sadece bir cihaz bağlayın/eşleştirin",
