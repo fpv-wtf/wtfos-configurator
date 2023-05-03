@@ -509,6 +509,7 @@ export default function Root() {
 
               <Disclaimer
                 lines={[
+                  t("disclaimerLine0"),
                   t("disclaimerLine1"),
                   t("disclaimerLine2"),
                   t("disclaimerLine3"),
