@@ -60,8 +60,7 @@ import { selectDisclaimersStatus } from "../settings/settingsSlice";
 
 import { selectDonationState } from "../donate/donateSlice";
 
-const corsProxy = process.env.REACT_APP_EXPLOIT_CORS_PROXY || "";
-const exploit = new Exploit(corsProxy);
+const exploit = new Exploit();
 const rebootTimeMinSeconds = 7;
 const rebootTimeMaxSeconds = 60;
 
