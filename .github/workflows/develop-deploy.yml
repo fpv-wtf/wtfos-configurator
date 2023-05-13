@@ -19,7 +19,6 @@ jobs:
 
       - run: |
           rm -r .git
-          cp .env.example .env
           echo "# Nothing to see here" > README.md
           echo "This repository is only a placholder for deploying [development previews](https://develop.fpv.wtf/) of [wtfos configurator](https://github.com/fpv-wtf/wtfos-configurator)." >> README.md
 
