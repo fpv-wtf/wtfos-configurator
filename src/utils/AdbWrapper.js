@@ -41,6 +41,8 @@ export default class AdbWrapper {
       healthchesksPath: "/tmp/healthchecks",
       packageConfigPath: "/opt/etc/package-config",
       packageConfigFile: "config.json",
+      packageConfigSchemaCmd: "schemaV2",
+      packageConfigUiSchemaCmd: "uiSchemaV2",
       packageConfigSchema: "schemaV2.json",
       packageConfigUiSchema: "uiSchemaV2.json",
     };
@@ -142,7 +144,7 @@ export default class AdbWrapper {
     const fullCommand = [
       ". /etc/mkshrc;",
       ...commandArray,
-      ";echo $?",
+      ";echo \"\n$?\"",
     ];
     const output = await this.adb.subprocess.spawnAndWait(fullCommand);
     let lines = output.stdout.split("\n");
@@ -156,7 +158,6 @@ export default class AdbWrapper {
         lines.shift();
       }
     }
-
     output.exitCode = parseInt(exitCode);
     output.stdout = lines.join("\n");
 
@@ -487,17 +488,25 @@ export default class AdbWrapper {
 
   async getPackageConfig(name) {
     const configPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigFile}`;
+    const schemaCmd = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigSchemaCmd}`;
     const schemaPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigSchema}`;
+    const uiSchemaCmd = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigUiSchemaCmd}`;
     const uiSchemaPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigUiSchema}`;
 
     try {
+
       const config = await this.pullJsonFile(configPath);
-      const schema = await this.pullJsonFile(schemaPath);
+      const schema = await this.executeJsonCommand([
+        `${schemaCmd} --config-schema 2>/dev/null || cat ${schemaPath} 2>/dev/null`,
+      ]);
+      //const schema = await this.pullJsonFile(schemaPath);
 
       // gets it's own try as we can tolerate no uiSchema here - we don't want to full fail as if we have no schema/config
       const uiSchema = await (async() => {
         try {
-          return await this.pullJsonFile(uiSchemaPath);
+          return await this.executeJsonCommand([
+            `${uiSchemaCmd} --config-ui-schema 2>/dev/null || cat ${uiSchemaPath} 2>/dev/null`,
+          ]);
         } catch (e) {
           return {}; // empty uiSchema
         }
@@ -523,6 +532,17 @@ export default class AdbWrapper {
     const data = await this.pullFile(path);
     const string = new TextDecoder().decode(data);
     const json = JSON.parse(string);
+
+    return json;
+  }
+
+  // Returns a JSON object from the output of the given command
+  async executeJsonCommand(command) {
+    const result = await this.executeCommand(command);
+    if(result.exitCode !== 0) {
+      throw new Error(`Couldn't execute ${command} retun code was ${result.exitCode} output was:\n${result.stderr}${result.stdout}`);
+    }
+    const json = JSON.parse(result.stdout);
 
     return json;
   }
