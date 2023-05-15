@@ -8,10 +8,10 @@
   "install": "Installieren",
   "installing": "Paket wird installiert...",
   "removing": "Paket wird entfernt...",
-  "fetchPackageFailed": "Fehler beim Abrufen der Paket-Details!",
-  "removePackageFailed": "Fehler beim entfernen des Pakets:",
-  "installPackageFailed": "Fehler beim installieren des Pakets:",
+  "fetchPackageFailed": "Fehler beim Abrufen der Paketdetails!",
+  "removePackageFailed": "Fehler beim Entfernen des Pakets:",
+  "installPackageFailed": "Fehler beim Installieren des Pakets:",
   "fetchPackagesFailed": "Fehler beim Abrufen der Paketliste:",
-  "upgradeFailed": "Fehler beim aktualisieren der Pakete:",
-  "fetchUpgradableFailed": "Fehler beim laden von aktualisierbaren Paketen:"
+  "upgradeFailed": "Fehler beim Aktualisieren der Pakete:",
+  "fetchUpgradableFailed": "Fehler beim Laden von aktualisierbaren Paketen:"
 }
