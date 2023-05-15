@@ -20,6 +20,7 @@
   "deviceBack": "Urządzenie wróciło...",
   "cooling": "Jeśli rootujesz Air Unit - zwłaszcza Air Unit Lite (Caddx Vista) - upewnij się, że jest on czynnie chłodzony, kierując na niego wentylator.",
   "disclaimerTitle": "Wyłączenie odpowiedzialności:",
+  "disclaimerLine0": "Please close UltiMaker Cura, PrusaSlicer and DJI Assistant if they are running before rooting. They are known to cause issues with the process.",
   "disclaimerLine1": "Upewnij się, że urządzenie do zrootowania jest zasilane z niezawodnego źródła zasilania",
   "disclaimerLine2": "Masz tylko jedno urządzenie podłączone/sparowane",
   "disclaimerLine3": "Nie wyłączaj podczas rootowania",
