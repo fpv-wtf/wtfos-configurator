@@ -20,6 +20,7 @@
   "deviceBack": "Пристрій під'єднався...",
   "cooling": "Якщо ви надаєте рут права до Air Unit - особливо Air Unit Lite (Caddx Vista) - переконайтеся, що він активно охолоджується, направивши на нього вентилятор.",
   "disclaimerTitle": "Відмова від відповідальності:",
+  "disclaimerLine0": "Please close UltiMaker Cura, PrusaSlicer and DJI Assistant if they are running before rooting. They are known to cause issues with the process.",
   "disclaimerLine1": "Переконайтеся, що пристрій, під час всього процесу надання рут-прав, живиться від надійного джерела живлення",
   "disclaimerLine2": "Тільки один пристрій може бути під'єднаний",
   "disclaimerLine3": "Не вимикайте живлення під час процесу отримання рут прав",
