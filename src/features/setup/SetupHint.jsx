@@ -1,10 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-import Link from "@mui/material/Link";
-
 import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
+import Link from "../styledLink/Default";
 
 export default function SetupHint() {
   const { t } = useTranslation("setup");
@@ -14,9 +13,10 @@ export default function SetupHint() {
       <Typography>
         {t("hint1")}
         &nbsp;
-        <Link href="/wtfos/install">
-          {t("hint2")}
-        </Link>
+        <Link
+          text={t("hint2")}
+          to="/wtfos/install"
+        />
         .
         &nbsp;
         {t("hint3")}
