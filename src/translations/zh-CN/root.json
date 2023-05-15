@@ -19,7 +19,6 @@
   "deviceLost": "设备断开...",
   "deviceBack": "设备再次连接...",
   "cooling": "如果您正在对天空端 - 特别是天空端 Lite (Caddx Vista) - 进行 root，请务必使用风扇对其进行主动散热。",
-  "v2diy": "If you are rooting V2 googles, make sure they are in DIY mode - they will not root in DJI FPV mode.",
   "disclaimerTitle": "免责声明:",
   "disclaimerLine1": "请确保待 root 设备已有可靠供电",
   "disclaimerLine2": "每次只连接/配对一个设备",

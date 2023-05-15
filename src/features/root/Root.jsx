@@ -60,8 +60,7 @@ import { selectDisclaimersStatus } from "../settings/settingsSlice";
 
 import { selectDonationState } from "../donate/donateSlice";
 
-const corsProxy = process.env.REACT_APP_EXPLOIT_CORS_PROXY || "";
-const exploit = new Exploit(corsProxy);
+const exploit = new Exploit();
 const rebootTimeMinSeconds = 7;
 const rebootTimeMaxSeconds = 60;
 
@@ -504,15 +503,12 @@ export default function Root() {
               <Alert severity="error">
                 <Typography sx={{ fontWeight: "bold" }}>
                   {t("cooling")}
-
-                  <br />
-
-                  {t("v2diy")}
                 </Typography>
               </Alert>
 
               <Disclaimer
                 lines={[
+                  t("disclaimerLine0"),
                   t("disclaimerLine1"),
                   t("disclaimerLine2"),
                   t("disclaimerLine3"),

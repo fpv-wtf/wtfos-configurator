@@ -11,6 +11,8 @@ import {
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
+import Markdown from "marked-react";
+
 import validator from "@rjsf/validator-ajv6";
 import Form from "@rjsf/mui";
 
@@ -42,6 +44,7 @@ import {
   selectLoading,
   selectName,
   selectSchema,
+  selectUiSchema,
   selectWriting,
   writeConfig,
 } from "./packageSlice";
@@ -55,6 +58,8 @@ import {
 import { selectPassed } from "../healthcheck/healthcheckSlice";
 import Spinner from "../overlays/Spinner";
 import PackageManagementError from "./PackageManagementError";
+
+import FieldHelpTemplate from "./FieldHelpTemplate";
 
 export default function Package({ adb }) {
   const { t } = useTranslation("package");
@@ -73,6 +78,7 @@ export default function Package({ adb }) {
   const fetched = useSelector(selectFetched);
   const config = useSelector(selectConfig);
   const schema = useSelector(selectSchema);
+  const uiSchema = useSelector(selectUiSchema);
 
   const loading = useSelector(selectLoading);
   const writing = useSelector(selectWriting);
@@ -287,15 +293,17 @@ export default function Package({ adb }) {
               </Grid>
             </Grid>
 
-            <Typography variant="body1">
+            <Markdown>
               {description}
-            </Typography>
+            </Markdown>
 
             {schema && installed &&
               <Form
                 formData={currentConfig}
                 onSubmit={saveConfig}
                 schema={JSON.parse(JSON.stringify(schema))}
+                templates={{ FieldHelpTemplate }}
+                uiSchema={JSON.parse(JSON.stringify(uiSchema))}
                 validator={validator}
               >
                 <Button

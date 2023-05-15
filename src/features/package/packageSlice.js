@@ -17,6 +17,7 @@ const initialState = {
   },
 
   schema: null,
+  uiSchema: null,
   config: null,
 
   writing: false,
@@ -95,9 +96,11 @@ export const packageSlice = createSlice({
       }).addCase(fetchConfig.pending, (state, action) => {
         state.config = null;
         state.schema = null;
+        state.uiSchema = null;
       }).addCase(fetchConfig.fulfilled, (state, action) => {
         state.config = action.payload.config;
         state.schema = action.payload.schema;
+        state.uiSchema = action.payload.uiSchema;
       }).addCase(writeConfig.pending, (state, action) => {
         state.writing = true;
       }).addCase(writeConfig.fulfilled, (state, action) => {
@@ -127,5 +130,6 @@ export const selectLoading = (state) => state.package.loading;
 
 export const selectConfig = (state) => state.package.config;
 export const selectSchema = (state) => state.package.schema;
+export const selectUiSchema = (state) => state.package.uiSchema;
 
 export default packageSlice.reducer;

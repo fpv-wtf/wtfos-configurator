@@ -47,6 +47,7 @@
     "no-lone-blocks": "off",
     "curly": "error",
     "eol-last": "error",
-    "no-trailing-spaces": "error"
+    "no-trailing-spaces": "error",
+    "no-multiple-empty-lines": ["warn", { "max": 1 }]
   }
 }

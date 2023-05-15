@@ -42,6 +42,7 @@ export default class AdbWrapper {
       packageConfigPath: "/opt/etc/package-config",
       packageConfigFile: "config.json",
       packageConfigSchema: "schemaV2.json",
+      packageConfigUiSchema: "uiSchemaV2.json",
     };
 
     /**
@@ -487,14 +488,25 @@ export default class AdbWrapper {
   async getPackageConfig(name) {
     const configPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigFile}`;
     const schemaPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigSchema}`;
+    const uiSchemaPath = `${this.wtfos.packageConfigPath}/${name}/${this.wtfos.packageConfigUiSchema}`;
 
     try {
       const config = await this.pullJsonFile(configPath);
       const schema = await this.pullJsonFile(schemaPath);
 
+      // gets it's own try as we can tolerate no uiSchema here - we don't want to full fail as if we have no schema/config
+      const uiSchema = await (async() => {
+        try {
+          return await this.pullJsonFile(uiSchemaPath);
+        } catch (e) {
+          return {}; // empty uiSchema
+        }
+      })();
+
       return {
         config,
         schema,
+        uiSchema,
       };
     } catch(e) {
       console.log("Failed fetching package config", e);
