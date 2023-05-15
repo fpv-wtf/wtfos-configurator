@@ -20,6 +20,7 @@
   "deviceBack": "Enheten kom tillbaka...",
   "cooling": "Om du har en Air Unit - speciellt Air Unit Lite (Caddx Vista) - måste du se till att det kyls aktivt med en fläkt.",
   "disclaimerTitle": "Varning:",
+  "disclaimerLine0": "Please close UltiMaker Cura, PrusaSlicer and DJI Assistant if they are running before rooting. They are known to cause issues with the process.",
   "disclaimerLine1": "Se till att den enhet som ska rotas drivs från en tillförlitlig strömkälla",
   "disclaimerLine2": "Ha bara en enhet ansluten/parad",
   "disclaimerLine3": "Stäng inte av under rotning",
