@@ -862,11 +862,16 @@ export default class AdbWrapper {
     output = await this.executeCommand("rm -r /opt");
     output = await this.executeCommand("mount -o ro,remount /");
 
+    let retries = 0;
     output = await this.executeCommand(`rm -r ${this.wtfos.path}`);
-    if(output.exitCode !== 0) {
-      statusCallback("ERROR: Failed cleaning up");
-      output.stdout.split("\n").forEach((line) => statusCallback(line));
-      return;
+    while(output.exitCode !== 0) {
+      if(retries > 20) {
+        statusCallback("ERROR: Failed cleaning up");
+        output.stdout.split("\n").forEach((line) => statusCallback(line));
+        return;
+      }
+      output = await this.executeCommand(`rm -r ${this.wtfos.path}`);
+      retries++;
     }
 
     const hasAdbRemoval = await this.fileExists(this.wtfos.bin.adbRemoval);
