@@ -58,10 +58,10 @@ function App({
   const canClaim = useSelector(selectCanClaim);
 
   useEffect(() => {
-    if(adb && !fetchedUpgradable) {
+    if(adb && !fetchedUpgradable && healthchecksPassed) {
       dispatch(fetchUpgradable(adb));
     }
-  }, [adb, dispatch, fetchedUpgradable]);
+  }, [adb, dispatch, fetchedUpgradable, healthchecksPassed]);
 
   return (
     <Container

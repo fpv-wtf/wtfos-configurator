@@ -54,12 +54,6 @@ export default function Update({ adb }) {
 
   const healthchecksPassed = useSelector(selectPassed);
 
-  useEffect(() => {
-    if(!isProcessing && !fetchedUpgradable && healthchecksPassed) {
-      dispatch(fetchUpgradable(adb));
-    }
-  }, [adb, dispatch, fetchedUpgradable, isProcessing, healthchecksPassed]);
-
   const handleWTFOSUpdate = useCallback(() => {
     dispatch(upgrade({
       adb,
