@@ -20,6 +20,7 @@
   "deviceBack": "Cihaz geri geldi...",
   "cooling": "Eğer Air Unit ve özellikle Air Unit Lite (Caddx Vista-Runcam Link) rootlayacaksanız cihazların fan ile aktif olarak soğutulduğundan emin olun.",
   "disclaimerTitle": "Uyarılar:",
+  "disclaimerLine0": "Please close UltiMaker Cura, PrusaSlicer and DJI Assistant if they are running before rooting. They are known to cause issues with the process.",
   "disclaimerLine1": "Rootlanacak cihazın güvenilir bir güç kaynaği ile çalıştırıldığından emin olun",
   "disclaimerLine2": "Aynı anda sadece bir cihaz bağlayın/eşleştirin",
   "disclaimerLine3": "Root esnasında cihazı kapatmayın",

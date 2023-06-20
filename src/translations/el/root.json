@@ -20,6 +20,7 @@
   "deviceBack": "Η συσκευή επέστρεψε...",
   "cooling": "Εάν κάνετε root ένα Air Unit - ειδικά Air Unit Lite (Caddx Vista) - βεβαιωθείτε ότι έχει ψύχεται ενεργά δείχνοντας έναν ανεμιστήρα σε αυτό.",
   "disclaimerTitle": "Αποποίηση ευθυνών:",
+  "disclaimerLine0": "Please close UltiMaker Cura, PrusaSlicer and DJI Assistant if they are running before rooting. They are known to cause issues with the process.",
   "disclaimerLine1": "Βεβαιωθείτε ότι η συσκευή που πρόκειται να γίνει rooted τροφοδοτείται από μια αξιόπιστη πηγή ενέργειας",
   "disclaimerLine2": "Να έχετε μόνο μία συσκευή συνδεδεμένη/συζευγμένη",
   "disclaimerLine3": "Μην απενεργοποιήσετε τη συσκευή κατά τη διάρκεια του root",

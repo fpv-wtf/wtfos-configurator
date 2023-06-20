@@ -20,6 +20,7 @@
   "deviceBack": "设备再次连接...",
   "cooling": "如果您正在对天空端 - 特别是天空端 Lite (Caddx Vista) - 进行 root，请务必使用风扇对其进行主动散热。",
   "disclaimerTitle": "免责声明:",
+  "disclaimerLine0": "Please close UltiMaker Cura, PrusaSlicer and DJI Assistant if they are running before rooting. They are known to cause issues with the process.",
   "disclaimerLine1": "请确保待 root 设备已有可靠供电",
   "disclaimerLine2": "每次只连接/配对一个设备",
   "disclaimerLine3": "Root 过程中请勿关闭电源",

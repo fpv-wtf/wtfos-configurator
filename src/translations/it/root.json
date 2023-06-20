@@ -20,6 +20,7 @@
   "deviceBack": "Il dispositivo è nuovamente connesso...",
   "cooling": "Se cerchi di avere i permessi di root su una Air Unit, in particolare su una Air Unit Lite (Caddx Vista) - assicurarti che sia raffreddata da un ventilatore.",
   "disclaimerTitle": "Esclusione di Responsabilità:",
+  "disclaimerLine0": "Vi preghiamo di chiudere tutti i programmi quali UltiMaker Cura, PrusaSlicer e DJI Assistant, qualora fossero attivi prima di aver eseguito il root. Vi sono problemi noti che causano errori al processo.",
   "disclaimerLine1": "In fase di ottenimento dei permessi di root assicurati che il dispositivo sia alimentato da una fonte di alimentazione affidabile",
   "disclaimerLine2": "Di avere solo un dispositivo collegato/accoppiato",
   "disclaimerLine3": "Non scollegare mai e/o togliere alimentazione al device, durante la fase di acquisizione dei permessi di Root",
