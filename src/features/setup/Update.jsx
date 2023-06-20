@@ -1,8 +1,5 @@
 import PropTypes from "prop-types";
-import React, {
-  useCallback,
-  useEffect,
-} from "react";
+import React, { useCallback } from "react";
 import {
   useDispatch,
   useSelector,
@@ -29,7 +26,6 @@ import {
 } from "../device/deviceSlice";
 
 import {
-  fetchUpgradable,
   selectErrors,
   selectFetchedUpgradable,
   selectProcessing,
