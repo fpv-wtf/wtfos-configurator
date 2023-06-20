@@ -1,8 +1,5 @@
 import PropTypes from "prop-types";
-import React, {
-  useCallback,
-  useEffect,
-} from "react";
+import React, { useCallback } from "react";
 import {
   useDispatch,
   useSelector,
@@ -29,7 +26,6 @@ import {
 } from "../device/deviceSlice";
 
 import {
-  fetchUpgradable,
   selectErrors,
   selectFetchedUpgradable,
   selectProcessing,
@@ -53,12 +49,6 @@ export default function Update({ adb }) {
   const errors = useSelector(selectErrors);
 
   const healthchecksPassed = useSelector(selectPassed);
-
-  useEffect(() => {
-    if(!isProcessing && !fetchedUpgradable && healthchecksPassed) {
-      dispatch(fetchUpgradable(adb));
-    }
-  }, [adb, dispatch, fetchedUpgradable, isProcessing, healthchecksPassed]);
 
   const handleWTFOSUpdate = useCallback(() => {
     dispatch(upgrade({
