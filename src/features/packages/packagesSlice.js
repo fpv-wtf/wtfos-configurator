@@ -28,6 +28,8 @@ const initialState = {
   update: {
     ran: false,
     success: false,
+    waitingOnPostUpdateReboot: false,
+    postUpdateRebootDone: false,
   },
 };
 
@@ -133,6 +135,8 @@ export const upgrade = createAsyncThunk(
     let errorMessage = ["Unknown error while upgrading packages..."];
     try {
       await adb.upgradePackages(callback);
+      await adb.reboot();
+
       return;
     } catch(e) {
       if(e.stdout) {
@@ -243,7 +247,17 @@ export const packagesSlice = createSlice({
       state.error = initialState.error;
       state.errors = initialState.errors;
     },
-    reset: () => initialState,
+    setPostUpdateRebootDone: (state, event) => {
+      state.update.waitingOnPostUpdateReboot = false;
+      state.update.postUpdateRebootDone = true;
+    },
+    reset: (state, event) => {
+      state = {
+        ...initialState,
+        update: state.update,
+      };
+    },
+    fullReset: () => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -323,6 +337,8 @@ export const packagesSlice = createSlice({
         state.processing = true;
         state.fetchedUpgradable = false;
         state.update.ran = false;
+        state.update.waitingOnPostUpdateReboot = false;
+        state.update.postUpdateRebootDone = false;
       })
       .addCase(upgrade.rejected, (state, action) => {
         state.error = action.payload;
@@ -337,6 +353,7 @@ export const packagesSlice = createSlice({
         state.processing = false;
         state.update.ran = true;
         state.update.success = true;
+        state.update.waitingOnPostUpdateReboot = true;
       })
       .addCase(installWTFOS.pending, (state, action) => {
         state.processing = true;
@@ -355,11 +372,13 @@ export const packagesSlice = createSlice({
 
 export const {
   clearError,
+  fullReset,
   installedFilter,
   processing,
   repo,
   reset,
   search,
+  setPostUpdateRebootDone,
   systemFilter,
 } = packagesSlice.actions;
 

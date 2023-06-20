@@ -21,6 +21,8 @@ import {
   selectRebooting,
 } from "./deviceSlice";
 
+import { selectUpdate } from "../packages/packagesSlice";
+
 export default function Device({
   adbDetection,
   error,
@@ -33,6 +35,7 @@ export default function Device({
 
   const isRebooting = useSelector(selectRebooting);
   const adbConnectionFailed = useSelector(selectAdbDetectionFailed);
+  const update = useSelector(selectUpdate);
 
   let content = (
     <Stack
@@ -44,34 +47,44 @@ export default function Device({
       {!window.navigator.usb &&
         <Webusb />}
 
-      <AdbDetectionError />
-
-      {adbDetection &&
+      {(update.waitingOnPostUpdateReboot || update.postUpdateRebootDone) &&
         <Alert severity="info">
           <Typography>
-            {tc("adbCheck")}
+            {tc("rebooting")}
           </Typography>
         </Alert>}
 
-      {!error && window.navigator.usb && !adbDetection && !adbConnectionFailed &&
-        <Alert severity="warning">
-          <Typography>
-            {t("warningConnection")}
-          </Typography>
-        </Alert>}
+      {(!update.waitingOnPostUpdateReboot && !update.postUpdateRebootDone) &&
+        <>
+          <AdbDetectionError />
 
-      { error &&
-        <Alert severity="error">
-          <Typography>
-            {t("errorConnection")}
-          </Typography>
-        </Alert>}
+          {adbDetection &&
+            <Alert severity="info">
+              <Typography>
+                {tc("adbCheck")}
+              </Typography>
+            </Alert>}
 
-      { isLinux() &&
-        <Udev />}
+          {!error && window.navigator.usb && !adbDetection && !adbConnectionFailed &&
+            <Alert severity="warning">
+              <Typography>
+                {t("warningConnection")}
+              </Typography>
+            </Alert>}
 
-      {!adbDetection && !adbConnectionFailed &&
-        <ConnectButton onClick={handleDeviceConnect} />}
+          { error &&
+            <Alert severity="error">
+              <Typography>
+                {t("errorConnection")}
+              </Typography>
+            </Alert>}
+
+          { isLinux() && !update.waitingOnPostUpdateReboot &&
+            <Udev />}
+
+          {!adbDetection && !adbConnectionFailed &&
+            <ConnectButton onClick={handleDeviceConnect} />}
+        </>}
     </Stack>
   );
 
