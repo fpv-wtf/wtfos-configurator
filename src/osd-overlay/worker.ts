@@ -114,11 +114,13 @@ export class VideoWorker {
   }
 
   modifyFrame(frame: ImageBitmap, frameIndex: number): ImageBitmap {
-    const osdCanvas = this.osdCanvas!;
-    const osdCtx = this.osdCtx!;
     const frameCanvas = this.frameCanvas!;
     const frameCtx = this.frameCtx!;
+    const osdCanvas = this.osdCanvas!;
+    const osdCtx = this.osdCtx!;
 
+    frameCtx.fillStyle = this.chromaKey ? this.chromaKeyColor : 'black';
+    frameCtx.fillRect(0, 0, frameCanvas.width, frameCanvas.height);
     osdCtx.clearRect(0, 0, osdCanvas.width, osdCanvas.height);
 
     if (!this.chromaKey) {
@@ -129,9 +131,6 @@ export class VideoWorker {
         frameXOffset = 0;
       }
       frameCtx.drawImage(frame, frameXOffset, 0);
-    } else {
-      frameCtx.fillStyle = this.chromaKeyColor;
-      frameCtx.fillRect(0, 0, frameCanvas.width, frameCanvas.height);
     }
 
     if (this.lastOsdIndex < this.osdReader!.frames.length - 1) {
