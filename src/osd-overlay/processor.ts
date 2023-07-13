@@ -173,7 +173,7 @@ export class Processor {
 
       this.outMp4?.setFramerate(60);
 
-      this.expectedFrames = this.inMp4!.moov!.trak[0].mdia.mdhd.duration;
+      this.expectedFrames = this.inMp4!.moov!.trak[0].mdia.minf.stbl.stsz.sampleCount;
       this.decodedFrames = {};
 
       this.progressInit({
@@ -258,16 +258,19 @@ export class Processor {
         });
 
         this.decoder!.decode(encodedChunk);
-        lastSampleIndex = chunk.index + 1;
         this.queuedForDecode++;
       }
 
       // Wait for all samples to be decoded.
       await this.decoder!.flush();
 
+      // DJI recordings straight from the goggles have all frames in sequence.
+      // Processed files may need reordering of the frames described in the ctts box.
+      const orderedFrames = this.reorderFrames(lastSampleIndex);
+
       // Modify and enque frames for encoding.
       this.encodedFrames = [];
-      for (const [index, entry] of Object.values(this.decodedFrames).entries()) {
+      for (const [index, entry] of orderedFrames.entries()) {
         if (!entry.image) {
           console.error(`Frame ${entry.index} was never decoded!`);
           this.framesDecodedMissing++;
@@ -300,11 +303,45 @@ export class Processor {
       for (const frame of this.encodedFrames) {
         this.outMp4!.writeSample(frame.data, frame.sync);
       }
+
+      lastSampleIndex += sampleChunks.length
     }
 
     await this.outMp4!.close();
     this.sendProgressUpdate();
     this.processResolve!();
+  }
+
+  private reorderFrames(lastSampleIndex: number) {
+    const orderedFrames = []
+    const ctts = this.inMp4!.moov!.trak[0].mdia.minf.stbl.ctts;
+
+    if (!ctts) {
+      // No ctts box found: no reordering needed
+      for (let i = 0; i < Object.keys(this.decodedFrames).length; i++) {
+        orderedFrames.push(this.decodedFrames[lastSampleIndex + i])
+      }
+    } else {
+      // Reorder frames according to ctts table
+      const sampleDelta = this.inMp4!.moov!.trak[0].mdia.minf.stbl.stts.entries[0].sampleDelta;
+      const initialOffset = ctts.sampleOffsets[0] / sampleDelta
+
+      for (let i = 0; i < Object.keys(this.decodedFrames).length; i++) {
+        const frameNumber = lastSampleIndex + i
+
+        let j = 0;
+        let frame = 0;
+        while (frameNumber >= frame) {
+          j++
+          frame = ctts.sampleCounts.slice(0, j).reduce((acc, e) => acc + e, 0)
+        }
+
+        const newPosition = i + ctts.sampleOffsets[j - 1] / sampleDelta - initialOffset;
+        orderedFrames[newPosition] = Object.assign({}, this.decodedFrames[lastSampleIndex + i], {index: lastSampleIndex + newPosition})
+      }
+    }
+
+    return orderedFrames;
   }
 
   private async handleDecodedFrame(frame: VideoFrame) {
