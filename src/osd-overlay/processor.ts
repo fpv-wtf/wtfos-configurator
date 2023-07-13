@@ -313,31 +313,31 @@ export class Processor {
   }
 
   private reorderFrames(lastSampleIndex: number) {
-    const orderedFrames = []
+    const orderedFrames = [];
     const ctts = this.inMp4!.moov!.trak[0].mdia.minf.stbl.ctts;
 
     if (!ctts) {
       // No ctts box found: no reordering needed
       for (let i = 0; i < Object.keys(this.decodedFrames).length; i++) {
-        orderedFrames.push(this.decodedFrames[lastSampleIndex + i])
+        orderedFrames.push(this.decodedFrames[lastSampleIndex + i]);
       }
     } else {
       // Reorder frames according to ctts table
       const sampleDelta = this.inMp4!.moov!.trak[0].mdia.minf.stbl.stts.entries[0].sampleDelta;
-      const initialOffset = ctts.sampleOffsets[0] / sampleDelta
+      const initialOffset = ctts.sampleOffsets[0] / sampleDelta;
 
       for (let i = 0; i < Object.keys(this.decodedFrames).length; i++) {
-        const frameNumber = lastSampleIndex + i
+        const frameNumber = lastSampleIndex + i;
 
         let j = 0;
         let frame = 0;
         while (frameNumber >= frame) {
-          j++
-          frame = ctts.sampleCounts.slice(0, j).reduce((acc, e) => acc + e, 0)
+          j++;
+          frame = ctts.sampleCounts.slice(0, j).reduce((acc, e) => acc + e, 0);
         }
 
         const newPosition = i + ctts.sampleOffsets[j - 1] / sampleDelta - initialOffset;
-        orderedFrames[newPosition] = Object.assign({}, this.decodedFrames[lastSampleIndex + i], {index: lastSampleIndex + newPosition})
+        orderedFrames[newPosition] = Object.assign({}, this.decodedFrames[lastSampleIndex + i], {index: lastSampleIndex + newPosition});
       }
     }
 
