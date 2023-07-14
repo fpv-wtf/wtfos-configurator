@@ -22,7 +22,7 @@
   "fileDropVideo": "Video",
   "noteConfigLink": "Configurala nel gestore dei pacchetti.",
   "noteHeader": "La registrazione dell'OSD è una funzione da aggiungere sugli occhiali.",
-  "noteWarning": "Tutti i file video utilizzati devono provenire direttamente dagli occhiali, senza alcuna modifica.",
+  "noteWarning": "The video file must either come directly from the goggles, or have only modifications that don't change the length of the video. Altering the aspect ratio, stabilization, etc are supported.",
   "processing": "Elaborazione...",
   "start": "Avvia"
 }
