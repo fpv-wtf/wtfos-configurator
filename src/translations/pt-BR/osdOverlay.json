@@ -22,7 +22,7 @@
   "fileDropVideo": "Vídeo",
   "noteConfigLink": "Configure isto no Gerenciador de Pacotes.",
   "noteHeader": "A gravação do OSD é um recurso opcional que deve ser ativado nos óculos.",
-  "noteWarning": "Qualquer arquivo de vídeo usado deve vir diretamente dos óculos, sem modificações.",
+  "noteWarning": "The video file must either come directly from the goggles, or have only modifications that don't change the length of the video. Altering the aspect ratio, stabilization, etc are supported.",
   "processing": "Processando...",
   "start": "Iniciar"
 }
