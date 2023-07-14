@@ -22,7 +22,7 @@
   "fileDropVideo": "Video",
   "noteConfigLink": "Configurar esto en el gestor de paquetes.",
   "noteHeader": "La grabación OSD es una característica opt-in en el lado de las gafas.",
-  "noteWarning": "Cualquier archivo de vídeo utilizado debe venir directamente de las gafas, sin modificaciones.",
+  "noteWarning": "The video file must either come directly from the goggles, or have only modifications that don't change the length of the video. Altering the aspect ratio, stabilization, etc are supported.",
   "processing": "Procesando...",
   "start": "Iniciar"
 }
