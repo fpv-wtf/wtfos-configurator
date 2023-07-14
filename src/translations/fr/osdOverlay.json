@@ -22,7 +22,7 @@
   "fileDropVideo": "Vidéo",
   "noteConfigLink": "Configurer ceci dans le gestionnaire de paquets.",
   "noteHeader": "L'enregistrement de l'OSD est une fonction facultative du côté des lunettes.",
-  "noteWarning": "Tous les fichiers vidéo utilisés doivent provenir directement des lunettes, sans aucune modification.",
+  "noteWarning": "The video file must either come directly from the goggles, or have only modifications that don't change the length of the video. Altering the aspect ratio, stabilization, etc are supported.",
   "processing": "Traitement en cours...",
   "start": "Démarrer"
 }
