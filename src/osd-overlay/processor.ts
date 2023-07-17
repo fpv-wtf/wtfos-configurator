@@ -268,7 +268,7 @@ export class Processor {
       // Processed files may need reordering of the frames described in the ctts box.
       const orderedFrames = this.reorderFrames(lastSampleIndex);
 
-      // Modify and enque frames for encoding.
+      // Modify and enqueue frames for encoding.
       this.encodedFrames = [];
       for (const [index, entry] of orderedFrames.entries()) {
         if (!entry.image) {

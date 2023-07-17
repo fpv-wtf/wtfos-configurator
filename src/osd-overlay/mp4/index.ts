@@ -254,7 +254,7 @@ export class MP4Writer {
       },
       alternateGroup: 0,
       creationTime: nowMp4Time,
-      duration: this.sampleCount * 60,
+      duration: Math.floor((this.sampleCount * 1000) / this.frameRate),
       width: this.displaySize!.width,
       height: this.displaySize!.height,
       layer: 0,
