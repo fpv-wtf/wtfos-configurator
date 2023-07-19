@@ -22,7 +22,7 @@
   "fileDropVideo": "Wideo",
   "noteConfigLink": "Konfiguruj to w Menedżerze pakietów.",
   "noteHeader": "Nagrywanie OSD jest funkcją włączaną po stronie gogli.",
-  "noteWarning": "The video file must either come directly from the goggles, or have only modifications that don't change the length of the video. Altering the aspect ratio, stabilization, etc are supported.",
+  "noteWarning": "Plik wideo musi pochodzić bezpośrednio z gogli lub mieć tylko modyfikacje, które nie zmieniają długości filmu. Obsługiwana jest zmiana proporcji, stabilizacja itp.",
   "processing": "Przetwarzanie...",
   "start": "Rozpocznij"
 }
