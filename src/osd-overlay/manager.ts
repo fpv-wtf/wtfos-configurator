@@ -83,6 +83,7 @@ export default class VideoWorkerManager {
     chromaKeyColor: string
     fontFiles: FontPackFiles,
     osdFile: File,
+    srtFile: File,
     outHandle: FileSystemFileHandle
     videoFile: File,
   }) {

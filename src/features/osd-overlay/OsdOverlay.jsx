@@ -28,6 +28,7 @@ export default function OsdOverlay() {
   const [files, setFiles] = useFileDropState();
   const videoFile = files.videoFile;
   const osdFile = files.osdFile;
+  const srtFile = files.srtFile;
   const fontFiles = React.useMemo(() => ({
     sd1: files.fontFileSd1,
     sd2: files.fontFileSd2,
@@ -169,6 +170,7 @@ export default function OsdOverlay() {
       chromaKeyColor: config.chromaKeyColor,
       fontFiles: fontFiles,
       osdFile: osdFile,
+      srtFile: srtFile,
       outHandle: handle,
       videoFile: videoFile,
     });
@@ -176,6 +178,7 @@ export default function OsdOverlay() {
     config,
     fontFiles,
     osdFile,
+    srtFile,
     setInProgress,
     setStartedOnce,
     videoFile,
