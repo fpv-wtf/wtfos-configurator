@@ -19,6 +19,7 @@
   "fileDropFontSd2": "Шрифт 2 (SD)",
   "fileDropHelp": "Можно перенести сюда любой из ваших файлов или нажать на кнопку и выбрать их индивидуально.",
   "fileDropOsd": "OSD",
+  "fileDropSrt": "SRT (optional)",
   "fileDropVideo": "Видео",
   "noteConfigLink": "Настроить это в Менеджере Пакетов.",
   "noteHeader": "Запись OSD это отдельная опция в настройках очков.",
