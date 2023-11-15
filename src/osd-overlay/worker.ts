@@ -9,6 +9,7 @@ import {
   TILES_PER_PAGE,
 } from "./fonts";
 import { OsdReader } from "./osd";
+import { SrtReader } from "./srt";
 
 const MAX_DISPLAY_X = 60;
 const MAX_DISPLAY_Y = 22;
@@ -21,6 +22,7 @@ export class VideoWorker {
 
   fontPack?: FontPack;
   osdReader?: OsdReader;
+  srtReader?: SrtReader;
 
   lastOsdIndex: number = 0;
 
@@ -50,6 +52,7 @@ export class VideoWorker {
 
     fontFiles: FontPackFiles,
     osdFile: File,
+    srtFile: File,
     outHandle: FileSystemFileHandle,
     videoFile: File,
   }) {
@@ -57,6 +60,11 @@ export class VideoWorker {
     this.chromaKeyColor = options.chromaKeyColor;
 
     this.osdReader = await OsdReader.fromFile(options.osdFile);
+
+    if (options.srtFile) {
+      this.srtReader = await SrtReader.fromFile(options.srtFile);
+    }
+
     this.fontPack = await Font.fromFiles(options.fontFiles);
 
     const { width, height } = await this.processor.open(options.videoFile, options.outHandle);
@@ -139,6 +147,39 @@ export class VideoWorker {
 
       if (frameIndex >= nextOsdFrame.frameNumber) {
         this.lastOsdIndex = nextOsdIndex;
+      }
+    }
+
+    if (this.srtReader) {
+      // If a srt file is supplied, render the DJI goggle osd elements
+      const drawText = (osdCtx: OffscreenCanvasRenderingContext2D, text: string, x: number, y: number, bigFont= false) => {
+        osdCtx.font = `${bigFont ? '30px' : '26px'} calibri`;
+        osdCtx.strokeStyle = '#333333';
+        osdCtx.lineWidth = 4;
+        osdCtx.strokeText(text, x, y);
+        osdCtx.fillStyle = 'white';
+        osdCtx.fillText(text, x, y);
+      }
+
+      const currentFrameInMilliseconds = frameIndex * 1000 / 60;
+      let srtFrame = this.srtReader.frames.find(it => it.start <= currentFrameInMilliseconds && it.end > currentFrameInMilliseconds);
+
+      if (currentFrameInMilliseconds < this.srtReader.frames[0].start) {
+        // DJI subtitles don't start at 0 milliseconds
+        // Take the first one as a filler at the start
+        srtFrame = this.srtReader.frames[0];
+      } else if (currentFrameInMilliseconds > this.srtReader.frames[this.srtReader.frames.length - 1].end) {
+        // Show the last subtitle in case there is more video than subtitles
+        srtFrame = this.srtReader.frames[this.srtReader.frames.length - 1];
+      }
+
+      if (srtFrame) {
+        drawText(osdCtx, srtFrame.ch, 120, 785, true);
+        drawText(osdCtx, srtFrame.delay, 1190, 710);
+        drawText(osdCtx, srtFrame.bitrate, 1320, 710);
+        drawText(osdCtx, srtFrame.uavBat, 1060, 785, true);
+        drawText(osdCtx, srtFrame.flightTime, 1200, 785, true);
+        drawText(osdCtx, srtFrame.glsBat, 1350, 785, true);
       }
     }
 
@@ -228,6 +269,7 @@ export class VideoWorker {
           chromaKeyColor: message.chromaKeyColor,
           fontFiles: message.fontFiles,
           osdFile: message.osdFile,
+          srtFile: message.srtFile,
           outHandle: message.outHandle,
           videoFile: message.videoFile,
         });

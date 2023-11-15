@@ -21,6 +21,7 @@ export function useFileDropState() {
     fontFileSd1: null,
     fontFileSd2: null,
     osdFile: null,
+    srtFile: null,
     videoFile: null,
   });
 
@@ -53,6 +54,10 @@ export default function FileDrop(props) {
 
         case "osd":
           changedFiles.osdFile = file;
+          break;
+
+        case "srt":
+          changedFiles.srtFile = file;
           break;
 
         case "bin":
@@ -144,6 +149,12 @@ export default function FileDrop(props) {
           file={files.osdFile}
           icon={OsdIcon}
           label={t("fileDropOsd")}
+        />
+
+        <FileDropEntry
+          file={files.srtFile}
+          icon={OsdIcon}
+          label={t("fileDropSrt")}
         />
 
         <FileDropEntry
