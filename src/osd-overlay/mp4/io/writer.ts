@@ -69,7 +69,7 @@ export class FileStreamWriter {
 
   async writeNextBytes(bytes: BufferSource | Blob): Promise<void> {
     const stream = await this.getStream();
-    await stream.write(bytes)
+    await stream.write(bytes);
 
     const byteLength = bytes instanceof Blob ? bytes.size : bytes.byteLength;
     this._offset += byteLength;

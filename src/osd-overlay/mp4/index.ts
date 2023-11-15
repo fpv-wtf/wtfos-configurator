@@ -28,7 +28,10 @@ import {
 } from "./types";
 import { getMp4Time } from "./utils";
 import { parseBox } from "./parsers";
-import { writeBox, MdatBoxStreamWriter } from "./writers";
+import {
+  writeBox,
+  MdatBoxStreamWriter,
+} from "./writers";
 
 export class MP4Parser {
   private readonly stream: FileStreamReader;

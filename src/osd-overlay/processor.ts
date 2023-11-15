@@ -2,8 +2,14 @@
 import { StreamDataView } from "stream-data-view";
 
 import VideoWorkerShared from "./shared";
-import { MP4Parser, MP4Writer } from "./mp4";
-import { Avc1Box, AvcCBox } from "./mp4/types";
+import {
+  MP4Parser,
+  MP4Writer,
+} from "./mp4";
+import {
+  Avc1Box,
+  AvcCBox,
+} from "./mp4/types";
 
 const PROGRESS_UPDATE_INTERVAL = 100;
 
@@ -176,9 +182,7 @@ export class Processor {
       this.expectedFrames = this.inMp4!.moov!.trak[0].mdia.minf.stbl.stsz.sampleCount;
       this.decodedFrames = {};
 
-      this.progressInit({
-        expectedFrames: this.expectedFrames,
-      });
+      this.progressInit({ expectedFrames: this.expectedFrames });
 
       this.progressUpdateIntervalHandle = self.setInterval(this.sendProgressUpdate, PROGRESS_UPDATE_INTERVAL);
 
@@ -245,7 +249,7 @@ export class Processor {
           index: chunk.index,
           image: undefined,
           sync: chunk.sync,
-        }
+        };
       }
 
       // Enqueue samples for decoding.
@@ -286,9 +290,7 @@ export class Processor {
         // Send first frame as preview. This needs to happen after constructing the frame otherwise
         // it complains that "the image source is detached" which is completely ungooglable.
         if (index === 0) {
-          this.progressUpdate({
-            preview: modifiedFrame
-          })
+          this.progressUpdate({ preview: modifiedFrame });
         }
 
         this.encoder!.encode(frame, { keyFrame: entry.sync });
@@ -304,7 +306,7 @@ export class Processor {
         this.outMp4!.writeSample(frame.data, frame.sync);
       }
 
-      lastSampleIndex += sampleChunks.length
+      lastSampleIndex += sampleChunks.length;
     }
 
     await this.outMp4!.close();
@@ -337,7 +339,7 @@ export class Processor {
         }
 
         const newPosition = i + ctts.sampleOffsets[j - 1] / sampleDelta - initialOffset;
-        orderedFrames[newPosition] = Object.assign({}, this.decodedFrames[lastSampleIndex + i], {index: lastSampleIndex + newPosition});
+        orderedFrames[newPosition] = Object.assign({}, this.decodedFrames[lastSampleIndex + i], { index: lastSampleIndex + newPosition });
       }
     }
 
