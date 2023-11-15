@@ -19,6 +19,7 @@
   "fileDropFontSd2": "Police 2 (SD)",
   "fileDropHelp": "Vous pouvez déposer l'un de vos fichiers ici, ou cliquer pour les sélectionner individuellement.",
   "fileDropOsd": "OSD",
+  "fileDropSrt": "SRT (optional)",
   "fileDropVideo": "Vidéo",
   "noteConfigLink": "Configurer ceci dans le gestionnaire de paquets.",
   "noteHeader": "L'enregistrement de l'OSD est une fonction facultative du côté des lunettes.",
