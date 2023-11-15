@@ -19,6 +19,7 @@
   "fileDropFontSd2": "Font 2 (SD)",
   "fileDropHelp": "您可以在这里拖入任何文件，或者单击以单独选择这些文件。",
   "fileDropOsd": "OSD",
+  "fileDropSrt": "SRT (optional)",
   "fileDropVideo": "视频",
   "noteConfigLink": "在软件包管理器中配置它。",
   "noteHeader": "OSD 录制是一种可选的功能，可在眼镜侧使用。",
