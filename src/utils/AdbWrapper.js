@@ -37,7 +37,7 @@ export default class AdbWrapper {
       opkgLists: "/opt/var/opkg-lists",
       entwareInstallerUrl: "http://repo.fpv.wtf/entware-armv7sf-k3.2/installer/alternative.sh",
       opkgConfigUrl: "http://repo.fpv.wtf/pigeon/wtfos-opkg-config_armv7-3.2.ipk",
-      healthchecksUrl: "https://github.com/fpv-wtf/wtfos-healthchecks/releases/latest/download/healthchecks.tar.gz",
+      healthchecksUrl: "https://repo.fpv.wtf/healthchecks/healthchecks.tar.gz",
       healthchesksPath: "/tmp/healthchecks",
       packageConfigPath: "/opt/etc/package-config",
       packageConfigFile: "config.json",
