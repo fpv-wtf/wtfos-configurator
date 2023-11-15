@@ -459,7 +459,7 @@ class StblBoxParser extends SimpleBoxParser<StblBox> {
       stss: childBoxes.stss![0] as StssBox,
       stsz: childBoxes.stsz![0] as StszBox,
       stts: childBoxes.stts![0] as SttsBox,
-      ctts: childBoxes.ctts ? childBoxes.ctts![0] as CttsBox : undefined
+      ctts: childBoxes.ctts ? childBoxes.ctts![0] as CttsBox : undefined,
     };
   }
 }

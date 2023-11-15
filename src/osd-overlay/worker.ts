@@ -67,7 +67,10 @@ export class VideoWorker {
 
     this.fontPack = await Font.fromFiles(options.fontFiles);
 
-    const { width, height } = await this.processor.open(options.videoFile, options.outHandle);
+    const {
+      width,
+      height,
+    } = await this.processor.open(options.videoFile, options.outHandle);
 
     if (width === 1280 && height === 720) {
       this.wide = true;
@@ -109,9 +112,7 @@ export class VideoWorker {
         height: outHeight,
       });
 
-      this.postMessage({
-        type: VideoWorkerShared.MessageType.COMPLETE,
-      });
+      this.postMessage({ type: VideoWorkerShared.MessageType.COMPLETE });
     } catch (e: any) {
       this.postMessage({
         type: VideoWorkerShared.MessageType.ERROR,
@@ -127,7 +128,7 @@ export class VideoWorker {
     const osdCanvas = this.osdCanvas!;
     const osdCtx = this.osdCtx!;
 
-    frameCtx.fillStyle = this.chromaKey ? this.chromaKeyColor : 'black';
+    frameCtx.fillStyle = this.chromaKey ? this.chromaKeyColor : "black";
     frameCtx.fillRect(0, 0, frameCanvas.width, frameCanvas.height);
     osdCtx.clearRect(0, 0, osdCanvas.width, osdCanvas.height);
 
@@ -152,17 +153,17 @@ export class VideoWorker {
 
     if (this.srtReader) {
       // If a srt file is supplied, render the DJI goggle osd elements
-      const drawText = (osdCtx: OffscreenCanvasRenderingContext2D, text: string, x: number, y: number, bigFont= false) => {
-        osdCtx.font = `${bigFont ? '30px' : '26px'} calibri`;
-        osdCtx.strokeStyle = '#333333';
+      const drawText = (osdCtx: OffscreenCanvasRenderingContext2D, text: string, x: number, y: number, bigFont = false) => {
+        osdCtx.font = `${bigFont ? "30px" : "26px"} calibri`;
+        osdCtx.strokeStyle = "#333333";
         osdCtx.lineWidth = 4;
         osdCtx.strokeText(text, x, y);
-        osdCtx.fillStyle = 'white';
+        osdCtx.fillStyle = "white";
         osdCtx.fillText(text, x, y);
-      }
+      };
 
       const currentFrameInMilliseconds = frameIndex * 1000 / 60;
-      let srtFrame = this.srtReader.frames.find(it => it.start <= currentFrameInMilliseconds && it.end > currentFrameInMilliseconds);
+      let srtFrame = this.srtReader.frames.find((it) => it.start <= currentFrameInMilliseconds && it.end > currentFrameInMilliseconds);
 
       if (currentFrameInMilliseconds < this.srtReader.frames[0].start) {
         // DJI subtitles don't start at 0 milliseconds

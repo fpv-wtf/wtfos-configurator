@@ -52,9 +52,7 @@ export default class VideoWorkerManager {
       }
 
       case VideoWorkerShared.MessageType.PROGRESS_INIT: {
-        this.callbacks?.onProgressInit({
-          expectedFrames: message.expectedFrames,
-        });
+        this.callbacks?.onProgressInit({ expectedFrames: message.expectedFrames });
         break;
       }
 
