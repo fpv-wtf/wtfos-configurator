@@ -33,6 +33,7 @@ export type BoxType =
   | "url "
   | "urn "
   | "vmhd"
+  | "ctts"
   | UnknownBoxType;
 
 export type ContainerBox =
@@ -68,6 +69,7 @@ export type Box =
   | UrlBox
   | UrnBox
   | VmhdBox
+  | CttsBox
   | UnknownBox;
 
 export interface BoxHeader {
@@ -124,6 +126,7 @@ export interface StblBox extends BaseBox<"stbl"> {
   stss: StssBox;
   stsz: StszBox;
   stts: SttsBox;
+  ctts?: CttsBox;
 }
 
 export interface UdtaBox extends BaseBox<"udta"> {}
@@ -261,6 +264,11 @@ export interface HdlrBox extends BaseFullBox<"hdlr"> {
 export interface VmhdBox extends BaseFullBox<"vmhd"> {
   graphicsMode: number;
   opColor: number[];
+}
+
+export interface CttsBox extends BaseFullBox<"ctts"> {
+  sampleCounts: number[];
+  sampleOffsets: number[];
 }
 
 export interface UrlBox extends BaseFullBox<"url "> {

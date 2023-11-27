@@ -19,10 +19,11 @@
   "fileDropFontSd2": "Font 2 (HD)",
   "fileDropHelp": "Możesz upuścić tutaj dowolny plik lub kliknij, aby wybrać je indywidualnie.",
   "fileDropOsd": "OSD",
+  "fileDropSrt": "SRT (opcjonalnie)",
   "fileDropVideo": "Wideo",
   "noteConfigLink": "Konfiguruj to w Menedżerze pakietów.",
   "noteHeader": "Nagrywanie OSD jest funkcją włączaną po stronie gogli.",
-  "noteWarning": "Wszystkie używane pliki wideo muszą pochodzić bezpośrednio z gogli, bez żadnych modyfikacji.",
+  "noteWarning": "Plik wideo musi pochodzić bezpośrednio z gogli lub mieć tylko modyfikacje, które nie zmieniają długości filmu. Obsługiwana jest zmiana proporcji, stabilizacja itp.",
   "processing": "Przetwarzanie...",
   "start": "Rozpocznij"
 }

@@ -45,6 +45,7 @@ namespace VideoWorkerShared {
 
     fontFiles: FontPackFiles,
     osdFile: File;
+    srtFile: File;
     outHandle: FileSystemFileHandle;
     videoFile: File;
   }
@@ -55,8 +56,6 @@ namespace VideoWorkerShared {
     | ProgressInitMessage
     | ProgressUpdateMessage
     | StartMessage;
-
-
 
   export class DecoderError extends Error {
     constructor(message: string) {

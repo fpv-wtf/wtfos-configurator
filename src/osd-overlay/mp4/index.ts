@@ -28,7 +28,10 @@ import {
 } from "./types";
 import { getMp4Time } from "./utils";
 import { parseBox } from "./parsers";
-import { writeBox, MdatBoxStreamWriter } from "./writers";
+import {
+  writeBox,
+  MdatBoxStreamWriter,
+} from "./writers";
 
 export class MP4Parser {
   private readonly stream: FileStreamReader;
@@ -254,7 +257,7 @@ export class MP4Writer {
       },
       alternateGroup: 0,
       creationTime: nowMp4Time,
-      duration: this.sampleCount * 60,
+      duration: Math.floor((this.sampleCount * 1000) / this.frameRate),
       width: this.displaySize!.width,
       height: this.displaySize!.height,
       layer: 0,

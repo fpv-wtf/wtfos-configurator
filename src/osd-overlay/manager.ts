@@ -52,9 +52,7 @@ export default class VideoWorkerManager {
       }
 
       case VideoWorkerShared.MessageType.PROGRESS_INIT: {
-        this.callbacks?.onProgressInit({
-          expectedFrames: message.expectedFrames,
-        });
+        this.callbacks?.onProgressInit({ expectedFrames: message.expectedFrames });
         break;
       }
 
@@ -83,6 +81,7 @@ export default class VideoWorkerManager {
     chromaKeyColor: string
     fontFiles: FontPackFiles,
     osdFile: File,
+    srtFile: File,
     outHandle: FileSystemFileHandle
     videoFile: File,
   }) {

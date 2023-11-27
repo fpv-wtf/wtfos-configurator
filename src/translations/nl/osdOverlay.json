@@ -19,10 +19,11 @@
   "fileDropFontSd2": "Font 2 (SD)",
   "fileDropHelp": "You can drop any of your files here, or click to select them individually.",
   "fileDropOsd": "OSD",
+  "fileDropSrt": "SRT (optional)",
   "fileDropVideo": "Video",
   "noteConfigLink": "Configure this in the Package Manager.",
   "noteHeader": "OSD recording is an opt-in feature on the goggle side.",
-  "noteWarning": "Any video files used must come directly from the goggles, with no modifications.",
+  "noteWarning": "The video file must either come directly from the goggles, or have only modifications that don't change the length of the video. Altering the aspect ratio, stabilization, etc are supported.",
   "processing": "Processing...",
   "start": "Start"
 }
