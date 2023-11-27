@@ -19,10 +19,11 @@
   "fileDropFontSd2": "Font 2 (SD)",
   "fileDropHelp": "您可以在这里拖入任何文件，或者单击以单独选择这些文件。",
   "fileDropOsd": "OSD",
+  "fileDropSrt": "SRT (optional)",
   "fileDropVideo": "视频",
   "noteConfigLink": "在软件包管理器中配置它。",
   "noteHeader": "OSD 录制是一种可选的功能，可在眼镜侧使用。",
-  "noteWarning": "所使用的视频文件必须为眼镜直接生成的文件，且不做任何修改。",
+  "noteWarning": "The video file must either come directly from the goggles, or have only modifications that don't change the length of the video. Altering the aspect ratio, stabilization, etc are supported.",
   "processing": "处理中...",
   "start": "开始"
 }

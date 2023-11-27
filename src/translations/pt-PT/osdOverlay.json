@@ -19,10 +19,11 @@
   "fileDropFontSd2": "Fonte 2 (SD)",
   "fileDropHelp": "Pode colocar aqui qualquer um dos seus ficheiros, ou clicar para selecioná-los individualmente.",
   "fileDropOsd": "OSD",
+  "fileDropSrt": "SRT (optional)",
   "fileDropVideo": "Vídeo",
   "noteConfigLink": "Configure isto no Gerenciador de Pacotes.",
   "noteHeader": "A gravação OSD é uma funcionalidade opt-in no lado dos óculos.",
-  "noteWarning": "Quaisquer ficheiros de vídeo devem vir diretamente dos óculos, sem modificações.",
+  "noteWarning": "O arquivo de vídeo deve vir diretamente dos óculos, ou ter apenas modificações que não mudam a duração do vídeo. Alterar o rácio de aspeto, estabilização, etc é suportado.",
   "processing": "A processar...",
   "start": "Iniciar"
 }

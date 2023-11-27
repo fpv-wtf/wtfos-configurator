@@ -20,7 +20,7 @@
   "deviceBack": "O dispositivo voltou...",
   "cooling": "Se está a fazer root a uma Air Unit - especialmente a uma Air Unit Lite (Caddx Vista) - certifique-se de que está a arrefecê-la ativamente com uma ventoinha.",
   "disclaimerTitle": "Aviso Legal:",
-  "disclaimerLine0": "Please close UltiMaker Cura, PrusaSlicer and DJI Assistant if they are running before rooting. They are known to cause issues with the process.",
+  "disclaimerLine0": "Por favor feche o UltiMaker Cura, PrusaSlicer e DJI Assistant antes de iniciar se estiverem abertos. São conhecidos por causarem problemas ao processo.",
   "disclaimerLine1": "Certifique-se de que o dispositivo a ser rooteado é alimentado por uma fonte de energia confiável",
   "disclaimerLine2": "Só tenha um dispositivo conectado/emparelhado",
   "disclaimerLine3": "Não desligue durante o processo de root",

@@ -19,10 +19,11 @@
   "fileDropFontSd2": "Шрифт 2 (SD)",
   "fileDropHelp": "Можно перенести сюда любой из ваших файлов или нажать на кнопку и выбрать их индивидуально.",
   "fileDropOsd": "OSD",
+  "fileDropSrt": "SRT (optional)",
   "fileDropVideo": "Видео",
   "noteConfigLink": "Настроить это в Менеджере Пакетов.",
   "noteHeader": "Запись OSD это отдельная опция в настройках очков.",
-  "noteWarning": "Любые используемые видеофайлы должны быть взяты напрямую из очков, без изменений.",
+  "noteWarning": "The video file must either come directly from the goggles, or have only modifications that don't change the length of the video. Altering the aspect ratio, stabilization, etc are supported.",
   "processing": "Обработка...",
   "start": "Запуск"
 }

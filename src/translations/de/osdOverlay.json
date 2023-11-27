@@ -19,10 +19,11 @@
   "fileDropFontSd2": "Schriftart 2 (SD)",
   "fileDropHelp": "Du kannst deine Dateien hier her ziehen oder diese einzeln auswählen.",
   "fileDropOsd": "OSD",
+  "fileDropSrt": "SRT (optional)",
   "fileDropVideo": "Video",
   "noteConfigLink": "Konfiguriere dies im Paketmanager.",
   "noteHeader": "OSD-Aufnahme ist eine für die Brille wählbare Option.",
-  "noteWarning": "Die verwendeten Videodateien müssen direkt, also ohne Modifikationen, von der Brille kommen.",
+  "noteWarning": "The video file must either come directly from the goggles, or have only modifications that don't change the length of the video. Altering the aspect ratio, stabilization, etc are supported.",
   "processing": "Verarbeite...",
   "start": "Starten"
 }
