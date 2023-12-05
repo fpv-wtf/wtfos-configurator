@@ -211,6 +211,10 @@ export default class AdbWrapper {
     return upgradable;
   }
 
+  async reboot() {
+    await this.executeCommand("reboot");
+  }
+
   async upgradePackages(callback) {
     const output = await this.opkgQueue.add([
       "upgrade",

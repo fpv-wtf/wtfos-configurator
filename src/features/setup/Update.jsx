@@ -81,7 +81,7 @@ export default function Update({ adb }) {
     <Stack spacing={2}>
       <PackageManagementError />
 
-      {update.ran && update.success &&
+      {update.ran && update.success && update.postUpdateRebootDone &&
         <Alert severity="success">
           {t("updateSuccess")}
         </Alert>}
