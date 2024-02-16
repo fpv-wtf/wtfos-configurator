@@ -19,7 +19,7 @@
   "fileDropFontSd2": "Fonte 2 (SD)",
   "fileDropHelp": "Pode colocar aqui qualquer um dos seus ficheiros, ou clicar para selecioná-los individualmente.",
   "fileDropOsd": "OSD",
-  "fileDropSrt": "SRT (optional)",
+  "fileDropSrt": "SRT (opcional)",
   "fileDropVideo": "Vídeo",
   "noteConfigLink": "Configure isto no Gerenciador de Pacotes.",
   "noteHeader": "A gravação OSD é uma funcionalidade opt-in no lado dos óculos.",
