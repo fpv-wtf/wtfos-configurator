@@ -8,10 +8,10 @@
   "install": "Instalar",
   "installing": "Instalando paquete",
   "removing": "Eliminando paquete...",
-  "fetchPackageFailed": "Failed fetching package details!",
+  "fetchPackageFailed": "¡Error al obtener los detalles del paquete!",
   "removePackageFailed": "Fallo al eliminar el paquete:",
   "installPackageFailed": "Fallo instalando el paquete:",
-  "fetchPackagesFailed": "Failed fetching package list:",
+  "fetchPackagesFailed": "Fallo al obtener la lista de paquetes:",
   "upgradeFailed": "Fallo al actualizar los paquetes:",
-  "fetchUpgradableFailed": "Failed fetching upgradable packages:"
+  "fetchUpgradableFailed": "Fallo al obtener los paquetes actualizables:"
 }
