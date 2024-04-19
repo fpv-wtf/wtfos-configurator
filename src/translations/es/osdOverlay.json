@@ -19,11 +19,11 @@
   "fileDropFontSd2": "Font 2 (SD)",
   "fileDropHelp": "Usted puede soltar cualquiera de sus archivos aquí, o haga clic para seleccionarlos individualmente.",
   "fileDropOsd": "OSD",
-  "fileDropSrt": "SRT (optional)",
+  "fileDropSrt": "SRT (opcional)",
   "fileDropVideo": "Video",
   "noteConfigLink": "Configurar esto en el gestor de paquetes.",
   "noteHeader": "La grabación OSD es una característica opt-in en el lado de las gafas.",
-  "noteWarning": "The video file must either come directly from the goggles, or have only modifications that don't change the length of the video. Altering the aspect ratio, stabilization, etc are supported.",
+  "noteWarning": "El archivo de video debe venir directamente de las gafas, o tener únicamente modificaciones que no cambien la longitud del vídeo. Las modificaciones de relación de aspecto, estabilización, etc. están soportadas.",
   "processing": "Procesando...",
   "start": "Iniciar"
 }
