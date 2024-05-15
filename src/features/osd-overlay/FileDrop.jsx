@@ -16,10 +16,8 @@ import FileDropEntry from "./FileDropEntry";
 
 export function useFileDropState() {
   const [files, setFiles] = React.useState({
-    fontFileHd1: null,
-    fontFileHd2: null,
-    fontFileSd1: null,
-    fontFileSd2: null,
+    fontFileHd: null,
+    fontFileSd: null,
     osdFile: null,
     srtFile: null,
     videoFile: null,
@@ -60,19 +58,11 @@ export default function FileDrop(props) {
           changedFiles.srtFile = file;
           break;
 
-        case "bin":
+        case "png":
           if (name.includes("hd")) {
-            if (name.includes("_2")) {
-              changedFiles.fontFileHd2 = file;
-            } else {
-              changedFiles.fontFileHd1 = file;
-            }
+            changedFiles.fontFileHd = file;
           } else {
-            if (name.includes("_2")) {
-              changedFiles.fontFileSd2 = file;
-            } else {
-              changedFiles.fontFileSd1 = file;
-            }
+            changedFiles.fontFileSd = file;
           }
           break;
 
@@ -126,7 +116,7 @@ export default function FileDrop(props) {
       }}
     >
       <input
-        accept=".mp4,.osd,.bin"
+        accept=".mp4,.osd,.png"
         multiple
         onChange={handleFileChange}
         ref={inputRef}
@@ -158,27 +148,15 @@ export default function FileDrop(props) {
         />
 
         <FileDropEntry
-          file={files.fontFileSd1}
+          file={files.fontFileSd}
           icon={FontIcon}
-          label={t("fileDropFontSd1")}
+          label={t("fileDropFontSd")}
         />
 
         <FileDropEntry
-          file={files.fontFileSd2}
+          file={files.fontFileHd}
           icon={FontIcon}
-          label={t("fileDropFontSd2")}
-        />
-
-        <FileDropEntry
-          file={files.fontFileHd1}
-          icon={FontIcon}
-          label={t("fileDropFontHd1")}
-        />
-
-        <FileDropEntry
-          file={files.fontFileHd2}
-          icon={FontIcon}
-          label={t("fileDropFontHd2")}
+          label={t("fileDropFontHd")}
         />
       </Stack>
     </Paper>

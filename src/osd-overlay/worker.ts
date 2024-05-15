@@ -6,7 +6,6 @@ import {
   Font,
   FontPack,
   FontPackFiles,
-  TILES_PER_PAGE,
 } from "./fonts";
 import { OsdReader } from "./osd";
 import { SrtReader } from "./srt";
@@ -65,7 +64,7 @@ export class VideoWorker {
       this.srtReader = await SrtReader.fromFile(options.srtFile);
     }
 
-    this.fontPack = await Font.fromFiles(options.fontFiles);
+    this.fontPack = await Font.fromFiles(options.fontFiles, this.osdReader);
 
     const {
       width,
@@ -192,19 +191,13 @@ export class VideoWorker {
 
         let font: Font;
         if (this.hd) {
-          font =
-            osdFrameChar < TILES_PER_PAGE
-              ? this.fontPack!.hd1
-              : this.fontPack!.hd2;
+          font = this.fontPack!.hd;
         } else {
-          font =
-            osdFrameChar < TILES_PER_PAGE
-              ? this.fontPack!.sd1
-              : this.fontPack!.sd2;
+          font = this.fontPack!.sd;
         }
 
         osdCtx.drawImage(
-          font.getTile(osdFrameChar % TILES_PER_PAGE),
+          font.getTile(osdFrameChar),
           x * this.osdReader!.header.config.fontWidth,
           y * this.osdReader!.header.config.fontHeight
         );
