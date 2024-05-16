@@ -17,6 +17,8 @@
   "fileDropFontHd2": "Font 2 (HD)",
   "fileDropFontSd1": "Font 1 (SD)",
   "fileDropFontSd2": "Font 2 (SD)",
+  "fileDropFontHd": "Custom HD Font (optional)",
+  "fileDropFontSd": "Custom SD Font (optional)",
   "fileDropHelp": "您可以在这里拖入任何文件，或者单击以单独选择这些文件。",
   "fileDropOsd": "OSD",
   "fileDropSrt": "SRT (optional)",
