@@ -30,7 +30,6 @@ interface OsdConfigV1 {
   xOffset: number;
   yOffset: number;
   fontVariant: number;
-
 }
 
 interface OsdFrame {
