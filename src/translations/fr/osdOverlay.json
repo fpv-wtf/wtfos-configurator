@@ -17,6 +17,8 @@
   "fileDropFontHd2": "Police 2 (HD)",
   "fileDropFontSd1": "Police 1 (SD)",
   "fileDropFontSd2": "Police 2 (SD)",
+  "fileDropFontHd": "Custom HD Font (optional)",
+  "fileDropFontSd": "Custom SD Font (optional)",
   "fileDropHelp": "Vous pouvez déposer l'un de vos fichiers ici, ou cliquer pour les sélectionner individuellement.",
   "fileDropOsd": "OSD",
   "fileDropSrt": "SRT (optional)",
