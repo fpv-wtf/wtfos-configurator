@@ -1,6 +1,6 @@
 {
   "name": "wtfos-configurator",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "homepage": "https://fpv.wtf",
   "private": true,
   "dependencies": {

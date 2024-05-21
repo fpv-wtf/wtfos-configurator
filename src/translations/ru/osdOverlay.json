@@ -17,6 +17,8 @@
   "fileDropFontHd2": "Шрифт 2 (HD)",
   "fileDropFontSd1": "Шрифт 1 (SD)",
   "fileDropFontSd2": "Шрифт 2 (SD)",
+  "fileDropFontHd": "Custom HD Font (optional)",
+  "fileDropFontSd": "Custom SD Font (optional)",
   "fileDropHelp": "Можно перенести сюда любой из ваших файлов или нажать на кнопку и выбрать их индивидуально.",
   "fileDropOsd": "OSD",
   "fileDropSrt": "SRT (optional)",

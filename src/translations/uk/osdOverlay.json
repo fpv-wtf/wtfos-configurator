@@ -17,6 +17,8 @@
   "fileDropFontHd2": "Font 2 (HD)",
   "fileDropFontSd1": "Font 1 (SD)",
   "fileDropFontSd2": "Font 2 (SD)",
+  "fileDropFontHd": "Custom HD Font (optional)",
+  "fileDropFontSd": "Custom SD Font (optional)",
   "fileDropHelp": "You can drop any of your files here, or click to select them individually.",
   "fileDropOsd": "OSD",
   "fileDropSrt": "SRT (optional)",
