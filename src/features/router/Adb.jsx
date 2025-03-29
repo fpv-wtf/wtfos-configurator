@@ -46,6 +46,11 @@ import {
 } from "../device/deviceSlice";
 
 import {
+  selectUpdate,
+  setPostUpdateRebootDone,
+} from "../packages/packagesSlice";
+
+import {
   selectChecked as selectCheckedMaster,
   selectIsMaster,
 } from "../tabGovernor/tabGovernorSlice";
@@ -60,6 +65,7 @@ export default function AdbRouter() {
   const isMaster = useSelector(selectIsMaster);
   const checkedMasterState = useSelector(selectCheckedMaster);
   const adbDetectionFailed = useSelector(selectAdbDetectionFailed);
+  const update = useSelector(selectUpdate);
 
   const [startupCheck, setStartupCheck] = useState(false);
   const [adb, setAdb] = useState(null);
@@ -162,6 +168,10 @@ export default function AdbRouter() {
         setAdbDetection(false);
         dispatch(setAdbDetectionFailed(false));
 
+        if(update.waitingOnPostUpdateReboot) {
+          dispatch(setPostUpdateRebootDone());
+        }
+
         return;
       }
 
@@ -179,7 +189,7 @@ export default function AdbRouter() {
     setAdbDetection(false);
     dispatch(setAdbDetectionFailed(true));
     navigate("/root");
-  }, [adbDetection, adbDetectionFailed, connectToDevice, dispatch, navigate, setAdbDetection]);
+  }, [adbDetection, adbDetectionFailed, connectToDevice, dispatch, navigate, setAdbDetection, update.waitingOnPostUpdateReboot]);
 
   /**
    * Auto connect to ADB device if all criteria are matched.
