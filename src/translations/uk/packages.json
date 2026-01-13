@@ -20,6 +20,6 @@
   "labelCategory": "Категорія",
   "labelCategoryAllExceptSystem": "Всі (окрім системних)",
   "labelCategoryAll": "Усі",
-  "installing": "Installing package...",
-  "removing": "Removing package..."
+  "installing": "Встановлення пакету...",
+  "removing": "Видалення пакета..."
 }

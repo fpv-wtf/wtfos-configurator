@@ -19,7 +19,7 @@
   "name": "Назва пакету",
   "current": "Встановлена версія",
   "latest": "Остання версія",
-  "updateSuccess": "Updates installed successfully!",
-  "updateFailed": "Failed installing updates!",
-  "fetchUpgradableFailed": "Failed fetching upgradable packages!"
+  "updateSuccess": "Оновлення успішно встановлено!",
+  "updateFailed": "Помилка встановлення оновлень!",
+  "fetchUpgradableFailed": "Помилка отримання оновлених пакетів!"
 }

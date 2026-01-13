@@ -11,7 +11,7 @@
   "fetchPackageFailed": "¡Error al obtener los detalles del paquete!",
   "removePackageFailed": "Fallo al eliminar el paquete:",
   "installPackageFailed": "Fallo instalando el paquete:",
-  "fetchPackagesFailed": "Fallo al obtener la lista de paquetes:",
-  "upgradeFailed": "Fallo al actualizar los paquetes:",
+  "fetchPackagesFailed": "Fallo al obtener la lista de paquetes: jet>:",
+  "upgradeFailed": "Frailes platino pasajes:",
   "fetchUpgradableFailed": "Fallo al obtener los paquetes actualizables:"
 }

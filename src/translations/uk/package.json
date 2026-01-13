@@ -8,10 +8,10 @@
   "install": "Встановити",
   "installing": "Встановлення пакета...",
   "removing": "Видалення пакета...",
-  "fetchPackageFailed": "Failed fetching package details!",
-  "removePackageFailed": "Failed removing package:",
-  "installPackageFailed": "Failed installing package:",
-  "fetchPackagesFailed": "Failed fetching package list:",
-  "upgradeFailed": "Failed updating packages:",
-  "fetchUpgradableFailed": "Failed fetching upgradable packages:"
+  "fetchPackageFailed": "Не вдалося отримати дані про пакет!",
+  "removePackageFailed": "Не вдалося видалити пакет:",
+  "installPackageFailed": "Не вдалося встановити пакет:",
+  "fetchPackagesFailed": "Не вдалося отримати дані про пакет:",
+  "upgradeFailed": "Не вдалося оновити пакет:",
+  "fetchUpgradableFailed": "Помилка отримання оновлених пакетів:"
 }
