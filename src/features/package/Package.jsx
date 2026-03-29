@@ -19,6 +19,7 @@ import Form from "@rjsf/mui";
 import Alert from "@mui/material/Alert";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import BugReportIcon from "@mui/icons-material/BugReport";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DownloadIcon from "@mui/icons-material/Download";
 import Grid from "@mui/material/Grid";
@@ -231,6 +232,31 @@ export default function Package({ adb }) {
                       >
                         <InfoIcon
                           color="success"
+                          data-key={packageName}
+                          sx={{ fontSize: 40 }}
+                        />
+                      </IconButton>
+                    </Link>}
+
+                  {details.homepage && details.homepage.includes("github.com") &&
+                    <Link
+                      href={`${details.homepage}/issues/new`}
+                      sx={{
+                        whiteSpace: "nowrap",
+                        textDecoration: "none",
+                      }}
+                      target="_blank"
+                    >
+                      <IconButton
+                        aria-label={t("reportIssue")}
+                        sx={{
+                          width: 65,
+                          height: 65,
+                        }}
+                        title={t("reportIssue")}
+                      >
+                        <BugReportIcon
+                          color="warning"
                           data-key={packageName}
                           sx={{ fontSize: 40 }}
                         />
