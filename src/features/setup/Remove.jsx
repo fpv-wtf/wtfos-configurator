@@ -23,7 +23,10 @@ import {
   rebooting,
   selectHasOpkgBinary,
   selectNiceName,
+  selectRebooting,
 } from "../device/deviceSlice";
+
+import SuccessContinue from "./SuccessContinue";
 
 import {
   removeWTFOS,
@@ -36,6 +39,7 @@ export default function Remove({ adb }) {
 
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const isProcessing = useSelector(selectProcessing);
+  const isRebooting = useSelector(selectRebooting);
   const deviceName = useSelector(selectNiceName);
 
   const onClick = useCallback(async (device) => {
@@ -75,6 +79,9 @@ export default function Remove({ adb }) {
       </Button>
 
       <Log />
+
+      {isRebooting &&
+        <SuccessContinue message={t("removeSuccess")} />}
     </Stack>
   );
 }

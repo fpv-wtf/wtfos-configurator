@@ -45,7 +45,10 @@ import {
   success,
   selectAttempted,
   selectRooting,
+  selectSuccess,
 } from "./rootSlice";
+
+import SuccessContinue from "../setup/SuccessContinue";
 
 import {
   appendToLog,
@@ -87,6 +90,7 @@ export default function Root() {
   const attempted = useSelector(selectAttempted);
   const hasAdb = useSelector(selectHasAdb);
   const rooting = useSelector(selectRooting);
+  const rootSuccess = useSelector(selectSuccess);
 
   const donationState = useSelector(selectDonationState);
 
@@ -537,6 +541,9 @@ export default function Root() {
           </Button>
 
           <Log />
+
+          {rootSuccess &&
+            <SuccessContinue message={t("rootSuccess")} />}
         </>
       </Stack>
 
