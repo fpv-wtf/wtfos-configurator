@@ -12,6 +12,7 @@ import {
 import { useTranslation } from "react-i18next";
 
 import Box from "@mui/material/Box";
+import BugReportIcon from "@mui/icons-material/BugReport";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DownloadIcon from "@mui/icons-material/Download";
 import FormControl from "@mui/material/FormControl";
@@ -257,6 +258,31 @@ export default function Packages({ adb }) {
               >
                 <InfoIcon
                   color="success"
+                  data-key={item.name}
+                  sx={{ fontSize: 40 }}
+                />
+              </IconButton>
+            </Link>}
+
+          {item.details.homepage && item.details.homepage.includes("github.com") &&
+            <Link
+              href={`${item.details.homepage}/issues/new`}
+              sx={{
+                whiteSpace: "nowrap",
+                textDecoration: "none",
+              }}
+              target="_blank"
+            >
+              <IconButton
+                aria-label={t("reportIssue")}
+                sx={{
+                  width: 65,
+                  height: 65,
+                }}
+                title={t("reportIssue")}
+              >
+                <BugReportIcon
+                  color="warning"
                   data-key={item.name}
                   sx={{ fontSize: 40 }}
                 />

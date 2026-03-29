@@ -17,6 +17,7 @@
   "description": "Description",
   "matchCount": "Found {{count}} packages",
   "visitProjectPage": "Visit project page",
+  "reportIssue": "Report issue on GitHub",
   "labelCategory": "Category",
   "labelCategoryAllExceptSystem": "All (except system)",
   "labelCategoryAll": "All",

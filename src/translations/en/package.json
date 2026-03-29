@@ -3,6 +3,7 @@
   "submit": "Save settings",
   "loading": "Loading package details...",
   "visitProjectPage": "Visit project page",
+  "reportIssue": "Report issue on GitHub",
   "maintainer": "Maintainer: {{name}}",
   "remove": "Remove",
   "install": "Install",
