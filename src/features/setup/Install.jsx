@@ -24,7 +24,10 @@ import {
   rebooting,
   selectHasOpkgBinary,
   selectNiceName,
+  selectRebooting,
 } from "../device/deviceSlice";
+
+import SuccessContinue from "./SuccessContinue";
 
 import {
   installWTFOS,
@@ -39,6 +42,7 @@ export default function Install({ adb }) {
 
   const hasOpkgBinary = useSelector(selectHasOpkgBinary);
   const isProcessing = useSelector(selectProcessing);
+  const isRebooting = useSelector(selectRebooting);
   const deviceName = useSelector(selectNiceName);
   const healthchecksPassed = useSelector(selectPassed);
 
@@ -90,6 +94,9 @@ export default function Install({ adb }) {
       </Button>
 
       <Log />
+
+      {isRebooting &&
+        <SuccessContinue message={t("installSuccess")} />}
     </Stack>
   );
 }

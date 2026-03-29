@@ -21,5 +21,8 @@
   "latest": "Latest Version",
   "updateSuccess": "Updates installed successfully!",
   "updateFailed": "Failed installing updates!",
-  "fetchUpgradableFailed": "Failed fetching upgradable packages!"
+  "fetchUpgradableFailed": "Failed fetching upgradable packages!",
+  "continue": "Continue",
+  "installSuccess": "WTFOS installed successfully! Your device is rebooting.",
+  "removeSuccess": "WTFOS removed successfully! Your device is rebooting."
 }

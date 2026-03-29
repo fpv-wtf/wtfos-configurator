@@ -18,6 +18,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
 import Spinner from "../loading/Spinner";
+import SuccessContinue from "./SuccessContinue";
 
 import {
   setLog,
@@ -82,9 +83,7 @@ export default function Update({ adb }) {
       <PackageManagementError />
 
       {update.ran && update.success &&
-        <Alert severity="success">
-          {t("updateSuccess")}
-        </Alert>}
+        <SuccessContinue message={t("updateSuccess")} />}
 
       {upgradable.length > 0 &&
         <Button
